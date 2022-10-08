@@ -22,8 +22,21 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
               alignItems: "center",
             }}
           >
+            <View
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                opacity: .3
+              }}
+            >
+            </View>
             <Image
-              style={{ width: 200, height: 200 }}
+              style={{
+                width: '80%',
+                height: '70%',
+                position: 'absolute',
+              }}
               source={{
                 uri: "https://pngimg.com/uploads/love/love_PNG85.png",
               }}
@@ -31,11 +44,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
           </View>
         }
       >
-        {/* Shows behind the mask, you can put anything here, such as an image */}
         <Image
-          style={{ width: 200, height: 400 }}
+          style={{ width: '100%', height: '100%', opacity: 1 }}
           source={{
-            uri: "https://c.tenor.com/wsChytFfrS4AAAAM/monki-flip-monkey.gif",
+            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
           }}
         />
       </MaskedView>
@@ -45,12 +57,6 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
-      />
-      <Image
-        style={{ width: 100, height: 100 }}
-        source={{
-          uri: "https://c.tenor.com/wsChytFfrS4AAAAM/monki-flip-monkey.gif",
-        }}
       />
       <EditScreenInfo path="/screens/TabOneScreen.tsx" />
     </View>
