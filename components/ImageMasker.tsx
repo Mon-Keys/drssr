@@ -1,14 +1,15 @@
-import React, { FC } from "react";
+import React from "react";
+import { Button, StyleSheet, Text, View, Image } from "react-native";
 
 import MaskedView from "@react-native-masked-view/masked-view";
 
-import { StyleSheet, Image,Text, View } from "react-native";
+export type Props = {
+  imgURI: string;
+  maskURI: string;
+  opacity?: number 
+};
 
-export type ImageMaskerProps = {
-  img: string;
-  maskimg: string;
-}
-const ImageMasker: React.FC<ImageMaskerProps> = ({img, maskimg}) => {
+const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.3 }) => {
   return (
     <View style={styles.container}>
       <MaskedView
@@ -22,48 +23,49 @@ const ImageMasker: React.FC<ImageMaskerProps> = ({img, maskimg}) => {
               alignItems: "center",
             }}
           >
-            
             <Image
               style={{
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
+                width: "100%",
+                height: "100%",
+                position: "absolute",
               }}
               source={{
-                uri: "https://pngimg.com/uploads/love/love_PNG85.png",
+                uri: maskURI,
               }}
             />
-            <View
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                opacity: 0.3
-              }}
-            >
-            </View>
+            
           </View>
         }
       >
         <Image
-          style={{ width: '100%', height: '100%', opacity: 1 }}
+          style={{ width: "100%", height: "100%", opacity: 1 }}
           source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
+            uri: imgURI,
           }}
         />
       </MaskedView>
+      <Image
+        style={{
+          width: "100%",
+          height: "100%",
+          opacity: opacity,
+          position: "absolute",
+        }}
+        source={{
+          uri: imgURI,
+        }}
+      />
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    color: "white",
-  },
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-})
-export default ImageMasker
+ 
+});
+
+export default ImageMasker;

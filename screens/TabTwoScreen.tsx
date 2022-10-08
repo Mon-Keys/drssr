@@ -2,15 +2,16 @@ import { StyleSheet, Image } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import ImageMasker from '../components/ImageMasker';
 import MaskedView from "@react-native-masked-view/masked-view";
-import Hello from '../components/Image';
+import ImageMasker from '../components/ImageMasker';
 
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <Hello imgURI='djasdasd'/>
-      
+      <ImageMasker
+        imgURI="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
+        maskURI="https://pngimg.com/uploads/love/love_PNG85.png"
+      />
     </View>
   );
 }
