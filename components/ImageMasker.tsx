@@ -1,13 +1,14 @@
-import { StyleSheet, Image } from 'react-native';
-
+import React, { FC } from "react";
 
 import MaskedView from "@react-native-masked-view/masked-view";
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import { StyleSheet, Image,Text, View } from "react-native";
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export type ImageMaskerProps = {
+  img: string;
+  maskimg: string;
+}
+const ImageMasker: React.FC<ImageMaskerProps> = ({img, maskimg}) => {
   return (
     <View style={styles.container}>
       <MaskedView
@@ -21,25 +22,26 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
               alignItems: "center",
             }}
           >
-            <View
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                opacity: .3
-              }}
-            >
-            </View>
+            
             <Image
               style={{
-                width: '80%',
-                height: '70%',
+                width: '100%',
+                height: '100%',
                 position: 'absolute',
               }}
               source={{
                 uri: "https://pngimg.com/uploads/love/love_PNG85.png",
               }}
             />
+            <View
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                opacity: 0.3
+              }}
+            >
+            </View>
           </View>
         }
       >
@@ -51,22 +53,17 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
         />
       </MaskedView>
     </View>
-  );
-}
+  )
+};
 
 const styles = StyleSheet.create({
+  text: {
+    color: "white",
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+})
+export default ImageMasker

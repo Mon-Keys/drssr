@@ -1,14 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import ImageMasker from '../components/ImageMasker';
+import MaskedView from "@react-native-masked-view/masked-view";
+import Hello from '../components/Image';
 
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <Hello imgURI='djasdasd'/>
+      
     </View>
   );
 }
@@ -18,6 +20,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    width: "100%",
+    height: "100%"
   },
   title: {
     fontSize: 20,
