@@ -1,4 +1,4 @@
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, Button, GestureResponderEvent } from 'react-native';
 
 
 import MaskedView from "@react-native-masked-view/masked-view";
@@ -6,50 +6,37 @@ import MaskedView from "@react-native-masked-view/masked-view";
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import { MonoText } from '../components/StyledText';
+
+import { useAppSelector } from "../hooks/useAppSelector"
+import { useAppDispatch } from "../hooks/useAppDispatch"
+import { selectCount, increment, decrement } from "../reducers"
+import { useState } from 'react';
+
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+  const count = useAppSelector(selectCount);
+  const dispatch = useAppDispatch();
+  const [incrementAmout, setIncrementAmount] = useState<number>(2);
+
+  const incrementValue = Number(incrementAmout) || 0;
+
+
   return (
     <View style={styles.container}>
-      <MaskedView
-        style={{ flex: 1, flexDirection: "row", height: "100%" }}
-        maskElement={
-          <View
-            style={{
-              backgroundColor: "transparent",
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <View
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                opacity: .3
-              }}
-            >
-            </View>
-            <Image
-              style={{
-                width: '80%',
-                height: '70%',
-                position: 'absolute',
-              }}
-              source={{
-                uri: "https://pngimg.com/uploads/love/love_PNG85.png",
-              }}
-            />
-          </View>
+      <MonoText> {`current val: ${count}`}</MonoText>
+      <Button title='-' onPress={
+        (e: GestureResponderEvent) => {
+          console.log("minus")
+          dispatch(decrement())
         }
-      >
-        <Image
-          style={{ width: '100%', height: '100%', opacity: 1 }}
-          source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png",
-          }}
-        />
-      </MaskedView>
+      }></Button>
+      <Button title='+' onPress={
+        (e: GestureResponderEvent) => {
+          console.log("plus")
+          dispatch(increment())
+        }
+      }></Button>
     </View>
   );
 }
