@@ -1,8 +1,6 @@
 import { StyleSheet, Image } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import MaskedView from "@react-native-masked-view/masked-view";
 import ImageMasker from '../components/ImageMasker';
 
 export default function TabTwoScreen() {

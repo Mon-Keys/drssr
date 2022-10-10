@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, StyleSheet, Text, View, Image } from "react-native";
+
+import ExpoDraw from "expo-draw";
 
 import MaskedView from "@react-native-masked-view/masked-view";
 
@@ -9,7 +11,9 @@ export type Props = {
   opacity?: number 
 };
 
-const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.3 }) => {
+const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.5 }) => {
+  const [strokesData, setStrokes] = useState<any>({})
+
   return (
     <View style={styles.container}>
       <MaskedView
@@ -33,7 +37,6 @@ const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.3 }) => {
                 uri: maskURI,
               }}
             />
-            
           </View>
         }
       >
@@ -53,6 +56,38 @@ const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.3 }) => {
         }}
         source={{
           uri: imgURI,
+        }}
+      />
+      <ExpoDraw
+        strokes={[strokesData]}
+        containerStyle={{
+          backgroundColor: "transparent",
+          height: "100%",
+          width: "100%",
+          position: "absolute",
+        }}
+        color={"red"}
+        strokeWidth={4}
+        enabled={true}
+        onChangeStrokes={(strokes) => {
+          setStrokes(strokes);
+        }}
+      />
+      <ExpoDraw
+        strokes={[]}
+        containerStyle={{
+          backgroundColor: "transparent",
+          height: "100%",
+          width: "100%",
+          position: "absolute",
+        }}
+        color={"transparent"}
+        strokeWidth={4}
+        enabled={true}
+        onChangeStrokes={(strokes) => {
+          console.log(strokes);
+          setStrokes(strokes);
+          console.log(strokesData)
         }}
       />
     </View>
