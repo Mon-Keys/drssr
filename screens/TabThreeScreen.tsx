@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { StyleSheet, Image, SafeAreaView } from "react-native";
 import ImageMasker from "../components/ImageMasker";
 
+// @ts-ignore
 import ExpoDraw from 'expo-draw'
 
 import { Text, View } from "../components/Themed";
@@ -27,7 +28,6 @@ export default function TabThreeScreen() {
         color={"red"}
         strokeWidth={8}
         enabled={true}
-        onChangeStrokes={(strokes) => console.log(strokes)}
       />
     </View>
   );

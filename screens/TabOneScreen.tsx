@@ -1,9 +1,5 @@
-import { StyleSheet, Image, Button, GestureResponderEvent } from 'react-native';
+import { StyleSheet, Button, GestureResponderEvent } from 'react-native';
 
-
-import MaskedView from "@react-native-masked-view/masked-view";
-
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { MonoText } from '../components/StyledText';
