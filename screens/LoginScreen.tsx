@@ -6,7 +6,7 @@ import { useAppSelector } from "../hooks/useAppSelector"
 import { useAppDispatch } from "../hooks/useAppDispatch"
 import { selectCount, increment, decrement } from "../reducers"
 import { useState } from 'react';
-
+import UselessTextInput from "../components/InputField"
 
 export default function LoginScreen({ navigation }: RootTabScreenProps<'LoginScreen'>) {
     const count = useAppSelector(selectCount);
@@ -18,6 +18,7 @@ export default function LoginScreen({ navigation }: RootTabScreenProps<'LoginScr
 
     return (
         <View style={styles.container}>
+            <UselessTextInput></UselessTextInput>
           <Text> test </Text>
         </View>
     );
