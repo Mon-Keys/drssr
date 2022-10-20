@@ -2,33 +2,18 @@ import React, { useRef } from "react";
 
 import { StyleSheet, Image, SafeAreaView } from "react-native";
 import ImageMasker from "../components/ImageMasker";
+import CustomImagePicker from "../components/ImagePicker";
 
 // @ts-ignore
 import ExpoDraw from 'expo-draw'
 
 import { Text, View } from "../components/Themed";
 
-export default function TabThreeScreen() {
+export default function WardrobeScreen() {
 
   return (
     <View style={styles.container}>
-      <ImageMasker
-        style={{ position: "absolute " }}
-        imgURI="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
-        maskURI="https://pngimg.com/uploads/love/love_PNG85.png"
-      />
-      <ExpoDraw
-        strokes={[]}
-        containerStyle={{
-          backgroundColor: "transparent",
-          height: "100%",
-          width: "100%",
-          position: "absolute",
-        }}
-        color={"red"}
-        strokeWidth={8}
-        enabled={true}
-      />
+      <CustomImagePicker />
     </View>
   );
 }

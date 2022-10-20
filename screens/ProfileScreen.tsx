@@ -1,24 +1,19 @@
-import { StyleSheet, Button, GestureResponderEvent } from 'react-native';
-import React from "react"
+import React from 'react'
+import { StyleSheet, Image } from 'react-native';
+import InputField from '../components/InputField'
+
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
-import InputField from "../components/InputField"
-import Person from '../components/icons/person'
+import ImageMasker from '../components/ImageMasker';
 import StyledButton from '../components/StyledButton';
-import Colors from '../constants/Colors';
+import Person from '../components/icons/person'
 
-export default function LoginScreen() {
-
-    const [nickname, onChangeNickname] = React.useState<string>('');
-
-    const [email, onChangeEmail] = React.useState<string>('');
+export default function ProfileScreen() {
+    const [login, onChangeLogin] = React.useState<string>('');
 
     const [password, onChangePassword] = React.useState<string>('');
 
-    const [birthdate, onChangeBirthdate] = React.useState<string>('');
-
-    const submitSignup = (event: GestureResponderEvent) => {
-        alert("submitting")
+    const submitLogin = () => {
+        alert("hello")
     }
 
     return (
@@ -27,27 +22,17 @@ export default function LoginScreen() {
                 <InputField
                     icon={<Person />}
                     placeholder={'имя пользователя'}
-                    value={nickname}
-                    onChangeText={onChangeNickname} />
-                <InputField
-                    icon={<Person />}
-                    placeholder={'почта'}
-                    value={email}
-                    onChangeText={onChangeEmail}
-                    keyboardType={"email-address"} />
+                    value={login}
+                    onChangeText={onChangeLogin} />
                 <InputField
                     icon={<Person />}
                     placeholder={'пароль'}
                     value={password}
                     onChangeText={onChangePassword}
                     password={true} />
-                <InputField
-                    icon={<Person />}
-                    placeholder={'дата рождения'}
-                    value={birthdate}
-                    onChangeText={onChangeBirthdate} />
+
                 <StyledButton
-                    title='hello' onPress={submitSignup} />
+                    title='hello' onPress={submitLogin} />
             </View>
         </View>
     );
@@ -76,5 +61,4 @@ const styles = StyleSheet.create({
         height: 1,
         width: '80%',
     },
-
 });
