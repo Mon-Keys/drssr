@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, Text, View, Image } from "react-native";
 
+// @ts-ignore
 import ExpoDraw from "expo-draw";
 
 import MaskedView from "@react-native-masked-view/masked-view";
@@ -69,9 +70,6 @@ const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.5 }) => {
         color={"red"}
         strokeWidth={4}
         enabled={true}
-        onChangeStrokes={(strokes) => {
-          setStrokes(strokes);
-        }}
       />
       <ExpoDraw
         strokes={[]}
@@ -84,11 +82,6 @@ const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.5 }) => {
         color={"transparent"}
         strokeWidth={4}
         enabled={true}
-        onChangeStrokes={(strokes) => {
-          console.log(strokes);
-          setStrokes(strokes);
-          console.log(strokesData)
-        }}
       />
     </View>
   );

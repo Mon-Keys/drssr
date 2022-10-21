@@ -1,9 +1,5 @@
-import { StyleSheet, Image, Button, GestureResponderEvent } from 'react-native';
+import { StyleSheet, Button, GestureResponderEvent } from 'react-native';
 
-
-import MaskedView from "@react-native-masked-view/masked-view";
-
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { MonoText } from '../components/StyledText';
@@ -14,7 +10,7 @@ import { selectCount, increment, decrement } from "../reducers"
 import { useState } from 'react';
 
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
   const [incrementAmout, setIncrementAmount] = useState<number>(2);
