@@ -6,15 +6,31 @@ import { Text, View } from '../components/Themed';
 import ImageMasker from '../components/ImageMasker';
 import StyledButton from '../components/StyledButton';
 import Person from '../components/icons/person'
+import DatePicker from 'react-native-date-picker'
+import { loginUser, selectUser } from '../reducers/userReducer';
+import { useAppSelector } from '../hooks/useAppSelector';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { ILoginData } from '../network';
 
 export default function TabTwoScreen() {
   const [login, onChangeLogin] = React.useState<string>('');
 
   const [password, onChangePassword] = React.useState<string>('');
+  const [date, setDate] = React.useState<Date>(new Date(343223543))
+  const [open, setOpen] = React.useState<boolean>(false)
+
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
 
   const submitLogin = () => {
-    alert("hello")
+    const loginData: ILoginData = {
+      login: login,
+      password: password,
+    }
+    dispatch(loginUser(loginData))
   }
+
+
 
   return (
     <View style={styles.container}>
@@ -33,6 +49,7 @@ export default function TabTwoScreen() {
 
         <StyledButton
           title='hello' onPress={submitLogin} />
+
       </View>
     </View>
   );

@@ -1,32 +1,99 @@
 import { createSlice, PayloadAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import DataService from "../network/"
+import DataService, { ILoginData, IUserData } from "../network/"
+import { ISignupData } from "../network/";
 
 export interface User {
     nickname: string;
     email: string;
     name: string;
-    avatarURI: string;
-    stylist: boolean;
-    birthDate: string;
-    description: string;
-    ctime: string;
+    avatarURI?: string;
+    stylist?: boolean;
+    birthDate?: string;
+    description?: string;
+    ctime?: string;
 }
 
 interface UserState {
     isLoggedIn: boolean;
     userData: User;
+    status: string;
+    error: string;
 }
 
 const initialState = {
     isLoggedIn: false,
     userData: {},
+    status: "",
+    error: ""
 } as UserState;
 
 
-export const fetchUserData = createAsyncThunk('user/privateData', async () => {
-    const response = await DataService.getUserDataByCookie();
-    return response.data
+export const fetchUserData = createAsyncThunk<IUserData>('user/fetchUserData', async (_, {rejectWithValue}) => {
+    try {
+        console.log('fetching user data')
+        const response = await DataService.getUserDataByCookie();
+        console.log(response)
+        if(response.status !== 200 ){
+            throw new Error(`Error, status ${response.status}`)
+        }
+    
+        return response.data   
+    } catch (error: any) {
+        console.log(error)
+        return rejectWithValue(error.message)
+    }
+})
+
+
+export const signUpUser = createAsyncThunk<ISignupData, ISignupData>('user/signUpUser', async (signUpData, {rejectWithValue}) => {
+    try {
+        console.log('sending signup')
+        const response = await DataService.signUpUser(signUpData)
+        console.log(response)
+        if(response.status !== 200 ){
+            throw new Error(`Error, status ${response.status}`)
+        }
+    
+        return response.data   
+    } catch (error: any) {
+        console.log(error)
+        return rejectWithValue(error.message)
+    }
+})
+
+
+export const loginUser = createAsyncThunk<ILoginData, ILoginData>('user/loginUser', async (loginData, {rejectWithValue}) => {
+    try {
+        console.log('sending login')
+        const response = await DataService.loginUser(loginData)
+        console.log(response)
+        if(response.status !== 200 ){
+            throw new Error(`Error, status ${response.status}`)
+        }
+    
+        return response.data   
+    } catch (error: any) {
+        console.log(error)
+        return rejectWithValue(error.message)
+    }
+})
+
+
+export const logoutUser = createAsyncThunk<IUserData>('user/logoutUser', async (_, {rejectWithValue}) => {
+    try {
+        console.log('logout user')
+        const response = await DataService.logoutUser()
+        console.log(response)
+        if(response.status !== 200 ){
+            throw new Error(`Error, status ${response.status}`)
+        }
+    
+        return response.data   
+    } catch (error: any) {
+        console.log(error)
+        return rejectWithValue(error.message)
+    }
 })
 
 
@@ -37,6 +104,72 @@ export const userSlice = createSlice({
         loadData: (state) => {
             console.log("not done",state);
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchUserData.pending, (state, action) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(fetchUserData.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                console.log('resolved')
+                state.userData = action.payload as unknown as User
+                state.isLoggedIn = true
+                console.log(action)
+                console.log(state.userData)
+
+            })
+            .addCase(fetchUserData.rejected, (state, action) => {
+                state.status = 'rejected';
+                console.log('rejected')
+                // state.error = action.payload
+            })
+            .addCase(signUpUser.pending, (state, action) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(signUpUser.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                console.log('resolved')
+                state.userData = action.payload as unknown as User
+
+            })
+            .addCase(signUpUser.rejected, (state, action) => {
+                state.status = 'rejected';
+                console.log('rejected')
+                // state.error = action.payload
+            })
+
+            .addCase(loginUser.pending, (state, action) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                console.log('resolved')
+                state.userData = action.payload as unknown as User
+
+            })
+            .addCase(loginUser.rejected, (state, action) => {
+                state.status = 'rejected';
+                console.log('rejected')
+                // state.error = action.payload
+            })
+            .addCase(logoutUser.pending, (state, action) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(logoutUser.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                state.isLoggedIn = false
+                console.log('resolved')
+            })
+            .addCase(logoutUser.rejected, (state, action) => {
+                state.status = 'rejected';
+                console.log('rejected')
+                // state.error = action.payload
+            })
     },
 });
 

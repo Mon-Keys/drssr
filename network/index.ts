@@ -9,7 +9,7 @@ interface ISignupData {
     nickname: string;
     password: string;
     email: string;
-    birth_date: string;
+    birth_date?: Date;
     name?: string;
     description?: string;
     avatar?: string; // [Base64]
@@ -44,7 +44,7 @@ class DataService {
      * @beta
      */
     getUserDataByCookie() {
-        return http.get<IUserData>("/users/private/")
+        return http.get<IUserData>("/users/private", { withCredentials: true })
     }
 
     /**
@@ -57,7 +57,7 @@ class DataService {
      * @beta
      */
     signUpUser(data: ISignupData) {
-        return http.post<ISignupData>("/users/public/signup", data)
+        return http.post<ISignupData>("/users/public/signup", data, {withCredentials: false})
     }
 
     /**
@@ -94,7 +94,7 @@ class DataService {
      * @beta
      */
     logoutUser() {
-        return http.delete<any>("/users/private/logout")
+        return http.delete<any>("/users/private/logout", { withCredentials: true })
     }
 
     /**

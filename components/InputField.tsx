@@ -37,7 +37,7 @@ const InputField = (props: InputFieldProps) => {
             <View style={styles.inputContainer}>
                 {/* <Person style={styles.icon}></Person> */}
                 {icon}
-                <TextInput style={styles.input} selectionColor={Colors.base.white}  {...props} secureTextEntry={hidePass} />
+                <TextInput style={styles.input} selectionColor={Colors.base.white} {...props} secureTextEntry={hidePass} />
                 {hidePassIcon}
             </View>
         </SafeAreaView>

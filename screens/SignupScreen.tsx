@@ -1,4 +1,4 @@
-import { StyleSheet, Button, GestureResponderEvent } from 'react-native';
+import { StyleSheet, Button, GestureResponderEvent, ActivityIndicator } from 'react-native';
 import React from "react"
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
@@ -6,8 +6,19 @@ import InputField from "../components/InputField"
 import Person from '../components/icons/person'
 import StyledButton from '../components/StyledButton';
 import Colors from '../constants/Colors';
+import DatePicker from 'react-native-date-picker'
+import { useAppSelector } from '../hooks/useAppSelector';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { fetchUserData, selectUser, signUpUser } from '../reducers/userReducer';
+import { ISignupData } from '../network';
 
-export default function LoginScreen() {
+export default function SignupScreen() {
+
+    const user = useAppSelector(selectUser);
+    const dispatch = useAppDispatch();
+
+    const [date, setDate] = React.useState<Date>(new Date(343223543))
+    const [open, setOpen] = React.useState<boolean>(false)
 
     const [nickname, onChangeNickname] = React.useState<string>('');
 
@@ -18,7 +29,17 @@ export default function LoginScreen() {
     const [birthdate, onChangeBirthdate] = React.useState<string>('');
 
     const submitSignup = (event: GestureResponderEvent) => {
-        alert("submitting")
+        const data: ISignupData = {
+            nickname: nickname,
+            password: password,
+            email: email,
+            birth_date: new Date(),
+            name: 'test',
+            description: 'test user',
+        }
+
+        // dispatch(signUpUser(data))
+        dispatch(fetchUserData())
     }
 
     return (
@@ -48,6 +69,8 @@ export default function LoginScreen() {
                     onChangeText={onChangeBirthdate} />
                 <StyledButton
                     title='hello' onPress={submitSignup} />
+                {user.status === 'pending' ? <ActivityIndicator size={"large"} color={Colors.base.purple} /> : <View />}
+
             </View>
         </View>
     );

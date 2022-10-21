@@ -1,10 +1,15 @@
 import axios from "axios";
 
-const baseURL = "http://localhost/api/v1"
+const baseURL = "http://leonidperl.in:3001/api/v1"
 
-export default axios.create({
+const axiosClient = axios.create({
     baseURL: baseURL,
+    withCredentials: true,
     headers: {
         "Content-type": "application/json"
     }
 });
+
+axiosClient.defaults.withCredentials = true
+
+export default axiosClient

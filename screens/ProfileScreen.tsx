@@ -1,39 +1,47 @@
 import React from 'react'
-import { StyleSheet, Image } from 'react-native';
-import InputField from '../components/InputField'
+import { StyleSheet, Image, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
 
 import { Text, View } from '../components/Themed';
-import ImageMasker from '../components/ImageMasker';
+
+import { useEffect } from 'react';
+import { useAppSelector } from '../hooks/useAppSelector';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { fetchUserData, selectUser, logoutUser } from '../reducers/userReducer';
 import StyledButton from '../components/StyledButton';
-import Person from '../components/icons/person'
+
 
 export default function ProfileScreen() {
-    const [login, onChangeLogin] = React.useState<string>('');
 
-    const [password, onChangePassword] = React.useState<string>('');
+    const [refreshing, setRefreshing] = React.useState(false);
 
-    const submitLogin = () => {
-        alert("hello")
+    const { isLoggedIn, status, error, userData } = useAppSelector(selectUser);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        console.log('hello')
+
+        dispatch(fetchUserData())
+    }, [dispatch])
+
+    const logout = () => {
+
+        dispatch(logoutUser())
+    }
+
+    const refresh = () => {
+        console.log('refresh')
+        dispatch(fetchUserData())
     }
 
     return (
         <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <InputField
-                    icon={<Person />}
-                    placeholder={'имя пользователя'}
-                    value={login}
-                    onChangeText={onChangeLogin} />
-                <InputField
-                    icon={<Person />}
-                    placeholder={'пароль'}
-                    value={password}
-                    onChangeText={onChangePassword}
-                    password={true} />
-
-                <StyledButton
-                    title='hello' onPress={submitLogin} />
-            </View>
+            {refreshing ? <ActivityIndicator /> : null}
+            <ScrollView refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={refresh} />
+            }>
+                <Text> {JSON.stringify(userData)} </Text>
+                <StyledButton title={"logout"} onPress={logout} />
+            </ScrollView>
         </View>
     );
 }
