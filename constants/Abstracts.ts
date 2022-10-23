@@ -4,6 +4,5 @@ const tintColorDark = '#fff';
 export default {
     base: {
         borderRadius: 9,
-
     }
 };

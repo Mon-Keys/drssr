@@ -8,9 +8,10 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchUserData, selectUser, logoutUser } from '../reducers/userReducer';
 import StyledButton from '../components/StyledButton';
+import {RootStackParamList, RootTabScreenProps} from "../types";
 
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profile'>) {
 
     const [refreshing, setRefreshing] = React.useState(false);
 
@@ -20,8 +21,11 @@ export default function ProfileScreen() {
     useEffect(() => {
         console.log('hello')
 
-        dispatch(fetchUserData())
+        dispatch(fetchUserData()).then(()=> {
+            if(!isLoggedIn) navigation.navigate('Login')
+        })
     }, [dispatch])
+
 
     const logout = () => {
 
@@ -41,6 +45,9 @@ export default function ProfileScreen() {
             }>
                 <Text> {JSON.stringify(userData)} </Text>
                 <StyledButton title={"logout"} onPress={logout} />
+                <StyledButton title={"log in"} onPress={ () => {
+                    navigation.navigate('Login')
+                }} />
             </ScrollView>
         </View>
     );

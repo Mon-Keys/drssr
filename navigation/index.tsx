@@ -12,16 +12,20 @@ import { ColorSchemeName, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
+
 import NotFoundScreen from '../screens/NotFoundScreen';
 import Home from '../screens/HomeScreen';
-import SearchScreen from '../screens/SearchScreen';
+import SearchScreen from '../screens/DiscoverScreen';
 import WardrobeScreen from "../screens/WardrobeScreen";
 import SignupScreen from "../screens/SignupScreen";
+import LoginScreen from "../screens/LoginScreen"
 import ProfileScreen from '../screens/ProfileScreen';
+
+
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import EditModal from "../screens/EditModal";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -45,7 +49,9 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Signup" component={SignupScreen} />
+          <Stack.Screen name="Signup" component={SignupScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Edit" component={EditModal} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -107,7 +113,7 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="ProfileScreen"
+        name="Profile"
         component={ProfileScreen}
         options={{
           title: "Profile",

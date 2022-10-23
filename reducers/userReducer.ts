@@ -163,6 +163,7 @@ export const userSlice = createSlice({
             .addCase(logoutUser.fulfilled, (state, action) => {
                 state.status = 'resolved';
                 state.isLoggedIn = false
+                state.userData = { nickname: '', email: '', name: '' }
                 console.log('resolved')
             })
             .addCase(logoutUser.rejected, (state, action) => {

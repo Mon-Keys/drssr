@@ -8,12 +8,17 @@ import CustomImagePicker from "../components/ImagePicker";
 import ExpoDraw from 'expo-draw'
 
 import { Text, View } from "../components/Themed";
+import {RootTabScreenProps} from "../types";
+import StyledButton from "../components/StyledButton";
 
-export default function WardrobeScreen() {
+export default function WardrobeScreen({ navigation }: RootTabScreenProps<'Wardrobe'>) {
 
   return (
     <View style={styles.container}>
       <CustomImagePicker />
+      <StyledButton title={'экран'} onPress={()=> {
+        navigation.navigate('Edit')
+      }}/>
     </View>
   );
 }

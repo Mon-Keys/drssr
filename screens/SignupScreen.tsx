@@ -12,7 +12,7 @@ import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchUserData, selectUser, signUpUser } from '../reducers/userReducer';
 import { ISignupData } from '../network';
 
-export default function SignupScreen() {
+export default function SignupScreen({ navigation }: RootTabScreenProps<'Profile'>) {
 
     const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
@@ -38,8 +38,7 @@ export default function SignupScreen() {
             description: 'test user',
         }
 
-        // dispatch(signUpUser(data))
-        dispatch(fetchUserData())
+        dispatch(signUpUser(data))
     }
 
     return (
@@ -69,6 +68,11 @@ export default function SignupScreen() {
                     onChangeText={onChangeBirthdate} />
                 <StyledButton
                     title='hello' onPress={submitSignup} />
+
+                <StyledButton
+                    title='login' onPress={()=> {
+                        navigation.navigate("Login")
+                }} />
                 {user.status === 'pending' ? <ActivityIndicator size={"large"} color={Colors.base.purple} /> : <View />}
 
             </View>

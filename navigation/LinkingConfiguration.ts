@@ -30,14 +30,16 @@ const linking: LinkingOptions<RootStackParamList> = {
               TabThreeScreen: "wardrobe",
             },
           },
-          ProfileScreen: {
+          Profile: {
             screens: {
               ProfileScreen: "profile",
             },
           },
         },
       },
+      Edit: "Edit",
       Signup: "Signup",
+      Login: "Login",
       NotFound: "*",
     },
   },

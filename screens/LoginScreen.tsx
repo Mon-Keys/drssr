@@ -11,8 +11,9 @@ import { loginUser, selectUser } from '../reducers/userReducer';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { ILoginData } from '../network';
+import {RootTabScreenProps} from "../types";
 
-export default function TabTwoScreen() {
+export default function TabTwoScreen({ navigation }: RootTabScreenProps<'Profile'>) {
   const [login, onChangeLogin] = React.useState<string>('');
 
   const [password, onChangePassword] = React.useState<string>('');
@@ -27,7 +28,9 @@ export default function TabTwoScreen() {
       login: login,
       password: password,
     }
-    dispatch(loginUser(loginData))
+    dispatch(loginUser(loginData)).then(()=> {
+      navigation.navigate("Profile")
+    })
   }
 
 
@@ -48,7 +51,12 @@ export default function TabTwoScreen() {
           password={true} />
 
         <StyledButton
-          title='hello' onPress={submitLogin} />
+          title='войти' onPress={submitLogin} />
+
+        <StyledButton
+            title='signup' onPress={()=> {
+              navigation.navigate('Signup')
+        }} />
 
       </View>
     </View>

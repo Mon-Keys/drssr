@@ -12,7 +12,7 @@ export type Props = {
   opacity?: number 
 };
 
-const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.5 }) => {
+const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.3 }) => {
   const [strokesData, setStrokes] = useState<any>({})
 
   return (
@@ -58,30 +58,6 @@ const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.5 }) => {
         source={{
           uri: imgURI,
         }}
-      />
-      <ExpoDraw
-        strokes={[strokesData]}
-        containerStyle={{
-          backgroundColor: "transparent",
-          height: "100%",
-          width: "100%",
-          position: "absolute",
-        }}
-        color={"red"}
-        strokeWidth={4}
-        enabled={true}
-      />
-      <ExpoDraw
-        strokes={[]}
-        containerStyle={{
-          backgroundColor: "transparent",
-          height: "100%",
-          width: "100%",
-          position: "absolute",
-        }}
-        color={"transparent"}
-        strokeWidth={4}
-        enabled={true}
       />
     </View>
   );

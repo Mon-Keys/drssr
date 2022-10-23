@@ -57,6 +57,7 @@ class DataService {
      * @beta
      */
     signUpUser(data: ISignupData) {
+        console.log('signup')
         return http.post<ISignupData>("/users/public/signup", data, {withCredentials: false})
     }
 
