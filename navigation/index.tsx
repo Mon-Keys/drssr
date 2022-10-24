@@ -26,6 +26,7 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import EditModal from "../screens/EditModal";
+import ImageRecognizerScreen from '../screens/ImageRecognizer';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -44,14 +45,16 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  return (
+  // @ts-ignore
+    return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      <Stack.Group screenOptions={{ presentation: 'card' }}>
           <Stack.Screen name="Signup" component={SignupScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Edit" component={EditModal} />
+          <Stack.Screen name="ImageRecognizer" component={ImageRecognizerScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -94,14 +97,16 @@ function BottomTabNavigator() {
               />
             </Pressable>
           ),
+            headerShown: false
         })}
       />
       <BottomTab.Screen
         name="Search"
         component={SearchScreen}
         options={{
-          title: "Search",
-          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+            title: "Search",
+            tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+            headerShown: false
         }}
       />
       <BottomTab.Screen
@@ -110,6 +115,7 @@ function BottomTabNavigator() {
         options={{
           title: "Wardrobe",
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="wardrobe" size={24} color={color} />,
+            headerShown: false,
         }}
       />
       <BottomTab.Screen
@@ -118,6 +124,7 @@ function BottomTabNavigator() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => <Ionicons name="person" size={24} color={color} />,
+            headerShown: false
         }}
       />
     </BottomTab.Navigator>

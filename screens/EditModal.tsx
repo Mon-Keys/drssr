@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Image } from 'react-native';
 import { Text, View } from '../components/Themed';
 import ImageMasker from '../components/ImageMasker'
+// @ts-ignore
 import ExpoDraw from "expo-draw";
 
 export default function EditModal() {

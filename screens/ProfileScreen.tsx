@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Image, ScrollView, ActivityIndicator, RefreshControl } from 'react-native';
+import {StyleSheet, Image, ScrollView, ActivityIndicator, RefreshControl, SafeAreaView} from 'react-native';
 
 import { Text, View } from '../components/Themed';
 
@@ -9,6 +9,8 @@ import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchUserData, selectUser, logoutUser } from '../reducers/userReducer';
 import StyledButton from '../components/StyledButton';
 import {RootStackParamList, RootTabScreenProps} from "../types";
+import Colors from "../constants/Colors";
+
 
 
 export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profile'>) {
@@ -16,6 +18,7 @@ export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profil
     const [refreshing, setRefreshing] = React.useState(false);
 
     const { isLoggedIn, status, error, userData } = useAppSelector(selectUser);
+
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -38,18 +41,41 @@ export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profil
     }
 
     return (
-        <View style={styles.container}>
-            {refreshing ? <ActivityIndicator /> : null}
+        <SafeAreaView style={styles.container}>
             <ScrollView refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={refresh} />
             }>
-                <Text> {JSON.stringify(userData)} </Text>
+
+                <Image
+                    style={{
+                        width: 100,
+                        height: 100,
+                        borderRadius: 50,
+                    }}
+
+                    source={{
+                        uri: 'https://abrakadabra.fun/uploads/posts/2022-03/1646379493_17-abrakadabra-fun-p-gul-ded-insaid-53.jpg'
+                        }}
+                />
+                <Text style={styles.userName}>
+                    {userData.name}
+                </Text>
+                <Text style={styles.userName}>
+                    {userData.nickname}
+                </Text>
+                <Text style={styles.userName}>
+                    {userData.email}
+                </Text>
+
+                <Text style={styles.userDescription}>
+                    {userData.email}
+                </Text>
                 <StyledButton title={"logout"} onPress={logout} />
                 <StyledButton title={"log in"} onPress={ () => {
                     navigation.navigate('Login')
                 }} />
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -60,20 +86,11 @@ const styles = StyleSheet.create({
         alignContent: "center",
         justifyContent: "center"
     },
-    formContainer: {
-        alignItems: 'center',
-        // backgroundColor: Colors.base.red,
-        height: 300,
-        alignContent: "space-between",
-        justifyContent: "space-between",
+    userName: {
+        fontSize: 18,
     },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
+    userDescription: {
+        fontSize: 16,
+        color: Colors.base.darkgray,
     },
 });

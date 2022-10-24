@@ -38,6 +38,7 @@ const linking: LinkingOptions<RootStackParamList> = {
         },
       },
       Edit: "Edit",
+      ImageRecognizer: "ImageRecognizer",
       Signup: "Signup",
       Login: "Login",
       NotFound: "*",

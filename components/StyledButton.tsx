@@ -20,15 +20,15 @@ const StyledButton = (props: StyledButtonProps) => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: Colors.base.purple,
+        backgroundColor: Colors.base.white,
         width: 288,
         height: 36,
-        borderRadius: 9,
+        borderRadius: 18,
         justifyContent: "center",
         alignItems: "center"
     },
     buttonTitle: {
-        color: "white",
+        color: Colors.base.black,
         fontSize: 18,
         fontFamily: 'proxima-nova',
     }
