@@ -42,6 +42,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       Signup: "Signup",
       Login: "Login",
       NotFound: "*",
+      AddItem: "AddItem",
     },
   },
 };

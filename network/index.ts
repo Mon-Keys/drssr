@@ -1,4 +1,6 @@
 import http from "./http-common";
+import * as ImagePicker from "expo-image-picker";
+import {ImageInfo} from "expo-image-picker";
 
 interface ILoginData {
     login: string;
@@ -32,6 +34,13 @@ interface IUpdateUserData {
     avatar: string; // [Base64]
     birth_date: string;
     description: string;
+}
+
+
+interface IItemData {
+    file: ImagePicker.ImagePickerResult,
+    sex: string,
+    brand: string,
 }
 
 class DataService {
@@ -109,8 +118,19 @@ class DataService {
     updateUser(data: IUpdateUserData) {
         return http.put<IUpdateUserData>("/users/private/")
     }
+
+    checkImage(data: IItemData) {
+        let bodyFormData = new FormData();
+
+        let photo = { uri: data.file }
+
+        bodyFormData.append('sex', 'male')
+        bodyFormData.append('brand','prada')
+        bodyFormData.append('file',data.file as ImageInfo)
+        return http.postForm("/clothes",)
+    }
 }
 
-export { ILoginData, IUpdateUserData, IUserData, ISignupData }
+export { ILoginData, IUpdateUserData, IUserData, ISignupData, IItemData }
 
 export default new DataService();

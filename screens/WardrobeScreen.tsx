@@ -13,12 +13,18 @@ import StyledButton from "../components/StyledButton";
 import Cheap from "../components/Cheap"
 import * as ImagePicker from "expo-image-picker";
 import Colors from "../constants/Colors";
+import {useAppSelector} from "../hooks/useAppSelector";
+import {useAppDispatch} from "../hooks/useAppDispatch";
+import {choosePhoto, selectItemEditor} from "../reducers/itemEditorReducer";
 
 export default function WardrobeScreen({ navigation }: RootTabScreenProps<'Wardrobe'>) {
     enum Selector {
         Items,
         Looks
     }
+
+    const selectItem = useAppSelector(selectItemEditor);
+    const dispatch = useAppDispatch();
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ["40%"], []);
@@ -36,16 +42,10 @@ export default function WardrobeScreen({ navigation }: RootTabScreenProps<'Wardr
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
             quality: 1,
         });
-
-        console.log(result)
-
-        // if (!result.cancelled) {
-        //     setImage(result);
-        // }
+        dispatch(choosePhoto(result))
+        navigation.navigate("AddItem")
     }
 
   return (

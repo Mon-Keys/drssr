@@ -27,6 +27,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import EditModal from "../screens/EditModal";
 import ImageRecognizerScreen from '../screens/ImageRecognizer';
+import AddItemModal from '../screens/AddItemModal';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -51,6 +52,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'card' }}>
+          <Stack.Screen name="AddItem" component={AddItemModal} />
           <Stack.Screen name="Signup" component={SignupScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Edit" component={EditModal} />
