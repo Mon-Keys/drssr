@@ -123,11 +123,15 @@ class DataService {
         let bodyFormData = new FormData();
 
         let photo = { uri: data.file }
-
+        console.log(data)
         bodyFormData.append('sex', 'male')
         bodyFormData.append('brand','prada')
-        bodyFormData.append('file',data.file as ImageInfo)
-        return http.postForm("/clothes",)
+        bodyFormData.append('file', {
+            uri: data.file.uri,
+            type: "image/jpg",
+            name:'name.jpg'
+        })
+        return http.post("/clothes",bodyFormData, {withCredentials: true,headers: {"Content-Type":"multipart/form-data"}})
     }
 }
 

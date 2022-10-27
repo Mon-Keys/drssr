@@ -67,12 +67,12 @@ export default function SignupScreen({ navigation }: RootTabScreenProps<'Profile
                     value={birthdate}
                     onChangeText={onChangeBirthdate} />
                 <StyledButton
-                    title='hello' onPress={submitSignup} />
+                    title='Зарегистрироваться' onPress={submitSignup} />
 
                 <StyledButton
-                    title='login' onPress={()=> {
+                    title='Войти' onPress={() => {
                         navigation.navigate("Login")
-                }} />
+                    }} />
                 {user.status === 'pending' ? <ActivityIndicator size={"large"} color={Colors.base.purple} /> : <View />}
 
             </View>

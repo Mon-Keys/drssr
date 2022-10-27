@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Image, ScrollView, ActivityIndicator, RefreshControl, SafeAreaView} from 'react-native';
+import { StyleSheet, Image, ScrollView, ActivityIndicator, RefreshControl, SafeAreaView } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 
@@ -8,7 +8,7 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchUserData, selectUser, logoutUser } from '../reducers/userReducer';
 import StyledButton from '../components/StyledButton';
-import {RootStackParamList, RootTabScreenProps} from "../types";
+import { RootStackParamList, RootTabScreenProps } from "../types";
 import Colors from "../constants/Colors";
 
 
@@ -24,8 +24,8 @@ export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profil
     useEffect(() => {
         console.log('hello')
 
-        dispatch(fetchUserData()).then(()=> {
-            if(!isLoggedIn) navigation.navigate('Login')
+        dispatch(fetchUserData()).then(() => {
+            if (!isLoggedIn) navigation.navigate('Login')
         })
     }, [dispatch])
 
@@ -54,8 +54,8 @@ export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profil
                     }}
 
                     source={{
-                        uri: 'https://abrakadabra.fun/uploads/posts/2022-03/1646379493_17-abrakadabra-fun-p-gul-ded-insaid-53.jpg'
-                        }}
+                        uri: 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                    }}
                 />
                 <Text style={styles.userName}>
                     {userData.name}
@@ -71,7 +71,7 @@ export default function ProfileScreen({ navigation }: RootTabScreenProps<'Profil
                     {userData.email}
                 </Text>
                 <StyledButton title={"logout"} onPress={logout} />
-                <StyledButton title={"log in"} onPress={ () => {
+                <StyledButton title={"log in"} onPress={() => {
                     navigation.navigate('Login')
                 }} />
             </ScrollView>
