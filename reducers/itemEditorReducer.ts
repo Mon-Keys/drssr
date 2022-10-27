@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import * as ImagePicker from 'expo-image-picker';
-import DataService, { IItemData, ISignupData } from '../network';
-import axios from 'axios';
+import DataService, { IItemData } from '../network';
 
 export interface ItemResponse {
     id: number;
@@ -58,7 +57,7 @@ export const itemEditorSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(analyzeItem.pending, (state, action) => {
+            .addCase(analyzeItem.pending, (state) => {
                 state.status = 'pending';
                 console.log('pending');
                 // state.error = '';
@@ -80,7 +79,7 @@ export const itemEditorSlice = createSlice({
                 state.itemResp = itemResp;
                 // console.log(state.userData)
             })
-            .addCase(analyzeItem.rejected, (state, action) => {
+            .addCase(analyzeItem.rejected, (state) => {
                 state.status = 'rejected';
                 console.log('rejected');
                 // state.error = action.payload

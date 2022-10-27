@@ -1,9 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Button, StyleSheet, Text, View, Image, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { Button, StyleSheet, View, Image, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 // import ImageUploading, { ImageListType } from "react-images-uploading";
 
 export type Props = {};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    chooseImageIcon: {
+        width: 200,
+        height: 200
+    }
+});
 
 const CustomImagePicker: React.FC<Props> = ({}) => {
     // const [image, setImage] = useState<ImagePicker.ImagePickerResult>();
@@ -25,10 +37,7 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
         }
     };
 
-    const createFormData = (
-        photo: ImagePicker.ImagePickerResult,
-        body = {}
-    ) => {
+    const createFormData = (photo: ImagePicker.ImagePickerResult) => {
         const data = new FormData();
 
         if (!photo.cancelled && photo.fileName && photo.type && photo.uri) {
@@ -47,7 +56,7 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
 
     const handleUploadPhoto = () => {
         console.log('ssssssssssssssss');
-        if (image != undefined) {
+        if (image !== undefined) {
             fetch('http://leonidperl.in:5001/upload', {
                 method: 'POST',
                 body: createFormData(image)
@@ -70,20 +79,12 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
                 <Image
                     //@ts-ignore
                     source={{ uri: image.uri }}
-                    style={{ width: 200, height: 200 }}
+                    style={styles.chooseImageIcon}
                 />
             )}
             {image && <Button title="Отправить" onPress={handleUploadPhoto} />}
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-});
 
 export default CustomImagePicker;

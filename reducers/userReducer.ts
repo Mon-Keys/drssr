@@ -1,12 +1,6 @@
-import {
-    createSlice,
-    PayloadAction,
-    createAsyncThunk,
-    nanoid
-} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import DataService, { ILoginData, IUserData } from '../network/';
-import { ISignupData } from '../network/';
+import DataService, { ILoginData, IUserData, ISignupData } from '../network/';
 
 export interface User {
     nickname: string;
@@ -119,7 +113,7 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUserData.pending, (state, action) => {
+            .addCase(fetchUserData.pending, (state) => {
                 state.status = 'pending';
                 state.error = '';
             })
@@ -131,12 +125,12 @@ export const userSlice = createSlice({
                 console.log(action);
                 console.log(state.userData);
             })
-            .addCase(fetchUserData.rejected, (state, action) => {
+            .addCase(fetchUserData.rejected, (state) => {
                 state.status = 'rejected';
                 console.log('rejected');
                 // state.error = action.payload
             })
-            .addCase(signUpUser.pending, (state, action) => {
+            .addCase(signUpUser.pending, (state) => {
                 state.status = 'pending';
                 state.error = '';
             })
@@ -145,13 +139,13 @@ export const userSlice = createSlice({
                 console.log('resolved');
                 state.userData = action.payload as unknown as User;
             })
-            .addCase(signUpUser.rejected, (state, action) => {
+            .addCase(signUpUser.rejected, (state) => {
                 state.status = 'rejected';
                 console.log('rejected');
                 // state.error = action.payload
             })
 
-            .addCase(loginUser.pending, (state, action) => {
+            .addCase(loginUser.pending, (state) => {
                 state.status = 'pending';
                 state.error = '';
             })
@@ -160,22 +154,22 @@ export const userSlice = createSlice({
                 console.log('resolved');
                 state.userData = action.payload as unknown as User;
             })
-            .addCase(loginUser.rejected, (state, action) => {
+            .addCase(loginUser.rejected, (state) => {
                 state.status = 'rejected';
                 console.log('rejected');
                 // state.error = action.payload
             })
-            .addCase(logoutUser.pending, (state, action) => {
+            .addCase(logoutUser.pending, (state) => {
                 state.status = 'pending';
                 state.error = '';
             })
-            .addCase(logoutUser.fulfilled, (state, action) => {
+            .addCase(logoutUser.fulfilled, (state) => {
                 state.status = 'resolved';
                 state.isLoggedIn = false;
                 state.userData = { nickname: '', email: '', name: '' };
                 console.log('resolved');
             })
-            .addCase(logoutUser.rejected, (state, action) => {
+            .addCase(logoutUser.rejected, (state) => {
                 state.status = 'rejected';
                 console.log('rejected');
                 // state.error = action.payload

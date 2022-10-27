@@ -3,24 +3,12 @@ import {
     SafeAreaView,
     StyleSheet,
     ButtonProps,
-    View,
-    Button,
     Pressable,
     Text
 } from 'react-native';
 import Colors from '../constants/Colors';
 
 interface StyledButtonProps extends ButtonProps {}
-
-const StyledButton = (props: StyledButtonProps) => {
-    return (
-        <SafeAreaView>
-            <Pressable style={styles.button} {...props}>
-                <Text style={styles.buttonTitle}> {props.title} </Text>
-            </Pressable>
-        </SafeAreaView>
-    );
-};
 
 const styles = StyleSheet.create({
     button: {
@@ -37,5 +25,15 @@ const styles = StyleSheet.create({
         fontFamily: 'proxima-nova'
     }
 });
+
+const StyledButton = (props: StyledButtonProps) => {
+    return (
+        <SafeAreaView>
+            <Pressable style={styles.button} {...props}>
+                <Text style={styles.buttonTitle}> {props.title} </Text>
+            </Pressable>
+        </SafeAreaView>
+    );
+};
 
 export default StyledButton;

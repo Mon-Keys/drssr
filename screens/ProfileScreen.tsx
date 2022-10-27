@@ -1,29 +1,48 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     StyleSheet,
     Image,
     ScrollView,
-    ActivityIndicator,
     RefreshControl,
     SafeAreaView
 } from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import { Text } from '../components/Themed';
 
-import { useEffect } from 'react';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchUserData, selectUser, logoutUser } from '../reducers/userReducer';
 import StyledButton from '../components/StyledButton';
-import { RootStackParamList, RootTabScreenProps } from '../types';
+import { RootTabScreenProps } from '../types';
 import Colors from '../constants/Colors';
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        // backgroundColor: "red",
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    userName: {
+        fontSize: 18
+    },
+    userDescription: {
+        fontSize: 16,
+        color: Colors.base.darkgray
+    },
+    image: {
+        width: 100,
+        height: 100,
+        borderRadius: 50
+    }
+});
 
 export default function ProfileScreen({
     navigation
 }: RootTabScreenProps<'Profile'>) {
-    const [refreshing, setRefreshing] = React.useState(false);
+    const [refreshing] = React.useState(false);
 
-    const { isLoggedIn, status, error, userData } = useAppSelector(selectUser);
+    const { isLoggedIn, userData } = useAppSelector(selectUser);
 
     const dispatch = useAppDispatch();
 
@@ -33,7 +52,7 @@ export default function ProfileScreen({
         dispatch(fetchUserData()).then(() => {
             if (!isLoggedIn) navigation.navigate('Login');
         });
-    }, [dispatch]);
+    }, [dispatch, isLoggedIn, navigation]);
 
     const logout = () => {
         dispatch(logoutUser());
@@ -55,11 +74,7 @@ export default function ProfileScreen({
                 }
             >
                 <Image
-                    style={{
-                        width: 100,
-                        height: 100,
-                        borderRadius: 50
-                    }}
+                    style={styles.image}
                     source={{
                         uri: 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
                     }}
@@ -80,19 +95,3 @@ export default function ProfileScreen({
         </SafeAreaView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // backgroundColor: "red",
-        alignContent: 'center',
-        justifyContent: 'center'
-    },
-    userName: {
-        fontSize: 18
-    },
-    userDescription: {
-        fontSize: 16,
-        color: Colors.base.darkgray
-    }
-});

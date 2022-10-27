@@ -1,17 +1,39 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 import InputField from '../components/InputField';
 
-import { Text, View } from '../components/Themed';
-import ImageMasker from '../components/ImageMasker';
+import { View } from '../components/Themed';
 import StyledButton from '../components/StyledButton';
 import Person from '../components/icons/person';
-import DatePicker from 'react-native-date-picker';
-import { loginUser, selectUser } from '../reducers/userReducer';
-import { useAppSelector } from '../hooks/useAppSelector';
+import { loginUser } from '../reducers/userReducer';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { ILoginData } from '../network';
-import { RootStackScreenProps, RootTabScreenProps } from '../types';
+import { RootStackScreenProps } from '../types';
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        // backgroundColor: "red",
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    formContainer: {
+        alignItems: 'center',
+        // backgroundColor: Colors.base.red,
+        height: 300,
+        alignContent: 'space-between',
+        justifyContent: 'space-between'
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: '80%'
+    }
+});
 
 export default function TabTwoScreen({
     navigation
@@ -19,10 +41,10 @@ export default function TabTwoScreen({
     const [login, onChangeLogin] = React.useState<string>('');
 
     const [password, onChangePassword] = React.useState<string>('');
-    const [date, setDate] = React.useState<Date>(new Date(343223543));
-    const [open, setOpen] = React.useState<boolean>(false);
+    // const [date, setDate] = React.useState<Date>(new Date(343223543));
+    // const [open, setOpen] = React.useState<boolean>(false);
 
-    const user = useAppSelector(selectUser);
+    // const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
 
     const submitLogin = () => {
@@ -64,28 +86,3 @@ export default function TabTwoScreen({
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // backgroundColor: "red",
-        alignContent: 'center',
-        justifyContent: 'center'
-    },
-    formContainer: {
-        alignItems: 'center',
-        // backgroundColor: Colors.base.red,
-        height: 300,
-        alignContent: 'space-between',
-        justifyContent: 'space-between'
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%'
-    }
-});

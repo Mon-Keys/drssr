@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -11,12 +11,30 @@ import Colors from '../constants/Colors';
 import EyeSlash from './icons/eyeSlash';
 import Eye from './icons/eye';
 
-import { useState } from 'react';
-
 interface InputFieldProps extends Omit<TextInputProps, 'secureTextEntry'> {
     password?: boolean;
     icon: JSX.Element;
 }
+
+const styles = StyleSheet.create({
+    input: {
+        color: Colors.base.white,
+        height: 40,
+        fontFamily: 'proxima-nova',
+        fontSize: 18,
+        width: 230,
+        paddingLeft: 9
+    },
+    inputContainer: {
+        backgroundColor: Colors.base.dark,
+        borderRadius: 9,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 9,
+        width: 288,
+        height: 36
+    }
+});
 
 const InputField = (props: InputFieldProps) => {
     const [hidePass, setHidePass] = useState<boolean | undefined>(
@@ -27,16 +45,16 @@ const InputField = (props: InputFieldProps) => {
         setHidePass(!hidePass);
     }
 
-    let hidePassIcon: JSX.Element = <View></View>;
+    let hidePassIcon: JSX.Element = <View />;
     if (props.password) {
         hidePassIcon = hidePass ? (
-            <Eye onPress={changeHidePass}></Eye>
+            <Eye onPress={changeHidePass} />
         ) : (
-            <EyeSlash onPress={changeHidePass}></EyeSlash>
+            <EyeSlash onPress={changeHidePass} />
         );
     }
 
-    let icon: JSX.Element = <View></View>;
+    let icon: JSX.Element = <View />;
     if (props.icon) {
         icon = props.icon;
         // icon.props.style = styles.icon
@@ -58,25 +76,5 @@ const InputField = (props: InputFieldProps) => {
         </SafeAreaView>
     );
 };
-
-const styles = StyleSheet.create({
-    input: {
-        color: Colors.base.white,
-        height: 40,
-        fontFamily: 'proxima-nova',
-        fontSize: 18,
-        width: 230,
-        paddingLeft: 9
-    },
-    inputContainer: {
-        backgroundColor: Colors.base.dark,
-        borderRadius: 9,
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingLeft: 9,
-        width: 288,
-        height: 36
-    }
-});
 
 export default InputField;

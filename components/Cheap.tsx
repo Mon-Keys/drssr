@@ -3,12 +3,8 @@ import {
     SafeAreaView,
     StyleSheet,
     ButtonProps,
-    View,
-    Button,
     Pressable,
-    Text,
-    Animated,
-    GestureResponderEvent
+    Animated
 } from 'react-native';
 import Colors from '../constants/Colors';
 
@@ -16,30 +12,59 @@ interface CheapProps extends ButtonProps {
     isActive: boolean;
 }
 
+const styles = StyleSheet.create({
+    active: {
+        backgroundColor: Colors.base.white,
+        width: 144,
+        height: 36,
+        borderRadius: 18,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    inactive: {
+        backgroundColor: Colors.base.black,
+        width: 144,
+        height: 36,
+        borderRadius: 18,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    inactiveTitle: {
+        fontSize: 18,
+        fontFamily: 'proxima-nova',
+        color: Colors.base.white
+    },
+    activeTitle: {
+        fontSize: 18,
+        fontFamily: 'proxima-nova',
+        color: Colors.base.black
+    }
+});
+
 const Cheap = (props: CheapProps) => {
     const fadeAnim = React.useRef(new Animated.Value(1)).current;
 
-    const [animation, setAnimation] = React.useState(new Animated.Value(0));
+    const [animation] = React.useState(new Animated.Value(0));
 
-    const fadeIn = () => {
-        // Will change fadeAnim value to 1 in 5 seconds
-        Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: 500,
-            useNativeDriver: false
-        }).start();
-    };
+    // const fadeIn = () => {
+    //     // Will change fadeAnim value to 1 in 5 seconds
+    //     Animated.timing(fadeAnim, {
+    //         toValue: 1,
+    //         duration: 500,
+    //         useNativeDriver: false
+    //     }).start();
+    // };
 
-    const fadeToBlack = (
-        callback: ((event: GestureResponderEvent) => void) | undefined
-    ) => {
-        // @ts-ignore
-        // Animated.timing(animation, {
-        //     toValue: 1,
-        //     duration: 400,
-        //     useNativeDriver: false
-        // }).start(callback);
-    };
+    // const fadeToBlack = (
+    //     callback: ((event: GestureResponderEvent) => void) | undefined
+    // ) => {
+    //     // @ts-ignore
+    //     // Animated.timing(animation, {
+    //     //     toValue: 1,
+    //     //     duration: 400,
+    //     //     useNativeDriver: false
+    //     // }).start(callback);
+    // };
 
     const fadeToWhite = () => {
         Animated.timing(animation, {
@@ -59,26 +84,21 @@ const Cheap = (props: CheapProps) => {
         outputRange: [Colors.base.white, Colors.base.black]
     });
 
-    const fadeOut = () => {
-        // Will change fadeAnim value to 0 in 3 seconds
-        Animated.timing(fadeAnim, {
-            toValue: 0,
-            duration: 500,
-            useNativeDriver: false
-        }).start();
-    };
+    // const fadeOut = () => {
+    //     // Will change fadeAnim value to 0 in 3 seconds
+    //     Animated.timing(fadeAnim, {
+    //         toValue: 0,
+    //         duration: 500,
+    //         useNativeDriver: false
+    //     }).start();
+    // };
 
     fadeToWhite();
 
     return (
         <SafeAreaView>
             <Animated.View style={{ opacity: fadeAnim }}>
-                <Pressable
-                    {...props}
-                    onPress={(event) => {
-                        fadeToBlack(props.onPress);
-                    }}
-                >
+                <Pressable {...props}>
                     <Animated.View
                         style={
                             props.isActive
@@ -122,34 +142,5 @@ const Cheap = (props: CheapProps) => {
         </SafeAreaView>
     );
 };
-
-const styles = StyleSheet.create({
-    active: {
-        backgroundColor: Colors.base.white,
-        width: 144,
-        height: 36,
-        borderRadius: 18,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    inactive: {
-        backgroundColor: Colors.base.black,
-        width: 144,
-        height: 36,
-        borderRadius: 18,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    inactiveTitle: {
-        fontSize: 18,
-        fontFamily: 'proxima-nova',
-        color: Colors.base.white
-    },
-    activeTitle: {
-        fontSize: 18,
-        fontFamily: 'proxima-nova',
-        color: Colors.base.black
-    }
-});
 
 export default Cheap;

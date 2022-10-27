@@ -1,9 +1,25 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
+
 import ImageMasker from '../components/ImageMasker';
 // @ts-ignore
 import ExpoDraw from 'expo-draw';
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        // backgroundColor: "red",
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    expoDraw: {
+        backgroundColor: 'transparent',
+        height: '100%',
+        width: '100%',
+        position: 'absolute'
+    }
+});
 
 export default function EditModal() {
     return (
@@ -20,12 +36,7 @@ export default function EditModal() {
             <Text> экран владимира лункина </Text>
 
             <ExpoDraw
-                containerStyle={{
-                    backgroundColor: 'transparent',
-                    height: '100%',
-                    width: '100%',
-                    position: 'absolute'
-                }}
+                containerStyle={styles.expoDraw}
                 color={'red'}
                 strokeWidth={4}
                 enabled={true}
@@ -33,12 +44,3 @@ export default function EditModal() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // backgroundColor: "red",
-        alignContent: 'center',
-        justifyContent: 'center'
-    }
-});

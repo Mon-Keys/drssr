@@ -1,21 +1,38 @@
-import {
-    StyleSheet,
-    Button,
-    GestureResponderEvent,
-    ActivityIndicator
-} from 'react-native';
+import { StyleSheet, ActivityIndicator } from 'react-native';
 import React from 'react';
-import { Text, View } from '../components/Themed';
-import { RootStackScreenProps, RootTabScreenProps } from '../types';
+import { View } from '../components/Themed';
+import { RootStackScreenProps } from '../types';
 import InputField from '../components/InputField';
 import Person from '../components/icons/person';
 import StyledButton from '../components/StyledButton';
 import Colors from '../constants/Colors';
-import DatePicker from 'react-native-date-picker';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
-import { fetchUserData, selectUser, signUpUser } from '../reducers/userReducer';
+import { selectUser, signUpUser } from '../reducers/userReducer';
 import { ISignupData } from '../network';
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    formContainer: {
+        alignItems: 'center',
+        height: 300,
+        alignContent: 'space-between',
+        justifyContent: 'space-between'
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: '80%'
+    }
+});
 
 export default function SignupScreen({
     navigation
@@ -23,8 +40,8 @@ export default function SignupScreen({
     const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
 
-    const [date, setDate] = React.useState<Date>(new Date(343223543));
-    const [open, setOpen] = React.useState<boolean>(false);
+    // const [date, setDate] = React.useState<Date>(new Date(343223543));
+    // const [open, setOpen] = React.useState<boolean>(false);
 
     const [nickname, onChangeNickname] = React.useState<string>('');
 
@@ -34,7 +51,7 @@ export default function SignupScreen({
 
     const [birthdate, onChangeBirthdate] = React.useState<string>('');
 
-    const submitSignup = (event: GestureResponderEvent) => {
+    const submitSignup = () => {
         const data: ISignupData = {
             nickname: nickname,
             password: password,
@@ -99,28 +116,3 @@ export default function SignupScreen({
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // backgroundColor: "red",
-        alignContent: 'center',
-        justifyContent: 'center'
-    },
-    formContainer: {
-        alignItems: 'center',
-        // backgroundColor: Colors.base.red,
-        height: 300,
-        alignContent: 'space-between',
-        justifyContent: 'space-between'
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%'
-    }
-});

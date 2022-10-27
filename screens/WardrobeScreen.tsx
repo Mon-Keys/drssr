@@ -1,24 +1,57 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
-import { StyleSheet, Image, SafeAreaView, Pressable } from 'react-native';
+import { StyleSheet, SafeAreaView, Pressable } from 'react-native';
 
 import {
     BottomSheetModal,
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
-import CustomImagePicker from '../components/ImagePicker';
-// @ts-ignore
-import ExpoDraw from 'expo-draw';
 import { AntDesign } from '@expo/vector-icons';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import StyledButton from '../components/StyledButton';
 import Cheap from '../components/Cheap';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '../constants/Colors';
-import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
-import { choosePhoto, selectItemEditor } from '../reducers/itemEditorReducer';
+import { choosePhoto } from '../reducers/itemEditorReducer';
+
+const styles = StyleSheet.create({
+    cheapContainer: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    bottomSheet: {
+        backgroundColor: Colors.base.black
+    },
+    contentContainer: {
+        backgroundColor: Colors.base.black,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    },
+    overlay: {
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%'
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: '80%'
+    }
+});
 
 export default function WardrobeScreen({
     navigation
@@ -28,7 +61,7 @@ export default function WardrobeScreen({
         Looks
     }
 
-    const selectItem = useAppSelector(selectItemEditor);
+    // const selectItem = useAppSelector(selectItemEditor);
     const dispatch = useAppDispatch();
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
@@ -79,7 +112,7 @@ export default function WardrobeScreen({
                         />
                     </Pressable>
                 </View>
-                <View></View>
+                <View />
                 {/* 
           <CustomImagePicker /> */}
                 {/* <StyledButton title={'экран'} onPress={()=> {
@@ -109,40 +142,3 @@ export default function WardrobeScreen({
         </BottomSheetModalProvider>
     );
 }
-
-const styles = StyleSheet.create({
-    cheapContainer: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    bottomSheet: {
-        backgroundColor: Colors.base.black
-    },
-    contentContainer: {
-        backgroundColor: Colors.base.black,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    overlay: {
-        backgroundColor: 'rgba(0,0,0,0.2)',
-        flex: 1,
-        justifyContent: 'flex-end'
-    },
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%'
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%'
-    }
-});
