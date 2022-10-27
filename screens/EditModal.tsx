@@ -16,6 +16,7 @@ export default function EditModal() {
                     'https://www.pngall.com/wp-content/uploads/5/Shape-PNG-Image.png'
                 }
             />
+
             <Text> экран владимира лункина </Text>
 
             <ExpoDraw
