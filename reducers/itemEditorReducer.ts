@@ -1,8 +1,8 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import * as ImagePicker from "expo-image-picker";
-import DataService, {IItemData, ISignupData} from "../network";
-import axios from "axios";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import * as ImagePicker from 'expo-image-picker';
+import DataService, { IItemData, ISignupData } from '../network';
+import axios from 'axios';
 
 export interface ItemResponse {
     id: number;
@@ -20,49 +20,52 @@ interface ItemEditorState {
     itemResp: ItemResponse | null;
 }
 
-
-
-export const analyzeItem = createAsyncThunk<IItemData, IItemData>('itemEditor/analyze',
-    async (data, {rejectWithValue}) => {
+export const analyzeItem = createAsyncThunk<ItemResponse, IItemData>(
+    'itemEditor/analyze',
+    async (data, { rejectWithValue }) => {
         try {
-            console.log('sending signup11')
-            const response = await DataService.checkImage(data)
+            console.log('sending signup11');
+            const response = await DataService.checkImage(data);
             // console.log(data)
-            console.log('sent')
+            console.log('sent');
             // console.log(response)
 
-            return response.data
+            return response.data;
         } catch (error: any) {
-            console.log(error)
-            return rejectWithValue(error.message)
+            console.log(error);
+            return rejectWithValue(error.message);
         }
-})
+    }
+);
 
 const initialState = {
     currentItem: null,
-    status: "",
+    status: '',
     itemResp: null
 } as ItemEditorState;
 
 export const itemEditorSlice = createSlice({
-    name: "itemEditor",
+    name: 'itemEditor',
     initialState,
     reducers: {
-        choosePhoto: (state, action: PayloadAction<ImagePicker.ImagePickerResult>) => {
-            state.itemResp = null
-            state.currentItem = action.payload
-        },
+        choosePhoto: (
+            state,
+            action: PayloadAction<ImagePicker.ImagePickerResult>
+        ) => {
+            state.itemResp = null;
+            state.currentItem = action.payload;
+        }
     },
-     extraReducers: (builder) => {
+    extraReducers: (builder) => {
         builder
             .addCase(analyzeItem.pending, (state, action) => {
                 state.status = 'pending';
-                console.log('pending')
+                console.log('pending');
                 // state.error = '';
             })
             .addCase(analyzeItem.fulfilled, (state, action) => {
                 state.status = 'resolved';
-                console.log('resolved')
+                console.log('resolved');
                 // state.userData = action.payload as unknown as User
                 // state.isLoggedIn = true
                 const itemResp: ItemResponse = {
@@ -72,18 +75,17 @@ export const itemEditorSlice = createSlice({
                     mask: action.payload.mask,
                     color: action.payload.color,
                     id: action.payload.id,
-                    sex: action.payload.sex,
-                }
-                state.itemResp = itemResp
+                    sex: action.payload.sex
+                };
+                state.itemResp = itemResp;
                 // console.log(state.userData)
-
             })
             .addCase(analyzeItem.rejected, (state, action) => {
                 state.status = 'rejected';
-                console.log('rejected')
+                console.log('rejected');
                 // state.error = action.payload
-            })
-     }
+            });
+    }
 });
 
 export const { choosePhoto } = itemEditorSlice.actions;

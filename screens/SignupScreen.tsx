@@ -1,24 +1,30 @@
-import { StyleSheet, Button, GestureResponderEvent, ActivityIndicator } from 'react-native';
-import React from "react"
+import {
+    StyleSheet,
+    Button,
+    GestureResponderEvent,
+    ActivityIndicator
+} from 'react-native';
+import React from 'react';
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
-import InputField from "../components/InputField"
-import Person from '../components/icons/person'
+import { RootStackScreenProps, RootTabScreenProps } from '../types';
+import InputField from '../components/InputField';
+import Person from '../components/icons/person';
 import StyledButton from '../components/StyledButton';
 import Colors from '../constants/Colors';
-import DatePicker from 'react-native-date-picker'
+import DatePicker from 'react-native-date-picker';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchUserData, selectUser, signUpUser } from '../reducers/userReducer';
 import { ISignupData } from '../network';
 
-export default function SignupScreen({ navigation }: RootTabScreenProps<'Profile'>) {
-
+export default function SignupScreen({
+    navigation
+}: RootStackScreenProps<'Signup'>) {
     const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
 
-    const [date, setDate] = React.useState<Date>(new Date(343223543))
-    const [open, setOpen] = React.useState<boolean>(false)
+    const [date, setDate] = React.useState<Date>(new Date(343223543));
+    const [open, setOpen] = React.useState<boolean>(false);
 
     const [nickname, onChangeNickname] = React.useState<string>('');
 
@@ -35,11 +41,11 @@ export default function SignupScreen({ navigation }: RootTabScreenProps<'Profile
             email: email,
             birth_date: new Date(),
             name: 'test',
-            description: 'test user',
-        }
+            description: 'test user'
+        };
 
-        dispatch(signUpUser(data))
-    }
+        dispatch(signUpUser(data));
+    };
 
     return (
         <View style={styles.container}>
@@ -48,33 +54,47 @@ export default function SignupScreen({ navigation }: RootTabScreenProps<'Profile
                     icon={<Person />}
                     placeholder={'имя пользователя'}
                     value={nickname}
-                    onChangeText={onChangeNickname} />
+                    onChangeText={onChangeNickname}
+                />
                 <InputField
                     icon={<Person />}
                     placeholder={'почта'}
                     value={email}
                     onChangeText={onChangeEmail}
-                    keyboardType={"email-address"} />
+                    keyboardType={'email-address'}
+                />
                 <InputField
                     icon={<Person />}
                     placeholder={'пароль'}
                     value={password}
                     onChangeText={onChangePassword}
-                    password={true} />
+                    password={true}
+                />
                 <InputField
                     icon={<Person />}
                     placeholder={'дата рождения'}
                     value={birthdate}
-                    onChangeText={onChangeBirthdate} />
+                    onChangeText={onChangeBirthdate}
+                />
                 <StyledButton
-                    title='Зарегистрироваться' onPress={submitSignup} />
+                    title="Зарегистрироваться"
+                    onPress={submitSignup}
+                />
 
                 <StyledButton
-                    title='Войти' onPress={() => {
-                        navigation.navigate("Login")
-                    }} />
-                {user.status === 'pending' ? <ActivityIndicator size={"large"} color={Colors.base.purple} /> : <View />}
-
+                    title="Войти"
+                    onPress={() => {
+                        navigation.navigate('Login');
+                    }}
+                />
+                {user.status === 'pending' ? (
+                    <ActivityIndicator
+                        size={'large'}
+                        color={Colors.base.purple}
+                    />
+                ) : (
+                    <View />
+                )}
             </View>
         </View>
     );
@@ -84,24 +104,23 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // backgroundColor: "red",
-        alignContent: "center",
-        justifyContent: "center"
+        alignContent: 'center',
+        justifyContent: 'center'
     },
     formContainer: {
         alignItems: 'center',
         // backgroundColor: Colors.base.red,
         height: 300,
-        alignContent: "space-between",
-        justifyContent: "space-between",
+        alignContent: 'space-between',
+        justifyContent: 'space-between'
     },
     title: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     },
     separator: {
         marginVertical: 30,
         height: 1,
-        width: '80%',
-    },
-
+        width: '80%'
+    }
 });

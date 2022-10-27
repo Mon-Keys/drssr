@@ -10,41 +10,41 @@ import * as Linking from 'expo-linking';
 import { RootStackParamList } from '../types';
 
 const linking: LinkingOptions<RootStackParamList> = {
-  prefixes: [Linking.createURL("/")],
-  config: {
-    screens: {
-      Root: {
+    prefixes: [Linking.createURL('/')],
+    config: {
         screens: {
-          Home: {
-            screens: {
-              Home: "home",
+            Root: {
+                screens: {
+                    Home: {
+                        screens: {
+                            Home: 'home'
+                        }
+                    },
+                    Search: {
+                        screens: {
+                            TabTwoScreen: 'search'
+                        }
+                    },
+                    Wardrobe: {
+                        screens: {
+                            TabThreeScreen: 'wardrobe'
+                        }
+                    },
+                    Profile: {
+                        screens: {
+                            ProfileScreen: 'profile'
+                        }
+                    }
+                }
             },
-          },
-          Search: {
-            screens: {
-              TabTwoScreen: "search",
-            },
-          },
-          Wardrobe: {
-            screens: {
-              TabThreeScreen: "wardrobe",
-            },
-          },
-          Profile: {
-            screens: {
-              ProfileScreen: "profile",
-            },
-          },
-        },
-      },
-      Edit: "Edit",
-      ImageRecognizer: "ImageRecognizer",
-      Signup: "Signup",
-      Login: "Login",
-      NotFound: "*",
-      AddItem: "AddItem",
-    },
-  },
+            Edit: 'Edit',
+            ImageRecognizer: 'ImageRecognizer',
+            Signup: 'Signup',
+            Login: 'Login',
+            NotFound: '*',
+            AddItem: 'AddItem'
+        }
+    }
 };
 
 export default linking;

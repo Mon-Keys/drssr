@@ -1,75 +1,74 @@
-import React, { useState } from "react";
-import { Button, StyleSheet, Text, View, Image } from "react-native";
+import React, { useState } from 'react';
+import { Button, StyleSheet, Text, View, Image } from 'react-native';
 
 // @ts-ignore
-import ExpoDraw from "expo-draw";
+import ExpoDraw from 'expo-draw';
 
-import MaskedView from "@react-native-masked-view/masked-view";
+import MaskedView from '@react-native-masked-view/masked-view';
 
 export type Props = {
-  imgURI: string;
-  maskURI: string;
-  opacity?: number 
+    imgURI: string;
+    maskURI: string;
+    opacity?: number;
 };
 
-const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity=0.3 }) => {
-  const [strokesData, setStrokes] = useState<any>({})
+const ImageMasker: React.FC<Props> = ({ imgURI, maskURI, opacity = 0.3 }) => {
+    const [strokesData, setStrokes] = useState<any>({});
 
-  return (
-    <View style={styles.container}>
-      <MaskedView
-        style={{ flex: 1, flexDirection: "row", height: "100%" }}
-        maskElement={
-          <View
-            style={{
-              backgroundColor: "transparent",
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+    return (
+        <View style={styles.container}>
+            <MaskedView
+                style={{ flex: 1, flexDirection: 'row', height: '100%' }}
+                maskElement={
+                    <View
+                        style={{
+                            backgroundColor: 'transparent',
+                            flex: 1,
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Image
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                position: 'absolute'
+                            }}
+                            source={{
+                                uri: maskURI
+                            }}
+                        />
+                    </View>
+                }
+            >
+                <Image
+                    style={{ width: '100%', height: '100%', opacity: 1 }}
+                    source={{
+                        uri: imgURI
+                    }}
+                />
+            </MaskedView>
             <Image
-              style={{
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-              }}
-              source={{
-                uri: maskURI,
-              }}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    opacity: opacity,
+                    position: 'absolute'
+                }}
+                source={{
+                    uri: imgURI
+                }}
             />
-          </View>
-        }
-      >
-        <Image
-          style={{ width: "100%", height: "100%", opacity: 1 }}
-          source={{
-            uri: imgURI,
-          }}
-        />
-      </MaskedView>
-      <Image
-        style={{
-          width: "100%",
-          height: "100%",
-          opacity: opacity,
-          position: "absolute",
-        }}
-        source={{
-          uri: imgURI,
-        }}
-      />
-    </View>
-  );
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
- 
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 });
 
 export default ImageMasker;

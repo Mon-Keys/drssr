@@ -1,6 +1,5 @@
-
 export default {
     base: {
-        fontRegular: 'proxima-nova',
+        fontRegular: 'proxima-nova'
     }
 };

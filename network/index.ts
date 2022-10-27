@@ -1,6 +1,6 @@
-import http from "./http-common";
-import * as ImagePicker from "expo-image-picker";
-import {ImageInfo} from "expo-image-picker";
+import http from './http-common';
+import * as ImagePicker from 'expo-image-picker';
+import { ImageInfo } from 'expo-image-picker';
 
 interface ILoginData {
     login: string;
@@ -16,7 +16,6 @@ interface ISignupData {
     description?: string;
     avatar?: string; // [Base64]
 }
-
 
 interface IUserData {
     nickname: string;
@@ -36,11 +35,10 @@ interface IUpdateUserData {
     description: string;
 }
 
-
 interface IItemData {
-    file: ImagePicker.ImagePickerResult,
-    sex: string,
-    brand: string,
+    file: ImagePicker.ImagePickerResult;
+    sex: string;
+    brand: string;
 }
 
 class DataService {
@@ -53,7 +51,7 @@ class DataService {
      * @beta
      */
     getUserDataByCookie() {
-        return http.get<IUserData>("/users/private", { withCredentials: true })
+        return http.get<IUserData>('/users/private', { withCredentials: true });
     }
 
     /**
@@ -66,8 +64,10 @@ class DataService {
      * @beta
      */
     signUpUser(data: ISignupData) {
-        console.log('signup')
-        return http.post<ISignupData>("/users/public/signup", data, {withCredentials: false})
+        console.log('signup');
+        return http.post<ISignupData>('/users/public/signup', data, {
+            withCredentials: false
+        });
     }
 
     /**
@@ -80,7 +80,7 @@ class DataService {
      * @beta
      */
     loginUser(data: ILoginData) {
-        return http.post<ILoginData>("/users/public/login", data)
+        return http.post<ILoginData>('/users/public/login', data);
     }
 
     /**
@@ -92,7 +92,7 @@ class DataService {
      * @beta
      */
     deleteUser() {
-        return http.delete<any>("/users/private")
+        return http.delete<any>('/users/private');
     }
 
     /**
@@ -104,7 +104,9 @@ class DataService {
      * @beta
      */
     logoutUser() {
-        return http.delete<any>("/users/private/logout", { withCredentials: true })
+        return http.delete<any>('/users/private/logout', {
+            withCredentials: true
+        });
     }
 
     /**
@@ -116,25 +118,29 @@ class DataService {
      * @beta
      */
     updateUser(data: IUpdateUserData) {
-        return http.put<IUpdateUserData>("/users/private/")
+        return http.put<IUpdateUserData>('/users/private/');
     }
 
     checkImage(data: IItemData) {
         let bodyFormData = new FormData();
 
-        let photo = { uri: data.file }
-        console.log(data)
-        bodyFormData.append('sex', 'male')
-        bodyFormData.append('brand','prada')
+        let photo = { uri: data.file };
+        console.log(data);
+        bodyFormData.append('sex', 'male');
+        bodyFormData.append('brand', 'prada');
         bodyFormData.append('file', {
+            //@ts-ignore
             uri: data.file.uri,
-            type: "image/jpg",
-            name:'name.jpg'
-        })
-        return http.post("/clothes",bodyFormData, {withCredentials: true,headers: {"Content-Type":"multipart/form-data"}})
+            type: 'image/jpg',
+            name: 'name.jpg'
+        });
+        return http.post('/clothes', bodyFormData, {
+            withCredentials: true,
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
     }
 }
 
-export { ILoginData, IUpdateUserData, IUserData, ISignupData, IItemData }
+export { ILoginData, IUpdateUserData, IUserData, ISignupData, IItemData };
 
 export default new DataService();
