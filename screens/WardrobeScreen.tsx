@@ -12,7 +12,7 @@ import {
     BottomSheetModal,
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import StyledButton from '../components/StyledButton';
@@ -21,6 +21,8 @@ import * as ImagePicker from 'expo-image-picker';
 import Colors from '../constants/Colors';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { choosePhoto } from '../reducers/itemEditorReducer';
+import ItemsScreen from './ItemsWardrobeScreen';
+import LooksScreen from './LooksWardrobeScreen';
 
 const styles = StyleSheet.create({
     cheapContainer: {
@@ -83,6 +85,11 @@ export default function WardrobeScreen({
         bottomSheetModalRef.current.present();
     };
 
+    const closeModal = () => {
+        // @ts-ignore
+        bottomSheetModalRef.current.close();
+    };
+
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -121,7 +128,13 @@ export default function WardrobeScreen({
                         />
                     </Pressable>
                 </View>
-                <View />
+                <View>
+                    {selected === Selector.Items ? (
+                        <ItemsScreen />
+                    ) : (
+                        <LooksScreen />
+                    )}
+                </View>
                 {/* 
           <CustomImagePicker /> */}
                 {/* <StyledButton title={'экран'} onPress={()=> {
@@ -137,6 +150,13 @@ export default function WardrobeScreen({
                 handleIndicatorStyle={{ backgroundColor: Colors.base.white }}
             >
                 <View style={styles.contentContainer}>
+                    <Pressable onPress={closeModal}>
+                        <Entypo
+                            name="cross"
+                            size={24}
+                            color={Colors.base.white}
+                        />
+                    </Pressable>
                     <StyledButton title={'Из ссылки'} />
                     <StyledButton
                         title={'Камера'}
