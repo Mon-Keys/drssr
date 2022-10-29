@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, SafeAreaView, Pressable } from 'react-native';
+import {StyleSheet, SafeAreaView, Pressable, Platform, StatusBar} from 'react-native';
 
 import {
     BottomSheetModal,
@@ -19,7 +19,8 @@ import { choosePhoto } from '../reducers/itemEditorReducer';
 const styles = StyleSheet.create({
     cheapContainer: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: Colors.base.black,
     },
     bottomSheet: {
         backgroundColor: Colors.base.black
@@ -40,7 +41,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        backgroundColor: Colors.base.black,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     title: {
         fontSize: 20,

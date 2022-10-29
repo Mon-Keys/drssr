@@ -1,17 +1,20 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import {Platform, StatusBar, StyleSheet} from 'react-native';
 import { Text, View } from '../components/Themed';
 
 import ImageMasker from '../components/ImageMasker';
 // @ts-ignore
 import ExpoDraw from 'expo-draw';
+import Colors from "../constants/Colors";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         // backgroundColor: "red",
         alignContent: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: Colors.base.black,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     expoDraw: {
         backgroundColor: 'transparent',

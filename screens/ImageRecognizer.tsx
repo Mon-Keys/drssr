@@ -1,16 +1,19 @@
 import React from 'react';
-import { StyleSheet, ActivityIndicator } from 'react-native';
+import {StyleSheet, ActivityIndicator, Platform, StatusBar} from 'react-native';
 
 import { View } from '../components/Themed';
 
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
+import Colors from "../constants/Colors";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         // backgroundColor: "red",
         alignContent: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: Colors.base.black,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     }
 });
 
