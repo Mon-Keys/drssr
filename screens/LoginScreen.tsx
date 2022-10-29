@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, StatusBar, StyleSheet} from 'react-native';
+import { Platform, StatusBar, StyleSheet } from 'react-native';
 import InputField from '../components/InputField';
 
 import { View } from '../components/Themed';
@@ -9,7 +9,7 @@ import { loginUser } from '../reducers/userReducer';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { ILoginData } from '../network';
 import { RootStackScreenProps } from '../types';
-import Colors from "../constants/Colors";
+import Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     formContainer: {
         alignItems: 'center',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         height: 300,
         alignContent: 'space-between',
         justifyContent: 'space-between',
-        backgroundColor: Colors.base.black,
+        backgroundColor: Colors.base.black
     },
     title: {
         fontSize: 20,

@@ -1,4 +1,9 @@
-import {StyleSheet, ActivityIndicator, Platform, StatusBar} from 'react-native';
+import {
+    StyleSheet,
+    ActivityIndicator,
+    Platform,
+    StatusBar
+} from 'react-native';
 import React from 'react';
 import { View } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
@@ -17,14 +22,14 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     formContainer: {
         alignItems: 'center',
         height: 300,
         alignContent: 'space-between',
         justifyContent: 'space-between',
-        backgroundColor: Colors.base.black,
+        backgroundColor: Colors.base.black
     },
     title: {
         fontSize: 20,

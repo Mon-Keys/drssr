@@ -136,8 +136,9 @@ class DataService {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
     }
+
     addUserItem(data: IItemData) {
-        return http.post('/items',data, {withCredentials: true})
+        return http.post('/items', data, { withCredentials: true });
     }
 }
 

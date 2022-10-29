@@ -1,7 +1,7 @@
-import {Platform, StatusBar, StyleSheet} from 'react-native';
+import { Platform, StatusBar, StyleSheet } from 'react-native';
 import React from 'react';
 import { Text, View } from '../components/Themed';
-import Colors from "../constants/Colors";
+import Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     }
 });
 

@@ -4,7 +4,9 @@ import {
     Image,
     ScrollView,
     RefreshControl,
-    SafeAreaView, Platform, StatusBar
+    SafeAreaView,
+    Platform,
+    StatusBar
 } from 'react-native';
 
 import { Text } from '../components/Themed';
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         backgroundColor: Colors.base.black,
         justifyContent: 'center',
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     userName: {
         fontSize: 18

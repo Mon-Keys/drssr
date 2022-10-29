@@ -1,9 +1,14 @@
 import React from 'react';
-import {Platform, StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+    Platform,
+    StatusBar,
+    StyleSheet,
+    TouchableOpacity
+} from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
-import Colors from "../constants/Colors";
+import Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -12,7 +17,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 20,
         backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     title: {
         fontSize: 20,
