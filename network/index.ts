@@ -50,7 +50,7 @@ class DataService {
      * @beta
      */
     getUserDataByCookie() {
-        return http.get<IUserData>('/users/private', { withCredentials: true });
+        return http.get<IUserData>('/private/users', { withCredentials: true });
     }
 
     /**
@@ -64,7 +64,7 @@ class DataService {
      */
     signUpUser(data: ISignupData) {
         console.log('signup');
-        return http.post<ISignupData>('/users/public/signup', data, {
+        return http.post<ISignupData>('/public/users/signup', data, {
             withCredentials: false
         });
     }
@@ -79,7 +79,7 @@ class DataService {
      * @beta
      */
     loginUser(data: ILoginData) {
-        return http.post<ILoginData>('/users/public/login', data);
+        return http.post<ILoginData>('/public/users/login', data);
     }
 
     /**
@@ -91,7 +91,7 @@ class DataService {
      * @beta
      */
     deleteUser() {
-        return http.delete<any>('/users/private');
+        return http.delete<any>('/private/users');
     }
 
     /**
@@ -103,7 +103,7 @@ class DataService {
      * @beta
      */
     logoutUser() {
-        return http.delete<any>('/users/private/logout', {
+        return http.delete<any>('/private/users/logout', {
             withCredentials: true
         });
     }
@@ -117,7 +117,7 @@ class DataService {
      * @beta
      */
     updateUser(data: IUpdateUserData) {
-        return http.put<IUpdateUserData>('/users/private/', data);
+        return http.put<IUpdateUserData>('/private/users/', data);
     }
 
     checkImage(data: IItemData) {
@@ -131,7 +131,7 @@ class DataService {
             type: 'image/jpg',
             name: 'name.jpg'
         });
-        return http.post('/clothes', bodyFormData, {
+        return http.post('/private/clothes', bodyFormData, {
             withCredentials: true,
             headers: { 'Content-Type': 'multipart/form-data' }
         });
