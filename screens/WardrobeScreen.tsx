@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
     StyleSheet,
@@ -23,11 +23,16 @@ import { useAppDispatch } from '../hooks/useAppDispatch';
 import { choosePhoto } from '../reducers/itemEditorReducer';
 import ItemsScreen from './ItemsWardrobeScreen';
 import LooksScreen from './LooksWardrobeScreen';
+import { fetchUsersClothes } from '../reducers/clothesReduser';
 
 const styles = StyleSheet.create({
     cheapContainer: {
         flex: 1,
         flexDirection: 'row',
+        backgroundColor: Colors.base.black
+    },
+    mainContainer: {
+        flex: 10,
         backgroundColor: Colors.base.black
     },
     bottomSheet: {
@@ -100,6 +105,12 @@ export default function WardrobeScreen({
         navigation.navigate('AddItem');
     };
 
+    useEffect(() => {
+        console.log('hello');
+
+        dispatch(fetchUsersClothes());
+    }, [dispatch]);
+
     return (
         <BottomSheetModalProvider>
             <SafeAreaView style={styles.container}>
@@ -128,7 +139,7 @@ export default function WardrobeScreen({
                         />
                     </Pressable>
                 </View>
-                <View>
+                <View style={styles.mainContainer}>
                     {selected === Selector.Items ? (
                         <ItemsScreen />
                     ) : (
