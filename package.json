@@ -9,6 +9,7 @@
         "test": "jest --watchAll",
         "prettier:write": "npx prettier --write **/*.{js,jsx,ts,tsx,json}",
         "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./",
+        "lint:fix": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./ --fix",
         "prettier:check": "npx prettier --check **/*.{js,jsx,ts,tsx,json}"
     },
     "jest": {

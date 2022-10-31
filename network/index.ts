@@ -24,6 +24,14 @@ interface IUserData {
     description?: string;
     ctime: number;
 }
+interface IClothesData {
+    id: number;
+    brand: string;
+    color: string;
+    type: string;
+    img: string;
+    mask: string;
+}
 
 interface IUpdateUserData {
     nickname: string;
@@ -137,11 +145,20 @@ class DataService {
         });
     }
 
-    addUserItem(data: IItemData) {
-        return http.post('/items', data, { withCredentials: true });
+    getUsersClothesByCookie() {
+        return http.get<Array<IClothesData>>('/private/clothes', {
+            withCredentials: true
+        });
     }
 }
 
-export { ILoginData, IUpdateUserData, IUserData, ISignupData, IItemData };
+export {
+    ILoginData,
+    IUpdateUserData,
+    IUserData,
+    ISignupData,
+    IItemData,
+    IClothesData
+};
 
 export default new DataService();
