@@ -16,6 +16,7 @@
         "preset": "jest-expo"
     },
     "dependencies": {
+        "@bam.tech/react-native-image-resizer": "^3.0.4",
         "@benjeau/react-native-draw": "^0.8.3",
         "@expo/vector-icons": "^13.0.0",
         "@gorhom/bottom-sheet": "^4.4.5",

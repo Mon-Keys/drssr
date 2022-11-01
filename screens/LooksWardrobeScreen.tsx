@@ -19,9 +19,12 @@ const styles = StyleSheet.create({
 });
 
 export default function LooksWardrobeScreen() {
+    // const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
+    // const snapPoints = React.useMemo(() => ['40%'], []);
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>wardrobe</Text>
+            <Text style={styles.title}> wardrobe </Text>
         </View>
     );
 }
