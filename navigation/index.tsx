@@ -170,10 +170,7 @@ function RootNavigator() {
                     component={ImageRecognizerScreen}
                 />
 
-                <Stack.Screen
-                    name="CreateLook"
-                    component={CreateLookModal}
-                />
+                <Stack.Screen name="CreateLook" component={CreateLookModal} />
             </Stack.Group>
         </Stack.Navigator>
     );

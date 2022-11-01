@@ -43,7 +43,7 @@ const linking: LinkingOptions<RootStackParamList> = {
             Login: 'Login',
             NotFound: '*',
             AddItem: 'AddItem',
-            CreateLook: 'CreateLook',
+            CreateLook: 'CreateLook'
         }
     }
 };
