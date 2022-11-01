@@ -157,7 +157,9 @@ export default function WardrobeScreen({
                             color={Colors.base.white}
                         />
                     </Pressable>
-                    <StyledButton title={'Из ссылки'} />
+                    <StyledButton title={'Добавить лук'} onPress={()=> {
+                        navigation.navigate('CreateLook')
+                    }} />
                     <StyledButton
                         title={'Камера'}
                         onPress={() => {

@@ -39,6 +39,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import EditModal from '../screens/EditModal';
 import ImageRecognizerScreen from '../screens/ImageRecognizer';
 import AddItemModal from '../screens/AddItemModal';
+import CreateLookModal from '../screens/CreateLookModal';
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -167,6 +168,11 @@ function RootNavigator() {
                 <Stack.Screen
                     name="ImageRecognizer"
                     component={ImageRecognizerScreen}
+                />
+
+                <Stack.Screen
+                    name="CreateLook"
+                    component={CreateLookModal}
                 />
             </Stack.Group>
         </Stack.Navigator>

@@ -3,6 +3,7 @@ import { Platform, StatusBar, StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
+import {BottomSheetModal, BottomSheetModalProvider} from "@gorhom/bottom-sheet";
 
 const styles = StyleSheet.create({
     container: {
@@ -19,9 +20,13 @@ const styles = StyleSheet.create({
 });
 
 export default function LooksWardrobeScreen() {
+    const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
+    const snapPoints = React.useMemo(() => ['40%'], []);
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>wardrobe</Text>
+            <Text style={styles.title}> wardrobe </Text>
+
         </View>
     );
 }
