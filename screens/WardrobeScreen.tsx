@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { StyleSheet, SafeAreaView, Pressable } from 'react-native';
+import {
+    StyleSheet,
+    SafeAreaView,
+    Pressable,
+    Platform,
+    StatusBar
+} from 'react-native';
 
 import {
     BottomSheetModal,
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 import { View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import StyledButton from '../components/StyledButton';
@@ -15,11 +21,19 @@ import * as ImagePicker from 'expo-image-picker';
 import Colors from '../constants/Colors';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { choosePhoto } from '../reducers/itemEditorReducer';
+import ItemsScreen from './ItemsWardrobeScreen';
+import LooksScreen from './LooksWardrobeScreen';
+import { fetchUsersClothes } from '../reducers/clothesReduser';
 
 const styles = StyleSheet.create({
     cheapContainer: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: Colors.base.black
+    },
+    mainContainer: {
+        flex: 10,
+        backgroundColor: Colors.base.black
     },
     bottomSheet: {
         backgroundColor: Colors.base.black
@@ -40,7 +54,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        backgroundColor: Colors.base.black,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     title: {
         fontSize: 20,
@@ -74,6 +90,11 @@ export default function WardrobeScreen({
         bottomSheetModalRef.current.present();
     };
 
+    const closeModal = () => {
+        // @ts-ignore
+        bottomSheetModalRef.current.close();
+    };
+
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -83,6 +104,12 @@ export default function WardrobeScreen({
         dispatch(choosePhoto(result));
         navigation.navigate('AddItem');
     };
+
+    useEffect(() => {
+        console.log('hello');
+
+        dispatch(fetchUsersClothes());
+    }, [dispatch]);
 
     return (
         <BottomSheetModalProvider>
@@ -112,7 +139,13 @@ export default function WardrobeScreen({
                         />
                     </Pressable>
                 </View>
-                <View />
+                <View style={styles.mainContainer}>
+                    {selected === Selector.Items ? (
+                        <ItemsScreen />
+                    ) : (
+                        <LooksScreen />
+                    )}
+                </View>
                 {/* 
           <CustomImagePicker /> */}
                 {/* <StyledButton title={'экран'} onPress={()=> {
@@ -128,7 +161,19 @@ export default function WardrobeScreen({
                 handleIndicatorStyle={{ backgroundColor: Colors.base.white }}
             >
                 <View style={styles.contentContainer}>
-                    <StyledButton title={'Из ссылки'} />
+                    <Pressable onPress={closeModal}>
+                        <Entypo
+                            name="cross"
+                            size={24}
+                            color={Colors.base.white}
+                        />
+                    </Pressable>
+                    <StyledButton
+                        title={'Добавить лук'}
+                        onPress={() => {
+                            navigation.navigate('CreateLook');
+                        }}
+                    />
                     <StyledButton
                         title={'Камера'}
                         onPress={() => {

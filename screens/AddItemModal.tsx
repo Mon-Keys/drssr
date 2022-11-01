@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 
-import { StyleSheet, Image, ActivityIndicator } from 'react-native';
+import {
+    StyleSheet,
+    Image,
+    ActivityIndicator,
+    Platform,
+    StatusBar
+} from 'react-native';
 
 import { Text, View } from '../components/Themed';
 
@@ -22,7 +28,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: Colors.base.black,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     backgroundImage: {
         height: 400,

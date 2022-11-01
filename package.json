@@ -9,12 +9,14 @@
         "test": "jest --watchAll",
         "prettier:write": "npx prettier --write **/*.{js,jsx,ts,tsx,json}",
         "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./",
+        "lint:fix": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./ --fix",
         "prettier:check": "npx prettier --check **/*.{js,jsx,ts,tsx,json}"
     },
     "jest": {
         "preset": "jest-expo"
     },
     "dependencies": {
+        "@bam.tech/react-native-image-resizer": "^3.0.4",
         "@benjeau/react-native-draw": "^0.8.3",
         "@expo/vector-icons": "^13.0.0",
         "@gorhom/bottom-sheet": "^4.4.5",
