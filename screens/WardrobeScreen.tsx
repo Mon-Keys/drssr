@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import {
     StyleSheet,
@@ -13,10 +13,9 @@ import {
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
 import { AntDesign, Entypo } from '@expo/vector-icons';
-import { View } from '../components/Themed';
+import { View } from '../components/base/Themed';
 import { RootTabScreenProps } from '../types';
-import StyledButton from '../components/StyledButton';
-import Cheap from '../components/Cheap';
+import StyledButton from '../components/base/StyledButton';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '../constants/Colors';
 import { useAppDispatch } from '../hooks/useAppDispatch';
@@ -24,6 +23,7 @@ import { choosePhoto } from '../reducers/itemEditorReducer';
 import ItemsScreen from './ItemsWardrobeScreen';
 import LooksScreen from './LooksWardrobeScreen';
 import { fetchUsersClothes } from '../reducers/clothesReduser';
+import Cheaps from '../components/base/Cheaps';
 
 const styles = StyleSheet.create({
     cheapContainer: {
@@ -72,18 +72,13 @@ const styles = StyleSheet.create({
 export default function WardrobeScreen({
     navigation
 }: RootTabScreenProps<'Wardrobe'>) {
-    enum Selector {
-        Items,
-        Looks
-    }
-
     // const selectItem = useAppSelector(selectItemEditor);
     const dispatch = useAppDispatch();
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ['40%'], []);
 
-    const [selected, setSelected] = React.useState<Selector>(Selector.Items);
+    // const [selected, setSelected] = React.useState<Selector>(Selector.Items);
 
     const openModal = () => {
         // @ts-ignore
@@ -111,24 +106,29 @@ export default function WardrobeScreen({
         dispatch(fetchUsersClothes());
     }, [dispatch]);
 
+    const menuItems = [
+        {
+            name: 'Мои вещи',
+            component: <ItemsScreen />
+        },
+        {
+            name: 'Мои cyki',
+            component: <LooksScreen />
+        }
+    ];
+
+    const [currentScreen, setCurrentScreen] = React.useState<
+        ReactElement<any, any>
+    >(menuItems[0].component);
+
     return (
         <BottomSheetModalProvider>
             <SafeAreaView style={styles.container}>
                 <View style={styles.cheapContainer}>
-                    <Cheap
-                        isActive={selected === Selector.Items}
-                        title={'Мои вещи'}
-                        onPress={() => {
-                            setSelected(Selector.Items);
-                            console.log('items');
-                        }}
-                    />
-                    <Cheap
-                        isActive={selected === Selector.Looks}
-                        title={'Мои луки'}
-                        onPress={() => {
-                            setSelected(Selector.Looks);
-                            console.log('looks');
+                    <Cheaps
+                        cheaps={menuItems}
+                        currentScreen={(component) => {
+                            setCurrentScreen(component);
                         }}
                     />
                     <Pressable onPress={openModal}>
@@ -139,18 +139,7 @@ export default function WardrobeScreen({
                         />
                     </Pressable>
                 </View>
-                <View style={styles.mainContainer}>
-                    {selected === Selector.Items ? (
-                        <ItemsScreen />
-                    ) : (
-                        <LooksScreen />
-                    )}
-                </View>
-                {/* 
-          <CustomImagePicker /> */}
-                {/* <StyledButton title={'экран'} onPress={()=> {
-            navigation.navigate('Edit')
-          }}/> */}
+                <View style={styles.mainContainer}>{currentScreen}</View>
             </SafeAreaView>
             <BottomSheetModal
                 ref={bottomSheetModalRef}

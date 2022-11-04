@@ -1,90 +1,92 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Image } from 'react-native';
+import { Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import StyledButton from '../components/StyledButton';
 
-import { View } from '../components/Themed';
-import Colors from '../constants/Colors';
+import { View } from '../components/base/Themed';
 import { useAppSelector } from '../hooks/useAppSelector';
-import { Clothes, selectClothes } from '../reducers/clothesReduser';
+import {
+    Clothes,
+    getCategories,
+    selectUserItems
+} from '../reducers/clothesReduser';
+import { ClothingItem } from '../components/clothes/ClothingItem';
 
-const styles = StyleSheet.create({
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    image: { width: 400, height: 400, resizeMode: 'contain' },
-    text: {
-        color: Colors.base.black
-    }
-});
-
-const Item = ({ data }: { data: Clothes }) => (
-    <View>
-        <Image
-            style={styles.image}
-            source={{
-                uri: `data:image/jpg;base64,${data.img}`
-            }}
-        />
-    </View>
-);
+// const styles = StyleSheet.create({
+//     title: {
+//         fontSize: 20,
+//         fontWeight: 'bold'
+//     },
+//     text: {
+//         color: Colors.base.black
+//     }
+// });
 
 export default function ItemsWardrobeScreen() {
-    const [showSelect, setShowSelect] = React.useState<String>('');
-    const { clothesData } = useAppSelector(selectClothes);
+    // const [showSelect, setShowSelect] = React.useState<String>('');
 
-    const hodies = Object.values(clothesData).filter(
-        (item) => item.type === 'Hoodie' || item.type === 'Sweater'
-    );
-    const dresses = Object.values(clothesData).filter(
-        (item) => item.type === 'Dress'
-    );
+    const categories = useAppSelector(getCategories);
+
+    const clothes = useAppSelector(selectUserItems);
+
+    const itemsByCategory = (name: string) =>
+        clothes.filter((item) => item.type == name);
+
+    // const dispatch = useAppDispatch();
+
+    // const updateItems = () => {
+    //     dispatch(fetchUsersClothes());
+    // };
 
     return (
         <View>
-            {showSelect !== '' && (
-                <StyledButton
-                    title="Назад"
-                    onPress={() => {
-                        setShowSelect('');
-                    }}
-                />
-            )}
-            {showSelect === '' && (
-                <StyledButton
-                    title="Худи"
-                    onPress={() => {
-                        setShowSelect('hoodies');
-                    }}
-                />
-            )}
-            {showSelect === '' && (
-                <StyledButton
-                    title="Платья"
-                    onPress={() => {
-                        setShowSelect('sneakers');
-                    }}
-                />
-            )}
-            {showSelect === 'hoodies' && (
-                <ScrollView>
-                    <FlatList
-                        data={hodies}
-                        renderItem={({ item }) => <Item data={item} />}
-                        keyExtractor={(item: Clothes) => item.id.toString()}
-                    />
-                </ScrollView>
-            )}
-            {showSelect === 'sneakers' && (
-                <ScrollView>
-                    <FlatList
-                        data={dresses}
-                        renderItem={({ item }) => <Item data={item} />}
-                        keyExtractor={(item: Clothes) => item.id.toString()}
-                    />
-                </ScrollView>
-            )}
+            <Text style={{ color: 'black' }}> {categories.join()}</Text>
+            <FlatList
+                data={itemsByCategory('Tee')}
+                renderItem={({ item }) => <ClothingItem data={item} />}
+                keyExtractor={(item: Clothes) => item.id.toString()}
+            />
+            {/*{showSelect !== '' && (*/}
+            {/*    <StyledButton*/}
+            {/*        title="Назад"*/}
+            {/*        onPress={() => {*/}
+            {/*            setShowSelect('');*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*)}*/}
+            {/*{showSelect === '' && (*/}
+            {/*    <StyledButton*/}
+            {/*        title="Худи"*/}
+            {/*        onPress={() => {*/}
+            {/*            setShowSelect('hoodies');*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*)}*/}
+            {/*{showSelect === '' && (*/}
+            {/*    <StyledButton*/}
+            {/*        title="Платья"*/}
+            {/*        onPress={() => {*/}
+            {/*            setShowSelect('sneakers');*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*)}*/}
+            {/*{showSelect === 'hoodies' && (*/}
+            {/*    <ScrollView>*/}
+            {/*        <FlatList*/}
+            {/*            data={hodies}*/}
+            {/*            renderItem={({ item }) => <Item data={item} />}*/}
+            {/*            keyExtractor={(item: Clothes) => item.id.toString()}*/}
+            {/*        />*/}
+            {/*    </ScrollView>*/}
+            {/*)}*/}
+            {/*{showSelect === 'sneakers' && (*/}
+            {/*    <ScrollView>*/}
+            {/*        <FlatList*/}
+            {/*            data={dresses}*/}
+            {/*            renderItem={({ item }) => <Item data={item} />}*/}
+            {/*            keyExtractor={(item: Clothes) => item.id.toString()}*/}
+            {/*        />*/}
+            {/*    </ScrollView>*/}
+            {/*)}*/}
         </View>
     );
 }

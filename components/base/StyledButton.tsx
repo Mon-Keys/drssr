@@ -6,7 +6,7 @@ import {
     Pressable,
     Text
 } from 'react-native';
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
 
 interface StyledButtonProps extends ButtonProps {}
 

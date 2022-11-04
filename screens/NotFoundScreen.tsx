@@ -6,7 +6,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import { Text, View } from '../components/base/Themed';
 import { RootStackScreenProps } from '../types';
 import Colors from '../constants/Colors';
 

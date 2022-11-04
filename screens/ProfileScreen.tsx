@@ -9,12 +9,12 @@ import {
     StatusBar
 } from 'react-native';
 
-import { Text } from '../components/Themed';
+import { Text } from '../components/base/Themed';
 
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { fetchUserData, selectUser, logoutUser } from '../reducers/userReducer';
-import StyledButton from '../components/StyledButton';
+import StyledButton from '../components/base/StyledButton';
 import { RootTabScreenProps } from '../types';
 import Colors from '../constants/Colors';
 

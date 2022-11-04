@@ -6,10 +6,10 @@ import {
     TextInputProps,
     View
 } from 'react-native';
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
 
-import EyeSlash from './icons/eyeSlash';
-import Eye from './icons/eye';
+import EyeSlash from '../icons/eyeSlash';
+import Eye from '../icons/eye';
 
 interface InputFieldProps extends Omit<TextInputProps, 'secureTextEntry'> {
     password?: boolean;

@@ -1,6 +1,6 @@
 import { Platform, StatusBar, StyleSheet } from 'react-native';
 import React from 'react';
-import { Text, View } from '../components/Themed';
+import { Text, View } from '../components/base/Themed';
 import Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({

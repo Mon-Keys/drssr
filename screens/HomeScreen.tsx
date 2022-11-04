@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Platform, StatusBar, StyleSheet } from 'react-native';
 
-import { View } from '../components/Themed';
-import { MonoText } from '../components/StyledText';
+import { View } from '../components/base/Themed';
+import { MonoText } from '../components/base/StyledText';
 import Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({

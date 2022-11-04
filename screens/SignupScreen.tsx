@@ -5,11 +5,11 @@ import {
     StatusBar
 } from 'react-native';
 import React from 'react';
-import { View } from '../components/Themed';
+import { View } from '../components/base/Themed';
 import { RootStackScreenProps } from '../types';
-import InputField from '../components/InputField';
+import InputField from '../components/base/InputField';
 import Person from '../components/icons/person';
-import StyledButton from '../components/StyledButton';
+import StyledButton from '../components/base/StyledButton';
 import Colors from '../constants/Colors';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
