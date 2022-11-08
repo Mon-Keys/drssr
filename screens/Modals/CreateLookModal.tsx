@@ -11,9 +11,9 @@ import {
 
 // import ImageResizer, { ResizeMode } from '@bam.tech/react-native-image-resizer';
 
-import { View } from '../components/base/Themed';
+import { View } from '../../components/base/Themed';
 
-import Colors from '../constants/Colors';
+import Colors from '../../constants/Colors';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import {

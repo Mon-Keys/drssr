@@ -5,16 +5,16 @@ import {
     StatusBar
 } from 'react-native';
 import React from 'react';
-import { View } from '../components/base/Themed';
-import { RootStackScreenProps } from '../types';
-import InputField from '../components/base/InputField';
-import Person from '../components/icons/person';
-import StyledButton from '../components/base/StyledButton';
-import Colors from '../constants/Colors';
-import { useAppSelector } from '../hooks/useAppSelector';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { selectUser, signUpUser } from '../reducers/userReducer';
-import { ISignupData } from '../network';
+import { View } from '../../components/base/Themed';
+import { RootStackScreenProps } from '../../types';
+import InputField from '../../components/base/InputField';
+import Person from '../../components/icons/person';
+import StyledButton from '../../components/base/StyledButton';
+import Colors from '../../constants/Colors';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { selectUser, signUpUser } from '../../reducers/userReducer';
+import { ISignupData } from '../../network';
 
 const styles = StyleSheet.create({
     container: {
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function SignupScreen({
+export default function SignupScreenModal({
     navigation
 }: RootStackScreenProps<'Signup'>) {
     const user = useAppSelector(selectUser);

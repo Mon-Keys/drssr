@@ -2,14 +2,14 @@ import React from 'react';
 import { Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-import { View } from '../components/base/Themed';
-import { useAppSelector } from '../hooks/useAppSelector';
+import { View } from '../../../components/base/Themed';
+import { useAppSelector } from '../../../hooks/useAppSelector';
 import {
     Clothes,
     getCategories,
     selectUserItems
-} from '../reducers/clothesReduser';
-import { ClothingItem } from '../components/clothes/ClothingItem';
+} from '../../../reducers/clothesReducer';
+import { ClothingItem } from '../../../components/clothes/ClothingItem';
 
 // const styles = StyleSheet.create({
 //     title: {

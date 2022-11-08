@@ -22,13 +22,13 @@ import {
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 
-import NotFoundScreen from '../screens/NotFoundScreen';
-import Home from '../screens/HomeScreen';
-import SearchScreen from '../screens/DiscoverScreen';
-import WardrobeScreen from '../screens/WardrobeScreen';
-import SignupScreen from '../screens/SignupScreen';
-import LoginScreen from '../screens/LoginScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import NotFoundScreenModal from '../screens/Modals/NotFoundScreenModal';
+import Home from '../screens/HomeScreen/HomeScreen';
+import SearchScreen from '../screens/SearchScreen/DiscoverScreen';
+import WardrobeScreen from '../screens/WardrobeScreen/WardrobeScreen';
+import SignupScreenModal from '../screens/Modals/SignupScreenModal';
+import LoginScreen from '../screens/Modals/LoginScreen';
+import ProfileScreen from '../screens/ProfileScreen/ProfileScreen';
 
 import {
     RootStackParamList,
@@ -36,10 +36,11 @@ import {
     RootTabScreenProps
 } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import EditModal from '../screens/EditModal';
-import ImageRecognizerScreen from '../screens/ImageRecognizer';
-import AddItemModal from '../screens/AddItemModal';
-import CreateLookModal from '../screens/CreateLookModal';
+import EditModal from '../screens/Modals/EditModal';
+import ImageRecognizerScreen from '../screens/Modals/ImageRecognizer';
+import AddItemModal from '../screens/Modals/AddItemModal';
+import CreateLookModal from '../screens/Modals/CreateLookModal';
+import PostModalScreen from "../screens/Modals/PostModal";
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -70,7 +71,7 @@ function BottomTabNavigator() {
         <BottomTab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                tabBarActiveTintColor: Colors[colorScheme].tint
+                tabBarActiveTintColor: Colors.base.white
             }}
         >
             <BottomTab.Screen
@@ -91,7 +92,7 @@ function BottomTabNavigator() {
                             <FontAwesome
                                 name="info-circle"
                                 size={25}
-                                color={Colors[colorScheme].text}
+                                color={Colors.base.white}
                                 style={styles.info}
                             />
                         </Pressable>
@@ -157,14 +158,15 @@ function RootNavigator() {
             />
             <Stack.Screen
                 name="NotFound"
-                component={NotFoundScreen}
+                component={NotFoundScreenModal}
                 options={{ title: 'Oops!' }}
             />
             <Stack.Group screenOptions={{ presentation: 'card' }}>
                 <Stack.Screen name="AddItem" component={AddItemModal} />
-                <Stack.Screen name="Signup" component={SignupScreen} />
+                <Stack.Screen name="Signup" component={SignupScreenModal} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Edit" component={EditModal} />
+                <Stack.Screen name="Post" component={PostModalScreen} />
                 <Stack.Screen
                     name="ImageRecognizer"
                     component={ImageRecognizerScreen}

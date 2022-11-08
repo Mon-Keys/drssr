@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-// ...
 
 import { wardrobeSlice } from '../reducers/wardrobeReducer';
 import { userSlice } from '../reducers/userReducer';
 import { itemEditorSlice } from '../reducers/itemEditorReducer';
-import { clothesSlice } from '../reducers/clothesReduser';
+import { clothesSlice } from '../reducers/clothesReducer';
 
 export const store = configureStore({
     reducer: {
