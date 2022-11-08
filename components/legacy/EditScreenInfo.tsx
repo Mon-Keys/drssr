@@ -79,7 +79,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
                 >
                     <Text
                         style={styles.helpLinkText}
-                        lightColor={Colors.light.tint}
+                        lightColor={Colors.base.dark}
                     >
                         Tap here if your app doesn't automatically update after
                         making changes

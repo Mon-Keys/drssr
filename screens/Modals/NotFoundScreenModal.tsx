@@ -6,9 +6,9 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import { Text, View } from '../components/base/Themed';
-import { RootStackScreenProps } from '../types';
-import Colors from '../constants/Colors';
+import { Text, View } from '../../components/base/Themed';
+import { RootStackScreenProps } from '../../types';
+import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function NotFoundScreen({
+export default function NotFoundScreenModal({
     navigation
 }: RootStackScreenProps<'NotFound'>) {
     return (

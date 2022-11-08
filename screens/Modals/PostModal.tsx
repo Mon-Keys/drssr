@@ -1,12 +1,17 @@
-import { Platform, StatusBar, StyleSheet } from 'react-native';
 import React from 'react';
-import { Text, View } from '../components/base/Themed';
-import Colors from '../constants/Colors';
+import {
+    StyleSheet,
+    Text,
+    Platform,
+    StatusBar
+} from 'react-native';
+import { View } from '../../components/base/Themed';
+import Colors from '../../constants/Colors';
+import {RootStackScreenProps} from "../../types";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: "red",
         alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.base.black,
@@ -14,12 +19,13 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function DiscoverScreen(/*{
+export default function PostModalScreen({
     navigation
-}: RootTabScreenProps<'Search'>*/) {
+}: RootStackScreenProps<'Post'>) {
+
     return (
         <View style={styles.container}>
-            <Text> Discover this </Text>
+            <Text style={{color: 'white'}}>aga</Text>
         </View>
     );
 }

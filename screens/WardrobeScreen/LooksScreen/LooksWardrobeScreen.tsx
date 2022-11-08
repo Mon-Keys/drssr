@@ -1,8 +1,8 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet } from 'react-native';
 
-import { Text, View } from '../components/base/Themed';
-import Colors from '../constants/Colors';
+import { Text, View } from '../../../components/base/Themed';
+import Colors from '../../../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {

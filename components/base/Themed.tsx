@@ -12,7 +12,6 @@ import useColorScheme from '../../hooks/useColorScheme';
 
 export function useThemeColor(
     props: { light?: string; dark?: string },
-    colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) {
     const theme = useColorScheme();
     const colorFromProps = props[theme];
@@ -20,7 +19,7 @@ export function useThemeColor(
     if (colorFromProps) {
         return colorFromProps;
     } else {
-        return Colors[theme][colorName];
+        return Colors.base.white;
     }
 }
 
@@ -34,6 +33,7 @@ export type ViewProps = ThemeProps & DefaultView['props'];
 
 export function Text(props: TextProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
+    // @ts-ignore
     const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
     return <DefaultText style={[{ color }, style]} {...otherProps} />;
@@ -41,9 +41,9 @@ export function Text(props: TextProps) {
 
 export function View(props: ViewProps) {
     const { style, lightColor, darkColor, ...otherProps } = props;
+    // @ts-ignore
     const backgroundColor = useThemeColor(
         { light: lightColor, dark: darkColor },
-        'background'
     );
 
     return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;

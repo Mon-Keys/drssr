@@ -13,17 +13,17 @@ import {
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
 import { AntDesign, Entypo } from '@expo/vector-icons';
-import { View } from '../components/base/Themed';
-import { RootTabScreenProps } from '../types';
-import StyledButton from '../components/base/StyledButton';
+import { View } from '../../components/base/Themed';
+import { RootTabScreenProps } from '../../types';
+import StyledButton from '../../components/base/StyledButton';
 import * as ImagePicker from 'expo-image-picker';
-import Colors from '../constants/Colors';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { choosePhoto } from '../reducers/itemEditorReducer';
-import ItemsScreen from './ItemsWardrobeScreen';
-import LooksScreen from './LooksWardrobeScreen';
-import { fetchUsersClothes } from '../reducers/clothesReduser';
-import Cheaps from '../components/base/Cheaps';
+import Colors from '../../constants/Colors';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { choosePhoto } from '../../reducers/itemEditorReducer';
+import ItemsScreen from './ItemsScreen/ItemsWardrobeScreen';
+import LooksScreen from './LooksScreen/LooksWardrobeScreen';
+import { fetchUsersClothes } from '../../reducers/clothesReducer';
+import Cheaps from '../../components/base/Cheaps';
 
 const styles = StyleSheet.create({
     cheapContainer: {
@@ -69,16 +69,25 @@ const styles = StyleSheet.create({
     }
 });
 
+
+const menuItems = [
+    {
+        name: 'Мои вещи',
+        component: <ItemsScreen />
+    },
+    {
+        name: 'Мои луки',
+        component: <LooksScreen />
+    }
+];
+
 export default function WardrobeScreen({
     navigation
 }: RootTabScreenProps<'Wardrobe'>) {
-    // const selectItem = useAppSelector(selectItemEditor);
     const dispatch = useAppDispatch();
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ['40%'], []);
-
-    // const [selected, setSelected] = React.useState<Selector>(Selector.Items);
 
     const openModal = () => {
         // @ts-ignore
@@ -101,21 +110,11 @@ export default function WardrobeScreen({
     };
 
     useEffect(() => {
-        console.log('hello');
 
         dispatch(fetchUsersClothes());
     }, [dispatch]);
 
-    const menuItems = [
-        {
-            name: 'Мои вещи',
-            component: <ItemsScreen />
-        },
-        {
-            name: 'Мои cyki',
-            component: <LooksScreen />
-        }
-    ];
+
 
     const [currentScreen, setCurrentScreen] = React.useState<
         ReactElement<any, any>

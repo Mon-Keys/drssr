@@ -1,15 +1,15 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet } from 'react-native';
-import InputField from '../components/base/InputField';
+import InputField from '../../components/base/InputField';
 
-import { View } from '../components/base/Themed';
-import StyledButton from '../components/base/StyledButton';
-import Person from '../components/icons/person';
-import { loginUser } from '../reducers/userReducer';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { ILoginData } from '../network';
-import { RootStackScreenProps } from '../types';
-import Colors from '../constants/Colors';
+import { View } from '../../components/base/Themed';
+import StyledButton from '../../components/base/StyledButton';
+import Person from '../../components/icons/person';
+import { loginUser } from '../../reducers/userReducer';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { ILoginData } from '../../network';
+import { RootStackScreenProps } from '../../types';
+import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
