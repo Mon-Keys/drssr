@@ -1,4 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {
+    createSlice,
+    createAsyncThunk,
+    createSelector
+} from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import DataService, { IClothesData } from '../network/';
 
@@ -12,15 +16,13 @@ export interface Clothes {
 }
 
 interface ClothesState {
-    isLoggedIn: boolean;
     clothesData: Array<Clothes>;
     status: string;
     error: string;
 }
 
 const initialState = {
-    isLoggedIn: false,
-    clothesData: {},
+    clothesData: [],
     status: '',
     error: ''
 } as ClothesState;
@@ -29,12 +31,8 @@ export const fetchUsersClothes = createAsyncThunk<Array<IClothesData>>(
     'clothes/fetchUsersClothes',
     async (_, { rejectWithValue }) => {
         try {
-            console.log('fetching users clothes');
             const response = await DataService.getUsersClothesByCookie();
-            console.log(response.data[0].id);
-            console.log(response.data[0].brand);
-            console.log(response.data[0].color);
-            console.log(response.data[0].type);
+
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
             }
@@ -65,7 +63,6 @@ export const clothesSlice = createSlice({
                 state.status = 'resolved';
                 console.log('resolved');
                 state.clothesData = action.payload as unknown as Array<Clothes>;
-                state.isLoggedIn = true;
                 // console.log(action);
                 console.log('done');
             })
@@ -80,5 +77,15 @@ export const clothesSlice = createSlice({
 export const { loadData } = clothesSlice.actions;
 
 export const selectClothes = (state: RootState) => state.clothes;
+
+export const selectUserItems = (state: RootState) => state.clothes.clothesData;
+
+export const getCategories = createSelector(selectUserItems, (items) => {
+    const categoriesAvailable = new Set<string>();
+    items.forEach((item) => {
+        categoriesAvailable.add(item.type);
+    });
+    return Array.from(categoriesAvailable);
+});
 
 export default clothesSlice.reducer;

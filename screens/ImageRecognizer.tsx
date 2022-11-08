@@ -6,7 +6,7 @@ import {
     StatusBar
 } from 'react-native';
 
-import { View } from '../components/Themed';
+import { View } from '../components/base/Themed';
 
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
 import Colors from '../constants/Colors';

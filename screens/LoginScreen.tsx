@@ -1,9 +1,9 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet } from 'react-native';
-import InputField from '../components/InputField';
+import InputField from '../components/base/InputField';
 
-import { View } from '../components/Themed';
-import StyledButton from '../components/StyledButton';
+import { View } from '../components/base/Themed';
+import StyledButton from '../components/base/StyledButton';
 import Person from '../components/icons/person';
 import { loginUser } from '../reducers/userReducer';
 import { useAppDispatch } from '../hooks/useAppDispatch';

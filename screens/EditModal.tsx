@@ -1,8 +1,8 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { Text, View } from '../components/base/Themed';
 
-import ImageMasker from '../components/ImageMasker';
+import ImageMasker from '../components/legacy/ImageMasker';
 // @ts-ignore
 import ExpoDraw from 'expo-draw';
 import Colors from '../constants/Colors';
