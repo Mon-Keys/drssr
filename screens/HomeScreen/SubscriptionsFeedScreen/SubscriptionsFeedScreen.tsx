@@ -3,12 +3,11 @@ import { FlatList, StyleSheet } from 'react-native';
 
 import { View } from '../../../components/base/Themed';
 import { FeedCard, FeedCardProps } from '../../../components/feed/FeedCard';
-import Colors from '../../../constants/Colors';
 import { RootTabScreenProps } from '../../../types';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.base.black
+        backgroundColor: 'transparent'
     }
 });
 
@@ -60,6 +59,7 @@ export default function SubscriptionsFeedScreen({
                 data={dataMock}
                 numColumns={2}
                 keyExtractor={(item) => item.previewSrc}
+                style={styles.container}
                 renderItem={(item) => (
                     <FeedCard
                         previewSrc={item.item.previewSrc}

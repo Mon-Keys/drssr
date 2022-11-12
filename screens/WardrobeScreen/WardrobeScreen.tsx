@@ -17,7 +17,7 @@ import { View } from '../../components/base/Themed';
 import { RootTabScreenProps } from '../../types';
 import StyledButton from '../../components/base/StyledButton';
 import * as ImagePicker from 'expo-image-picker';
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { choosePhoto } from '../../reducers/itemEditorReducer';
 import ItemsScreen from './ItemsScreen/ItemsWardrobeScreen';
@@ -29,17 +29,13 @@ const styles = StyleSheet.create({
     cheapContainer: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: Colors.base.black
+        backgroundColor: 'transparent'
     },
     mainContainer: {
-        flex: 10,
-        backgroundColor: Colors.base.black
+        flex: 10
     },
-    bottomSheet: {
-        backgroundColor: Colors.base.black
-    },
+    bottomSheet: {},
     contentContainer: {
-        backgroundColor: Colors.base.black,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
@@ -55,7 +51,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        backgroundColor: Colors.base.black,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     title: {
@@ -99,7 +94,6 @@ export default function WardrobeScreen({
     };
 
     const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             quality: 1
@@ -165,7 +159,6 @@ export default function WardrobeScreen({
                         }}
                     />
                     <StyledButton title={'Из библиотеки'} onPress={pickImage} />
-                    <StyledButton title={'Найти'} />
                 </View>
             </BottomSheetModal>
         </BottomSheetModalProvider>

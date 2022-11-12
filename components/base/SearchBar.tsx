@@ -1,6 +1,7 @@
 import { StyleSheet, TextInput, TextInputProps, View } from 'react-native';
-import Colors from '../../constants/Colors';
+import { Colors, Layout } from '../../styles';
 import { AntDesign } from '@expo/vector-icons';
+import React from 'react';
 
 interface SearchBarProps extends Omit<TextInputProps, 'secureTextEntry'> {
     password?: boolean;
@@ -8,7 +9,7 @@ interface SearchBarProps extends Omit<TextInputProps, 'secureTextEntry'> {
 
 const styles = StyleSheet.create({
     input: {
-        color: Colors.base.white,
+        color: Colors.base.black,
         height: 40,
         fontFamily: 'proxima-nova',
         fontSize: 18,
@@ -16,11 +17,11 @@ const styles = StyleSheet.create({
         paddingLeft: 9
     },
     inputContainer: {
-        backgroundColor: Colors.base.dark,
+        backgroundColor: Colors.base.white,
         borderRadius: 9,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingLeft: 9,
+        paddingLeft: Layout.margins.default,
         width: 288,
         height: 36
     }
@@ -29,11 +30,11 @@ const styles = StyleSheet.create({
 const SearchBar = (props: SearchBarProps) => {
     return (
         <View style={styles.inputContainer}>
-            <AntDesign name="search1" size={24} color={Colors.base.white} />
+            <AntDesign name="search1" size={24} color={Colors.base.darkgray} />
             <TextInput
                 placeholder={'Найди'}
                 style={styles.input}
-                selectionColor={Colors.base.white}
+                selectionColor={Colors.base.black}
                 {...props}
             />
         </View>

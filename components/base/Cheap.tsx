@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Pressable, View, Text } from 'react-native';
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 
 export interface CheapProps {
     name: string;
@@ -10,7 +10,7 @@ export interface CheapProps {
 
 const styles = StyleSheet.create({
     active: {
-        backgroundColor: Colors.base.white,
+        backgroundColor: Colors.base.black,
         width: 144,
         height: 36,
         borderRadius: 18,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inactive: {
-        backgroundColor: Colors.base.black,
+        backgroundColor: Colors.base.lightgray,
         width: 144,
         height: 36,
         borderRadius: 18,
@@ -28,19 +28,19 @@ const styles = StyleSheet.create({
     inactiveTitle: {
         fontSize: 18,
         fontFamily: 'proxima-nova',
-        color: Colors.base.white
+        color: Colors.base.black
     },
     activeTitle: {
         fontSize: 18,
         fontFamily: 'proxima-nova',
-        color: Colors.base.black
+        color: Colors.base.white
     }
 });
 
 const Cheap = (props: CheapProps) => {
     return (
-        <View style={props.isActive ? styles.active : styles.inactive}>
-            <Pressable onPress={props.onPress}>
+        <Pressable onPress={props.onPress}>
+            <View style={props.isActive ? styles.active : styles.inactive}>
                 <Text
                     style={
                         props.isActive
@@ -51,8 +51,8 @@ const Cheap = (props: CheapProps) => {
                     {' '}
                     {props.name}{' '}
                 </Text>
-            </Pressable>
-        </View>
+            </View>
+        </Pressable>
     );
 };
 

@@ -8,7 +8,6 @@ import {
 
 import { Text, View } from '../../components/base/Themed';
 import { RootStackScreenProps } from '../../types';
-import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
@@ -16,7 +15,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
-        backgroundColor: Colors.base.black,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     title: {

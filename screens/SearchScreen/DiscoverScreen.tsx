@@ -1,7 +1,6 @@
 import { Platform, StatusBar, StyleSheet } from 'react-native';
 import React from 'react';
 import { Text, View } from '../../components/base/Themed';
-import Colors from '../../constants/Colors';
 import SearchBar from '../../components/base/SearchBar';
 
 const styles = StyleSheet.create({
@@ -9,8 +8,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        backgroundColor: 'transparent'
     }
 });
 

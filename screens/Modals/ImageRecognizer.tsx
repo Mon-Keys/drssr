@@ -9,15 +9,12 @@ import {
 import { View } from '../../components/base/Themed';
 
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
-import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: "red",
         alignContent: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.base.black,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     }
 });

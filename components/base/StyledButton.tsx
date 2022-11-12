@@ -6,13 +6,13 @@ import {
     Pressable,
     Text
 } from 'react-native';
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 
 interface StyledButtonProps extends ButtonProps {}
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: Colors.base.white,
+        backgroundColor: Colors.base.black,
         width: 288,
         height: 36,
         borderRadius: 18,
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonTitle: {
-        color: Colors.base.black,
+        color: Colors.base.white,
         fontSize: 18,
         fontFamily: 'proxima-nova'
     }

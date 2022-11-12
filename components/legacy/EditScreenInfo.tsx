@@ -2,7 +2,7 @@ import React from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 import { MonoText } from '../base/StyledText';
 import { Text, View } from '../base/Themed';
 
@@ -79,7 +79,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
                 >
                     <Text
                         style={styles.helpLinkText}
-                        lightColor={Colors.base.dark}
+                        lightColor={Colors.base.black}
                     >
                         Tap here if your app doesn't automatically update after
                         making changes

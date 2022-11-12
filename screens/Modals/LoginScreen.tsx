@@ -9,24 +9,22 @@ import { loginUser } from '../../reducers/userReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { ILoginData } from '../../network';
 import { RootStackScreenProps } from '../../types';
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: "red",
         alignContent: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        backgroundColor: 'transparent'
     },
     formContainer: {
         alignItems: 'center',
-        // backgroundColor: Colors.base.red,
         height: 300,
         alignContent: 'space-between',
         justifyContent: 'space-between',
-        backgroundColor: Colors.base.black
+        backgroundColor: 'transparent'
     },
     title: {
         fontSize: 20,
@@ -65,13 +63,13 @@ export default function TabTwoScreen({
         <View style={styles.container}>
             <View style={styles.formContainer}>
                 <InputField
-                    icon={<Person />}
+                    icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'имя пользователя'}
                     value={login}
                     onChangeText={onChangeLogin}
                 />
                 <InputField
-                    icon={<Person />}
+                    icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'пароль'}
                     value={password}
                     onChangeText={onChangePassword}

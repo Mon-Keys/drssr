@@ -10,7 +10,7 @@ import { RootStackScreenProps } from '../../types';
 import InputField from '../../components/base/InputField';
 import Person from '../../components/icons/person';
 import StyledButton from '../../components/base/StyledButton';
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { selectUser, signUpUser } from '../../reducers/userReducer';
@@ -21,15 +21,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        backgroundColor: 'transparent'
     },
     formContainer: {
         alignItems: 'center',
         height: 300,
         alignContent: 'space-between',
         justifyContent: 'space-between',
-        backgroundColor: Colors.base.black
+        backgroundColor: 'transparent'
     },
     title: {
         fontSize: 20,
@@ -76,27 +76,27 @@ export default function SignupScreenModal({
         <View style={styles.container}>
             <View style={styles.formContainer}>
                 <InputField
-                    icon={<Person />}
+                    icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'имя пользователя'}
                     value={nickname}
                     onChangeText={onChangeNickname}
                 />
                 <InputField
-                    icon={<Person />}
+                    icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'почта'}
                     value={email}
                     onChangeText={onChangeEmail}
                     keyboardType={'email-address'}
                 />
                 <InputField
-                    icon={<Person />}
+                    icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'пароль'}
                     value={password}
                     onChangeText={onChangePassword}
                     password={true}
                 />
                 <InputField
-                    icon={<Person />}
+                    icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'дата рождения'}
                     value={birthdate}
                     onChangeText={onChangeBirthdate}
@@ -115,7 +115,7 @@ export default function SignupScreenModal({
                 {user.status === 'pending' ? (
                     <ActivityIndicator
                         size={'large'}
-                        color={Colors.base.purple}
+                        color={Colors.base.black}
                     />
                 ) : (
                     <View />

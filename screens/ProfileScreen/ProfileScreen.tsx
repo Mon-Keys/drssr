@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import {
     StyleSheet,
-    Image,
     ScrollView,
     RefreshControl,
     SafeAreaView,
@@ -9,25 +8,17 @@ import {
     StatusBar
 } from 'react-native';
 
-import { Text } from '../../components/base/Themed';
-
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {
-    fetchUserData,
-    selectUser,
-    logoutUser
-} from '../../reducers/userReducer';
-import StyledButton from '../../components/base/StyledButton';
+import { fetchUserData, selectUser } from '../../reducers/userReducer';
 import { RootTabScreenProps } from '../../types';
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
+import { ProfileCard } from '../../components/base/ProfileCard';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: "red",
         alignContent: 'center',
-        backgroundColor: Colors.base.black,
         justifyContent: 'center',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
@@ -55,16 +46,10 @@ export default function ProfileScreen({
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        console.log('hello');
-
         dispatch(fetchUserData()).then(() => {
             if (!isLoggedIn) navigation.navigate('Login');
         });
     }, [dispatch, isLoggedIn, navigation]);
-
-    const logout = () => {
-        dispatch(logoutUser());
-    };
 
     const refresh = () => {
         console.log('refresh');
@@ -81,23 +66,21 @@ export default function ProfileScreen({
                     />
                 }
             >
-                <Image
-                    style={styles.image}
-                    source={{
-                        uri: 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                <ProfileCard
+                    avatarSrc={
+                        'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                    }
+                    name={userData.name}
+                    isVerified={userData.stylist || false}
+                    subscribersAmount={3500}
+                    location={'Москва'}
+                    settingsAction={() => {
+                        navigation.navigate('Settings');
                     }}
-                />
-                <Text style={styles.userName}>{userData.name}</Text>
-                <Text style={styles.userName}>{userData.nickname}</Text>
-                <Text style={styles.userName}>{userData.email}</Text>
-
-                <Text style={styles.userDescription}>{userData.email}</Text>
-                <StyledButton title={'logout'} onPress={logout} />
-                <StyledButton
-                    title={'log in'}
-                    onPress={() => {
-                        navigation.navigate('Login');
-                    }}
+                    shareAction={() => {}}
+                    description={
+                        'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
+                    }
                 />
             </ScrollView>
         </SafeAreaView>

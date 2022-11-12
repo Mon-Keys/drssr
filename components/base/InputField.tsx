@@ -6,7 +6,7 @@ import {
     TextInputProps,
     View
 } from 'react-native';
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 
 import EyeSlash from '../icons/eyeSlash';
 import Eye from '../icons/eye';
@@ -18,7 +18,7 @@ interface InputFieldProps extends Omit<TextInputProps, 'secureTextEntry'> {
 
 const styles = StyleSheet.create({
     input: {
-        color: Colors.base.white,
+        color: Colors.base.black,
         height: 40,
         fontFamily: 'proxima-nova',
         fontSize: 18,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         paddingLeft: 9
     },
     inputContainer: {
-        backgroundColor: Colors.base.dark,
+        backgroundColor: Colors.base.white,
         borderRadius: 9,
         flexDirection: 'row',
         alignItems: 'center',
@@ -48,9 +48,9 @@ const InputField = (props: InputFieldProps) => {
     let hidePassIcon: JSX.Element = <View />;
     if (props.password) {
         hidePassIcon = hidePass ? (
-            <Eye onPress={changeHidePass} />
+            <Eye onPress={changeHidePass} color={Colors.base.black} />
         ) : (
-            <EyeSlash onPress={changeHidePass} />
+            <EyeSlash onPress={changeHidePass} color={Colors.base.black} />
         );
     }
 
@@ -67,7 +67,7 @@ const InputField = (props: InputFieldProps) => {
                 {icon}
                 <TextInput
                     style={styles.input}
-                    selectionColor={Colors.base.white}
+                    selectionColor={Colors.base.black}
                     {...props}
                     secureTextEntry={hidePass}
                 />

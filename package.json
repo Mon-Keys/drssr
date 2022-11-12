@@ -45,6 +45,7 @@
         "react-native": "0.69.6",
         "react-native-date-picker": "^4.2.5",
         "react-native-draw-on-screen": "^1.0.15",
+        "react-native-easy-gestures": "^2.2.4",
         "react-native-gesture-handler": "~2.5.0",
         "react-native-haptic-feedback": "^1.14.0",
         "react-native-reanimated": "^2.11.0",

@@ -1,13 +1,11 @@
 import { View } from '../base/Themed';
 import { Image, Pressable, StyleSheet } from 'react-native';
 import React from 'react';
-import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
     image: { width: 170, height: 240, resizeMode: 'cover', borderRadius: 14 },
     cardContainer: {
         borderRadius: 14,
-        backgroundColor: Colors.base.black,
         margin: 7
     }
 });
