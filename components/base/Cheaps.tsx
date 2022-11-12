@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         backgroundColor: 'transparent'
+
     },
     separator: {
         marginVertical: 7,
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
         width: 1,
         backgroundColor: Colors.base.darkgray,
     },
+
 });
 
 const Cheaps = (props: CheapsProps) => {

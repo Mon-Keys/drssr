@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'proxima-nova',
         color: Colors.base.darkgray,
+
     },
     activeTitle: {
         fontSize: 18,
         fontFamily: 'proxima-nova',
         color: Colors.base.black,
     },
-
 });
 
 const Cheap = (props: CheapProps) => {

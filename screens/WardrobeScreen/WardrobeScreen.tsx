@@ -20,6 +20,7 @@ import IconButton from "../../components/base/IconButton";
 import {Entypo} from "@expo/vector-icons";
 import StyledButton from "../../components/base/StyledButton";
 
+
 const styles = StyleSheet.create({
     cheapContainer: {
         flex: 1,
@@ -79,6 +80,7 @@ function LooksScreen() {
     return null;
 }
 
+
 const menuItems = [
     {
         name: 'Мои вещи',
@@ -132,6 +134,7 @@ export default function WardrobeScreen({
         }
     ];
 
+
     const [currentScreen, setCurrentScreen] = React.useState<
         ReactElement<any, any>
     >(menuItems[0].component);
@@ -148,6 +151,7 @@ export default function WardrobeScreen({
                         }}
                     />
                     <IconButton title="plus" onPress={openModal} size={styles.buttonPlus.width} />
+
                 </View>
                 <View style={styles.mainContainer}>{currentScreen}</View>
             </SafeAreaView>
@@ -160,6 +164,7 @@ export default function WardrobeScreen({
                 handleIndicatorStyle={{ backgroundColor: Colors.base.white }}
             >
                 <View style={styles.selectContainer}>
+                <View style={styles.contentContainer}>
                     <Pressable onPress={closeModal}>
                         <Entypo
                             name="cross"
