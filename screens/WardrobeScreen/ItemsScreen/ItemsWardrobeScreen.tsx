@@ -46,48 +46,7 @@ export default function ItemsWardrobeScreen() {
                 renderItem={({ item }) => <ClothingItem data={item} />}
                 keyExtractor={(item: Clothes) => item.id.toString()}
             />
-            {/*{showSelect !== '' && (*/}
-            {/*    <StyledButton*/}
-            {/*        title="Назад"*/}
-            {/*        onPress={() => {*/}
-            {/*            setShowSelect('');*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*)}*/}
-            {/*{showSelect === '' && (*/}
-            {/*    <StyledButton*/}
-            {/*        title="Худи"*/}
-            {/*        onPress={() => {*/}
-            {/*            setShowSelect('hoodies');*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*)}*/}
-            {/*{showSelect === '' && (*/}
-            {/*    <StyledButton*/}
-            {/*        title="Платья"*/}
-            {/*        onPress={() => {*/}
-            {/*            setShowSelect('sneakers');*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*)}*/}
-            {/*{showSelect === 'hoodies' && (*/}
-            {/*    <ScrollView>*/}
-            {/*        <FlatList*/}
-            {/*            data={hodies}*/}
-            {/*            renderItem={({ item }) => <Item data={item} />}*/}
-            {/*            keyExtractor={(item: Clothes) => item.id.toString()}*/}
-            {/*        />*/}
-            {/*    </ScrollView>*/}
-            {/*)}*/}
-            {/*{showSelect === 'sneakers' && (*/}
-            {/*    <ScrollView>*/}
-            {/*        <FlatList*/}
-            {/*            data={dresses}*/}
-            {/*            renderItem={({ item }) => <Item data={item} />}*/}
-            {/*            keyExtractor={(item: Clothes) => item.id.toString()}*/}
-            {/*        />*/}
-            {/*    </ScrollView>*/}
-            {/*)}*/}
+
         </View>
     );
 }

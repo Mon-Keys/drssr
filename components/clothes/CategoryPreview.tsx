@@ -1,7 +1,8 @@
 import { View } from '../base/Themed';
 import { Image, StyleSheet, Text } from 'react-native';
 import React from 'react';
-import { ClothingCategory } from "../../reducers/clothesReducer";
+import { ClothingCategory } from '../../reducers/clothesReducer';
+import {Layout} from "../../styles";
 
 const styles = StyleSheet.create({
     container: {
@@ -9,12 +10,13 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 14,
         overflow: 'hidden',
+        marginHorizontal: Layout.margins.small,
     },
     caption: {
         marginLeft: 14,
         marginTop: 14,
         fontSize: 12,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     },
     preview: {
         flex: 1,
@@ -23,11 +25,15 @@ const styles = StyleSheet.create({
         marginLeft: 40,
         marginHorizontal: -14,
         marginTop: -7,
-        marginBottom: -14,
-    },
+        marginBottom: -14
+    }
 });
 
-const ClothingCategoryPreview = ({ category }: { category: ClothingCategory }) => {
+const ClothingCategoryPreview = ({
+    category
+}: {
+    category: ClothingCategory;
+}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.caption} numberOfLines={1}>
@@ -41,6 +47,6 @@ const ClothingCategoryPreview = ({ category }: { category: ClothingCategory }) =
             />
         </View>
     );
-}
+};
 
 export default ClothingCategoryPreview;

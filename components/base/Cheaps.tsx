@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import Cheap from './Cheap';
-import {Colors} from "../../styles";
+import { Colors } from '../../styles';
 
 export interface MenuItem {
     name: string;
@@ -20,24 +20,24 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         backgroundColor: 'transparent'
-
     },
     separator: {
         marginVertical: 7,
-        maxHeight: 300,  // чтобы занимал максимальную высоту
+        maxHeight: 300, // чтобы занимал максимальную высоту
         width: 1,
-        backgroundColor: Colors.base.darkgray,
-    },
-
+        backgroundColor: Colors.base.darkgray
+    }
 });
 
 const Cheaps = (props: CheapsProps) => {
     const [chosenCheap, setChosenCheap] = React.useState(props.cheaps[0].name);
     return (
         <View style={styles.cheapContainer}>
-            <View style={{  }} >
+            <View>
                 <FlatList
-                    ItemSeparatorComponent={() => (<View style={styles.separator} />)}
+                    ItemSeparatorComponent={() => (
+                        <View style={styles.separator} />
+                    )}
                     horizontal={true}
                     data={props.cheaps}
                     renderItem={({ item }) => {
