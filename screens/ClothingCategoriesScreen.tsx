@@ -5,7 +5,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../components/base/Themed';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { getCategories } from '../reducers/clothesReduser';
-import { CategoryPreview } from "../components/clothes/CategoryPreview";
+import CategoryPreview from "../components/clothes/CategoryPreview";
 import Colors from "../constants/Colors";
 
 const styles = StyleSheet.create({

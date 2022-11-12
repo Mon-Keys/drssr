@@ -8,32 +8,38 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 14,
-    },
-    preview: {
-        flex: 1,
-        resizeMode: 'center',
+        overflow: 'hidden',
     },
     caption: {
+        marginLeft: 14,
+        marginTop: 14,
         fontSize: 12,
         fontWeight: 'bold',
-        alignSelf: 'center',
-        paddingVertical: 4,
+    },
+    preview: {
+        marginLeft: 40,
+        flex: 1,
+        resizeMode: 'center',
+
+        marginHorizontal: -14,
+        marginBottom: -14,
     },
 });
 
-// https://snack.expo.dev/kN6t1IJgh
-export const CategoryPreview = ({ category }: { category: ClothingCategory }) => {
+const ClothingCategoryPreview = ({ category }: { category: ClothingCategory }) => {
     return (
         <View style={styles.container}>
+            <Text style={styles.caption}>
+                {category.caption}
+            </Text>
             <Image
                 style={styles.preview}
                 source={{
                     uri: `data:image/jpg;base64,${category.img}`
                 }}
             />
-            <Text style={styles.caption}>
-                {category.caption}
-            </Text>
         </View>
     );
 }
+
+export default ClothingCategoryPreview;

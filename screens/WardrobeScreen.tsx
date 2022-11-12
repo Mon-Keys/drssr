@@ -113,7 +113,7 @@ export default function WardrobeScreen({
         <BottomSheetModalProvider>
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <View style={styles.buttonPlus}/> {/* для симметрии*/}
+                    <View style={styles.buttonPlus}/>
                     <Cheaps
                         cheaps={menuItems}
                         currentScreen={(component) => {
