@@ -8,7 +8,10 @@ import {
     StatusBar
 } from 'react-native';
 
-import { BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {
+    BottomSheetModal,
+    BottomSheetModalProvider
+} from '@gorhom/bottom-sheet';
 import { Entypo } from '@expo/vector-icons';
 import { View } from '../components/base/Themed';
 import { RootTabScreenProps } from '../types';
@@ -20,8 +23,8 @@ import { choosePhoto } from '../reducers/itemEditorReducer';
 import LooksScreen from './LooksWardrobeScreen';
 import { fetchUsersClothes } from '../reducers/clothesReduser';
 import Cheaps from '../components/base/Cheaps';
-import ClothingCategoriesScreen from "./ClothingCategoriesScreen";
-import IconButton from "../components/base/IconButton";
+import ClothingCategoriesScreen from './ClothingCategoriesScreen';
+import IconButton from '../components/base/IconButton';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
 
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column'
     },
     headerContainer: {
         flex: 0,
@@ -41,25 +44,25 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
 
-        backgroundColor: Colors.base.lightgray, // TODO delete
+        backgroundColor: Colors.base.lightgray // TODO delete
     },
     buttonPlus: {
         backgroundColor: Colors.base.lightgray, // TODO delete
-        width: 36,
+        width: 36
     },
     mainContainer: {
-        flex: 1,
+        flex: 1
     },
 
     bottomSheet: {
-        backgroundColor: Colors.base.black,
+        backgroundColor: Colors.base.black
     },
     selectContainer: {
         backgroundColor: Colors.base.black,
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-around',
-    },
+        justifyContent: 'space-around'
+    }
 });
 
 export default function WardrobeScreen({
@@ -113,14 +116,18 @@ export default function WardrobeScreen({
         <BottomSheetModalProvider>
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <View style={styles.buttonPlus}/>
+                    <View style={styles.buttonPlus} />
                     <Cheaps
                         cheaps={menuItems}
                         currentScreen={(component) => {
                             setCurrentScreen(component);
                         }}
                     />
-                    <IconButton title="plus" onPress={openModal} size={styles.buttonPlus.width} />
+                    <IconButton
+                        title="plus"
+                        onPress={openModal}
+                        size={styles.buttonPlus.width}
+                    />
                 </View>
                 <View style={styles.mainContainer}>{currentScreen}</View>
             </SafeAreaView>

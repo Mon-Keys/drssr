@@ -5,17 +5,17 @@ import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../components/base/Themed';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { getCategories } from '../reducers/clothesReduser';
-import CategoryPreview from "../components/clothes/CategoryPreview";
-import Colors from "../constants/Colors";
+import CategoryPreview from '../components/clothes/CategoryPreview';
+import Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: Colors.base.lightgray
     },
     columnWrapper: {
         margin: 7,
-        justifyContent: 'space-around',
-    },
+        justifyContent: 'space-around'
+    }
 });
 
 export default function ClothingCategoriesScreen() {
@@ -29,7 +29,7 @@ export default function ClothingCategoriesScreen() {
                 columnWrapperStyle={styles.columnWrapper}
                 horizontal={false}
                 data={categories}
-                renderItem={({item}) => <CategoryPreview category={item} />}
+                renderItem={({ item }) => <CategoryPreview category={item} />}
                 keyExtractor={(item, index) => index.toString()}
             />
         </View>

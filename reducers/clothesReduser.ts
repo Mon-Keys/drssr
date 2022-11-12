@@ -92,7 +92,7 @@ export const getCategories = createSelector(selectUserItems, (items) => {
             categoriesAvailable.add(item.type);
             categories.push({
                 caption: item.type,
-                img: item.mask,
+                img: item.mask
             });
         }
     });
