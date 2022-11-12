@@ -1,21 +1,21 @@
 import React from 'react';
-import {RefreshControl, StyleSheet} from 'react-native';
+import { RefreshControl, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../../../components/base/Themed';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import {fetchUsersClothes, getCategories} from '../../../reducers/clothesReducer';
+import { fetchUsersClothes, getCategories } from '../../../reducers/clothesReducer';
 import CategoryPreview from '../../../components/clothes/CategoryPreview';
-import { Colors } from '../../../styles';
-import {useAppDispatch} from "../../../hooks/useAppDispatch";
+import { Colors, Layout } from '../../../styles';
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.base.lightgray,
         flex: 1,
         alignItems: 'center',
+        backgroundColor: Colors.base.lightgray,
     },
     columnWrapper: {
-        margin: 7,
+        margin: Layout.margins.small,
         justifyContent: 'flex-start'
     }
 });
