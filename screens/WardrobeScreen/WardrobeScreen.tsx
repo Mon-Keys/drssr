@@ -25,29 +25,9 @@ import { Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
 
 const styles = StyleSheet.create({
-    cheapContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: 'transparent'
-    },
-    mainContainer: {
-        flex: 10
-    },
-    bottomSheet: {},
-    contentContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    overlay: {
-        backgroundColor: 'rgba(0,0,0,0.2)',
-        flex: 1,
-        justifyContent: 'flex-end'
-    },
     container: {
         width: '100%',
         height: '100%',
-        backgroundColor: Colors.base.lightgray,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
 
         display: 'flex',
@@ -60,13 +40,14 @@ const styles = StyleSheet.create({
 
         display: 'flex',
         flexDirection: 'row',
-
-        backgroundColor: Colors.base.lightgray // TODO delete
     },
     buttonPlus: {
-        backgroundColor: Colors.base.lightgray, // TODO delete
         width: 36
     },
+    mainContainer: {
+        flex: 1
+    },
+
     selectContainer: {
         backgroundColor: Colors.base.black,
         flex: 1,
@@ -148,7 +129,6 @@ export default function WardrobeScreen({
                 ref={bottomSheetModalRef}
                 index={0}
                 snapPoints={snapPoints}
-                style={styles.bottomSheet}
                 backgroundStyle={{ backgroundColor: Colors.base.black }}
                 handleIndicatorStyle={{ backgroundColor: Colors.base.white }}
             >
