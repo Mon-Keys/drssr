@@ -18,7 +18,7 @@ import {
 } from '../../reducers/itemEditorReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { IItemData } from '../../network';
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 
 const styles = StyleSheet.create({
     type: {

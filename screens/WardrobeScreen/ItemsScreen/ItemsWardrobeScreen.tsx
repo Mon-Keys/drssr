@@ -10,7 +10,7 @@ import {
     selectUserItems
 } from '../../../reducers/clothesReducer';
 import { ClothingItem } from '../../../components/clothes/ClothingItem';
-import Colors from '../../../constants/Colors';
+import Colors from '../../../styles/Colors';
 
 const styles = StyleSheet.create({
     title: {

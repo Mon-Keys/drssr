@@ -6,11 +6,7 @@
 
 /* eslint react/no-unstable-nested-components: 0 */ // --> OFF
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-    NavigationContainer,
-    DefaultTheme,
-    DarkTheme
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable, StyleSheet } from 'react-native';
@@ -19,7 +15,7 @@ import {
     MaterialCommunityIcons,
     FontAwesome
 } from '@expo/vector-icons';
-import Colors from '../constants/Colors';
+import Colors from '../styles/Colors';
 
 import NotFoundScreenModal from '../screens/Modals/NotFoundScreenModal';
 import Home from '../screens/HomeScreen/HomeScreen';
@@ -40,6 +36,8 @@ import ImageRecognizerScreen from '../screens/Modals/ImageRecognizer';
 import AddItemModal from '../screens/Modals/AddItemModal';
 import CreateLookModal from '../screens/Modals/CreateLookModal';
 import PostModalScreen from '../screens/Modals/PostModal';
+import SettingsModalScreen from '../screens/Modals/SettingsModal';
+import { Theme } from '../styles';
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -68,7 +66,7 @@ function BottomTabNavigator() {
         <BottomTab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                tabBarActiveTintColor: Colors.base.white
+                tabBarActiveTintColor: Colors.base.black
             }}
         >
             <BottomTab.Screen
@@ -146,6 +144,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
     // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Stack.Navigator>
             <Stack.Screen
@@ -164,6 +166,7 @@ function RootNavigator() {
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Edit" component={EditModal} />
                 <Stack.Screen name="Post" component={PostModalScreen} />
+                <Stack.Screen name="Settings" component={SettingsModalScreen} />
                 <Stack.Screen
                     name="ImageRecognizer"
                     component={ImageRecognizerScreen}
@@ -183,7 +186,7 @@ export default function Navigation({
     return (
         <NavigationContainer
             linking={LinkingConfiguration}
-            theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+            theme={colorScheme === 'dark' ? Theme.light : Theme.dark}
         >
             <RootNavigator />
         </NavigationContainer>

@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import Colors from '../../constants/Colors';
 import Cheap from './Cheap';
 
 export interface MenuItem {
@@ -17,7 +16,7 @@ const styles = StyleSheet.create({
     cheapContainer: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: Colors.base.black
+        backgroundColor: 'transparent'
     }
 });
 

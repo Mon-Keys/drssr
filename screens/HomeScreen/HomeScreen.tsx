@@ -3,7 +3,6 @@ import React, { ReactElement } from 'react';
 import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
 import { View } from '../../components/base/Themed';
-import Colors from '../../constants/Colors';
 import Cheaps from '../../components/base/Cheaps';
 
 import SubscriptionsFeedScreen from './SubscriptionsFeedScreen/SubscriptionsFeedScreen';
@@ -15,17 +14,17 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        backgroundColor: 'transparent'
     },
     cheapContainer: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: Colors.base.black
+        backgroundColor: 'transparent'
     },
     mainContainer: {
         flex: 10,
-        backgroundColor: Colors.base.black
+        backgroundColor: 'transparent'
     }
 });
 
