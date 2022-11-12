@@ -17,11 +17,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     preview: {
-        marginLeft: 40,
         flex: 1,
         resizeMode: 'center',
 
+        marginLeft: 40,
         marginHorizontal: -14,
+        marginTop: -7,
         marginBottom: -14,
     },
 });
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
 const ClothingCategoryPreview = ({ category }: { category: ClothingCategory }) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.caption}>
+            <Text style={styles.caption} numberOfLines={1}>
                 {category.caption}
             </Text>
             <Image
