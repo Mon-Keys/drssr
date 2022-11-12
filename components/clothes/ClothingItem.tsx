@@ -4,7 +4,10 @@ import { Image, StyleSheet, Text } from 'react-native';
 import React from 'react';
 
 const styles = StyleSheet.create({
-    image: { width: 100, height: 100, resizeMode: 'contain' }
+    image: { width: 100, height: 100, resizeMode: 'contain' },
+    caption: {
+
+    },
 });
 
 export const ClothingItem = ({ data }: { data: Clothes }) => (
@@ -15,10 +18,8 @@ export const ClothingItem = ({ data }: { data: Clothes }) => (
                 uri: `data:image/jpg;base64,${data.mask}`
             }}
         />
-        <Text>
-            {data.brand}
-
-            {data.type}
+        <Text style={styles.caption}>
+            {data.brand + " " + data.type}
         </Text>
     </View>
 );

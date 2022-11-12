@@ -21,6 +21,13 @@ interface ClothesState {
     error: string;
 }
 
+
+export interface ClothingCategory {
+    caption: string;
+    img: string;
+}
+
+
 const initialState = {
     clothesData: [],
     status: '',
@@ -69,7 +76,7 @@ export const clothesSlice = createSlice({
             .addCase(fetchUsersClothes.rejected, (state) => {
                 state.status = 'rejected';
                 console.log('rejected');
-                // state.error = action.payload
+
             });
     }
 });
@@ -81,9 +88,13 @@ export const selectClothes = (state: RootState) => state.clothes;
 export const selectUserItems = (state: RootState) => state.clothes.clothesData;
 
 export const getCategories = createSelector(selectUserItems, (items) => {
-    const categoriesAvailable = new Set<string>();
+    const categoriesAvailable = new Set<ClothingCategory>();
     items.forEach((item) => {
-        categoriesAvailable.add(item.type);
+        categoriesAvailable.add({
+            caption: item.type + " " + item.brand,
+            img: item.mask,
+        });
+
     });
     return Array.from(categoriesAvailable);
 });

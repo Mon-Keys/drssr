@@ -13,28 +13,29 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.base.black,
         width: 144,
         height: 36,
-        borderRadius: 18,
+        marginHorizontal: 14,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     inactive: {
         backgroundColor: Colors.base.lightgray,
         width: 144,
         height: 36,
-        borderRadius: 18,
+        marginHorizontal: 14,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     inactiveTitle: {
         fontSize: 18,
         fontFamily: 'proxima-nova',
-        color: Colors.base.black
+        color: Colors.base.darkgray,
+
     },
     activeTitle: {
         fontSize: 18,
         fontFamily: 'proxima-nova',
-        color: Colors.base.white
-    }
+        color: Colors.base.black,
+    },
 });
 
 const Cheap = (props: CheapProps) => {

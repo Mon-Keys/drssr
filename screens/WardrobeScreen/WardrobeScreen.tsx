@@ -5,25 +5,21 @@ import {
     SafeAreaView,
     Pressable,
     Platform,
-    StatusBar
+    StatusBar, View
 } from 'react-native';
+import {RootTabScreenProps} from "../../types";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {BottomSheetModal, BottomSheetModalProvider} from "@gorhom/bottom-sheet";
+import ImagePicker from "expo-image-picker";
+import {Colors} from "../../styles";
+import {choosePhoto} from "../../reducers/itemEditorReducer";
+import {fetchUsersClothes} from "../../reducers/clothesReducer";
+import ClothingCategoriesScreen from "../ClothingCategoriesScreen";
+import Cheaps from "../../components/base/Cheaps";
+import IconButton from "../../components/base/IconButton";
+import {Entypo} from "@expo/vector-icons";
+import StyledButton from "../../components/base/StyledButton";
 
-import {
-    BottomSheetModal,
-    BottomSheetModalProvider
-} from '@gorhom/bottom-sheet';
-import { AntDesign, Entypo } from '@expo/vector-icons';
-import { View } from '../../components/base/Themed';
-import { RootTabScreenProps } from '../../types';
-import StyledButton from '../../components/base/StyledButton';
-import * as ImagePicker from 'expo-image-picker';
-import Colors from '../../styles/Colors';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { choosePhoto } from '../../reducers/itemEditorReducer';
-import ItemsScreen from './ItemsScreen/ItemsWardrobeScreen';
-import LooksScreen from './LooksScreen/LooksWardrobeScreen';
-import { fetchUsersClothes } from '../../reducers/clothesReducer';
-import Cheaps from '../../components/base/Cheaps';
 
 const styles = StyleSheet.create({
     cheapContainer: {
@@ -46,23 +42,44 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100%',
         height: '100%',
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        backgroundColor: Colors.base.lightgray,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
+        display: 'flex',
+        flexDirection: 'column',
     },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold'
+    headerContainer: {
+        flex: 0,
+        margin: 14,
+        marginBottom: 7,
+
+        display: 'flex',
+        flexDirection: 'row',
+
+        backgroundColor: Colors.base.lightgray, // TODO delete
     },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%'
-    }
+    buttonPlus: {
+        backgroundColor: Colors.base.lightgray, // TODO delete
+        width: 36,
+    },
+    selectContainer: {
+        backgroundColor: Colors.base.black,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
 });
+
+function ItemsScreen() {
+    return null;
+}
+
+function LooksScreen() {
+    return null;
+}
+
 
 const menuItems = [
     {
@@ -106,6 +123,18 @@ export default function WardrobeScreen({
         dispatch(fetchUsersClothes());
     }, [dispatch]);
 
+    const menuItems = [
+        {
+            name: 'Вещи',
+            component: <ClothingCategoriesScreen />
+        },
+        {
+            name: 'Образы',
+            component: <LooksScreen />
+        }
+    ];
+
+
     const [currentScreen, setCurrentScreen] = React.useState<
         ReactElement<any, any>
     >(menuItems[0].component);
@@ -113,20 +142,16 @@ export default function WardrobeScreen({
     return (
         <BottomSheetModalProvider>
             <SafeAreaView style={styles.container}>
-                <View style={styles.cheapContainer}>
+                <View style={styles.headerContainer}>
+                    <View style={styles.buttonPlus}/>
                     <Cheaps
                         cheaps={menuItems}
                         currentScreen={(component) => {
                             setCurrentScreen(component);
                         }}
                     />
-                    <Pressable onPress={openModal}>
-                        <AntDesign
-                            name="pluscircle"
-                            size={36}
-                            color={Colors.base.white}
-                        />
-                    </Pressable>
+                    <IconButton title="plus" onPress={openModal} size={styles.buttonPlus.width} />
+
                 </View>
                 <View style={styles.mainContainer}>{currentScreen}</View>
             </SafeAreaView>
@@ -138,6 +163,7 @@ export default function WardrobeScreen({
                 backgroundStyle={{ backgroundColor: Colors.base.black }}
                 handleIndicatorStyle={{ backgroundColor: Colors.base.white }}
             >
+                <View style={styles.selectContainer}>
                 <View style={styles.contentContainer}>
                     <Pressable onPress={closeModal}>
                         <Entypo
