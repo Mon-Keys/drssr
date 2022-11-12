@@ -2,7 +2,7 @@ import { Platform, StatusBar, StyleSheet } from 'react-native';
 import React from 'react';
 import { Text, View } from '../../components/base/Themed';
 import Colors from '../../constants/Colors';
-import SearchBar from '../../components/base/SearchBar'
+import SearchBar from '../../components/base/SearchBar';
 
 const styles = StyleSheet.create({
     container: {

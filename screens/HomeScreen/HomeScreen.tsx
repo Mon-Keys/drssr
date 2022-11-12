@@ -1,17 +1,14 @@
-import React, {ReactElement} from 'react';
+import React, { ReactElement } from 'react';
 
-import {Platform, Pressable, SafeAreaView, StatusBar, StyleSheet} from 'react-native';
+import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
 import { View } from '../../components/base/Themed';
-import { MonoText } from '../../components/base/StyledText';
 import Colors from '../../constants/Colors';
-import Cheaps from "../../components/base/Cheaps";
-import {AntDesign} from "@expo/vector-icons";
-import ItemsScreen from "../WardrobeScreen/ItemsScreen/ItemsWardrobeScreen";
-import LooksScreen from "../WardrobeScreen/LooksScreen/LooksWardrobeScreen";
-import SubscriptionsFeedScreen from "./SubscriptionsFeedScreen/SubscriptionsFeedScreen";
-import SavedHomeScreen from "./SavedScreen/SavedScreen";
-import {RootTabScreenProps} from "../../types";
+import Cheaps from '../../components/base/Cheaps';
+
+import SubscriptionsFeedScreen from './SubscriptionsFeedScreen/SubscriptionsFeedScreen';
+import SavedHomeScreen from './SavedScreen/SavedScreen';
+import { RootTabScreenProps } from '../../types';
 
 const styles = StyleSheet.create({
     container: {
@@ -29,16 +26,15 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 10,
         backgroundColor: Colors.base.black
-    },
+    }
 });
-
-
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
     const menuItems = [
         {
             name: 'Подписки',
-            component: <SubscriptionsFeedScreen navigation={navigation}/>
+            //@ts-ignore
+            component: <SubscriptionsFeedScreen navigation={navigation} />
         },
         {
             name: 'Избранное',
@@ -48,7 +44,7 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 
     const [currentScreen, setCurrentScreen] = React.useState<
         ReactElement<any, any>
-        >(menuItems[0].component);
+    >(menuItems[0].component);
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.cheapContainer}>
@@ -58,9 +54,8 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
                         setCurrentScreen(component);
                     }}
                 />
-
             </View>
             <View style={styles.mainContainer}>{currentScreen}</View>
-        </SafeAreaView >
+        </SafeAreaView>
     );
 }

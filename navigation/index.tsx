@@ -20,7 +20,6 @@ import {
     FontAwesome
 } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
 
 import NotFoundScreenModal from '../screens/Modals/NotFoundScreenModal';
 import Home from '../screens/HomeScreen/HomeScreen';
@@ -40,7 +39,7 @@ import EditModal from '../screens/Modals/EditModal';
 import ImageRecognizerScreen from '../screens/Modals/ImageRecognizer';
 import AddItemModal from '../screens/Modals/AddItemModal';
 import CreateLookModal from '../screens/Modals/CreateLookModal';
-import PostModalScreen from "../screens/Modals/PostModal";
+import PostModalScreen from '../screens/Modals/PostModal';
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -65,8 +64,6 @@ function TabBarIcon(props: {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-    const colorScheme = useColorScheme();
-
     return (
         <BottomTab.Navigator
             initialRouteName="Home"

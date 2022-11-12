@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-    StyleSheet,
-    Text,
-    Platform,
-    StatusBar
-} from 'react-native';
+import { StyleSheet, Text, Platform, StatusBar } from 'react-native';
 import { View } from '../../components/base/Themed';
 import Colors from '../../constants/Colors';
-import {RootStackScreenProps} from "../../types";
+// import { RootStackScreenProps } from '../../types';
 
 const styles = StyleSheet.create({
     container: {
@@ -19,13 +14,12 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function PostModalScreen({
+export default function PostModalScreen(/*{
     navigation
-}: RootStackScreenProps<'Post'>) {
-
+}: RootStackScreenProps<'Post'>*/) {
     return (
         <View style={styles.container}>
-            <Text style={{color: 'white'}}>aga</Text>
+            <Text style={{ color: 'white' }}>aga</Text>
         </View>
     );
 }

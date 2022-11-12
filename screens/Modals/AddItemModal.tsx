@@ -12,7 +12,10 @@ import { Text, View } from '../../components/base/Themed';
 
 // import { RootStackScreenProps } from '../types';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { analyzeItem, selectItemEditor } from '../../reducers/itemEditorReducer';
+import {
+    analyzeItem,
+    selectItemEditor
+} from '../../reducers/itemEditorReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { IItemData } from '../../network';
 import Colors from '../../constants/Colors';

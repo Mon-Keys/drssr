@@ -44,7 +44,7 @@ const linking: LinkingOptions<RootStackParamList> = {
             NotFound: '*',
             AddItem: 'AddItem',
             CreateLook: 'CreateLook',
-            Post: 'Post',
+            Post: 'Post'
         }
     }
 };
