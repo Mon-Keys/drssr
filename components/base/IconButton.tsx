@@ -6,7 +6,7 @@ import {
     Pressable,
 } from 'react-native';
 
-import Colors from '../../constants/Colors';
+import Colors from '../../styles/Colors';
 import { AntDesign } from "@expo/vector-icons";
 
 interface StyledButtonProps extends ButtonProps {

@@ -1,7 +1,7 @@
 import { View } from '../base/Themed';
 import { Image, StyleSheet, Text } from 'react-native';
 import React from 'react';
-import { ClothingCategory } from "../../reducers/clothesReduser";
+import { ClothingCategory } from "../../reducers/clothesReducer";
 
 const styles = StyleSheet.create({
     container: {

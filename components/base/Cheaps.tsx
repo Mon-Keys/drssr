@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import Colors from '../../constants/Colors';
 import Cheap from './Cheap';
+import {Colors} from "../../styles";
 
 export interface MenuItem {
     name: string;
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
+        backgroundColor: 'transparent'
     },
     separator: {
         marginVertical: 7,

@@ -1,4 +1,4 @@
-import { Clothes } from '../../reducers/clothesReduser';
+import { Clothes } from '../../reducers/clothesReducer';
 import { View } from '../base/Themed';
 import { Image, StyleSheet, Text } from 'react-native';
 import React from 'react';
