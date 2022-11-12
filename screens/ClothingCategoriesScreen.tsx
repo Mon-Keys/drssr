@@ -10,7 +10,8 @@ import Colors from '../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.base.lightgray
+        flex: 1,
+        backgroundColor: Colors.base.lightgray, // TODO delete
     },
     columnWrapper: {
         margin: 7,
