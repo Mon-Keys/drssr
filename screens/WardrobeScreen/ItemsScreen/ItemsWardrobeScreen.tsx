@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { View } from '../../../components/base/Themed';
@@ -10,16 +10,17 @@ import {
     selectUserItems
 } from '../../../reducers/clothesReducer';
 import { ClothingItem } from '../../../components/clothes/ClothingItem';
+import Colors from '../../../constants/Colors';
 
-// const styles = StyleSheet.create({
-//     title: {
-//         fontSize: 20,
-//         fontWeight: 'bold'
-//     },
-//     text: {
-//         color: Colors.base.black
-//     }
-// });
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    text: {
+        color: Colors.base.black
+    }
+});
 
 export default function ItemsWardrobeScreen() {
     // const [showSelect, setShowSelect] = React.useState<String>('');
@@ -29,7 +30,7 @@ export default function ItemsWardrobeScreen() {
     const clothes = useAppSelector(selectUserItems);
 
     const itemsByCategory = (name: string) =>
-        clothes.filter((item) => item.type == name);
+        clothes.filter((item) => item.type === name);
 
     // const dispatch = useAppDispatch();
 
@@ -39,7 +40,7 @@ export default function ItemsWardrobeScreen() {
 
     return (
         <View>
-            <Text style={{ color: 'black' }}> {categories.join()}</Text>
+            <Text style={styles.text}> {categories.join()}</Text>
             <FlatList
                 data={itemsByCategory('Tee')}
                 renderItem={({ item }) => <ClothingItem data={item} />}

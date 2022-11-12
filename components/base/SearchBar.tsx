@@ -1,13 +1,6 @@
-import React, { useState } from 'react';
-import {
-    StyleSheet,
-    TextInput,
-    TextInputProps,
-    View
-} from 'react-native';
+import { StyleSheet, TextInput, TextInputProps, View } from 'react-native';
 import Colors from '../../constants/Colors';
 import { AntDesign } from '@expo/vector-icons';
-
 
 interface SearchBarProps extends Omit<TextInputProps, 'secureTextEntry'> {
     password?: boolean;
@@ -37,12 +30,12 @@ const SearchBar = (props: SearchBarProps) => {
     return (
         <View style={styles.inputContainer}>
             <AntDesign name="search1" size={24} color={Colors.base.white} />
-                <TextInput
-                    placeholder={'Найди'}
-                    style={styles.input}
-                    selectionColor={Colors.base.white}
-                    {...props}
-                />
+            <TextInput
+                placeholder={'Найди'}
+                style={styles.input}
+                selectionColor={Colors.base.white}
+                {...props}
+            />
         </View>
     );
 };

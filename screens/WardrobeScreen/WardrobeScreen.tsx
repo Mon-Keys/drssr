@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     }
 });
 
-
 const menuItems = [
     {
         name: 'Мои вещи',
@@ -110,11 +109,8 @@ export default function WardrobeScreen({
     };
 
     useEffect(() => {
-
         dispatch(fetchUsersClothes());
     }, [dispatch]);
-
-
 
     const [currentScreen, setCurrentScreen] = React.useState<
         ReactElement<any, any>

@@ -4,7 +4,7 @@ export default {
         fontSize: {
             small: '9px',
             normal: '12px',
-            big: '15px',
+            big: '15px'
         }
     }
 };
