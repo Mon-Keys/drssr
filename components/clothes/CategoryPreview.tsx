@@ -1,24 +1,39 @@
 import { View } from '../base/Themed';
 import { Image, StyleSheet, Text } from 'react-native';
 import React from 'react';
+import { ClothingCategory } from "../../reducers/clothesReduser";
 
 const styles = StyleSheet.create({
-    image: { width: 150, height: 150, resizeMode: 'contain' }
+    container: {
+        width: 100,
+        height: 100,
+        borderRadius: 14,
+    },
+    preview: {
+        flex: 1,
+        resizeMode: 'center',
+    },
+    caption: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        paddingVertical: 4,
+    },
 });
 
-export interface CategoryPreviewProps {
-    img?: string;
-    name: string;
+// https://snack.expo.dev/kN6t1IJgh
+export const CategoryPreview = ({ category }: { category: ClothingCategory }) => {
+    return (
+        <View style={styles.container}>
+            <Image
+                style={styles.preview}
+                source={{
+                    uri: `data:image/jpg;base64,${category.img}`
+                }}
+            />
+            <Text style={styles.caption}>
+                {category.caption}
+            </Text>
+        </View>
+    );
 }
-
-export const CategoryItem = (props: CategoryPreviewProps) => (
-    <View>
-        <Image
-            style={styles.image}
-            source={{
-                uri: `data:image/jpg;base64,${props.img}`
-            }}
-        />
-        <Text>{props.name}</Text>
-    </View>
-);

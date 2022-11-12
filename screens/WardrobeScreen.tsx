@@ -8,11 +8,8 @@ import {
     StatusBar
 } from 'react-native';
 
-import {
-    BottomSheetModal,
-    BottomSheetModalProvider
-} from '@gorhom/bottom-sheet';
-import { AntDesign, Entypo } from '@expo/vector-icons';
+import { BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import { Entypo } from '@expo/vector-icons';
 import { View } from '../components/base/Themed';
 import { RootTabScreenProps } from '../types';
 import StyledButton from '../components/base/StyledButton';
@@ -20,65 +17,58 @@ import * as ImagePicker from 'expo-image-picker';
 import Colors from '../constants/Colors';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { choosePhoto } from '../reducers/itemEditorReducer';
-import ItemsScreen from './ItemsWardrobeScreen';
 import LooksScreen from './LooksWardrobeScreen';
 import { fetchUsersClothes } from '../reducers/clothesReduser';
 import Cheaps from '../components/base/Cheaps';
+import ClothingCategoriesScreen from "./ClothingCategoriesScreen";
+import IconButton from "../components/base/IconButton";
 
 const styles = StyleSheet.create({
-    cheapContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: Colors.base.black
-    },
-    mainContainer: {
-        flex: 10,
-        backgroundColor: Colors.base.black
-    },
-    bottomSheet: {
-        backgroundColor: Colors.base.black
-    },
-    contentContainer: {
-        backgroundColor: Colors.base.black,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    overlay: {
-        backgroundColor: 'rgba(0,0,0,0.2)',
-        flex: 1,
-        justifyContent: 'flex-end'
-    },
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100%',
         height: '100%',
+        backgroundColor: Colors.base.lightgray,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    headerContainer: {
+        flex: 0,
+        margin: 14,
+        marginBottom: 7,
+
+        display: 'flex',
+        flexDirection: 'row',
+
+        backgroundColor: Colors.base.lightgray, // TODO delete
+    },
+    buttonPlus: {
+        backgroundColor: Colors.base.lightgray, // TODO delete
+        width: 36,
+    },
+    mainContainer: {
+        flex: 1,
+    },
+
+    bottomSheet: {
         backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold'
+    selectContainer: {
+        backgroundColor: Colors.base.black,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
     },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%'
-    }
 });
 
 export default function WardrobeScreen({
     navigation
 }: RootTabScreenProps<'Wardrobe'>) {
-    // const selectItem = useAppSelector(selectItemEditor);
     const dispatch = useAppDispatch();
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ['40%'], []);
-
-    // const [selected, setSelected] = React.useState<Selector>(Selector.Items);
 
     const openModal = () => {
         // @ts-ignore
@@ -101,18 +91,16 @@ export default function WardrobeScreen({
     };
 
     useEffect(() => {
-        console.log('hello');
-
         dispatch(fetchUsersClothes());
     }, [dispatch]);
 
     const menuItems = [
         {
-            name: 'Мои вещи',
-            component: <ItemsScreen />
+            name: 'Вещи',
+            component: <ClothingCategoriesScreen />
         },
         {
-            name: 'Мои cyki',
+            name: 'Образы',
             component: <LooksScreen />
         }
     ];
@@ -124,20 +112,15 @@ export default function WardrobeScreen({
     return (
         <BottomSheetModalProvider>
             <SafeAreaView style={styles.container}>
-                <View style={styles.cheapContainer}>
+                <View style={styles.headerContainer}>
+                    <View style={styles.buttonPlus}/> {/* для симметрии*/}
                     <Cheaps
                         cheaps={menuItems}
                         currentScreen={(component) => {
                             setCurrentScreen(component);
                         }}
                     />
-                    <Pressable onPress={openModal}>
-                        <AntDesign
-                            name="pluscircle"
-                            size={36}
-                            color={Colors.base.white}
-                        />
-                    </Pressable>
+                    <IconButton title="plus" onPress={openModal} size={styles.buttonPlus.width} />
                 </View>
                 <View style={styles.mainContainer}>{currentScreen}</View>
             </SafeAreaView>
@@ -149,7 +132,7 @@ export default function WardrobeScreen({
                 backgroundStyle={{ backgroundColor: Colors.base.black }}
                 handleIndicatorStyle={{ backgroundColor: Colors.base.white }}
             >
-                <View style={styles.contentContainer}>
+                <View style={styles.selectContainer}>
                     <Pressable onPress={closeModal}>
                         <Entypo
                             name="cross"
