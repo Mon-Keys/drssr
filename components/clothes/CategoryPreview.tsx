@@ -1,5 +1,5 @@
 import { View } from '../base/Themed';
-import { Image, StyleSheet, Text } from 'react-native';
+import {Image, Pressable, StyleSheet, Text} from 'react-native';
 import React from 'react';
 import { ClothingCategory } from "../../reducers/clothesReduser";
 
@@ -29,17 +29,21 @@ const styles = StyleSheet.create({
 
 const ClothingCategoryPreview = ({ category }: { category: ClothingCategory }) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.caption} numberOfLines={1}>
-                {category.caption}
-            </Text>
-            <Image
-                style={styles.preview}
-                source={{
-                    uri: `data:image/jpg;base64,${category.img}`
-                }}
-            />
-        </View>
+        <Pressable onPress={() => {
+            // navigation.navigate('Signup');
+        }}>
+            <View style={styles.container}>
+                <Text style={styles.caption} numberOfLines={1}>
+                    {category.caption}
+                </Text>
+                <Image
+                    style={styles.preview}
+                    source={{
+                        uri: `data:image/jpg;base64,${category.img}`
+                    }}
+                />
+            </View>
+        </Pressable>
     );
 }
 

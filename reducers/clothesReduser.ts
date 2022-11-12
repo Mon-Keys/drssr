@@ -85,14 +85,18 @@ export const selectClothes = (state: RootState) => state.clothes;
 export const selectUserItems = (state: RootState) => state.clothes.clothesData;
 
 export const getCategories = createSelector(selectUserItems, (items) => {
-    const categoriesAvailable = new Set<ClothingCategory>();
+    const categories = new Array<ClothingCategory>();
+    const categoriesAvailable = new Set<string>();
     items.forEach((item) => {
-        categoriesAvailable.add({
-            caption: item.type + " " + item.brand,
-            img: item.mask,
-        });
+        if (!categoriesAvailable.has(item.type)) {
+            categoriesAvailable.add(item.type);
+            categories.push({
+                caption: item.type,
+                img: item.mask,
+            });
+        }
     });
-    return Array.from(categoriesAvailable);
+    return categories;
 });
 
 export default clothesSlice.reducer;
