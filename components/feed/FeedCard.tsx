@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
 
 export interface FeedCardProps {
     previewSrc: string;
+    id: number;
     onPress?: () => void;
 }
 

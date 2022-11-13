@@ -1,12 +1,22 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { View } from '../../../components/base/Themed';
+import { FeedCommon } from '../../../components/feed/FeedCommon';
+import { RootTabScreenProps } from '../../../types';
 
-export default function SavedHomeScreen() {
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'transparent'
+    }
+});
+
+export default function SavedHomeScreen({
+    navigation
+}: RootTabScreenProps<'Home'>) {
     return (
-        <View>
-            <Text style={{ color: 'black' }}> Избранное </Text>
+        <View style={styles.container}>
+            <FeedCommon navigation={navigation} />
         </View>
     );
 }

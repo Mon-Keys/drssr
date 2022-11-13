@@ -21,7 +21,7 @@ import { fetchUsersClothes } from '../../reducers/clothesReducer';
 import ClothingCategoriesScreen from './ItemsScreen/ClothingCategoriesScreen';
 import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
-import { Entypo } from '@expo/vector-icons';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
 
 const styles = StyleSheet.create({
@@ -140,6 +140,13 @@ export default function WardrobeScreen({
                         title="plus"
                         onPress={openModal}
                         size={styles.buttonPlus.width}
+                        icon={
+                            <AntDesign
+                                name="pluscircle"
+                                size={styles.buttonPlus.width}
+                                color={Colors.base.darkgray}
+                            />
+                        }
                     />
                 </View>
                 <View style={styles.mainContainer}>{currentScreen}</View>

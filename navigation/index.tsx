@@ -13,7 +13,8 @@ import { ColorSchemeName, Pressable, StyleSheet } from 'react-native';
 import {
     Ionicons,
     MaterialCommunityIcons,
-    FontAwesome
+    FontAwesome,
+    AntDesign
 } from '@expo/vector-icons';
 import Colors from '../styles/Colors';
 
@@ -48,13 +49,6 @@ const styles = StyleSheet.create({
     }
 });
 
-function TabBarIcon(props: {
-    name: React.ComponentProps<typeof FontAwesome>['name'];
-    color: string;
-}) {
-    return <FontAwesome size={30} style={styles.iconAlignment} {...props} />;
-}
-
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
@@ -74,8 +68,9 @@ function BottomTabNavigator() {
                 component={Home}
                 options={({ navigation }: RootTabScreenProps<'Home'>) => ({
                     title: 'Home',
+                    tabBarLabel: () => null,
                     tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="home" color={color} />
+                        <AntDesign name="home" size={28} color={color} />
                     ),
                     headerRight: () => (
                         <Pressable
@@ -101,9 +96,10 @@ function BottomTabNavigator() {
                 options={{
                     title: 'Search',
                     tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="search" color={color} />
+                        <AntDesign name="hearto" size={28} color={color} />
                     ),
-                    headerShown: false
+                    headerShown: false,
+                    tabBarLabel: () => null
                 }}
             />
             <BottomTab.Screen
@@ -114,10 +110,11 @@ function BottomTabNavigator() {
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
                             name="wardrobe"
-                            size={24}
+                            size={28}
                             color={color}
                         />
                     ),
+                    tabBarLabel: () => null,
                     headerShown: false
                 }}
             />
@@ -127,8 +124,9 @@ function BottomTabNavigator() {
                 options={{
                     title: 'Profile',
                     tabBarIcon: ({ color }) => (
-                        <Ionicons name="person" size={24} color={color} />
+                        <Ionicons name="person" size={28} color={color} />
                     ),
+                    tabBarLabel: () => null,
                     headerShown: false
                 }}
             />

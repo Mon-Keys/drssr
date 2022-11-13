@@ -1,7 +1,7 @@
-import { Platform, StatusBar, StyleSheet } from 'react-native';
+import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import React from 'react';
-import { Text, View } from '../../components/base/Themed';
-import SearchBar from '../../components/base/SearchBar';
+import { FeedCommon } from '../../components/feed/FeedCommon';
+import { RootTabScreenProps } from '../../types';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,13 +13,12 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function DiscoverScreen(/*{
+export default function DiscoverScreen({
     navigation
-}: RootTabScreenProps<'Search'>*/) {
+}: RootTabScreenProps<'Search'>) {
     return (
-        <View style={styles.container}>
-            <SearchBar />
-            <Text> Discover this </Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <FeedCommon navigation={navigation} />
+        </SafeAreaView>
     );
 }

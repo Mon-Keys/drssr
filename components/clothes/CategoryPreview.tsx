@@ -2,7 +2,7 @@ import { View } from '../base/Themed';
 import { Image, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import { ClothingCategory } from '../../reducers/clothesReducer';
-import {Layout} from "../../styles";
+import { Layout } from '../../styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 14,
         overflow: 'hidden',
-        marginHorizontal: Layout.margins.small,
+        marginHorizontal: Layout.margins.small
     },
     caption: {
         marginLeft: 14,

@@ -96,9 +96,12 @@ export const ProfileCard = (props: ProfileCardProps) => (
     <View style={styles.cardContainer}>
         <View style={styles.mountContainer}>
             <Pressable onPress={props.settingsAction}>
-                <Settings style={styles.leftButton} />
+                <Settings
+                    style={styles.leftButton}
+                    color={Colors.base.darkgray}
+                />
             </Pressable>
-            <Share style={styles.rightButton} />
+            <Share style={styles.rightButton} color={Colors.base.darkgray} />
             <View style={styles.nameContainer}>
                 <Text style={styles.name}> {props.name} </Text>
                 <ProfileVerified />

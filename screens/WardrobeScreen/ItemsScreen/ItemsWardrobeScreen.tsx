@@ -46,7 +46,6 @@ export default function ItemsWardrobeScreen() {
                 renderItem={({ item }) => <ClothingItem data={item} />}
                 keyExtractor={(item: Clothes) => item.id.toString()}
             />
-
         </View>
     );
 }
