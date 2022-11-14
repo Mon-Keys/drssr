@@ -20,10 +20,14 @@ import { EditableImage } from '../../components/editor/EditableImage';
 import { Item } from '../../components/editor/Item';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { Clothes, selectUserItems } from '../../reducers/clothesReducer';
+import ViewShot, { captureRef } from "react-native-view-shot";
+import IconButton from '../../components/base/IconButton';
+import { RootStackScreenProps } from '../../types';
+import { addLookPhoto, selectCreateLook } from '../../reducers/createLookReducer';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: "red",
         alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.base.lightgray,
@@ -59,29 +63,21 @@ const styles = StyleSheet.create({
     addButton: { top: 20, left: 20, width: 60, height: 60 }
 });
 
-// export interface Item {
-//     image: string;
-//     id: number;
-//     coords: {
-//         x: number;
-//         y: number;
-//     };
-// }
 
-// export interface Look {
-//     LookItems: Array<Item>;
-// }
 
 export interface ItemMock {
     image: string;
     id: string;
 }
 
-export default function CreateLookModal(/*{
+export default function CreateLookModal({
     navigation
-}: RootStackScreenProps<'ImageRecognizer'>*/) {
+}: RootStackScreenProps<'CreateLook'>) {
     const [boardItems, setBoardItems] = React.useState<Array<string>>([]);
     const clothes = useAppSelector(selectUserItems);
+
+    const lookSelector = useAppSelector(selectCreateLook);
+    const dispatch = useAppDispatch();
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ['80%'], []);
@@ -96,6 +92,28 @@ export default function CreateLookModal(/*{
         bottomSheetModalRef.current.close();
     };
 
+    const ref = React.useRef();
+
+
+    const proceed = () => {
+
+        ref.current.capture().then(
+            (uri) => {
+                console.log('captue done')
+                console.log('captue done')
+                console.log('captue done')
+                dispatch(addLookPhoto(uri))
+                navigation.navigate("SaveLook")
+            }
+        )
+    };
+
+
+    const onCapture = React.useCallback((uri: string) => {
+        console.log("capture callback done ");
+
+    }, []);
+
     // @ts-ignore
     return (
         <BottomSheetModalProvider>
@@ -107,14 +125,32 @@ export default function CreateLookModal(/*{
                         color={Colors.base.white}
                     />
                 </Pressable>
-                <View style={styles.lookArea}>
-                    {boardItems.map((item) => (
-                        <EditableImage
-                            style={styles.defaultImage}
-                            source={{ uri: item }}
-                        />
-                    ))}
-                </View>
+                <ViewShot onCapture={onCapture} ref={ref} options={{ result: "base64", format: "jpg", quality: 0.8 }}>
+                    <View style={styles.lookArea}>
+                        {boardItems.map((item) => (
+                            <EditableImage
+                                style={styles.defaultImage}
+                                source={{ uri: item }}
+                            />
+                        ))}
+                    </View>
+                </ViewShot>
+                <IconButton
+                    title={'proceed'}
+                    icon={
+                        (
+                            <AntDesign
+                                name="arrowright"
+                                size={36}
+                                color={Colors.base.black}
+                            />
+                        )
+                    }
+                    onPress={
+                        proceed
+                    }
+                    color={Colors.base.black}
+                />
                 <BottomSheetModal
                     ref={bottomSheetModalRef}
                     index={0}

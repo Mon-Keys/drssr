@@ -39,6 +39,7 @@ import CreateLookModal from '../screens/Modals/CreateLookModal';
 import PostModalScreen from '../screens/Modals/PostModal';
 import SettingsModalScreen from '../screens/Modals/SettingsModal';
 import { Theme } from '../styles';
+import SaveLookModal from '../screens/Modals/SaveLookModal';
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -171,6 +172,7 @@ function RootNavigator() {
                 />
 
                 <Stack.Screen name="CreateLook" component={CreateLookModal} />
+                <Stack.Screen name="SaveLook" component={SaveLookModal} />
             </Stack.Group>
         </Stack.Navigator>
     );

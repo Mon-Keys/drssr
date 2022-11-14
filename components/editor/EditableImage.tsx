@@ -22,7 +22,6 @@ interface EditableImageProps extends ImageProps {
 }
 
 export const EditableImage = (props: EditableImageProps) => {
-    console.log(props.imageURI);
     return (
         <View style={styles.imageContainer}>
             <Gestures>
