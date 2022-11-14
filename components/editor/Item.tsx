@@ -17,11 +17,10 @@ interface ItemEditorProps {
 }
 
 export const Item = (props: ItemEditorProps) => {
-
     return (
         <TouchableOpacity
             style={[styles.wardrobeImageBackground]}
-            onLongPress={() => { }}
+            onLongPress={() => {}}
             onPress={props.callbackfn}
             delayLongPress={300}
         >

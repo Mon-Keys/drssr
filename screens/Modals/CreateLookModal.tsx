@@ -20,29 +20,29 @@ import { EditableImage } from '../../components/editor/EditableImage';
 import { Item } from '../../components/editor/Item';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { Clothes, selectUserItems } from '../../reducers/clothesReducer';
-import ViewShot, { captureRef } from "react-native-view-shot";
+import ViewShot from 'react-native-view-shot';
 import IconButton from '../../components/base/IconButton';
 import { RootStackScreenProps } from '../../types';
-import { addLookPhoto, selectCreateLook } from '../../reducers/createLookReducer';
+import { addLookPhoto } from '../../reducers/createLookReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const styles = StyleSheet.create({
     container: {
         alignContent: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: Colors.base.white,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     lookArea: {
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: Colors.base.white,
         height: 600,
         width: 400
     },
     bottomSheet: {
-        backgroundColor: Colors.base.lightgray
+        backgroundColor: Colors.base.white
     },
     contentContainer: {
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: Colors.base.white,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
     addButton: { top: 20, left: 20, width: 60, height: 60 }
 });
 
-
-
 export interface ItemMock {
     image: string;
     id: string;
@@ -76,7 +74,6 @@ export default function CreateLookModal({
     const [boardItems, setBoardItems] = React.useState<Array<string>>([]);
     const clothes = useAppSelector(selectUserItems);
 
-    const lookSelector = useAppSelector(selectCreateLook);
     const dispatch = useAppDispatch();
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
@@ -94,25 +91,16 @@ export default function CreateLookModal({
 
     const ref = React.useRef();
 
-
     const proceed = () => {
-
-        ref.current.capture().then(
-            (uri) => {
-                console.log('captue done')
-                console.log('captue done')
-                console.log('captue done')
-                dispatch(addLookPhoto(uri))
-                navigation.navigate("SaveLook")
-            }
-        )
+        //@ts-ignore
+        ref.current.capture().then((uri) => {
+            console.log('captue done');
+            console.log('captue done');
+            console.log('captue done');
+            dispatch(addLookPhoto(uri));
+            navigation.navigate('SaveLook');
+        });
     };
-
-
-    const onCapture = React.useCallback((uri: string) => {
-        console.log("capture callback done ");
-
-    }, []);
 
     // @ts-ignore
     return (
@@ -122,10 +110,15 @@ export default function CreateLookModal({
                     <AntDesign
                         name="pluscircle"
                         size={36}
-                        color={Colors.base.white}
+                        color={Colors.base.black}
                     />
                 </Pressable>
-                <ViewShot onCapture={onCapture} ref={ref} options={{ result: "base64", format: "jpg", quality: 0.8 }}>
+                <ViewShot
+                    onCapture={() => {}}
+                    //@ts-ignore
+                    ref={ref}
+                    options={{ result: 'base64', format: 'jpg', quality: 0.8 }}
+                >
                     <View style={styles.lookArea}>
                         {boardItems.map((item) => (
                             <EditableImage
@@ -138,17 +131,13 @@ export default function CreateLookModal({
                 <IconButton
                     title={'proceed'}
                     icon={
-                        (
-                            <AntDesign
-                                name="arrowright"
-                                size={36}
-                                color={Colors.base.black}
-                            />
-                        )
+                        <AntDesign
+                            name="arrowright"
+                            size={36}
+                            color={Colors.base.black}
+                        />
                     }
-                    onPress={
-                        proceed
-                    }
+                    onPress={proceed}
                     color={Colors.base.black}
                 />
                 <BottomSheetModal

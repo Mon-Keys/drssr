@@ -48,6 +48,21 @@ interface IItemData {
     brand: string;
 }
 
+interface IClothesInsideLookData {
+    id: string;
+    coords: {
+        x: number;
+        y: number;
+    };
+}
+
+export interface ILookData {
+    img: string;
+    filename: string;
+    description: string;
+    clothes: Array<IClothesInsideLookData>;
+}
+
 class DataService {
     /**
      * Returns axios request handle
@@ -147,6 +162,12 @@ class DataService {
 
     getUsersClothesByCookie() {
         return http.get<Array<IClothesData>>('/private/clothes', {
+            withCredentials: true
+        });
+    }
+
+    createNewLook(data: ILookData) {
+        return http.post<ILookData>('/private/looks', data, {
             withCredentials: true
         });
     }
