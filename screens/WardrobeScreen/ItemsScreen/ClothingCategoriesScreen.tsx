@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshControl, StyleSheet } from 'react-native';
+import { RefreshControl, StyleSheet, Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../../../components/base/Themed';
 import { useAppSelector } from '../../../hooks/useAppSelector';
@@ -44,6 +44,7 @@ export default function ClothingCategoriesScreen() {
                     />
                 }
                 numColumns={3}
+                ListEmptyComponent={<Text> Пока здесь нет вещей </Text>}
                 showsVerticalScrollIndicator={false}
                 columnWrapperStyle={styles.columnWrapper}
                 horizontal={false}

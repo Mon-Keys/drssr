@@ -25,6 +25,7 @@ export type RootStackParamList = {
     AddItem: undefined;
     NotFound: undefined;
     CreateLook: undefined;
+    SaveLook: undefined;
     Post: undefined;
     Settings: undefined;
 };
