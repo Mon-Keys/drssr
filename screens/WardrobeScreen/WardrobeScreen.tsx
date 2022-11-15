@@ -24,6 +24,9 @@ import IconButton from '../../components/base/IconButton';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
 import ClothingScreen from "./ItemsScreen/ClothingScreen";
+import Eye from "../../components/icons/eye";
+import EyeSlash from "../../components/icons/eyeSlash";
+import ClothingByCategoryScreen from "./ItemsScreen/ClothingByCategoryScreen";
 
 const styles = StyleSheet.create({
     container: {
@@ -41,9 +44,10 @@ const styles = StyleSheet.create({
 
         display: 'flex',
         flexDirection: 'row',
+        alignItems: 'center'
     },
     buttonPlus: {
-        width: 36
+        // backgroundColor: 'red'
     },
     mainContainer: {
         flex: 1
@@ -94,15 +98,11 @@ export default function WardrobeScreen({
 
     const menuItems = [
         {
-            name: 'Вещи',
+            name: 'К',
             component: <ClothingCategoriesScreen />
         },
-        // {
-        //     name: 'К',
-        //     component: <ClothingByCategoryScreen />
-        // },
         {
-            name: 'К1',
+            name: 'Вещи',
             component: <ClothingScreen />
         },
         {
@@ -119,19 +119,25 @@ export default function WardrobeScreen({
         <BottomSheetModalProvider>
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <View style={styles.buttonPlus} />
+                    <IconButton style={styles.buttonPlus} icon={(
+                        <AntDesign
+                            name='search1'
+                            size={24}
+                            color={Colors.base.black}
+                        />
+                    )} />
                     <Cheaps
                         cheaps={menuItems}
                         currentScreen={(component) => {
                             setCurrentScreen(component);
                         }}
                     />
-                    <IconButton style={{ flex: 0 }} icon={(
+                    <IconButton style={styles.buttonPlus} icon={(
                         <AntDesign
                             name='plus'
                             onPress={openModal}
-                            size={36}
-                            color={Colors.base.darkgray}
+                            size={24}
+                            color={Colors.base.black}
                         />
                     )} />
                 </View>
