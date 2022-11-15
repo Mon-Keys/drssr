@@ -23,6 +23,9 @@ export const newLook = createAsyncThunk<ILookData, ILookData>(
     async (lookData, { rejectWithValue }) => {
         try {
             console.log('sending signup');
+            console.log(lookData.description)
+            console.log(lookData.clothes)
+            console.log(lookData.filename)
             const response = await DataService.createNewLook(lookData);
             console.log(response);
             if (response.status !== 200) {

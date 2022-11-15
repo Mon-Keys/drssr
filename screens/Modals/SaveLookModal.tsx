@@ -13,8 +13,10 @@ import StyledButton from '../../components/base/StyledButton';
 import { View } from '../../components/base/Themed';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { selectCreateLook } from '../../reducers/createLookReducer';
+import {newLook, selectCreateLook} from '../../reducers/createLookReducer';
 import { Colors } from '../../styles';
+import {useDispatch} from "react-redux";
+import {ILookData} from "../../network";
 // @ts-ignore
 
 const styles = StyleSheet.create({
@@ -46,8 +48,27 @@ export default function SaveLookModal() {
     const [name, setName] = React.useState<string>('');
     const [description, setDescription] = React.useState<string>('');
 
+    const dispatch = useDispatch();
+
     const addLook = () => {
         console.log({ name, description });
+        const look: ILookData = {
+            img: lookSelector.look.img,
+            filename: '1.jpg',
+            clothes: [{
+                id: 1 ,
+                coords: {
+                    x: 300,
+                    y: 450,
+                }}
+            ],
+            description: name+' '+description
+        }
+
+        // @ts-ignore
+        dispatch(newLook(look)).then(()=> {
+            console.log('success')
+        })
     };
 
     return (
