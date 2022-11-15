@@ -35,6 +35,8 @@ const Cheaps = (props: CheapsProps) => {
         <View style={styles.cheapContainer}>
             <View>
                 <FlatList
+                    scrollEnabled={false}
+                    showsHorizontalScrollIndicator={false}
                     ItemSeparatorComponent={() => (
                         <View style={styles.separator} />
                     )}

@@ -1,5 +1,5 @@
 import { View } from '../base/Themed';
-import { Image, StyleSheet, Text } from 'react-native';
+import {GestureResponderEvent, Image, Pressable, StyleSheet, Text} from 'react-native';
 import React from 'react';
 import { ClothingCategory } from '../../reducers/clothesReducer';
 import {Layout} from "../../styles";
@@ -8,13 +8,13 @@ const styles = StyleSheet.create({
     container: {
         width: 100,
         height: 100,
-        borderRadius: 14,
+        borderRadius: Layout.cornerRadius,
         overflow: 'hidden',
         marginHorizontal: Layout.margins.small,
     },
     caption: {
-        marginLeft: 14,
-        marginTop: 14,
+        marginLeft: Layout.margins.default,
+        marginTop: Layout.margins.default,
         fontSize: 12,
         fontWeight: 'bold'
     },
@@ -23,29 +23,33 @@ const styles = StyleSheet.create({
         resizeMode: 'center',
 
         marginLeft: 40,
-        marginHorizontal: -14,
-        marginTop: -7,
-        marginBottom: -14
+        marginHorizontal: -Layout.margins.default,
+        marginTop: -Layout.margins.small,
+        marginBottom: -Layout.margins.default
     }
 });
 
 const ClothingCategoryPreview = ({
-    category
+    category,
+    onPress,
 }: {
     category: ClothingCategory;
+    onPress?: null | ((event: GestureResponderEvent) => void) | undefined;
 }) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.caption} numberOfLines={1}>
-                {category.caption}
-            </Text>
-            <Image
-                style={styles.preview}
-                source={{
-                    uri: `data:image/jpg;base64,${category.img}`
-                }}
-            />
-        </View>
+        <Pressable onPress={onPress}>
+            <View style={styles.container}>
+                <Text style={styles.caption} numberOfLines={1}>
+                    {category.caption}
+                </Text>
+                <Image
+                    style={styles.preview}
+                    source={{
+                        uri: `data:image/jpg;base64,${category.img}`
+                    }}
+                />
+            </View>
+        </Pressable>
     );
 };
 
