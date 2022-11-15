@@ -59,8 +59,8 @@ export default function ClothingByCategoryScreen() {
                 <IconButton style={{ flex: 0 }} icon={(
                         <AntDesign
                             name='back'
-                            size={36}
-                            color={Colors.base.darkgray}
+                            size={24}
+                            color={Colors.base.black}
                         />
                     )} onPress={() => navigation.goBack()}
                 />
@@ -70,8 +70,8 @@ export default function ClothingByCategoryScreen() {
                 <IconButton style={{ flex: 0 }} icon={(
                     <AntDesign
                         name='search1'
-                        size={36}
-                        color={Colors.base.darkgray}
+                        size={24}
+                        color={Colors.base.black}
                     />
                 )} />
             </View>
