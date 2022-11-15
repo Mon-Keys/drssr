@@ -6,9 +6,9 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import {
     CompositeScreenProps,
-    NavigatorScreenParams
+    NavigatorScreenParams, RouteProp
 } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {NativeStackNavigationProp, NativeStackScreenProps} from '@react-navigation/native-stack';
 
 declare global {
     namespace ReactNavigation {
@@ -28,6 +28,9 @@ export type RootStackParamList = {
     SaveLook: undefined;
     Post: undefined;
     Settings: undefined;
+    ClothingByCategory: {
+        category: string;
+    };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -45,3 +48,7 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
         BottomTabScreenProps<RootTabParamList, Screen>,
         NativeStackScreenProps<RootStackParamList>
     >;
+
+export type ClothingCategoriesScreenNavigation = NativeStackNavigationProp<RootStackParamList, 'Root'>;
+
+export type ClothingByCategoryScreenRouteProp = RouteProp<RootStackParamList, 'ClothingByCategory'>;

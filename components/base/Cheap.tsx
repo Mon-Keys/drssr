@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Pressable, View, Text } from 'react-native';
 import Colors from '../../styles/Colors';
+import {Layout} from "../../styles";
 
 export interface CheapProps {
     name: string;
@@ -11,26 +12,26 @@ export interface CheapProps {
 const styles = StyleSheet.create({
     active: {
         height: 36,
-        marginHorizontal: 14,
+        marginHorizontal: Layout.margins.default,
         justifyContent: 'center',
         alignItems: 'center'
     },
     inactive: {
         backgroundColor: Colors.base.lightgray,
         height: 36,
-        marginHorizontal: 14,
+        marginHorizontal: Layout.margins.default,
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    inactiveTitle: {
-        fontSize: 18,
-        fontFamily: 'proxima-nova',
-        color: Colors.base.darkgray
     },
     activeTitle: {
         fontSize: 18,
         fontFamily: 'proxima-nova',
         color: Colors.base.black
+    },
+    inactiveTitle: {
+        fontSize: 18,
+        fontFamily: 'proxima-nova',
+        color: Colors.base.darkgray
     }
 });
 

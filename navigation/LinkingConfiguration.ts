@@ -27,8 +27,9 @@ const linking: LinkingOptions<RootStackParamList> = {
                     },
                     Wardrobe: {
                         screens: {
-                            TabThreeScreen: 'wardrobe'
-                        }
+                            TabThreeScreen: 'wardrobe',
+                            ClothingByCategory: 'ClothingByCategory', // пока нихуя не понимаю куда че писать
+                        },
                     },
                     Profile: {
                         screens: {
@@ -46,6 +47,7 @@ const linking: LinkingOptions<RootStackParamList> = {
             CreateLook: 'CreateLook',
             SaveLook: 'SaveLook',
             Post: 'Post'
+            // ClothingByCategory: 'ClothingByCategory' TODO ебу пока куда это писать
         }
     }
 };

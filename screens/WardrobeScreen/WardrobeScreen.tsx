@@ -15,7 +15,7 @@ import {
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
 import * as ImagePicker from 'expo-image-picker';
-import { Colors } from '../../styles';
+import { Colors, Layout } from '../../styles';
 import { choosePhoto } from '../../reducers/itemEditorReducer';
 import { fetchUsersClothes } from '../../reducers/clothesReducer';
 import ClothingCategoriesScreen from './ItemsScreen/ClothingCategoriesScreen';
@@ -23,31 +23,12 @@ import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
+import ClothingScreen from "./ItemsScreen/ClothingScreen";
 
 const styles = StyleSheet.create({
-    cheapContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: 'transparent'
-    },
-    mainContainer: {
-        flex: 10
-    },
-    bottomSheet: {},
-    contentContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    overlay: {
-        backgroundColor: 'rgba(0,0,0,0.2)',
-        flex: 1,
-        justifyContent: 'flex-end'
-    },
     container: {
         width: '100%',
         height: '100%',
-        backgroundColor: Colors.base.lightgray,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
 
         display: 'flex',
@@ -55,18 +36,19 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         flex: 0,
-        margin: 14,
-        marginBottom: 7,
+        margin: Layout.margins.default,
+        marginBottom: Layout.margins.small,
 
         display: 'flex',
         flexDirection: 'row',
-
-        backgroundColor: Colors.base.lightgray // TODO delete
     },
     buttonPlus: {
-        backgroundColor: Colors.base.lightgray, // TODO delete
         width: 36
     },
+    mainContainer: {
+        flex: 1
+    },
+
     selectContainer: {
         backgroundColor: Colors.base.black,
         flex: 1,
@@ -115,6 +97,14 @@ export default function WardrobeScreen({
             name: 'Вещи',
             component: <ClothingCategoriesScreen />
         },
+        // {
+        //     name: 'К',
+        //     component: <ClothingByCategoryScreen />
+        // },
+        {
+            name: 'К1',
+            component: <ClothingScreen />
+        },
         {
             name: 'Образы',
             component: <LooksScreen />
@@ -136,18 +126,14 @@ export default function WardrobeScreen({
                             setCurrentScreen(component);
                         }}
                     />
-                    <IconButton
-                        title="plus"
-                        onPress={openModal}
-                        size={styles.buttonPlus.width}
-                        icon={
-                            <AntDesign
-                                name="pluscircle"
-                                size={styles.buttonPlus.width}
-                                color={Colors.base.darkgray}
-                            />
-                        }
-                    />
+                    <IconButton style={{ flex: 0 }} icon={(
+                        <AntDesign
+                            name='plus'
+                            onPress={openModal}
+                            size={36}
+                            color={Colors.base.darkgray}
+                        />
+                    )} />
                 </View>
                 <View style={styles.mainContainer}>{currentScreen}</View>
             </SafeAreaView>
@@ -155,7 +141,6 @@ export default function WardrobeScreen({
                 ref={bottomSheetModalRef}
                 index={0}
                 snapPoints={snapPoints}
-                style={styles.bottomSheet}
                 backgroundStyle={{ backgroundColor: Colors.base.black }}
                 handleIndicatorStyle={{ backgroundColor: Colors.base.white }}
             >
