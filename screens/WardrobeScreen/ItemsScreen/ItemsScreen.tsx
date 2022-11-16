@@ -4,7 +4,7 @@ import {StyleSheet, SafeAreaView, FlatList, View} from 'react-native';
 import {Layout} from "../../../styles";
 import {useAppSelector} from "../../../hooks/useAppSelector";
 import {Clothes, selectUserItems} from "../../../reducers/clothesReducer";
-import ClothingPreview from "../../../components/clothes/ClothingPreview";
+import ItemPreview from "../../../components/items/ItemPreview";
 
 const styles = StyleSheet.create({
     container: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function ClothingScreen() {
+export default function ItemsScreen() {
     const clothing = useAppSelector(selectUserItems);
 
     return (
@@ -28,7 +28,7 @@ export default function ClothingScreen() {
                 numColumns={2}
                 columnWrapperStyle={styles.columnWrapper}
                 data={clothing}
-                renderItem={({ item }) => <ClothingPreview clothes={item} />}
+                renderItem={({ item }) => <ItemPreview clothes={item} />}
             />
         </SafeAreaView>
     );

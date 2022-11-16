@@ -4,10 +4,10 @@ import {StyleSheet, SafeAreaView, FlatList, View, Image, Platform, StatusBar, Te
 import {Colors, Layout} from "../../../styles";
 import {useAppSelector} from "../../../hooks/useAppSelector";
 import {Clothes, selectUserItems} from "../../../reducers/clothesReducer";
-import ClothingPreview from "../../../components/clothes/ClothingPreview";
+import ItemPreview from "../../../components/items/ItemPreview";
 import {
     ClothingByCategoryScreenRouteProp,
-    ClothingCategoriesScreenNavigation,
+    RootNavigation,
     ThingScreenRouteProp
 } from "../../../types";
 import {useNavigation, useRoute} from "@react-navigation/native";
@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function ThingScreen() {
+export default function ItemScreen() {
     const clothing = useAppSelector(selectUserItems);
-    const navigation = useNavigation<ClothingCategoriesScreenNavigation>();
+    const navigation = useNavigation<RootNavigation>();
 
     const route = useRoute<ThingScreenRouteProp>();
     const { index } = route.params;

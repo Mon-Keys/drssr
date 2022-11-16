@@ -6,10 +6,10 @@ import IconButton from "../../../components/base/IconButton";
 import {AntDesign} from "@expo/vector-icons";
 import {useAppSelector} from "../../../hooks/useAppSelector";
 import { selectUserItems } from "../../../reducers/clothesReducer";
-import ClothingPreview from "../../../components/clothes/ClothingPreview";
+import ItemPreview from "../../../components/items/ItemPreview";
 import {
     ClothingByCategoryScreenRouteProp,
-    ClothingCategoriesScreenNavigation,
+    RootNavigation,
 } from "../../../types";
 import {useNavigation, useRoute} from "@react-navigation/native";
 
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function ClothingByCategoryScreen() {
-    const navigation = useNavigation<ClothingCategoriesScreenNavigation>();
+export default function ItemsByCategoryScreen() {
+    const navigation = useNavigation<RootNavigation>();
 
     const route = useRoute<ClothingByCategoryScreenRouteProp>();
     const { category } = route.params;
@@ -82,7 +82,7 @@ export default function ClothingByCategoryScreen() {
                     numColumns={2}
                     columnWrapperStyle={styles.columnWrapper}
                     data={clothingByCategory}
-                    renderItem={({ item }) => <ClothingPreview clothes={item} onPress={() => navigation.navigate('Thing', {index: clothing.indexOf(item)})} />}
+                    renderItem={({ item }) => <ItemPreview clothes={item} onPress={() => navigation.navigate('Item', {index: clothing.indexOf(item)})} />}
                 />
             </View>
         </SafeAreaView>

@@ -8,7 +8,7 @@ import {
     StatusBar,
     View
 } from 'react-native';
-import { RootTabScreenProps } from '../../types';
+import { RootNavigation, RootTabScreenProps} from '../../types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import {
     BottomSheetModal,
@@ -18,12 +18,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { Colors, Layout } from '../../styles';
 import { choosePhoto } from '../../reducers/itemEditorReducer';
 import { fetchUsersClothes } from '../../reducers/clothesReducer';
-import ClothingCategoriesScreen from './ItemsScreen/ClothingCategoriesScreen';
+import CategoriesScreen from './ItemsScreen/CategoriesScreen';
 import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
+import {useNavigation} from "@react-navigation/native";
 
 
 const styles = StyleSheet.create({
@@ -59,10 +60,10 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function WardrobeScreen({
-    navigation
-}: RootTabScreenProps<'Wardrobe'>) {
+export default function WardrobeScreen() {
     const dispatch = useAppDispatch();
+
+    const navigation = useNavigation<RootNavigation>();
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ['40%'], []);
@@ -93,7 +94,7 @@ export default function WardrobeScreen({
     const menuItems = [
         {
             name: 'Вещи',
-            component: <ClothingCategoriesScreen />
+            component: <CategoriesScreen />
         },
         {
             name: 'Образы',

@@ -33,7 +33,7 @@ const initialState = {
 } as ClothesState;
 
 export const fetchUsersClothes = createAsyncThunk<Array<IClothesData>>(
-    'clothes/fetchUsersClothes',
+    'items/fetchUsersClothes',
     async (_, { rejectWithValue }) => {
         try {
             const response = await DataService.getUsersClothesByCookie();

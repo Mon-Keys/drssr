@@ -9,7 +9,6 @@ import {
     NavigatorScreenParams, RouteProp
 } from '@react-navigation/native';
 import {NativeStackNavigationProp, NativeStackScreenProps} from '@react-navigation/native-stack';
-import ThingScreen from "./screens/WardrobeScreen/ItemsScreen/ThingScreen";
 
 declare global {
     namespace ReactNavigation {
@@ -29,10 +28,10 @@ export type RootStackParamList = {
     SaveLook: undefined;
     Post: undefined;
     Settings: undefined;
-    ClothingByCategory: {
+    ItemsByCategory: {
         category: string;
     };
-    Thing: {
+    Item: {
         index: number;
     }
 };
@@ -53,7 +52,8 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
         NativeStackScreenProps<RootStackParamList>
     >;
 
-export type ClothingCategoriesScreenNavigation = NativeStackNavigationProp<RootStackParamList, 'Root'>;
 
-export type ClothingByCategoryScreenRouteProp = RouteProp<RootStackParamList, 'ClothingByCategory'>;
-export type ThingScreenRouteProp = RouteProp<RootStackParamList, 'Thing'>;
+export type RootNavigation = NativeStackNavigationProp<RootStackParamList, 'Root'>;
+
+export type ClothingByCategoryScreenRouteProp = RouteProp<RootStackParamList, 'ItemsByCategory'>;
+export type ThingScreenRouteProp = RouteProp<RootStackParamList, 'Item'>;

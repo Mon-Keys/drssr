@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 
 export default function SaveLookModal({
     navigation
-}: RootStackScreenProps<'CreateLook'>) {
+}: RootStackScreenProps<'SaveLook'>) {
     const lookSelector = useAppSelector(selectCreateLook);
     const [name, setName] = React.useState<string>('');
     const [description, setDescription] = React.useState<string>('');

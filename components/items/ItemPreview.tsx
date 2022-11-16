@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const ClothingPreview = ({
+const ItemPreview = ({
     clothes,
     onPress
 }: {
@@ -52,4 +52,4 @@ const ClothingPreview = ({
     );
 };
 
-export default ClothingPreview;
+export default ItemPreview;
