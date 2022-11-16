@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-        backgroundColor: 'transparent'
+        backgroundColor: Colors.base.white
     },
     formContainer: {
         alignItems: 'center',
         height: 300,
         alignContent: 'space-between',
         justifyContent: 'space-between',
-        backgroundColor: 'transparent'
+        backgroundColor: Colors.base.white
     },
     title: {
         fontSize: 20,
@@ -78,12 +78,14 @@ export default function SignupScreenModal({
                 <InputField
                     icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'имя пользователя'}
+                    placeholderTextColor={Colors.base.darkgray}
                     value={nickname}
                     onChangeText={onChangeNickname}
                 />
                 <InputField
                     icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'почта'}
+                    placeholderTextColor={Colors.base.darkgray}
                     value={email}
                     onChangeText={onChangeEmail}
                     keyboardType={'email-address'}
@@ -92,6 +94,7 @@ export default function SignupScreenModal({
                     icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'пароль'}
                     value={password}
+                    placeholderTextColor={Colors.base.darkgray}
                     onChangeText={onChangePassword}
                     password={true}
                 />
@@ -99,6 +102,7 @@ export default function SignupScreenModal({
                     icon={<Person color={Colors.base.darkgray} />}
                     placeholder={'дата рождения'}
                     value={birthdate}
+                    placeholderTextColor={Colors.base.darkgray}
                     onChangeText={onChangeBirthdate}
                 />
                 <StyledButton

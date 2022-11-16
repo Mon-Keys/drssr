@@ -27,6 +27,8 @@ import ClothingScreen from "./ItemsScreen/ClothingScreen";
 import Eye from "../../components/icons/eye";
 import EyeSlash from "../../components/icons/eyeSlash";
 import ClothingByCategoryScreen from "./ItemsScreen/ClothingByCategoryScreen";
+import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -54,16 +56,12 @@ const styles = StyleSheet.create({
     },
 
     selectContainer: {
-        backgroundColor: Colors.base.black,
+        backgroundColor: Colors.base.lightgray,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
     }
 });
-
-function LooksScreen() {
-    return null;
-}
 
 export default function WardrobeScreen({
     navigation
@@ -103,7 +101,7 @@ export default function WardrobeScreen({
         },
         {
             name: 'Образы',
-            component: <LooksScreen />
+            component: <LooksWardrobeScreen />
         }
     ];
 
@@ -143,15 +141,16 @@ export default function WardrobeScreen({
                 ref={bottomSheetModalRef}
                 index={0}
                 snapPoints={snapPoints}
-                backgroundStyle={{ backgroundColor: Colors.base.black }}
-                handleIndicatorStyle={{ backgroundColor: Colors.base.white }}
+                style={styles.bottomSheet}
+                backgroundStyle={{ backgroundColor: Colors.base.lightgray }}
+                handleIndicatorStyle={{ backgroundColor: Colors.base.black }}
             >
                 <View style={styles.selectContainer}>
                     <Pressable onPress={closeModal}>
                         <Entypo
                             name="cross"
                             size={24}
-                            color={Colors.base.white}
+                            color={Colors.base.black}
                         />
                     </Pressable>
                     <StyledButton
