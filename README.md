@@ -12,6 +12,11 @@ npm ci
 
 ### Start app for expo
 ```
-expo start --tunnel
+npx expo start --tunnel
+```
+
+### Запуск на устройстве через Expo Go
+```
+необходимо отсканировать QR-код, появившийся в консоли
 ```
 
