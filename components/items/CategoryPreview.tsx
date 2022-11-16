@@ -46,7 +46,7 @@ const ClothingCategoryPreview = ({
                 <Image
                     style={styles.preview}
                     source={{
-                        uri: `data:image/jpg;base64,${category.img}`
+                        uri: `http://leonidperl.in:80/${category.img}`
                     }}
                 />
             </View>

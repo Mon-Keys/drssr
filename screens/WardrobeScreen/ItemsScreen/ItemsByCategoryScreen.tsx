@@ -15,8 +15,7 @@ import {useNavigation, useRoute} from "@react-navigation/native";
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
-        flexDirection: 'column',
+        height: '100%',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
     headerContainer: {
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
         color: Colors.base.black
     },
     bodyContainer: {
+        flex: 1,
         width: Layout.window.width,
         alignItems: 'center'
     },
@@ -82,7 +82,10 @@ export default function ItemsByCategoryScreen() {
                     numColumns={2}
                     columnWrapperStyle={styles.columnWrapper}
                     data={clothingByCategory}
-                    renderItem={({ item }) => <ItemPreview clothes={item} onPress={() => navigation.navigate('Item', {index: clothing.indexOf(item)})} />}
+                    renderItem={({ item }) => <ItemPreview
+                        clothes={item}
+                        onPress={() => navigation.navigate('Item', {index: clothing.indexOf(item)})}
+                    />}
                 />
             </View>
         </SafeAreaView>

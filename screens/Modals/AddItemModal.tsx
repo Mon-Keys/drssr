@@ -19,6 +19,7 @@ import {
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { IItemData } from '../../network';
 import Colors from '../../styles/Colors';
+import {fetchUsersClothes} from "../../reducers/clothesReducer";
 
 const styles = StyleSheet.create({
     type: {
@@ -61,6 +62,7 @@ export default function AddItemModal(/*{
                 brand: 'prada'
             };
             dispatch(analyzeItem(photo));
+            dispatch(fetchUsersClothes());
         }
     }, [dispatch, selectItem.currentItem]);
 

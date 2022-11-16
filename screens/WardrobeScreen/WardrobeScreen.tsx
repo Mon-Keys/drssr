@@ -80,7 +80,7 @@ export default function WardrobeScreen() {
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             quality: 1
         });
         dispatch(choosePhoto(result));
