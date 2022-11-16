@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text } from 'react-native';
+import {GestureResponderEvent, Image, Pressable, StyleSheet, Text} from 'react-native';
 import React from 'react';
 import { View } from '../base/Themed';
 import {Colors, Layout} from "../../styles";
@@ -27,24 +27,28 @@ const styles = StyleSheet.create({
 });
 
 const ClothingPreview = ({
-    clothes
+    clothes,
+    onPress
 }: {
     clothes: Clothes;
+    onPress?: null | ((event: GestureResponderEvent) => void) | undefined;
 }) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.previewContainer}>
-                <Image
-                    style={styles.preview}
-                    source={{
-                        uri: `data:image/jpg;base64,${clothes.mask}`
-                    }}
-                />
+        <Pressable onPress={onPress}>
+            <View style={styles.container}>
+                <View style={styles.previewContainer}>
+                    <Image
+                        style={styles.preview}
+                        source={{
+                            uri: `data:image/jpg;base64,${clothes.mask}`
+                        }}
+                    />
+                </View>
+                <Text style={styles.caption} numberOfLines={1}>
+                    {clothes.brand}
+                </Text>
             </View>
-            <Text style={styles.caption} numberOfLines={1}>
-                {clothes.brand}
-            </Text>
-        </View>
+        </Pressable>
     );
 };
 

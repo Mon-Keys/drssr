@@ -51,7 +51,8 @@ export default function ClothingByCategoryScreen() {
 
     const route = useRoute<ClothingByCategoryScreenRouteProp>();
     const { category } = route.params;
-    const clothing = useAppSelector(selectUserItems).filter((item) => item.type === category)
+    const clothing = useAppSelector(selectUserItems)
+    const clothingByCategory = clothing.filter((item) => item.type === category)
 
     return (
         <SafeAreaView style={styles.container}>
@@ -80,8 +81,8 @@ export default function ClothingByCategoryScreen() {
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
                     columnWrapperStyle={styles.columnWrapper}
-                    data={clothing}
-                    renderItem={({ item }) => <ClothingPreview clothes={item} />}
+                    data={clothingByCategory}
+                    renderItem={({ item }) => <ClothingPreview clothes={item} onPress={() => navigation.navigate('Thing', {index: clothing.indexOf(item)})} />}
                 />
             </View>
         </SafeAreaView>
