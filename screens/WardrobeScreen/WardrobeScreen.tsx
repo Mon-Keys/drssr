@@ -98,12 +98,8 @@ export default function WardrobeScreen({
 
     const menuItems = [
         {
-            name: 'К',
-            component: <ClothingCategoriesScreen />
-        },
-        {
             name: 'Вещи',
-            component: <ClothingScreen />
+            component: <ClothingCategoriesScreen />
         },
         {
             name: 'Образы',
