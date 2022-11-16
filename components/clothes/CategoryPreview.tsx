@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
         marginLeft: Layout.margins.default,
         marginTop: Layout.margins.default,
         fontSize: 12,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        zIndex: 10
     },
     preview: {
         flex: 1,
