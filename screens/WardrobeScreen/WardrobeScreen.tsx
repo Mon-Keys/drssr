@@ -23,10 +23,6 @@ import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
-import ClothingScreen from "./ItemsScreen/ClothingScreen";
-import Eye from "../../components/icons/eye";
-import EyeSlash from "../../components/icons/eyeSlash";
-import ClothingByCategoryScreen from "./ItemsScreen/ClothingByCategoryScreen";
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
 
 
@@ -141,7 +137,6 @@ export default function WardrobeScreen({
                 ref={bottomSheetModalRef}
                 index={0}
                 snapPoints={snapPoints}
-                style={styles.bottomSheet}
                 backgroundStyle={{ backgroundColor: Colors.base.lightgray }}
                 handleIndicatorStyle={{ backgroundColor: Colors.base.black }}
             >
