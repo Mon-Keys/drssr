@@ -6,17 +6,20 @@ import {
     StatusBar,
     StyleSheet,
     Image,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    ActivityIndicator
 } from 'react-native';
 import InputField from '../../components/base/InputField';
 import StyledButton from '../../components/base/StyledButton';
 import { View } from '../../components/base/Themed';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
-import {newLook, selectCreateLook} from '../../reducers/createLookReducer';
+import { newLook, selectCreateLook } from '../../reducers/createLookReducer';
 import { Colors } from '../../styles';
-import {useDispatch} from "react-redux";
-import {ILookData} from "../../network";
+import { useDispatch } from 'react-redux';
+import { ILookData } from '../../network';
+import { RootStackScreenProps } from '../../types';
+import { fetchUsersLooks, selectLook } from '../../reducers/lookReducer';
 // @ts-ignore
 
 const styles = StyleSheet.create({
@@ -31,6 +34,13 @@ const styles = StyleSheet.create({
         borderRadius: 14,
         resizeMode: 'contain'
     },
+    lookContainerInactive: {
+        width: 354,
+        height: 442,
+        opacity: 0.5,
+        borderRadius: 14,
+        resizeMode: 'contain'
+    },
     infoContainer: {
         marginTop: 14,
         width: 354,
@@ -40,35 +50,57 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.base.white,
         alignItems: 'center',
         justifyContent: 'space-around'
+    },
+    indicator: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 
-export default function SaveLookModal() {
+export default function SaveLookModal({
+    navigation
+}: RootStackScreenProps<'CreateLook'>) {
     const lookSelector = useAppSelector(selectCreateLook);
     const [name, setName] = React.useState<string>('');
     const [description, setDescription] = React.useState<string>('');
 
     const dispatch = useDispatch();
 
+    const looks = useAppSelector(selectLook);
+
     const addLook = () => {
         console.log({ name, description });
         const look: ILookData = {
             img: lookSelector.look.img,
-            filename: '1.jpg',
-            clothes: [{
-                id: 1 ,
-                coords: {
-                    x: 300,
-                    y: 450,
-                }}
+            filename: `${name}${description}${Math.floor(
+                Math.random() * 100
+            )}.jpg`,
+            clothes: [
+                {
+                    id: 1,
+                    coords: {
+                        x: 300,
+                        y: 450
+                    }
+                }
             ],
-            description: name+' '+description
-        }
+            description: name + ' ' + description
+        };
 
         // @ts-ignore
-        dispatch(newLook(look)).then(()=> {
-            console.log('success')
-        })
+        dispatch(newLook(look)).then(() => {
+            console.log('success');
+            //@ts-ignore
+            dispatch(fetchUsersLooks()).then(() => {
+                //@ts-ignore
+                navigation.navigate('Wardrobe');
+            });
+        });
     };
 
     return (
@@ -80,11 +112,23 @@ export default function SaveLookModal() {
             <View style={styles.container}>
                 <View style={styles.lookContainer}>
                     <Image
-                        style={styles.lookContainer}
+                        style={
+                            lookSelector.status === 'pending' ||
+                            looks.status === 'pending'
+                                ? styles.lookContainerInactive
+                                : styles.lookContainer
+                        }
                         source={{
                             uri: `data:image/jpg;base64,${lookSelector.look.img}`
                         }}
                     />
+                    {lookSelector.status === 'pending' ||
+                    looks.status === 'pending' ? (
+                        <ActivityIndicator
+                            size="large"
+                            style={styles.indicator}
+                        />
+                    ) : null}
                 </View>
                 <View style={styles.infoContainer}>
                     <InputField

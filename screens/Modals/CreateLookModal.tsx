@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
     lookArea: {
         backgroundColor: Colors.base.white,
-        height: 600,
+        height: 700,
         width: 400
     },
     bottomSheet: {
@@ -56,9 +56,20 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     defaultImage: {
-        width: 200,
-        height: 200,
-        backgroundColor: 'transparent'
+        width: 100,
+        height: 100,
+        backgroundColor: 'transparent',
+        resizeMode: 'center'
+    },
+    nextButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 375 / 2,
+        left: 94,
+        top: -100,
+        height: 40,
+        backgroundColor: Colors.base.black,
+        borderRadius: 14
     },
     addButton: { top: 20, left: 20, width: 60, height: 60 }
 });
@@ -128,26 +139,28 @@ export default function CreateLookModal({
                         ))}
                     </View>
                 </ViewShot>
-                <IconButton
-                    title={'proceed'}
-                    icon={
-                        <AntDesign
-                            name="arrowright"
-                            size={36}
-                            color={Colors.base.black}
-                        />
-                    }
-                    onPress={proceed}
-                    color={Colors.base.black}
-                />
+                <View style={styles.nextButton}>
+                    <IconButton
+                        title={'proceed'}
+                        icon={
+                            <AntDesign
+                                name="arrowright"
+                                size={36}
+                                color={Colors.base.white}
+                            />
+                        }
+                        onPress={proceed}
+                        color={Colors.base.black}
+                    />
+                </View>
                 <BottomSheetModal
                     ref={bottomSheetModalRef}
                     index={0}
                     snapPoints={snapPoints}
                     style={styles.bottomSheet}
-                    backgroundStyle={{ backgroundColor: Colors.base.black }}
+                    backgroundStyle={{ backgroundColor: Colors.base.lightgray }}
                     handleIndicatorStyle={{
-                        backgroundColor: Colors.base.white
+                        backgroundColor: Colors.base.black
                     }}
                 >
                     <View style={styles.contentContainer}>
@@ -155,7 +168,7 @@ export default function CreateLookModal({
                             <Entypo
                                 name="cross"
                                 size={24}
-                                color={Colors.base.white}
+                                color={Colors.base.black}
                             />
                         </Pressable>
                         <FlatList

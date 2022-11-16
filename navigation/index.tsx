@@ -1,3 +1,4 @@
+//@ts-nocheck
 /**
  * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
  * https://reactnavigation.org/docs/getting-started
@@ -172,6 +173,7 @@ function RootNavigator() {
                 />
 
                 <Stack.Screen name="CreateLook" component={CreateLookModal} />
+                {/*@ts-nocheck*/}
                 <Stack.Screen name="SaveLook" component={SaveLookModal} />
             </Stack.Group>
         </Stack.Navigator>

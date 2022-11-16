@@ -1,10 +1,6 @@
-import {
-    createSlice,
-    createAsyncThunk,
-    createSelector
-} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import DataService, {IGetLookData, ILookData} from '../network/';
+import DataService, { IGetLookData, ILookData } from '../network/';
 
 interface LookState {
     LooksData: Array<IGetLookData>;
@@ -22,7 +18,7 @@ export const fetchUsersLooks = createAsyncThunk<Array<ILookData>>(
     'Looks/fetchUsersLooks',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await DataService.getUsersLooksByCookie(10,0);
+            const response = await DataService.getUsersLooksByCookie(10, 0);
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
@@ -36,7 +32,7 @@ export const fetchUsersLooks = createAsyncThunk<Array<ILookData>>(
     }
 );
 
-export const LooksSlice = createSlice({
+export const looksSlice = createSlice({
     name: 'Looks',
     initialState,
     reducers: {
@@ -53,7 +49,8 @@ export const LooksSlice = createSlice({
             .addCase(fetchUsersLooks.fulfilled, (state, action) => {
                 state.status = 'resolved';
                 console.log('resolved');
-                state.LooksData = action.payload as unknown as Array<IGetLookData>;
+                state.LooksData =
+                    action.payload as unknown as Array<IGetLookData>;
                 // console.log(action);
                 console.log('done');
             })
@@ -64,21 +61,8 @@ export const LooksSlice = createSlice({
     }
 });
 
-export const { loadData } = LookSlice.actions;
+export const { loadData } = looksSlice.actions;
 
-export const selectLook = (state: RootState) => state.Look;
+export const selectLook = (state: RootState) => state.looks;
 
-export const selectUserItems = (state: RootState) => state.Look.LookData;
-
-export const getCategories = createSelector(selectUserItems, (items) => {
-    const categoriesAvailable = new Set<ClothingCategory>();
-    items.forEach((item) => {
-        categoriesAvailable.add({
-            caption: item.type + ' ' + item.brand,
-            img: item.mask
-        });
-    });
-    return Array.from(categoriesAvailable);
-});
-
-export default LookSlice.reducer;
+export default looksSlice.reducer;

@@ -48,7 +48,7 @@ interface IItemData {
     brand: string;
 }
 
-interface IClothesInsideLookData {
+export interface IClothesInsideLookData {
     id: number;
     coords: {
         x: number;
@@ -56,13 +56,13 @@ interface IClothesInsideLookData {
     };
 }
 
-interface IClothesLookData {
+export interface IClothesLookData {
     id: number;
     coords: {
         x: number;
         y: number;
     };
-    name: string
+    name: string;
 }
 
 export interface ILookData {
@@ -71,7 +71,6 @@ export interface ILookData {
     description: string;
     clothes: Array<IClothesInsideLookData>;
 }
-
 
 export interface IGetLookData extends ILookData {
     id: number;
@@ -182,9 +181,12 @@ class DataService {
     }
 
     getUsersLooksByCookie(limit: number, offset: number) {
-        return http.get<Array<IGetLookData>>(`/private/looks/all?limit=${limit}&offset=${offset}`, {
-            withCredentials: true
-        });
+        return http.get<Array<IGetLookData>>(
+            `/private/looks/all?limit=${limit}&offset=${offset}`,
+            {
+                withCredentials: true
+            }
+        );
     }
 
     createNewLook(data: ILookData) {
