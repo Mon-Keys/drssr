@@ -41,6 +41,8 @@ import PostModalScreen from '../screens/Modals/PostModal';
 import SettingsModalScreen from '../screens/Modals/SettingsModal';
 import { Theme } from '../styles';
 import SaveLookModal from '../screens/Modals/SaveLookModal';
+import ClothingByCategoryScreen from '../screens/WardrobeScreen/ItemsScreen/ClothingByCategoryScreen';
+import ThingScreen from "../screens/WardrobeScreen/ItemsScreen/ThingScreen";
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -166,6 +168,8 @@ function RootNavigator() {
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Edit" component={EditModal} />
                 <Stack.Screen name="Post" component={PostModalScreen} />
+                <Stack.Screen name="ClothingByCategory" component={ClothingByCategoryScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="Thing" component={ThingScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Settings" component={SettingsModalScreen} />
                 <Stack.Screen
                     name="ImageRecognizer"

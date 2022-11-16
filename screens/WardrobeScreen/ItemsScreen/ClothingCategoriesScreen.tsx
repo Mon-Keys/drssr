@@ -1,29 +1,31 @@
 import React from 'react';
-import { RefreshControl, StyleSheet, Text } from 'react-native';
+import { RefreshControl, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../../../components/base/Themed';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import {
-    fetchUsersClothes,
-    getCategories
-} from '../../../reducers/clothesReducer';
+import { fetchUsersClothes, getCategories } from '../../../reducers/clothesReducer';
 import CategoryPreview from '../../../components/clothes/CategoryPreview';
-import { Colors } from '../../../styles';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { Colors, Layout } from '../../../styles';
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { ClothingCategoriesScreenNavigation } from "../../../types";
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.base.lightgray,
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: Colors.base.lightgray,
     },
     columnWrapper: {
-        margin: 7,
+        minWidth: 342, // TODO не бейте за костыль, не ебу как по другому
+        margin: Layout.margins.small,
         justifyContent: 'flex-start'
     }
 });
 
 export default function ClothingCategoriesScreen() {
+    const navigation = useNavigation<ClothingCategoriesScreenNavigation>();
+
     const categories = useAppSelector(getCategories);
     const [refreshing] = React.useState(false);
 
@@ -36,20 +38,20 @@ export default function ClothingCategoriesScreen() {
     return (
         <View style={styles.container}>
             <FlatList
-                refreshControl={
-                    <RefreshControl
-                        tintColor={Colors.base.black}
-                        refreshing={refreshing}
-                        onRefresh={refresh}
-                    />
-                }
-                numColumns={3}
-                ListEmptyComponent={<Text> Пока здесь нет вещей </Text>}
-                showsVerticalScrollIndicator={false}
-                columnWrapperStyle={styles.columnWrapper}
+                refreshControl={<RefreshControl
+                    tintColor={Colors.base.black}
+                    refreshing={refreshing}
+                    onRefresh={refresh}
+                />}
                 horizontal={false}
+                showsVerticalScrollIndicator={false}
+                numColumns={3}
+                columnWrapperStyle={styles.columnWrapper}
                 data={categories}
-                renderItem={({ item }) => <CategoryPreview category={item} />}
+                renderItem={({ item }) => <CategoryPreview
+                    category={item}
+                    onPress={() => navigation.navigate('ClothingByCategory', { category: item.caption })}
+                />}
                 keyExtractor={(item, index) => index.toString()}
             />
         </View>
