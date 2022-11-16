@@ -17,14 +17,14 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-        backgroundColor: 'transparent'
+        backgroundColor: Colors.base.white
     },
     formContainer: {
         alignItems: 'center',
         height: 300,
         alignContent: 'space-between',
         justifyContent: 'space-between',
-        backgroundColor: 'transparent'
+        backgroundColor: Colors.base.white
     },
     title: {
         fontSize: 20,
@@ -64,12 +64,14 @@ export default function TabTwoScreen({
             <View style={styles.formContainer}>
                 <InputField
                     icon={<Person color={Colors.base.darkgray} />}
+                    placeholderTextColor={Colors.base.darkgray}
                     placeholder={'имя пользователя'}
                     value={login}
                     onChangeText={onChangeLogin}
                 />
                 <InputField
                     icon={<Person color={Colors.base.darkgray} />}
+                    placeholderTextColor={Colors.base.darkgray}
                     placeholder={'пароль'}
                     value={password}
                     onChangeText={onChangePassword}
