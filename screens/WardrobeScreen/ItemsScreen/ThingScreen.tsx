@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
 
         display: 'flex',
-        backgroundColor: 'black'
+        backgroundColor: 'transparent'
     },
     headerContainer: {
         display: 'flex',
@@ -38,11 +38,13 @@ const styles = StyleSheet.create({
     headerTitleText: {
         fontSize: 18,
         fontFamily: 'proxima-nova',
+        marginRight: 26,
         color: Colors.base.black
     },
     imageContainer: {
-        width: 150,
-        height: 150,
+        width: 300,
+        height: 300,
+        backgroundColor: Colors.base.white,
         borderRadius: Layout.cornerRadius,
         margin: Layout.margins.default,
     },
@@ -75,13 +77,7 @@ export default function ThingScreen() {
                 <View style={styles.headerTitleContainer}>
                     <Text style={styles.headerTitleText} >{thing.type + ' ' + thing.brand}</Text>
                 </View>
-                <IconButton style={{ flex: 0 }} icon={(
-                    <AntDesign
-                        name='search1'
-                        size={24}
-                        color={Colors.base.black}
-                    />
-                )} />
+
             </View>
             <View style={styles.imageContainer}>
                 <Image
