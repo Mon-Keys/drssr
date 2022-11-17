@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import * as ImagePicker from 'expo-image-picker';
