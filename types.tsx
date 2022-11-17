@@ -6,9 +6,13 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import {
     CompositeScreenProps,
-    NavigatorScreenParams, RouteProp
+    NavigatorScreenParams,
+    RouteProp
 } from '@react-navigation/native';
-import {NativeStackNavigationProp, NativeStackScreenProps} from '@react-navigation/native-stack';
+import {
+    NativeStackNavigationProp,
+    NativeStackScreenProps
+} from '@react-navigation/native-stack';
 
 declare global {
     namespace ReactNavigation {
@@ -33,7 +37,7 @@ export type RootStackParamList = {
     };
     Item: {
         index: number;
-    }
+    };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -52,8 +56,13 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
         NativeStackScreenProps<RootStackParamList>
     >;
 
+export type RootNavigation = NativeStackNavigationProp<
+    RootStackParamList,
+    'Root'
+>;
 
-export type RootNavigation = NativeStackNavigationProp<RootStackParamList, 'Root'>;
-
-export type ClothingByCategoryScreenRouteProp = RouteProp<RootStackParamList, 'ItemsByCategory'>;
+export type ClothingByCategoryScreenRouteProp = RouteProp<
+    RootStackParamList,
+    'ItemsByCategory'
+>;
 export type ThingScreenRouteProp = RouteProp<RootStackParamList, 'Item'>;

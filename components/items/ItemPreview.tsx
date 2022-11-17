@@ -1,26 +1,32 @@
-import {GestureResponderEvent, Image, Pressable, StyleSheet, Text} from 'react-native';
+import {
+    GestureResponderEvent,
+    Image,
+    Pressable,
+    StyleSheet,
+    Text
+} from 'react-native';
 import React from 'react';
 import { View } from '../base/Themed';
-import { Colors, Layout } from "../../styles";
-import { Clothes } from "../../reducers/clothesReducer";
-import { getUri } from "../../network/const";
+import { Colors, Layout } from '../../styles';
+import { Clothes } from '../../reducers/clothesReducer';
+import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.base.lightgray,
-        marginHorizontal: Layout.margins.small,
+        marginHorizontal: Layout.margins.small
     },
     previewContainer: {
         width: 150,
         height: 150,
-        borderRadius: Layout.cornerRadius,
+        borderRadius: Layout.cornerRadius
     },
     preview: {
         flex: 1,
-        resizeMode: 'center',
+        resizeMode: 'center'
     },
     caption: {
-        marginTop: Layout.margins.small/2,
+        marginTop: Layout.margins.small / 2,
         marginLeft: Layout.margins.default,
         fontSize: 12,
         fontWeight: 'bold'

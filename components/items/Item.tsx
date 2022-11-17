@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 
-import {Colors, Layout} from "../../styles";
-import { Clothes } from "../../reducers/clothesReducer";
-import { getUri } from "../../network/const";
+import { Colors, Layout } from '../../styles';
+import { Clothes } from '../../reducers/clothesReducer';
+import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({
     container: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         height: 300,
         backgroundColor: Colors.base.white,
         borderRadius: Layout.cornerRadius,
-        margin: Layout.margins.default,
+        margin: Layout.margins.default
     },
     image: {
         flex: 1,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function Item({item}: {item: Clothes}) {
+export default function Item({ item }: { item: Clothes }) {
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>

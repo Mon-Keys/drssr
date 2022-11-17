@@ -1,14 +1,21 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, View, Platform, StatusBar, Text} from 'react-native';
+import {
+    StyleSheet,
+    SafeAreaView,
+    View,
+    Platform,
+    StatusBar,
+    Text
+} from 'react-native';
 
-import {Colors, Layout} from "../../../styles";
-import {useAppSelector} from "../../../hooks/useAppSelector";
-import { selectUserItems } from "../../../reducers/clothesReducer";
-import { RootNavigation, ThingScreenRouteProp } from "../../../types";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import IconButton from "../../../components/base/IconButton";
-import { AntDesign } from "@expo/vector-icons";
-import Item from "../../../components/items/Item";
+import { Colors, Layout } from '../../../styles';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { selectUserItems } from '../../../reducers/clothesReducer';
+import { RootNavigation, ThingScreenRouteProp } from '../../../types';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import IconButton from '../../../components/base/IconButton';
+import { AntDesign } from '@expo/vector-icons';
+import Item from '../../../components/items/Item';
 
 const styles = StyleSheet.create({
     container: {
@@ -23,7 +30,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         margin: Layout.margins.default,
-        marginBottom: Layout.margins.small,
+        marginBottom: Layout.margins.small
     },
     headerTitleContainer: {
         flex: 1,
@@ -50,16 +57,21 @@ export default function ItemScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
-                <IconButton style={{ flex: 0 }} icon={(
-                    <AntDesign
-                        name='back'
-                        size={24}
-                        color={Colors.base.black}
-                    />
-                )} onPress={() => navigation.goBack()}
+                <IconButton
+                    style={{ flex: 0 }}
+                    icon={
+                        <AntDesign
+                            name="back"
+                            size={24}
+                            color={Colors.base.black}
+                        />
+                    }
+                    onPress={() => navigation.goBack()}
                 />
                 <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitleText} >{item.type + ' ' + item.brand}</Text>
+                    <Text style={styles.headerTitleText}>
+                        {item.type + ' ' + item.brand}
+                    </Text>
                 </View>
             </View>
             <Item item={item} />

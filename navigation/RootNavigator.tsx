@@ -1,19 +1,18 @@
-import AddItemModal from "../screens/Modals/AddItemModal";
-import SignupScreenModal from "../screens/Auth/SignupScreenModal";
-import LoginScreen from "../screens/Auth/LoginScreen";
-import EditModal from "../screens/Modals/EditModal";
-import PostModalScreen from "../screens/Modals/PostModal";
-import ImageRecognizerScreen from "../screens/Modals/ImageRecognizer";
-import CreateLookModal from "../screens/Modals/CreateLookModal";
-import SaveLookModal from "../screens/Modals/SaveLookModal";
-import * as React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../types";
-import { BottomTabNavigator } from "./TapBarNavigation/TapBar";
-import NotFoundScreenModal from "../screens/Modals/NotFoundScreenModal";
-import { selectUser } from "../reducers/userReducer";
-import { useAppSelector } from "../hooks/useAppSelector";
-
+import AddItemModal from '../screens/Modals/AddItemModal';
+import SignupScreenModal from '../screens/Auth/SignupScreenModal';
+import LoginScreen from '../screens/Auth/LoginScreen';
+import EditModal from '../screens/Modals/EditModal';
+import PostModalScreen from '../screens/Modals/PostModal';
+import ImageRecognizerScreen from '../screens/Modals/ImageRecognizer';
+import CreateLookModal from '../screens/Modals/CreateLookModal';
+import SaveLookModal from '../screens/Modals/SaveLookModal';
+import * as React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
+import { BottomTabNavigator } from './TapBarNavigation/TapBar';
+import NotFoundScreenModal from '../screens/Modals/NotFoundScreenModal';
+import { useAppSelector } from '../hooks/useAppSelector';
+import { selectUser } from '../reducers/userReducer';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

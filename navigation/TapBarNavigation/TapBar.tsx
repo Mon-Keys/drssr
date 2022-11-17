@@ -1,11 +1,16 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { RootTabParamList, RootTabScreenProps } from "../../types";
-import Colors from "../../styles/Colors";
-import Home from "../../screens/HomeScreen/HomeScreen";
-import { AntDesign, FontAwesome, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Pressable, StyleSheet } from "react-native";
-import SearchScreen from "../../screens/SearchScreen/DiscoverScreen";
-import * as React from "react";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RootTabParamList, RootTabScreenProps } from '../../types';
+import Colors from '../../styles/Colors';
+import Home from '../../screens/HomeScreen/HomeScreen';
+import {
+    AntDesign,
+    FontAwesome,
+    Ionicons,
+    MaterialCommunityIcons
+} from '@expo/vector-icons';
+import { Pressable, StyleSheet } from 'react-native';
+import SearchScreen from '../../screens/SearchScreen/DiscoverScreen';
+import * as React from 'react';
 import { Wardrobe } from "./Wardrobe";
 import { Profile } from "./Profile";
 
