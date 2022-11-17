@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import DataService, { ILoginData, IUserData, ISignupData } from '../network/';
+import Api, { ILoginData, IUserData, ISignupData } from '../network/';
 
 export interface User {
     nickname: string;
@@ -32,7 +32,7 @@ export const fetchUserData = createAsyncThunk<IUserData>(
     async (_, { rejectWithValue }) => {
         try {
             console.log('fetching user data');
-            const response = await DataService.getUserDataByCookie();
+            const response = await Api.User.getUser();
             console.log(response);
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
@@ -51,7 +51,7 @@ export const signUpUser = createAsyncThunk<ISignupData, ISignupData>(
     async (signUpData, { rejectWithValue }) => {
         try {
             console.log('sending signup');
-            const response = await DataService.signUpUser(signUpData);
+            const response = await Api.Auth.signUpUser(signUpData);
             console.log(response);
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
@@ -70,7 +70,7 @@ export const loginUser = createAsyncThunk<ILoginData, ILoginData>(
     async (loginData, { rejectWithValue }) => {
         try {
             console.log('sending login');
-            const response = await DataService.loginUser(loginData);
+            const response = await Api.Auth.loginUser(loginData);
             console.log(response);
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
@@ -89,7 +89,7 @@ export const logoutUser = createAsyncThunk<IUserData>(
     async (_, { rejectWithValue }) => {
         try {
             console.log('logout user');
-            const response = await DataService.logoutUser();
+            const response = await Api.Auth.logoutUser();
             console.log(response);
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);

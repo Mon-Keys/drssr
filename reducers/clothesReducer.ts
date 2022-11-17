@@ -4,7 +4,7 @@ import {
     createSelector
 } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import DataService, { IClothesData } from '../network/';
+import Api, { IClothesData } from '../network/';
 
 export interface Clothes {
     id: number;
@@ -38,7 +38,7 @@ export const fetchUsersClothes = createAsyncThunk<Array<IClothesData>>(
     'items/fetchUsersClothes',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await DataService.getUsersClothesByCookie();
+            const response = await Api.Common.getClothes();
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);

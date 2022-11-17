@@ -3,6 +3,7 @@ import { StyleSheet, View, Image } from 'react-native';
 
 import {Colors, Layout} from "../../styles";
 import { Clothes } from "../../reducers/clothesReducer";
+import { getUri } from "../../network/const";
 
 const styles = StyleSheet.create({
     imageContainer: {
@@ -24,7 +25,7 @@ export default function Item({item}: {item: Clothes}) {
             <Image
                 style={styles.image}
                 source={{
-                    uri: `http://leonidperl.in:80/${item.mask_path}`
+                    uri: getUri(item.mask_path)
                 }}
             />
         </View>

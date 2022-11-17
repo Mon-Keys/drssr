@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import DataService, { IGetLookData, ILookData } from '../network/';
+import Api, { IGetLookData, ILookData } from '../network/';
 
 interface LookState {
     LooksData: Array<IGetLookData>;
@@ -18,7 +18,7 @@ export const fetchUsersLooks = createAsyncThunk<Array<ILookData>>(
     'Looks/fetchUsersLooks',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await DataService.getUsersLooksByCookie(10, 0);
+            const response = await Api.Common.getLooks(10, 0);
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
