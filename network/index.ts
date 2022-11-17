@@ -73,6 +73,7 @@ export interface ILookData {
 }
 
 export interface IGetLookData extends ILookData {
+    img_path: string;
     id: number;
     clothes: Array<IClothesLookData>;
 }

@@ -17,6 +17,8 @@ interface ItemEditorProps {
 }
 
 export const Item = (props: ItemEditorProps) => {
+    console.log(props)
+
     return (
         <TouchableOpacity
             style={[styles.wardrobeImageBackground]}

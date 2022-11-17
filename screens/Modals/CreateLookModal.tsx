@@ -175,11 +175,11 @@ export default function CreateLookModal({
                             data={clothes}
                             renderItem={({ item }) => (
                                 <Item
-                                    imgURI={`data:image/jpg;base64,${item.mask}`}
+                                    imgURI={`http://leonidperl.in/${item.mask_path}`}
                                     callbackfn={() => {
                                         setBoardItems([
                                             ...boardItems,
-                                            `data:image/jpg;base64,${item.mask}`
+                                            `http://leonidperl.in/${item.mask_path}`
                                         ]);
                                         closeModal();
                                     }}

@@ -30,6 +30,8 @@ export interface LookCardProps {
 }
 
 export const LookCard = (props: LookCardProps) => {
+    console.log(props)
+
     return (
         <TouchableOpacity
             style={[styles.wardrobeImageBackground]}

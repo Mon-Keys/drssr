@@ -24,6 +24,8 @@ interface LooksListProps extends FlatListProps<IGetLookData> {
 }
 
 export const LookList = (props: LooksListProps) => {
+    console.log(props)
+
     return (
         <View style={styles.container}>
             <FlatList
@@ -34,7 +36,7 @@ export const LookList = (props: LooksListProps) => {
                 contentContainerStyle={styles.container}
                 renderItem={(item) => (
                     <LookCard
-                        imgURI={`data:image /jpg;base64,${item.item.img}`}
+                        imgURI={`http://leonidperl.in${item.item.img_path}`}
                         callbackfn={() => {}}
                         name={item.item.description}
                     />

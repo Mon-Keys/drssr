@@ -28,8 +28,8 @@ const linking: LinkingOptions<RootStackParamList> = {
                     Wardrobe: {
                         screens: {
                             TabThreeScreen: 'wardrobe',
-                            ItemsByCategory: 'ItemsByCategory',
-                        },
+                            ItemsByCategory: 'ItemsByCategory'
+                        }
                     },
                     Profile: {
                         screens: {
