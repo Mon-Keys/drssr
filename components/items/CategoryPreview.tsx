@@ -1,5 +1,11 @@
 import { View } from '../base/Themed';
-import {GestureResponderEvent, Image, Pressable, StyleSheet, Text} from 'react-native';
+import {
+    GestureResponderEvent,
+    Image,
+    Pressable,
+    StyleSheet,
+    Text
+} from 'react-native';
 import React from 'react';
 import { ClothingCategory } from '../../reducers/clothesReducer';
 import { Layout } from '../../styles';
@@ -32,7 +38,7 @@ const styles = StyleSheet.create({
 
 const ClothingCategoryPreview = ({
     category,
-    onPress,
+    onPress
 }: {
     category: ClothingCategory;
     onPress?: null | ((event: GestureResponderEvent) => void) | undefined;

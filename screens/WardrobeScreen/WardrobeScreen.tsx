@@ -8,7 +8,7 @@ import {
     StatusBar,
     View
 } from 'react-native';
-import { RootNavigation, RootTabScreenProps} from '../../types';
+import { RootNavigation } from '../../types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import {
     BottomSheetModal,
@@ -24,8 +24,7 @@ import IconButton from '../../components/base/IconButton';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
-import {useNavigation} from "@react-navigation/native";
-
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     container: {
@@ -110,27 +109,33 @@ export default function WardrobeScreen() {
         <BottomSheetModalProvider>
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <IconButton style={styles.buttonPlus} icon={(
-                        <AntDesign
-                            name='search1'
-                            size={24}
-                            color={Colors.base.black}
-                        />
-                    )} />
+                    <IconButton
+                        style={styles.buttonPlus}
+                        icon={
+                            <AntDesign
+                                name="search1"
+                                size={24}
+                                color={Colors.base.black}
+                            />
+                        }
+                    />
                     <Cheaps
                         cheaps={menuItems}
                         currentScreen={(component) => {
                             setCurrentScreen(component);
                         }}
                     />
-                    <IconButton style={styles.buttonPlus} icon={(
-                        <AntDesign
-                            name='plus'
-                            onPress={openModal}
-                            size={24}
-                            color={Colors.base.black}
-                        />
-                    )} />
+                    <IconButton
+                        style={styles.buttonPlus}
+                        icon={
+                            <AntDesign
+                                name="plus"
+                                onPress={openModal}
+                                size={24}
+                                color={Colors.base.black}
+                            />
+                        }
+                    />
                 </View>
                 <View style={styles.mainContainer}>{currentScreen}</View>
             </SafeAreaView>

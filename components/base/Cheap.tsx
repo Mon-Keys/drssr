@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Pressable, View, Text } from 'react-native';
 import Colors from '../../styles/Colors';
-import {Layout} from "../../styles";
+import { Layout } from '../../styles';
 
 export interface CheapProps {
     name: string;

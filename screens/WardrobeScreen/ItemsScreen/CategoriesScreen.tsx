@@ -3,18 +3,21 @@ import { RefreshControl, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../../../components/base/Themed';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { fetchUsersClothes, getCategories } from '../../../reducers/clothesReducer';
+import {
+    fetchUsersClothes,
+    getCategories
+} from '../../../reducers/clothesReducer';
 import CategoryPreview from '../../../components/items/CategoryPreview';
 import { Colors, Layout } from '../../../styles';
-import { useAppDispatch } from "../../../hooks/useAppDispatch";
-import { RootNavigation } from "../../../types";
-import { useNavigation } from "@react-navigation/native";
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { RootNavigation } from '../../../types';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: Colors.base.lightgray
     },
     columnWrapper: {
         minWidth: 342, // TODO не бейте за костыль, не ебу как по другому
@@ -38,20 +41,28 @@ export default function CategoriesScreen() {
     return (
         <View style={styles.container}>
             <FlatList
-                refreshControl={<RefreshControl
-                    tintColor={Colors.base.black}
-                    refreshing={refreshing}
-                    onRefresh={refresh}
-                />}
+                refreshControl={
+                    <RefreshControl
+                        tintColor={Colors.base.black}
+                        refreshing={refreshing}
+                        onRefresh={refresh}
+                    />
+                }
                 horizontal={false}
                 showsVerticalScrollIndicator={false}
                 numColumns={3}
                 columnWrapperStyle={styles.columnWrapper}
                 data={categories}
-                renderItem={({ item }) => <CategoryPreview
-                    category={item}
-                    onPress={() => navigation.navigate('ItemsByCategory', { category: item.caption })}
-                />}
+                renderItem={({ item }) => (
+                    <CategoryPreview
+                        category={item}
+                        onPress={() =>
+                            navigation.navigate('ItemsByCategory', {
+                                category: item.caption
+                            })
+                        }
+                    />
+                )}
                 keyExtractor={(item, index) => index.toString()}
             />
         </View>

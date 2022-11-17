@@ -19,7 +19,7 @@ import {
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { IItemData } from '../../network';
 import Colors from '../../styles/Colors';
-import {fetchUsersClothes} from "../../reducers/clothesReducer";
+import { fetchUsersClothes } from '../../reducers/clothesReducer';
 
 const styles = StyleSheet.create({
     type: {

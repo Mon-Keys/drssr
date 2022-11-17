@@ -66,6 +66,7 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
                                 color={Colors.base.black}
                             />
                         }
+                        //@ts-ignore
                         title={'search'}
                         onPress={() => {
                             setMenuOpen(!menuOpen);

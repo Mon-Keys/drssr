@@ -17,7 +17,7 @@ interface ItemEditorProps {
 }
 
 export const Item = (props: ItemEditorProps) => {
-    console.log(props)
+    console.log(props);
 
     return (
         <TouchableOpacity

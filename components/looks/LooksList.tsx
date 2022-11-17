@@ -24,7 +24,7 @@ interface LooksListProps extends FlatListProps<IGetLookData> {
 }
 
 export const LookList = (props: LooksListProps) => {
-    console.log(props)
+    console.log(props);
 
     return (
         <View style={styles.container}>

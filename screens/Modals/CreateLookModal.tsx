@@ -141,6 +141,7 @@ export default function CreateLookModal({
                 </ViewShot>
                 <View style={styles.nextButton}>
                     <IconButton
+                        //@ts-ignore
                         title={'proceed'}
                         icon={
                             <AntDesign
