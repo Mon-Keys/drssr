@@ -17,7 +17,7 @@ import { selectUser } from '../reducers/userReducer';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
-    const isLoggedIn = useAppSelector(selectUser).isLoggedIn
+    const isLoggedIn = useAppSelector(selectUser).isLoggedIn;
     return (
         <Stack.Navigator>
             {isLoggedIn ? (
