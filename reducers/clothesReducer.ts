@@ -12,7 +12,9 @@ export interface Clothes {
     color: string;
     type: string;
     img: string;
+    img_path: string;
     mask: string;
+    mask_path: string;
 }
 
 interface ClothesState {
@@ -33,7 +35,7 @@ const initialState = {
 } as ClothesState;
 
 export const fetchUsersClothes = createAsyncThunk<Array<IClothesData>>(
-    'clothes/fetchUsersClothes',
+    'items/fetchUsersClothes',
     async (_, { rejectWithValue }) => {
         try {
             const response = await DataService.getUsersClothesByCookie();
@@ -69,20 +71,20 @@ export const clothesSlice = createSlice({
             .addCase(fetchUsersClothes.fulfilled, (state, action) => {
                 state.status = 'resolved';
                 console.log('resolved');
-                state.clothesData = action.payload as unknown as Array<Clothes>;
-                // console.log(action);
+                const clothes = action.payload as unknown as Array<Clothes>;
+                state.clothesData = clothes.reverse();
                 console.log('done');
             })
             .addCase(fetchUsersClothes.rejected, (state) => {
                 state.status = 'rejected';
                 console.log('rejected');
-                state.clothesData = [
-                    {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                    {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                    {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                    {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                    {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                ]
+                // state.clothesData = [
+                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
+                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
+                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
+                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
+                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
+                // ]
             });
     }
 });
@@ -101,7 +103,7 @@ export const getCategories = createSelector(selectUserItems, (items) => {
             categoriesAvailable.add(item.type);
             categories.push({
                 caption: item.type,
-                img: item.mask
+                img: item.mask_path
             });
         }
     });

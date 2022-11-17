@@ -6,17 +6,16 @@ import IconButton from "../../../components/base/IconButton";
 import {AntDesign} from "@expo/vector-icons";
 import {useAppSelector} from "../../../hooks/useAppSelector";
 import { selectUserItems } from "../../../reducers/clothesReducer";
-import ClothingPreview from "../../../components/clothes/ClothingPreview";
+import ItemPreview from "../../../components/items/ItemPreview";
 import {
     ClothingByCategoryScreenRouteProp,
-    ClothingCategoriesScreenNavigation,
+    RootNavigation,
 } from "../../../types";
 import {useNavigation, useRoute} from "@react-navigation/native";
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
-        flexDirection: 'column',
+        height: '100%',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
     headerContainer: {
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
         color: Colors.base.black
     },
     bodyContainer: {
+        flex: 1,
         width: Layout.window.width,
         alignItems: 'center'
     },
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function ClothingByCategoryScreen() {
-    const navigation = useNavigation<ClothingCategoriesScreenNavigation>();
+export default function ItemsByCategoryScreen() {
+    const navigation = useNavigation<RootNavigation>();
 
     const route = useRoute<ClothingByCategoryScreenRouteProp>();
     const { category } = route.params;
@@ -82,7 +82,10 @@ export default function ClothingByCategoryScreen() {
                     numColumns={2}
                     columnWrapperStyle={styles.columnWrapper}
                     data={clothingByCategory}
-                    renderItem={({ item }) => <ClothingPreview clothes={item} onPress={() => navigation.navigate('Thing', {index: clothing.indexOf(item)})} />}
+                    renderItem={({ item }) => <ItemPreview
+                        clothes={item}
+                        onPress={() => navigation.navigate('Item', {index: clothing.indexOf(item)})}
+                    />}
                 />
             </View>
         </SafeAreaView>

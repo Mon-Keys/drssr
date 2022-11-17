@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
         marginLeft: Layout.margins.default,
         marginTop: Layout.margins.default,
         fontSize: 12,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        zIndex: 10
     },
     preview: {
         flex: 1,
@@ -45,7 +46,7 @@ const ClothingCategoryPreview = ({
                 <Image
                     style={styles.preview}
                     source={{
-                        uri: `data:image/jpg;base64,${category.img}`
+                        uri: `http://leonidperl.in:80/${category.img}`
                     }}
                 />
             </View>

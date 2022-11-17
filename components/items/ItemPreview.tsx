@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const ClothingPreview = ({
+const ItemPreview = ({
     clothes,
     onPress
 }: {
@@ -40,7 +40,7 @@ const ClothingPreview = ({
                     <Image
                         style={styles.preview}
                         source={{
-                            uri: `data:image/jpg;base64,${clothes.mask}`
+                            uri: `http://leonidperl.in:80/${clothes.mask_path}`
                         }}
                     />
                 </View>
@@ -52,4 +52,4 @@ const ClothingPreview = ({
     );
 };
 
-export default ClothingPreview;
+export default ItemPreview;

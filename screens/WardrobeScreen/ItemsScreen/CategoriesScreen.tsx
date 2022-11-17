@@ -4,10 +4,10 @@ import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../../../components/base/Themed';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { fetchUsersClothes, getCategories } from '../../../reducers/clothesReducer';
-import CategoryPreview from '../../../components/clothes/CategoryPreview';
+import CategoryPreview from '../../../components/items/CategoryPreview';
 import { Colors, Layout } from '../../../styles';
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
-import { ClothingCategoriesScreenNavigation } from "../../../types";
+import { RootNavigation } from "../../../types";
 import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function ClothingCategoriesScreen() {
-    const navigation = useNavigation<ClothingCategoriesScreenNavigation>();
+export default function CategoriesScreen() {
+    const navigation = useNavigation<RootNavigation>();
 
     const categories = useAppSelector(getCategories);
     const [refreshing] = React.useState(false);
@@ -50,7 +50,7 @@ export default function ClothingCategoriesScreen() {
                 data={categories}
                 renderItem={({ item }) => <CategoryPreview
                     category={item}
-                    onPress={() => navigation.navigate('ClothingByCategory', { category: item.caption })}
+                    onPress={() => navigation.navigate('ItemsByCategory', { category: item.caption })}
                 />}
                 keyExtractor={(item, index) => index.toString()}
             />
