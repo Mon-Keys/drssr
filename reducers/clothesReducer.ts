@@ -15,6 +15,7 @@ export interface Clothes {
     img_path: string;
     mask: string;
     mask_path: string;
+    description: string;
 }
 
 interface ClothesState {
