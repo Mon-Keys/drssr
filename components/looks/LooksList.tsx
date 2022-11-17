@@ -36,6 +36,7 @@ export const LookList = (props: LooksListProps) => {
                 contentContainerStyle={styles.container}
                 renderItem={(item) => (
                     <LookCard
+                        // @ts-ignore
                         imgURI={`http://leonidperl.in${item.item.img_path}`}
                         callbackfn={() => {}}
                         name={item.item.description}

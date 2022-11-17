@@ -15,6 +15,7 @@ const combinedReducer = combineReducers({
 });
 
 // https://codesandbox.io/s/reset-state-redux-toolkit-p515y?file=/src/store.ts
+// @ts-ignore
 const rootReducer = (state, action) => {
     if (action.type === 'user/logoutUser/pending') {
         state = undefined; // TODO хак для очистки всех сторов при логауте
@@ -28,4 +29,5 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 
+// @ts-ignore
 export type AppDispatch = typeof store.dispatch;
