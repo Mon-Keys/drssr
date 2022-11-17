@@ -11,9 +11,10 @@ import {
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { fetchUserData, selectUser } from '../../reducers/userReducer';
-import { RootTabScreenProps } from '../../types';
+import { RootNavigation } from '../../types';
 import Colors from '../../styles/Colors';
 import { ProfileCard } from '../../components/base/ProfileCard';
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
     container: {
@@ -36,23 +37,20 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function ProfileScreen({
-    navigation
-}: RootTabScreenProps<'Profile'>) {
+export default function ProfileScreen() {
     const [refreshing] = React.useState(false);
 
-    const { isLoggedIn, userData } = useAppSelector(selectUser);
+    const navigation = useNavigation<RootNavigation>();
+
+    const { userData } = useAppSelector(selectUser);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(fetchUserData()).then(() => {
-            if (!isLoggedIn) navigation.navigate('Login');
-        });
-    }, [dispatch, isLoggedIn, navigation]);
+        dispatch(fetchUserData());
+    }, [dispatch]);
 
     const refresh = () => {
-        console.log('refresh');
         dispatch(fetchUserData());
     };
 

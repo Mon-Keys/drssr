@@ -1,10 +1,6 @@
-import {
-    createSlice,
-    createAsyncThunk,
-    createSelector
-} from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import DataService, { IClothesData } from '../network/';
+import Api, { IClothesData } from '../network/';
 
 export interface Clothes {
     id: number;
@@ -15,6 +11,7 @@ export interface Clothes {
     img_path: string;
     mask: string;
     mask_path: string;
+    description: string;
 }
 
 interface ClothesState {
@@ -38,7 +35,7 @@ export const fetchUsersClothes = createAsyncThunk<Array<IClothesData>>(
     'items/fetchUsersClothes',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await DataService.getUsersClothesByCookie();
+            const response = await Api.Common.getClothes();
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
@@ -58,7 +55,7 @@ export const clothesSlice = createSlice({
     reducers: {
         loadData: (state) => {
             console.log('not done', state);
-        }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -76,20 +73,9 @@ export const clothesSlice = createSlice({
             .addCase(fetchUsersClothes.rejected, (state) => {
                 state.status = 'rejected';
                 console.log('rejected');
-                // state.clothesData = [
-                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                //     {id: 1, brand: 'h&m', color: 'red', type: 'Dress', img: img, mask: img},
-                // ]
             });
     }
 });
-
-export const { loadData } = clothesSlice.actions;
-
-export const selectClothes = (state: RootState) => state.clothes;
 
 export const selectUserItems = (state: RootState) => state.clothes.clothesData;
 

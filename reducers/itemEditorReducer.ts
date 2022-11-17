@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import * as ImagePicker from 'expo-image-picker';
-import DataService, { IItemData } from '../network';
+import Api, { IItemData } from '../network';
 
 export interface ItemResponse {
     id: number;
@@ -25,7 +25,7 @@ export const analyzeItem = createAsyncThunk<ItemResponse, IItemData>(
     async (data, { rejectWithValue }) => {
         try {
             console.log('sending signup11');
-            const response = await DataService.checkImage(data);
+            const response = await Api.Common.checkImage(data);
             // console.log(data)
             console.log('sent');
             // console.log(response)

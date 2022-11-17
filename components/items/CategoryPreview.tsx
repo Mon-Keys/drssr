@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import { ClothingCategory } from '../../reducers/clothesReducer';
 import { Layout } from '../../styles';
+import { getUri } from "../../network/const";
 
 const styles = StyleSheet.create({
     container: {
@@ -52,7 +53,7 @@ const ClothingCategoryPreview = ({
                 <Image
                     style={styles.preview}
                     source={{
-                        uri: `http://leonidperl.in:80/${category.img}`
+                        uri: getUri(category.img)
                     }}
                 />
             </View>

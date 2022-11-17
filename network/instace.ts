@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const baseURL = 'http://leonidperl.in:3001/api/v1';
+import { baseURL } from "./const";
 
 const axiosClient = axios.create({
     baseURL: baseURL,
@@ -9,7 +8,5 @@ const axiosClient = axios.create({
         'Content-type': 'application/json'
     }
 });
-
-axiosClient.defaults.withCredentials = true;
 
 export default axiosClient;

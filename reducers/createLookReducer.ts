@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import DataService, { ILookData } from '../network';
+import Api, { ILookData } from '../network';
 import { RootState } from '../store';
 
 interface CreateLookState {
@@ -27,7 +27,7 @@ export const newLook = createAsyncThunk<ILookData, ILookData>(
             console.log(lookData.description);
             console.log(lookData.clothes);
             console.log(lookData.filename);
-            const response = await DataService.createNewLook(lookData);
+            const response = await Api.Common.createNewLook(lookData);
             console.log(response);
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
