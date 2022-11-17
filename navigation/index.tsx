@@ -4,7 +4,7 @@ import { ColorSchemeName } from 'react-native';
 
 import LinkingConfiguration from './LinkingConfiguration';
 import { Theme } from '../styles';
-import {RootNavigator} from "./RootNavigator";
+import { RootNavigator } from "./RootNavigator";
 
 
 export default function Navigation({

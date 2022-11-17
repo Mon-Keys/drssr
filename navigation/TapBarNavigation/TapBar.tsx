@@ -1,13 +1,13 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { RootTabParamList, RootTabScreenProps } from "../types";
-import Colors from "../styles/Colors";
-import Home from "../screens/HomeScreen/HomeScreen";
+import { RootTabParamList, RootTabScreenProps } from "../../types";
+import Colors from "../../styles/Colors";
+import Home from "../../screens/HomeScreen/HomeScreen";
 import { AntDesign, FontAwesome, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Pressable, StyleSheet } from "react-native";
-import SearchScreen from "../screens/SearchScreen/DiscoverScreen";
-import ProfileScreen from "../screens/ProfileScreen/ProfileScreen";
+import SearchScreen from "../../screens/SearchScreen/DiscoverScreen";
 import * as React from "react";
-import {WardrobeNavigation} from "./WardrobeNavigation";
+import { Wardrobe } from "./Wardrobe";
+import { Profile } from "./Profile";
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -29,15 +29,15 @@ export function BottomTabNavigator() {
         <BottomTab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                tabBarActiveTintColor: Colors.base.black
+                tabBarActiveTintColor: Colors.base.black,
+                tabBarLabel: () => null,
+                headerShown: false
             }}
         >
             <BottomTab.Screen
                 name="Home"
                 component={Home}
                 options={({ navigation }: RootTabScreenProps<'Home'>) => ({
-                    title: 'Home',
-                    tabBarLabel: () => null,
                     tabBarIcon: ({ color }) => (
                         <AntDesign name="home" size={28} color={color} />
                     ),
@@ -56,26 +56,21 @@ export function BottomTabNavigator() {
                             />
                         </Pressable>
                     ),
-                    headerShown: false
                 })}
             />
             <BottomTab.Screen
                 name="Search"
                 component={SearchScreen}
                 options={{
-                    title: 'Search',
                     tabBarIcon: ({ color }) => (
                         <AntDesign name="hearto" size={28} color={color} />
                     ),
-                    headerShown: false,
-                    tabBarLabel: () => null
                 }}
             />
             <BottomTab.Screen
                 name="Wardrobe"
-                component={WardrobeNavigation}
+                component={Wardrobe}
                 options={{
-                    title: 'Wardrobe',
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
                             name="wardrobe"
@@ -83,20 +78,15 @@ export function BottomTabNavigator() {
                             color={color}
                         />
                     ),
-                    tabBarLabel: () => null,
-                    headerShown: false
                 }}
             />
             <BottomTab.Screen
                 name="Profile"
-                component={ProfileScreen}
+                component={Profile}
                 options={{
-                    title: 'Profile',
                     tabBarIcon: ({ color }) => (
                         <Ionicons name="person" size={28} color={color} />
                     ),
-                    tabBarLabel: () => null,
-                    headerShown: false
                 }}
             />
         </BottomTab.Navigator>

@@ -36,7 +36,6 @@ export default function LooksWardrobeScreen() {
     const flatListRef = React.useRef();
     React.useEffect(() => {
         dispatch(fetchUsersLooks());
-        console.log('dsdsdsdsdsdsdsadjsads');
     }, [dispatch]);
 
     // const toTop = () => {

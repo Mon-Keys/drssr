@@ -43,10 +43,7 @@ export default function TabTwoScreen({
     const [login, onChangeLogin] = React.useState<string>('');
 
     const [password, onChangePassword] = React.useState<string>('');
-    // const [date, setDate] = React.useState<Date>(new Date(343223543));
-    // const [open, setOpen] = React.useState<boolean>(false);
 
-    // const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
 
     const submitLogin = () => {
@@ -54,9 +51,7 @@ export default function TabTwoScreen({
             login: login,
             password: password
         };
-        dispatch(loginUser(loginData)).then(() => {
-            navigation.navigate('NotFound');
-        });
+        dispatch(loginUser(loginData))
     };
 
     return (
