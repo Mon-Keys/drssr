@@ -24,11 +24,7 @@ export const analyzeItem = createAsyncThunk<ItemResponse, IItemData>(
     'itemEditor/analyze',
     async (data, { rejectWithValue }) => {
         try {
-            console.log('sending signup11');
             const response = await Api.Common.checkImage(data);
-            // console.log(data)
-            console.log('sent');
-            // console.log(response)
 
             return response.data;
         } catch (error: any) {

@@ -158,15 +158,20 @@ export default function WardrobeScreen() {
                         title={'Добавить лук'}
                         onPress={() => {
                             navigation.navigate('CreateLook');
+                            closeModal();
                         }}
                     />
                     <StyledButton
                         title={'Камера'}
                         onPress={() => {
                             navigation.navigate('ImageRecognizer');
+                            closeModal();
                         }}
                     />
-                    <StyledButton title={'Из библиотеки'} onPress={pickImage} />
+                    <StyledButton title={'Из библиотеки'} onPress={() => {
+                        pickImage();
+                        closeModal();
+                    }} />
                 </View>
             </BottomSheetModal>
         </BottomSheetModalProvider>

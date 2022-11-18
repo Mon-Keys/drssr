@@ -20,6 +20,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { IItemData } from '../../network';
 import Colors from '../../styles/Colors';
 import { fetchUsersClothes } from '../../reducers/clothesReducer';
+import {getUri} from "../../network/const";
 
 const styles = StyleSheet.create({
     type: {
@@ -47,14 +48,11 @@ const styles = StyleSheet.create({
     indicator: { position: 'absolute' }
 });
 
-export default function AddItemModal(/*{
-    navigation
-}: RootStackScreenProps<'AddItem'>*/) {
+export default function AddItemModal() {
     const selectItem = useAppSelector(selectItemEditor);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        console.log('hello');
         if (selectItem.currentItem != null) {
             let photo: IItemData = {
                 file: selectItem.currentItem,
@@ -93,7 +91,7 @@ export default function AddItemModal(/*{
                 <Image
                     style={styles.image}
                     source={{
-                        uri: `data:image/jpg;base64,${selectItem.itemResp.mask}`
+                        uri: getUri(selectItem.itemResp.mask)
                     }}
                 />
             ) : null}

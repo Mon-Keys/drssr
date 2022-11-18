@@ -71,7 +71,7 @@ export const clothesSlice = createSlice({
                 state.status = 'resolved';
                 console.log('resolved');
                 const clothes = action.payload as unknown as Array<Clothes>;
-                state.clothesData = clothes.reverse();
+                state.clothesData = clothes ? clothes.reverse() : Array<Clothes>();
                 console.log('done');
             })
             .addCase(fetchUsersClothes.rejected, (state) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshControl, StyleSheet } from 'react-native';
+import {RefreshControl, StyleSheet, Text} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../../../components/base/Themed';
 import { useAppSelector } from '../../../hooks/useAppSelector';
@@ -12,6 +12,7 @@ import { Colors, Layout } from '../../../styles';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { RootNavigation } from '../../../types';
 import { useNavigation } from '@react-navigation/native';
+import EmptyView from "../../../components/base/EmptyScreen";
 
 const styles = StyleSheet.create({
     container: {
@@ -36,33 +37,41 @@ export default function CategoriesScreen() {
         dispatch(fetchUsersClothes());
     };
 
+    const isCategories = (): boolean => {
+        return categories && categories.length > 0;
+    };
+
     return (
         <View style={styles.container}>
-            <FlatList
-                horizontal={false}
-                showsVerticalScrollIndicator={false}
-                numColumns={3}
-                columnWrapperStyle={styles.columnWrapper}
-                data={categories}
-                renderItem={({ item }) => (
-                    <CategoryPreview
-                        category={item}
-                        onPress={() =>
-                            navigation.navigate('ItemsByCategory', {
-                                category: item.caption
-                            })
-                        }
-                    />
-                )}
-                keyExtractor={(item, index) => index.toString()}
-                refreshControl={
-                    <RefreshControl
-                        tintColor={Colors.base.black}
-                        refreshing={refreshing}
-                        onRefresh={refresh}
-                    />
-                }
-            />
+            {isCategories() ? (
+                <FlatList
+                    horizontal={false}
+                    showsVerticalScrollIndicator={false}
+                    numColumns={3}
+                    columnWrapperStyle={styles.columnWrapper}
+                    data={categories}
+                    renderItem={({ item }) => (
+                        <CategoryPreview
+                            category={item}
+                            onPress={() =>
+                                navigation.navigate('ItemsByCategory', {
+                                    category: item.caption
+                                })
+                            }
+                        />
+                    )}
+                    keyExtractor={(item, index) => index.toString()}
+                    refreshControl={
+                        <RefreshControl
+                            tintColor={Colors.base.black}
+                            refreshing={refreshing}
+                            onRefresh={refresh}
+                        />
+                    }
+                />
+            ) : (
+                <EmptyView textHeader={'Здесь пока пусто'} text={'Добавьте вещи с помощью +'} />
+            )}
         </View>
     );
 }

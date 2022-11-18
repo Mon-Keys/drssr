@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
 import { Colors } from '../../../styles';
+import EmptyView from "../../../components/base/EmptyScreen";
 
 const styles = StyleSheet.create({
 });
@@ -29,19 +30,28 @@ export default function LooksWardrobeScreen() {
     //     // use current
     //     flatListRef.current.scrollToOffset({ animated: true, offset: 1000 })
     // }
+    const isLooks = (): boolean => {
+        return looks && looks.LooksData && looks.LooksData.length > 0;
+    };
 
     return (
-        <LookList
-            //@ts-ignore
-            ref={flatListRef}
-            looks={looks.LooksData}
-            refreshControl={
-                <RefreshControl
-                    tintColor={Colors.base.black}
-                    refreshing={refreshing}
-                    onRefresh={refresh}
+        <>
+            {isLooks() ? (
+                <LookList
+                    //@ts-ignore
+                    ref={flatListRef}
+                    looks={looks.LooksData}
+                    refreshControl={
+                        <RefreshControl
+                            tintColor={Colors.base.black}
+                            refreshing={refreshing}
+                            onRefresh={refresh}
+                        />
+                    }
                 />
-            }
-        />
+            ) : (
+                <EmptyView textHeader={'Здесь пока пусто'} text={'Создайте лук с помощью +'}/>
+            )}
+        </>
     );
 }
