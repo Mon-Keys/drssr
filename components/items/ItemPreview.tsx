@@ -8,7 +8,7 @@ import {
 import React from 'react';
 import { View } from '../base/Themed';
 import { Layout } from '../../styles';
-import { Clothes } from '../../reducers/clothesReducer';
+import { Clothes } from '../../reducers/items/clothesReducer';
 import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({

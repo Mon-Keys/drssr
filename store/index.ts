@@ -1,14 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { userSlice } from '../reducers/userReducer';
-import { itemEditorSlice } from '../reducers/itemEditorReducer';
-import { clothesSlice } from '../reducers/clothesReducer';
+import { clothesSlice } from '../reducers/items/clothesReducer';
 import { createLookSlice } from '../reducers/createLookReducer';
 import { looksSlice } from '../reducers/lookReducer';
 
 const combinedReducer = combineReducers({
     user: userSlice.reducer,
-    itemEditor: itemEditorSlice.reducer,
     clothes: clothesSlice.reducer,
     createLook: createLookSlice.reducer,
     looks: looksSlice.reducer

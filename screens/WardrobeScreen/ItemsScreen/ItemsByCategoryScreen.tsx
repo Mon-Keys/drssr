@@ -13,7 +13,7 @@ import { Colors, Layout } from '../../../styles';
 import IconButton from '../../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import {fetchUsersClothes, selectUserItems} from '../../../reducers/clothesReducer';
+import { selectUserItems } from '../../../reducers/items/clothesReducer';
 import ItemPreview from '../../../components/items/ItemPreview';
 import {
     ClothingByCategoryScreenRouteProp,
@@ -21,6 +21,7 @@ import {
 } from '../../../types';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {useAppDispatch} from "../../../hooks/useAppDispatch";
+import {fetchUsersClothes} from "../../../reducers/items/fetchClothes";
 
 const styles = StyleSheet.create({
     container: {

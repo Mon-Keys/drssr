@@ -16,8 +16,6 @@ import {
 } from '@gorhom/bottom-sheet';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors, Layout } from '../../styles';
-import { choosePhoto } from '../../reducers/itemEditorReducer';
-import { fetchUsersClothes } from '../../reducers/clothesReducer';
 import CategoriesScreen from './ItemsScreen/CategoriesScreen';
 import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
@@ -25,6 +23,8 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
 import { useNavigation } from '@react-navigation/native';
+import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
+import {choosePhoto} from "../../reducers/items/clothesReducer";
 
 const styles = StyleSheet.create({
     container: {

@@ -3,18 +3,31 @@ import * as ImagePicker from "expo-image-picker";
 
 
 export interface IItemData {
-    file: ImagePicker.ImagePickerResult;
-    sex: string;
-    brand: string;
+    id?: number;
+    file?: ImagePicker.ImagePickerResult;
+    sex?: string;
+    brand?: string;
+    color?: string;
+    currency?: string;
+    link?: string;
+    type?: string;
+    price?: number;
+    description?: string;
 }
 
 export interface IClothesData {
     id: number;
     brand: string;
     color: string;
+    currency: string;
+    link: string;
     type: string;
-    img: string;
-    mask: string;
+    img_path: string;
+    mask_path: string;
+    owner_id: number;
+    price: number;
+    sex: string;
+    description: string;
 }
 
 export interface IClothesLookData {
@@ -51,8 +64,6 @@ export default class Common {
     checkImage(data: IItemData) {
         let bodyFormData = new FormData();
 
-        bodyFormData.append('sex', 'male');
-        bodyFormData.append('brand', 'prada');
         bodyFormData.append('file', {
             //@ts-ignore
             uri: data.file.uri,
@@ -65,24 +76,21 @@ export default class Common {
         });
     }
 
+    updateClothes(data: IItemData) {
+        return http.put(`/private/clothes?id=${data.id}`, data);
+    }
+
     getClothes() {
-        return http.get<Array<IClothesData>>('/private/clothes', {
-            withCredentials: true
-        });
+        return http.get<Array<IClothesData>>('/private/clothes');
     }
 
     createNewLook(data: ILookData) {
-        return http.post<ILookData>('/private/looks', data, {
-            withCredentials: true
-        });
+        return http.post<ILookData>('/private/looks', data);
     }
 
     getLooks(limit: number, offset: number) {
         return http.get<Array<IGetLookData>>(
-            `/private/looks/all?limit=${limit}&offset=${offset}`,
-            {
-                withCredentials: true
-            }
+            `/private/looks/all?limit=${limit}&offset=${offset}`
         );
     }
 }

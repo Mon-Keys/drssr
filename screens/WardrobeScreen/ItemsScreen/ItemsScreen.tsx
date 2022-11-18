@@ -3,7 +3,7 @@ import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
 
 import { Layout } from '../../../styles';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { selectUserItems } from '../../../reducers/clothesReducer';
+import { selectUserItems } from '../../../reducers/items/clothesReducer';
 import ItemPreview from '../../../components/items/ItemPreview';
 
 const styles = StyleSheet.create({

@@ -3,16 +3,14 @@ import { RefreshControl, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../../../components/base/Themed';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import {
-    fetchUsersClothes,
-    getCategories
-} from '../../../reducers/clothesReducer';
 import CategoryPreview from '../../../components/items/CategoryPreview';
 import { Colors, Layout } from '../../../styles';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { RootNavigation } from '../../../types';
 import { useNavigation } from '@react-navigation/native';
 import EmptyView from "../../../components/base/EmptyView";
+import {getCategories} from "../../../reducers/items/categories";
+import {fetchUsersClothes} from "../../../reducers/items/fetchClothes";
 
 const styles = StyleSheet.create({
     container: {

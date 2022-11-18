@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 
 import { Colors, Layout } from '../../styles';
-import { Clothes } from '../../reducers/clothesReducer';
+import { Clothes } from '../../reducers/items/clothesReducer';
 import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({

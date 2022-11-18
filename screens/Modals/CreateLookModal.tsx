@@ -19,7 +19,7 @@ import {
 import { EditableImage } from '../../components/editor/EditableImage';
 import { Item } from '../../components/editor/Item';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { Clothes, selectUserItems } from '../../reducers/clothesReducer';
+import { Clothes, selectUserItems } from '../../reducers/items/clothesReducer';
 import ViewShot from 'react-native-view-shot';
 import IconButton from '../../components/base/IconButton';
 import { RootStackScreenProps } from '../../types';
