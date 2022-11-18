@@ -1,4 +1,8 @@
-import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
+import {
+    createSlice,
+    createAsyncThunk,
+    createSelector
+} from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import Api, { IClothesData } from '../network/';
 
@@ -55,7 +59,7 @@ export const clothesSlice = createSlice({
     reducers: {
         loadData: (state) => {
             console.log('not done', state);
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
