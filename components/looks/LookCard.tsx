@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         marginHorizontal: Layout.margins.small
     },
     previewContainer: {
-        height: 270,
+        height: 260,
         width: 160,
         borderRadius: Layout.cornerRadius
     },

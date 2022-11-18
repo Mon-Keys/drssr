@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
 
     selectContainer: {
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: Colors.base.white,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
@@ -143,7 +143,7 @@ export default function WardrobeScreen() {
                 ref={bottomSheetModalRef}
                 index={0}
                 snapPoints={snapPoints}
-                backgroundStyle={{ backgroundColor: Colors.base.lightgray }}
+                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.31)' }}
                 handleIndicatorStyle={{ backgroundColor: Colors.base.black }}
             >
                 <View style={styles.selectContainer}>

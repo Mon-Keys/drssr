@@ -6,20 +6,21 @@ import {
     View,
     FlatList,
     Platform,
-    StatusBar
+    StatusBar, RefreshControl
 } from 'react-native';
 
 import { Colors, Layout } from '../../../styles';
 import IconButton from '../../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { selectUserItems } from '../../../reducers/clothesReducer';
+import {fetchUsersClothes, selectUserItems} from '../../../reducers/clothesReducer';
 import ItemPreview from '../../../components/items/ItemPreview';
 import {
     ClothingByCategoryScreenRouteProp,
     RootNavigation
 } from '../../../types';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import {useAppDispatch} from "../../../hooks/useAppDispatch";
 
 const styles = StyleSheet.create({
     container: {
@@ -67,6 +68,12 @@ export default function ItemsByCategoryScreen() {
         (item) => item.type === category
     );
 
+    const [refreshing] = React.useState(false);
+    const dispatch = useAppDispatch();
+    const refresh = () => {
+        dispatch(fetchUsersClothes());
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
@@ -111,6 +118,13 @@ export default function ItemsByCategoryScreen() {
                             }
                         />
                     )}
+                    refreshControl={
+                        <RefreshControl
+                            tintColor={Colors.base.black}
+                            refreshing={refreshing}
+                            onRefresh={refresh}
+                        />
+                    }
                 />
             </View>
         </SafeAreaView>

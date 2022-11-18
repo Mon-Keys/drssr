@@ -29,10 +29,9 @@ export default function CategoriesScreen() {
     const navigation = useNavigation<RootNavigation>();
 
     const categories = useAppSelector(getCategories);
+
     const [refreshing] = React.useState(false);
-
     const dispatch = useAppDispatch();
-
     const refresh = () => {
         dispatch(fetchUsersClothes());
     };
@@ -40,13 +39,6 @@ export default function CategoriesScreen() {
     return (
         <View style={styles.container}>
             <FlatList
-                refreshControl={
-                    <RefreshControl
-                        tintColor={Colors.base.black}
-                        refreshing={refreshing}
-                        onRefresh={refresh}
-                    />
-                }
                 horizontal={false}
                 showsVerticalScrollIndicator={false}
                 numColumns={3}
@@ -63,6 +55,13 @@ export default function CategoriesScreen() {
                     />
                 )}
                 keyExtractor={(item, index) => index.toString()}
+                refreshControl={
+                    <RefreshControl
+                        tintColor={Colors.base.black}
+                        refreshing={refreshing}
+                        onRefresh={refresh}
+                    />
+                }
             />
         </View>
     );
