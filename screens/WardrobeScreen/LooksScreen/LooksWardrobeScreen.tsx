@@ -1,16 +1,12 @@
 import React from 'react';
-import { Platform, RefreshControl, StatusBar, StyleSheet } from 'react-native';
+import { RefreshControl } from 'react-native';
 
-import { View } from '../../../components/base/Themed';
 import { LookList } from '../../../components/looks/LooksList';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
 import { Colors } from '../../../styles';
-import EmptyView from "../../../components/base/EmptyScreen";
-
-const styles = StyleSheet.create({
-});
+import EmptyView from "../../../components/base/EmptyView";
 
 export default function LooksWardrobeScreen() {
     const looks = useAppSelector(selectLook);

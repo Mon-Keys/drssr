@@ -1,5 +1,5 @@
 import React from 'react';
-import {RefreshControl, StyleSheet, Text} from 'react-native';
+import { RefreshControl, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from '../../../components/base/Themed';
 import { useAppSelector } from '../../../hooks/useAppSelector';
@@ -12,7 +12,7 @@ import { Colors, Layout } from '../../../styles';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { RootNavigation } from '../../../types';
 import { useNavigation } from '@react-navigation/native';
-import EmptyView from "../../../components/base/EmptyScreen";
+import EmptyView from "../../../components/base/EmptyView";
 
 const styles = StyleSheet.create({
     container: {
