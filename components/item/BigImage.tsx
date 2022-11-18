@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
 });
 
 export default function BigImage(props: BigImage) {
-    console.log('BigImage ' + props.img);
     return (
         <View style={props.style}>
             <View style={styles.imageContainer}>

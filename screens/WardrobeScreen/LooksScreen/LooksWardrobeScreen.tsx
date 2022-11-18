@@ -34,8 +34,6 @@ export default function LooksWardrobeScreen() {
         <>
             {isLooks() ? (
                 <LookList
-                    //@ts-ignore
-                    ref={flatListRef}
                     looks={looks.LooksData}
                     refreshControl={
                         <RefreshControl

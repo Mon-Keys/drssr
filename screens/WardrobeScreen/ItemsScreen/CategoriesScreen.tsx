@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import EmptyView from "../../../components/base/EmptyView";
 import {getCategories} from "../../../reducers/items/categories";
 import {fetchUsersClothes} from "../../../reducers/items/fetchClothes";
+import {fetchUsersLooks} from "../../../reducers/lookReducer";
 
 const styles = StyleSheet.create({
     container: {
@@ -34,6 +35,10 @@ export default function CategoriesScreen() {
     const refresh = () => {
         dispatch(fetchUsersClothes());
     };
+
+    React.useEffect(() => {
+        dispatch(fetchUsersClothes());
+    }, [dispatch]);
 
     const isCategories = (): boolean => {
         return categories && categories.length > 0;

@@ -82,13 +82,12 @@ export default function WardrobeScreen() {
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             quality: 1
         });
-        dispatch(choosePhoto(result));
-        navigation.navigate('AddItem');
+        if (!result.cancelled) {
+            dispatch(choosePhoto(result));
+            navigation.navigate('AddItem');
+            closeModal();
+        }
     };
-
-    useEffect(() => {
-        dispatch(fetchUsersClothes());
-    }, [dispatch]);
 
     const menuItems = [
         {
@@ -168,10 +167,7 @@ export default function WardrobeScreen() {
                             closeModal();
                         }}
                     />
-                    <StyledButton title={'Из библиотеки'} onPress={() => {
-                        pickImage();
-                        closeModal();
-                    }} />
+                    <StyledButton title={'Из библиотеки'} onPress={pickImage} />
                 </View>
             </BottomSheetModal>
         </BottomSheetModalProvider>

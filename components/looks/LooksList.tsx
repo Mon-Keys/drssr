@@ -1,9 +1,10 @@
-import { StyleSheet, FlatList, View, FlatListProps } from 'react-native';
+import {StyleSheet, FlatList, View, FlatListProps, RefreshControlProps} from 'react-native';
 import React from 'react';
 import Colors from '../../styles/Colors';
 import { LookCard } from './LookCard';
 import { IGetLookData } from '../../network';
 import {Layout} from "../../styles";
+import {getUri} from "../../network/const";
 
 const styles = StyleSheet.create({
     container: {
@@ -19,16 +20,15 @@ const styles = StyleSheet.create({
     }
 });
 
-interface LooksListProps extends FlatListProps<IGetLookData> {
-    navigation?: any;
+interface LooksListProps {
     looks: Array<IGetLookData>;
+    refreshControl?: React.ReactElement<RefreshControlProps>;
 }
 
 export const LookList = (props: LooksListProps) => {
     return (
         <View style={styles.container}>
             <FlatList
-                {...props}
                 data={props.looks}
                 numColumns={2}
                 keyExtractor={(item) => `${item.description}`}
@@ -37,12 +37,12 @@ export const LookList = (props: LooksListProps) => {
                 showsVerticalScrollIndicator={false}
                 renderItem={(item) => (
                     <LookCard
-                        // @ts-ignore
-                        imgURI={`http://leonidperl.in${item.item.img_path}`}
+                        imgURI={getUri(item.item.img)}
                         callbackfn={() => {}}
                         name={item.item.description}
                     />
                 )}
+                refreshControl={props.refreshControl}
             />
         </View>
     );

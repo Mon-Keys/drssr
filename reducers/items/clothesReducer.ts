@@ -109,5 +109,6 @@ export const { loadData, choosePhoto } = clothesSlice.actions
 export const selectUserItems = (state: RootState) => state.clothes.clothesData;
 
 export const selectPrepareClothes = (state: RootState) => state.clothes.prepareClothes;
+export const selectPrepareClothesResp = (state: RootState) => state.clothes.prepareClothes.itemResp;
 
 export default clothesSlice.reducer;

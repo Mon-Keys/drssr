@@ -10,7 +10,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { IItemData } from '../../network';
 import Colors from '../../styles/Colors';
-import {selectPrepareClothes, selectUserItems} from "../../reducers/items/clothesReducer";
+import {selectPrepareClothes, selectPrepareClothesResp, selectUserItems} from "../../reducers/items/clothesReducer";
 import {addClothes, prepareClothes} from "../../reducers/items/addItem";
 import BigImage from "../../components/item/BigImage";
 import {Layout} from "../../styles";
@@ -45,9 +45,6 @@ export default function AddItemModal() {
     const prepareItem = useAppSelector(selectPrepareClothes);
     const dispatch = useAppDispatch();
 
-    // if (!prepareItem.itemResp) {
-    //     return
-    // }
     const fields: Array<{title: string; value: string;}> = [
         // @ts-ignore
         {title: 'Тип вещи', value: ''},
@@ -107,14 +104,12 @@ export default function AddItemModal() {
         navigation.navigate('Item', { index: 0 })
     }
 
+    const img = prepareItem.itemResp ? prepareItem.itemResp.mask_path : '';
 
-    const clothing = useAppSelector(selectUserItems);
-    console.log(clothing[0].mask_path);
-
-    const item = clothing[0]
+    const item = useAppSelector(selectPrepareClothesResp);
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-            <BigImage img={item.mask_path} style={styles.imageContainer}/>
+            <BigImage img={img} style={styles.imageContainer}/>
 
             <InputContainer inputFields={fieldsData} style={styles.bodyContainer}/>
 
