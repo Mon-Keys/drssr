@@ -16,5 +16,12 @@ export default {
         small: Abstracts.base.point,
         micro: Math.round(Abstracts.base.point / 2)
     },
-    cornerRadius: Abstracts.base.point * 2
+    cornerRadius: Abstracts.base.point * 2,
+    fontSize: {
+        header: 24,
+        big: 18,
+        default: 14,
+        small: 12,
+        micro: 8,
+    }
 };

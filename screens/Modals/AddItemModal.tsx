@@ -2,63 +2,80 @@ import React, { useEffect } from 'react';
 
 import {
     StyleSheet,
-    Image,
     ActivityIndicator,
-    Platform,
-    StatusBar
+    ScrollView
 } from 'react-native';
-
-import { Text, View } from '../../components/base/Themed';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { IItemData } from '../../network';
 import Colors from '../../styles/Colors';
-import {getUri} from "../../network/const";
-import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
-import {selectPrepareClothes} from "../../reducers/items/clothesReducer";
+import {selectPrepareClothes, selectUserItems} from "../../reducers/items/clothesReducer";
 import {addClothes, prepareClothes} from "../../reducers/items/addItem";
-import StyledButton from "../../components/base/StyledButton";
-import * as ImagePicker from "expo-image-picker";
+import BigImage from "../../components/item/BigImage";
+import {Layout} from "../../styles";
+import InputContainer, {InputFieldData} from "../../components/item/InputContainer";
+import BaseButton from "../../components/base/BaseButton";
+import {useNavigation} from "@react-navigation/native";
+import {RootNavigation} from "../../types";
 
 const styles = StyleSheet.create({
-    type: {
-        top: 20,
-        color: Colors.base.white,
-        fontSize: 18,
-        fontFamily: 'proxima-nova'
-    },
     container: {
-        flex: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'transparent',
     },
-    backgroundImage: {
-        height: 400,
-        width: 400,
-        resizeMode: 'contain',
-        opacity: 0.1,
-        position: 'absolute'
+    imageContainer: {
+        margin: Layout.margins.default
     },
-    image: { width: 400, height: 400, resizeMode: 'contain' },
-    indicator: { position: 'absolute' }
+    bodyContainer: {
+        marginHorizontal: Layout.margins.default,
+    },
+    submitContainer: {
+        margin: Layout.margins.default,
+    },
+    indicator: {
+        marginVertical: Layout.margins.default,
+    }
 });
 
 export default function AddItemModal() {
-    const selectItem = useAppSelector(selectPrepareClothes);
+    const navigation = useNavigation<RootNavigation>();
+
+    const prepareItem = useAppSelector(selectPrepareClothes);
     const dispatch = useAppDispatch();
 
+    // if (!prepareItem.itemResp) {
+    //     return
+    // }
+    const fields: Array<{title: string; value: string;}> = [
+        // @ts-ignore
+        {title: 'Тип вещи', value: ''},
+        {title: 'Название', value: ''},
+        {title: 'Ссылка', value: ''},
+        {title: 'Бренд', value: ''},
+        {title: 'Цена', value: ''},
+        {title: 'Цвет', value: ''},
+    ]
+    const fieldsData: Array<InputFieldData> = [];
+    fields.forEach((item) => {
+        const [text, onChangeText] = React.useState(item.value);
+        const field: InputFieldData = {
+            title: item.title,
+            value: text,
+            onChange: onChangeText
+        }
+        fieldsData.push(field);
+    })
+
     useEffect(() => {
-        if (selectItem.currentItem != null) {
+        if (prepareItem.currentItem != null) {
             let photo: IItemData = {
-                file: selectItem.currentItem,
+                file: prepareItem.currentItem,
             };
             dispatch(prepareClothes(photo));
         }
-    }, [dispatch, selectItem.currentItem]);
+    }, [dispatch, prepareItem.currentItem]);
 
     // const analyze = (event: GestureResponderEvent) => {
     //     console.log('event');
@@ -73,43 +90,39 @@ export default function AddItemModal() {
     // };
 
     const add = () => {
-        const item = selectItem.itemResp;
+        const item = prepareItem.itemResp;
         if (item == null) {
             return
         }
         dispatch(addClothes({
             id: item.id,
-            // sex: 'male',
-            brand: 'h&m',
-            // color: 'red',
-            // currency: 'RUB',
-            // link: 'https://unsplash.com/s/photos/photo',
-            // price: 1599,
+            link: fieldsData[2].value,
+            brand: fieldsData[3].value,
+            price: Number(fieldsData[4].value),
+            color: fieldsData[5].value,
+            sex: 'unisex', // TODO required
+            currency: 'RUB', // TODO required
             // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
         }))
+        navigation.navigate('Item', { index: 0 })
     }
 
+
+    const clothing = useAppSelector(selectUserItems);
+    console.log(clothing[0].mask_path);
+
+    const item = clothing[0]
     return (
-        <View style={styles.container}>
-            {/* <StyledButton title={'analyze'} onPress={analyze} /> */}
-            {selectItem.itemResp ? (
-                <Image
-                    style={styles.image}
-                    source={{
-                        uri: getUri(selectItem.itemResp.mask_path)
-                    }}
-                />
-            ) : null}
-            {selectItem.itemResp ? (
-                <Text style={styles.type}>
-                    {' '}
-                    {/*Classified as {selectItem.itemResp.type}{' '}*/}
-                </Text>
-            ) : null}
-            {selectItem.status === 'pending' ? (
-                <ActivityIndicator size="large" style={styles.indicator} />
-            ) : null}
-            <StyledButton title={'Добавить'} onPress={add} />
-        </View>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+            <BigImage img={item.mask_path} style={styles.imageContainer}/>
+
+            <InputContainer inputFields={fieldsData} style={styles.bodyContainer}/>
+
+            {prepareItem.status === 'pending' ? (
+                <ActivityIndicator size="large" color={Colors.base.black} style={styles.indicator} />
+            ) : (
+                <BaseButton title={'Добавить'} onPress={add} style={styles.submitContainer} />
+            )}
+        </ScrollView>
     );
 }

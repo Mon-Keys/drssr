@@ -38,7 +38,9 @@ export function RootNavigator() {
                 options={{ title: 'Oops!' }}
             />
             <Stack.Group screenOptions={{ presentation: 'card' }}>
-                <Stack.Screen name="AddItem" component={AddItemModal} />
+                <Stack.Screen name="AddItem" component={AddItemModal} options={{
+                    title: 'Добавить вещь',
+                }} />
                 <Stack.Screen name="Edit" component={EditModal} />
                 <Stack.Screen name="Post" component={PostModalScreen} />
                 <Stack.Screen
