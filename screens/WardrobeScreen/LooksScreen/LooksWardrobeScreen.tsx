@@ -9,19 +9,6 @@ import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
 import { Colors } from '../../../styles';
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-        backgroundColor: 'transparent',
-        marginTop: 20
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: Colors.base.black
-    }
 });
 
 export default function LooksWardrobeScreen() {
@@ -44,19 +31,17 @@ export default function LooksWardrobeScreen() {
     // }
 
     return (
-        <View style={styles.container}>
-            <LookList
-                //@ts-ignore
-                ref={flatListRef}
-                looks={looks.LooksData}
-                refreshControl={
-                    <RefreshControl
-                        tintColor={Colors.base.black}
-                        refreshing={refreshing}
-                        onRefresh={refresh}
-                    />
-                }
-            />
-        </View>
+        <LookList
+            //@ts-ignore
+            ref={flatListRef}
+            looks={looks.LooksData}
+            refreshControl={
+                <RefreshControl
+                    tintColor={Colors.base.black}
+                    refreshing={refreshing}
+                    onRefresh={refresh}
+                />
+            }
+        />
     );
 }

@@ -6,16 +6,16 @@ import SettingsModalScreen from "../../screens/Modals/SettingsModal";
 
 const Stack = createNativeStackNavigator();
 
-export function Profile(): any {
+export function ProfileNavigation(): any {
     return (
         <Stack.Navigator
-            initialRouteName="Profile"
+            initialRouteName="ProfilePreview"
             screenOptions={{
                 headerShown: false,
             }}
         >
             <Stack.Screen
-                name="Profile"
+                name="ProfilePreview"
                 component={ProfileScreen}
             />
             <Stack.Screen

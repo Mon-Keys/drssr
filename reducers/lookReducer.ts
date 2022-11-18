@@ -37,7 +37,7 @@ export const looksSlice = createSlice({
     initialState,
     reducers: {
         loadData: (state) => {
-            console.log('not done', state);
+            // console.log('not done', state);
         }
     },
     extraReducers: (builder) => {

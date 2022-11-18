@@ -30,8 +30,6 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
             quality: 1
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
             setImage(result);
         }

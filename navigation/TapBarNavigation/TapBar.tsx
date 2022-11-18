@@ -11,8 +11,8 @@ import {
 import { Pressable, StyleSheet } from 'react-native';
 import SearchScreen from '../../screens/SearchScreen/DiscoverScreen';
 import * as React from 'react';
-import { Wardrobe } from "./Wardrobe";
-import { Profile } from "./Profile";
+import { WardrobeNavigation } from "./Wardrobe";
+import { ProfileNavigation } from "./Profile";
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -74,7 +74,7 @@ export function BottomTabNavigator() {
             />
             <BottomTab.Screen
                 name="Wardrobe"
-                component={Wardrobe}
+                component={WardrobeNavigation}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
@@ -87,7 +87,7 @@ export function BottomTabNavigator() {
             />
             <BottomTab.Screen
                 name="Profile"
-                component={Profile}
+                component={ProfileNavigation}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Ionicons name="person" size={28} color={color} />
