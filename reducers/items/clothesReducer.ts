@@ -57,6 +57,10 @@ export const clothesSlice = createSlice({
             action: PayloadAction<ImagePicker.ImagePickerResult>
         ) => {
             state.prepareClothes.currentItem = action.payload;
+        },
+        clearAddItem: (state) => {
+            state.prepareClothes.itemResp = null;
+            state.prepareClothes.currentItem = null;
         }
     },
     extraReducers: (builder) => {
@@ -104,7 +108,7 @@ export const clothesSlice = createSlice({
     }
 });
 
-export const { loadData, choosePhoto } = clothesSlice.actions
+export const { loadData, choosePhoto, clearAddItem } = clothesSlice.actions
 
 export const selectUserItems = (state: RootState) => state.clothes.clothesData;
 

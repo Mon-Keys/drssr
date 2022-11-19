@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
-import {
-    StyleSheet,
-    ActivityIndicator,
-    ScrollView
-} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet} from 'react-native';
 
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { IItemData } from '../../network';
+import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {IItemData} from '../../network';
 import Colors from '../../styles/Colors';
-import {selectPrepareClothes, selectPrepareClothesResp, selectUserItems} from "../../reducers/items/clothesReducer";
+import {clearAddItem, selectPrepareClothes} from "../../reducers/items/clothesReducer";
 import {addClothes, prepareClothes} from "../../reducers/items/addItem";
 import BigImage from "../../components/item/BigImage";
 import {Layout} from "../../styles";
@@ -39,31 +35,35 @@ const styles = StyleSheet.create({
     }
 });
 
+function updateValue(array: Array<InputFieldData>, key: string, value: string) {
+    const idx = array.findIndex((item) => item.key == key);
+    if (idx != -1) {
+        array[idx].value = value;
+    }
+}
+
+function getValue(array: Array<InputFieldData>, key: string) {
+    const data = array.find((item) => item.key == key);
+    if (data) {
+        return data.value;
+    }
+    return '';
+}
+
 export default function AddItemModal() {
     const navigation = useNavigation<RootNavigation>();
 
     const prepareItem = useAppSelector(selectPrepareClothes);
     const dispatch = useAppDispatch();
 
-    const fields: Array<{title: string; value: string;}> = [
-        // @ts-ignore
-        {title: 'Тип вещи', value: ''},
-        {title: 'Название', value: ''},
-        {title: 'Ссылка', value: ''},
-        {title: 'Бренд', value: ''},
-        {title: 'Цена', value: ''},
-        {title: 'Цвет', value: ''},
+    const fields: Array<InputFieldData> = [
+        {key: 'type', title: 'Тип вещи', placeholder: 'Например джинсы'},
+        {key: 'name', title: 'Название', placeholder: 'Дайте название вещи'},
+        // {key: 'link', title: 'Ссылка', placeholder: 'Ссылка на вещь в магазине'},
+        {key: 'brand', title: 'Бренд', placeholder: 'Укажите бренд'},
+        // {key: 'price', title: 'Цена', placeholder: 'Укажите цену вещи'},
+        // {key: 'color', title: 'Цвет', placeholder: 'Укажите цвет вещи'},
     ]
-    const fieldsData: Array<InputFieldData> = [];
-    fields.forEach((item) => {
-        const [text, onChangeText] = React.useState(item.value);
-        const field: InputFieldData = {
-            title: item.title,
-            value: text,
-            onChange: onChangeText
-        }
-        fieldsData.push(field);
-    })
 
     useEffect(() => {
         if (prepareItem.currentItem != null) {
@@ -74,18 +74,6 @@ export default function AddItemModal() {
         }
     }, [dispatch, prepareItem.currentItem]);
 
-    // const analyze = (event: GestureResponderEvent) => {
-    //     console.log('event');
-    //     if (selectItem.currentItem != null) {
-    //         let photo: IItemData = {
-    //             file: selectItem.currentItem,
-    //             sex: 'male',
-    //             brand: 'prada'
-    //         };
-    //         dispatch(analyzeItem(photo));
-    //     }
-    // };
-
     const add = () => {
         const item = prepareItem.itemResp;
         if (item == null) {
@@ -93,25 +81,30 @@ export default function AddItemModal() {
         }
         dispatch(addClothes({
             id: item.id,
-            link: fieldsData[2].value,
-            brand: fieldsData[3].value,
-            price: Number(fieldsData[4].value),
-            color: fieldsData[5].value,
-            sex: 'unisex', // TODO required
+            link: getValue(fields, 'link'),
+            brand: getValue(fields, 'brand'),
+            price: Number(getValue(fields, 'price')),
+            color: getValue(fields, 'color'),
+            sex: 'unisex', // TODO required.
             currency: 'RUB', // TODO required
             // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
         }))
-        navigation.navigate('Item', { index: 0 })
+        navigation.navigate('Item', { index: 0 });
+        dispatch(clearAddItem());
     }
 
-    const img = prepareItem.itemResp ? prepareItem.itemResp.mask_path : '';
+    let img = '';
 
-    const item = useAppSelector(selectPrepareClothesResp);
+    if (prepareItem.itemResp) {
+        updateValue(fields, 'type', prepareItem.itemResp.type); // TODO чет не работает
+        img = prepareItem.itemResp.mask_path;
+    }
+
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <BigImage img={img} style={styles.imageContainer}/>
 
-            <InputContainer inputFields={fieldsData} style={styles.bodyContainer}/>
+            <InputContainer inputFields={fields} style={styles.bodyContainer}/>
 
             {prepareItem.status === 'pending' ? (
                 <ActivityIndicator size="large" color={Colors.base.black} style={styles.indicator} />

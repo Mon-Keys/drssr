@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     input: {
-        color: Colors.base.darkgray,
+        color: Colors.base.black,
         fontSize: Layout.fontSize.default,
     }
 });
@@ -26,9 +26,8 @@ export default function InputForItem(props: InputFieldProps) {
         <View style={props.style}>
             <Text style={styles.title}>{props.title}</Text>
             <TextInput
+                {...props}
                 style={styles.input}
-                onChangeText={props.onChangeText}
-                value={props.value}
             />
         </View>
     );

@@ -6,9 +6,11 @@ import InputForItem from "./InputForItem";
 
 
 export interface InputFieldData {
+    key: string;
     title: string;
-    value: string;
-    onChange: React.Dispatch<React.SetStateAction<string>>;
+    value?: string | '';
+    onChange?: React.Dispatch<React.SetStateAction<string | undefined>>;
+    placeholder?: string | '';
 }
 
 export interface InputContainerPrpops {
@@ -28,6 +30,11 @@ const styles = StyleSheet.create({
 });
 
 export default function InputContainer(props: InputContainerPrpops) {
+    props.inputFields.forEach((item) => {
+        const [text, onChangeText] = React.useState(item.value);
+        item.value = text;
+        item.onChange = onChangeText;
+    })
     return (
         <View style={props.style}>
             <View style={styles.imageContainer}>
@@ -41,8 +48,11 @@ export default function InputContainer(props: InputContainerPrpops) {
                             title={item.title}
                             onChangeText={item.onChange}
                             value={item.value}
+                            placeholder={item.placeholder}
+                            placeholderTextColor={Colors.base.darkgray}
                         />
                     )}
+                    keyExtractor={(item) => item.key}
                 />
             </View>
         </View>
