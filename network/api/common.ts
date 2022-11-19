@@ -57,6 +57,7 @@ export interface ILookData {
 export interface IGetLookData extends ILookData {
     id: number;
     clothes: Array<IClothesLookData>;
+    img_path: string;
 }
 
 // TODO пока все запросы на вещи луки тут, но ваще по хорошему они должны быть в разных классах для стилиста и юзера

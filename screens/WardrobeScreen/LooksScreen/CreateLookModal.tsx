@@ -1,42 +1,46 @@
 import React from 'react';
 import {
     StyleSheet,
-    Platform,
-    StatusBar,
     Pressable,
     FlatList
 } from 'react-native';
 
-import { View } from '../../components/base/Themed';
+import { View } from '../../../components/base/Themed';
 
-import Colors from '../../styles/Colors';
+import Colors from '../../../styles/Colors';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import {
     BottomSheetModal,
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
-import { EditableImage } from '../../components/editor/EditableImage';
-import { Item } from '../../components/editor/Item';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { Clothes, selectUserItems } from '../../reducers/items/clothesReducer';
+import { EditableImage } from '../../../components/editor/EditableImage';
+import { Item } from '../../../components/editor/Item';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { Clothes, selectUserItems } from '../../../reducers/items/clothesReducer';
 import ViewShot from 'react-native-view-shot';
-import IconButton from '../../components/base/IconButton';
-import { RootStackScreenProps } from '../../types';
-import { addLookPhoto } from '../../reducers/createLookReducer';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { RootStackScreenProps } from '../../../types';
+import { addLookPhoto } from '../../../reducers/createLookReducer';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import BaseButton from "../../../components/base/BaseButton";
+import {InputFieldData} from "../../../components/item/InputContainer";
 
 const styles = StyleSheet.create({
     container: {
-        alignContent: 'center',
-        justifyContent: 'center',
-        backgroundColor: Colors.base.white,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'transparent',
+    },
+    addButton: {
+        position: 'absolute',
+        zIndex: 10,
+        top: 20,
+        right: 20,
     },
     lookArea: {
         backgroundColor: Colors.base.white,
         height: 700,
-        width: 400
+        width: 500
     },
     bottomSheet: {
         backgroundColor: Colors.base.white
@@ -62,16 +66,12 @@ const styles = StyleSheet.create({
         resizeMode: 'center'
     },
     nextButton: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 375 / 2,
-        left: 94,
-        top: -100,
-        height: 40,
-        backgroundColor: Colors.base.black,
-        borderRadius: 14
+        position: 'absolute',
+        bottom: 14,
+        left: '50%',
+        width: 120,
+        marginLeft: -60,
     },
-    addButton: { top: 20, left: 20, width: 60, height: 60 }
 });
 
 export interface ItemMock {
@@ -139,21 +139,11 @@ export default function CreateLookModal({
                         ))}
                     </View>
                 </ViewShot>
-                <View style={styles.nextButton}>
-                    <IconButton
-                        //@ts-ignore
-                        title={'proceed'}
-                        icon={
-                            <AntDesign
-                                name="arrowright"
-                                size={36}
-                                color={Colors.base.white}
-                            />
-                        }
-                        onPress={proceed}
-                        color={Colors.base.black}
-                    />
-                </View>
+                <BaseButton
+                    title={'Далее'}
+                    style={styles.nextButton}
+                    onPress={proceed}
+                />
                 <BottomSheetModal
                     ref={bottomSheetModalRef}
                     index={0}

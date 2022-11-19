@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ViewStyle, FlatList} from 'react-native';
+import {StyleSheet, View, ViewStyle, FlatList, ScrollView} from 'react-native';
 
 import { Colors, Layout } from '../../styles';
 import InputForItem from "./InputForItem";
@@ -13,6 +13,21 @@ export interface InputFieldData {
     placeholder?: string | '';
 }
 
+export function updateValue(array: Array<InputFieldData>, key: string, value: string) {
+    const idx = array.findIndex((item) => item.key == key);
+    if (idx != -1) {
+        array[idx].value = value;
+    }
+}
+
+export function getValue(array: Array<InputFieldData>, key: string) {
+    const data = array.find((item) => item.key == key);
+    if (data) {
+        return data.value;
+    }
+    return '';
+}
+
 export interface InputContainerPrpops {
     inputFields: Array<InputFieldData>;
     style?: ViewStyle;
@@ -20,6 +35,7 @@ export interface InputContainerPrpops {
 
 const styles = StyleSheet.create({
     imageContainer: {
+        flex: 1,
         backgroundColor: Colors.base.white,
         borderRadius: Layout.cornerRadius,
     },
@@ -38,22 +54,22 @@ export default function InputContainer(props: InputContainerPrpops) {
     return (
         <View style={props.style}>
             <View style={styles.imageContainer}>
-                <FlatList
-                    // scrollEnabled={false} TODO SectionList???
-                    nestedScrollEnabled={true}
-                    data={props.inputFields}
-                    renderItem={({item}) => (
-                        <InputForItem
-                            style={styles.inputField}
-                            title={item.title}
-                            onChangeText={item.onChange}
-                            value={item.value}
-                            placeholder={item.placeholder}
-                            placeholderTextColor={Colors.base.darkgray}
-                        />
-                    )}
-                    keyExtractor={(item) => item.key}
-                />
+                <ScrollView>
+                    <View>
+                        {props.inputFields.map((item) => {
+                            return (
+                                <InputForItem
+                                    style={styles.inputField}
+                                    title={item.title}
+                                    onChangeText={item.onChange}
+                                    value={item.value}
+                                    placeholder={item.placeholder}
+                                    placeholderTextColor={Colors.base.darkgray}
+                                />
+                            );
+                        })}
+                    </View>
+                </ScrollView>
             </View>
         </View>
     );

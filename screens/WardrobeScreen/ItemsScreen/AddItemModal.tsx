@@ -2,18 +2,18 @@ import React, {useEffect} from 'react';
 
 import {ActivityIndicator, ScrollView, StyleSheet} from 'react-native';
 
-import {useAppSelector} from '../../hooks/useAppSelector';
-import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {IItemData} from '../../network';
-import Colors from '../../styles/Colors';
-import {clearAddItem, selectPrepareClothes} from "../../reducers/items/clothesReducer";
-import {addClothes, prepareClothes} from "../../reducers/items/addItem";
-import BigImage from "../../components/item/BigImage";
-import {Layout} from "../../styles";
-import InputContainer, {InputFieldData} from "../../components/item/InputContainer";
-import BaseButton from "../../components/base/BaseButton";
+import {useAppSelector} from '../../../hooks/useAppSelector';
+import {useAppDispatch} from '../../../hooks/useAppDispatch';
+import {IItemData} from '../../../network';
+import Colors from '../../../styles/Colors';
+import {clearAddItem, selectPrepareClothes} from "../../../reducers/items/clothesReducer";
+import {addClothes, prepareClothes} from "../../../reducers/items/addItem";
+import BigImage from "../../../components/item/BigImage";
+import {Layout} from "../../../styles";
+import InputContainer, {getValue, InputFieldData, updateValue} from "../../../components/item/InputContainer";
+import BaseButton from "../../../components/base/BaseButton";
 import {useNavigation} from "@react-navigation/native";
-import {RootNavigation} from "../../types";
+import {RootNavigation} from "../../../types";
 
 const styles = StyleSheet.create({
     container: {
@@ -34,21 +34,6 @@ const styles = StyleSheet.create({
         marginVertical: Layout.margins.default,
     }
 });
-
-function updateValue(array: Array<InputFieldData>, key: string, value: string) {
-    const idx = array.findIndex((item) => item.key == key);
-    if (idx != -1) {
-        array[idx].value = value;
-    }
-}
-
-function getValue(array: Array<InputFieldData>, key: string) {
-    const data = array.find((item) => item.key == key);
-    if (data) {
-        return data.value;
-    }
-    return '';
-}
 
 export default function AddItemModal() {
     const navigation = useNavigation<RootNavigation>();
@@ -109,7 +94,7 @@ export default function AddItemModal() {
             {prepareItem.status === 'pending' ? (
                 <ActivityIndicator size="large" color={Colors.base.black} style={styles.indicator} />
             ) : (
-                <BaseButton title={'Добавить'} onPress={add} style={styles.submitContainer} />
+                <BaseButton title={'Сохранить'} onPress={add} style={styles.submitContainer} />
             )}
         </ScrollView>
     );

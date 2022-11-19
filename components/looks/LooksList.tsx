@@ -37,7 +37,7 @@ export const LookList = (props: LooksListProps) => {
                 showsVerticalScrollIndicator={false}
                 renderItem={(item) => (
                     <LookCard
-                        imgURI={getUri(item.item.img)}
+                        imgURI={getUri(item.item.img_path)}
                         callbackfn={() => {}}
                         name={item.item.description}
                     />

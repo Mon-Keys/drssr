@@ -7,49 +7,49 @@ import {
     StyleSheet,
     Image,
     KeyboardAvoidingView,
-    ActivityIndicator
+    ActivityIndicator, ScrollView
 } from 'react-native';
-import InputField from '../../components/base/InputField';
-import StyledButton from '../../components/base/StyledButton';
-import { View } from '../../components/base/Themed';
+import InputField from '../../../components/base/InputField';
+import StyledButton from '../../../components/base/StyledButton';
+import { View } from '../../../components/base/Themed';
 
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { newLook, selectCreateLook } from '../../reducers/createLookReducer';
-import { Colors } from '../../styles';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { newLook, selectCreateLook } from '../../../reducers/createLookReducer';
+import {Colors, Layout} from '../../../styles';
 import { useDispatch } from 'react-redux';
-import { ILookData } from '../../network';
-import { RootStackScreenProps } from '../../types';
-import { fetchUsersLooks, selectLook } from '../../reducers/lookReducer';
+import { ILookData } from '../../../network';
+import { RootStackScreenProps } from '../../../types';
+import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
+import InputContainer, {getValue, InputFieldData} from "../../../components/item/InputContainer";
+import BaseButton from "../../../components/base/BaseButton";
 // @ts-ignore
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
         alignItems: 'center',
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     lookContainer: {
         width: 354,
         height: 442,
+        marginVertical: Layout.margins.default,
         borderRadius: 14,
-        resizeMode: 'contain'
+        resizeMode: 'center'
     },
     lookContainerInactive: {
         width: 354,
         height: 442,
+        marginVertical: Layout.margins.default,
         opacity: 0.5,
         borderRadius: 14,
-        resizeMode: 'contain'
+        resizeMode: 'center'
     },
     infoContainer: {
-        marginTop: 14,
         width: 354,
-        height: 176,
-        borderRadius: 14,
-        resizeMode: 'contain',
-        backgroundColor: Colors.base.white,
-        alignItems: 'center',
-        justifyContent: 'space-around'
+        marginVertical: Layout.margins.default
+    },
+    buttonSave: {
+      marginBottom: Layout.margins.default,
     },
     indicator: {
         position: 'absolute',
@@ -66,14 +66,21 @@ export default function SaveLookModal({
     navigation
 }: RootStackScreenProps<'SaveLook'>) {
     const lookSelector = useAppSelector(selectCreateLook);
-    const [name, setName] = React.useState<string>('');
-    const [description, setDescription] = React.useState<string>('');
 
     const dispatch = useDispatch();
 
     const looks = useAppSelector(selectLook);
 
+
+    const fields: Array<InputFieldData> = [
+        {key: 'name', title: 'Название образа', placeholder: 'Придумайте название образа'},
+        {key: 'description', title: 'Описание', placeholder: 'Добавьте описание для лука'},
+    ]
+
     const addLook = () => {
+        const name = getValue(fields, 'name');
+        const description = getValue(fields, 'description');
+
         console.log({ name, description });
         const look: ILookData = {
             img: lookSelector.look.img,
@@ -104,11 +111,7 @@ export default function SaveLookModal({
     };
 
     return (
-        <KeyboardAvoidingView
-            enabled={true}
-            behavior={'position'}
-            keyboardVerticalOffset={50}
-        >
+        <ScrollView nestedScrollEnabled={true} horizontal={false} >
             <View style={styles.container}>
                 <View style={styles.lookContainer}>
                     <Image
@@ -130,36 +133,13 @@ export default function SaveLookModal({
                         />
                     ) : null}
                 </View>
-                <View style={styles.infoContainer}>
-                    <InputField
-                        placeholder="Введите название лука"
-                        placeholderTextColor={Colors.base.darkgray}
-                        value={name}
-                        onChangeText={setName}
-                        icon={
-                            <MaterialIcons
-                                name="drive-file-rename-outline"
-                                size={24}
-                                color="black"
-                            />
-                        }
-                    />
-                    <InputField
-                        placeholder="Введите описание лука"
-                        placeholderTextColor={Colors.base.darkgray}
-                        value={description}
-                        onChangeText={setDescription}
-                        icon={
-                            <SimpleLineIcons
-                                name="speech"
-                                size={24}
-                                color="black"
-                            />
-                        }
-                    />
-                    <StyledButton title="Добавить" onPress={addLook} />
-                </View>
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                >
+                    <InputContainer inputFields={fields} style={styles.infoContainer}  />
+                    <BaseButton title='Сохранить' onPress={addLook} style={styles.buttonSave} />
+                </KeyboardAvoidingView>
             </View>
-        </KeyboardAvoidingView>
+        </ScrollView>
     );
 }

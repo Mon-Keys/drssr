@@ -1,11 +1,10 @@
-import AddItemModal from '../screens/Modals/AddItemModal';
+import AddItemModal from '../screens/WardrobeScreen/ItemsScreen/AddItemModal';
 import SignupScreenModal from '../screens/Auth/SignupScreenModal';
 import LoginScreen from '../screens/Auth/LoginScreen';
-import EditModal from '../screens/Modals/EditModal';
 import PostModalScreen from '../screens/Modals/PostModal';
 import ImageRecognizerScreen from '../screens/Modals/ImageRecognizer';
-import CreateLookModal from '../screens/Modals/CreateLookModal';
-import SaveLookModal from '../screens/Modals/SaveLookModal';
+import CreateLookModal from '../screens/WardrobeScreen/LooksScreen/CreateLookModal';
+import SaveLookModal from '../screens/WardrobeScreen/LooksScreen/SaveLookModal';
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
@@ -41,7 +40,6 @@ export function RootNavigator() {
                 <Stack.Screen name="AddItem" component={AddItemModal} options={{
                     title: 'Добавить вещь',
                 }} />
-                <Stack.Screen name="Edit" component={EditModal} />
                 <Stack.Screen name="Post" component={PostModalScreen} />
                 <Stack.Screen
                     name="ImageRecognizer"
