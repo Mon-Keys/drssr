@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 
 import {
     StyleSheet,
@@ -23,7 +23,6 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
 import { useNavigation } from '@react-navigation/native';
-import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
 import {choosePhoto} from "../../reducers/items/clothesReducer";
 
 const styles = StyleSheet.create({
@@ -88,7 +87,7 @@ export default function WardrobeScreen() {
             closeModal();
         }
     };
-
+// wedwe
     const menuItems = [
         {
             name: 'Вещи',
