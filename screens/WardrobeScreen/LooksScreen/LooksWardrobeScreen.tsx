@@ -1,28 +1,12 @@
 import React from 'react';
-import { Platform, RefreshControl, StatusBar, StyleSheet } from 'react-native';
+import { RefreshControl } from 'react-native';
 
-import { View } from '../../../components/base/Themed';
 import { LookList } from '../../../components/looks/LooksList';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
 import { Colors } from '../../../styles';
-
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-        backgroundColor: 'transparent',
-        marginTop: 20
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: Colors.base.black
-    }
-});
+import EmptyView from "../../../components/base/EmptyView";
 
 export default function LooksWardrobeScreen() {
     const looks = useAppSelector(selectLook);
@@ -42,21 +26,26 @@ export default function LooksWardrobeScreen() {
     //     // use current
     //     flatListRef.current.scrollToOffset({ animated: true, offset: 1000 })
     // }
+    const isLooks = (): boolean => {
+        return looks && looks.LooksData && looks.LooksData.length > 0;
+    };
 
     return (
-        <View style={styles.container}>
-            <LookList
-                //@ts-ignore
-                ref={flatListRef}
-                looks={looks.LooksData}
-                refreshControl={
-                    <RefreshControl
-                        tintColor={Colors.base.black}
-                        refreshing={refreshing}
-                        onRefresh={refresh}
-                    />
-                }
-            />
-        </View>
+        <>
+            {isLooks() ? (
+                <LookList
+                    looks={looks.LooksData}
+                    refreshControl={
+                        <RefreshControl
+                            tintColor={Colors.base.black}
+                            refreshing={refreshing}
+                            onRefresh={refresh}
+                        />
+                    }
+                />
+            ) : (
+                <EmptyView textHeader={'Здесь пока пусто'} text={'Создайте лук с помощью +'}/>
+            )}
+        </>
     );
 }

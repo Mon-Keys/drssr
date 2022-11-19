@@ -1,111 +1,116 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
-import {
-    StyleSheet,
-    Image,
-    ActivityIndicator,
-    Platform,
-    StatusBar
-} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet} from 'react-native';
 
-import { Text, View } from '../../components/base/Themed';
-
-// import { RootStackScreenProps } from '../types';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import {
-    analyzeItem,
-    selectItemEditor
-} from '../../reducers/itemEditorReducer';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { IItemData } from '../../network';
+import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {IItemData} from '../../network';
 import Colors from '../../styles/Colors';
-import { fetchUsersClothes } from '../../reducers/clothesReducer';
+import {clearAddItem, selectPrepareClothes} from "../../reducers/items/clothesReducer";
+import {addClothes, prepareClothes} from "../../reducers/items/addItem";
+import BigImage from "../../components/item/BigImage";
+import {Layout} from "../../styles";
+import InputContainer, {InputFieldData} from "../../components/item/InputContainer";
+import BaseButton from "../../components/base/BaseButton";
+import {useNavigation} from "@react-navigation/native";
+import {RootNavigation} from "../../types";
 
 const styles = StyleSheet.create({
-    type: {
-        top: 20,
-        color: Colors.base.white,
-        fontSize: 18,
-        fontFamily: 'proxima-nova'
-    },
     container: {
-        flex: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Colors.base.black,
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'transparent',
     },
-    backgroundImage: {
-        height: 400,
-        width: 400,
-        resizeMode: 'contain',
-        opacity: 0.1,
-        position: 'absolute'
+    imageContainer: {
+        margin: Layout.margins.default
     },
-    image: { width: 400, height: 400, resizeMode: 'contain' },
-    indicator: { position: 'absolute' }
+    bodyContainer: {
+        marginHorizontal: Layout.margins.default,
+    },
+    submitContainer: {
+        margin: Layout.margins.default,
+    },
+    indicator: {
+        marginVertical: Layout.margins.default,
+    }
 });
 
-export default function AddItemModal(/*{
-    navigation
-}: RootStackScreenProps<'AddItem'>*/) {
-    const selectItem = useAppSelector(selectItemEditor);
+function updateValue(array: Array<InputFieldData>, key: string, value: string) {
+    const idx = array.findIndex((item) => item.key == key);
+    if (idx != -1) {
+        array[idx].value = value;
+    }
+}
+
+function getValue(array: Array<InputFieldData>, key: string) {
+    const data = array.find((item) => item.key == key);
+    if (data) {
+        return data.value;
+    }
+    return '';
+}
+
+export default function AddItemModal() {
+    const navigation = useNavigation<RootNavigation>();
+
+    const prepareItem = useAppSelector(selectPrepareClothes);
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        console.log('hello');
-        if (selectItem.currentItem != null) {
-            let photo: IItemData = {
-                file: selectItem.currentItem,
-                sex: 'male',
-                brand: 'prada'
-            };
-            dispatch(analyzeItem(photo));
-            dispatch(fetchUsersClothes());
-        }
-    }, [dispatch, selectItem.currentItem]);
+    const fields: Array<InputFieldData> = [
+        {key: 'type', title: 'Тип вещи', placeholder: 'Например джинсы'},
+        {key: 'name', title: 'Название', placeholder: 'Дайте название вещи'},
+        // {key: 'link', title: 'Ссылка', placeholder: 'Ссылка на вещь в магазине'},
+        {key: 'brand', title: 'Бренд', placeholder: 'Укажите бренд'},
+        // {key: 'price', title: 'Цена', placeholder: 'Укажите цену вещи'},
+        // {key: 'color', title: 'Цвет', placeholder: 'Укажите цвет вещи'},
+    ]
 
-    // const analyze = (event: GestureResponderEvent) => {
-    //     console.log('event');
-    //     if (selectItem.currentItem != null) {
-    //         let photo: IItemData = {
-    //             file: selectItem.currentItem,
-    //             sex: 'male',
-    //             brand: 'prada'
-    //         };
-    //         dispatch(analyzeItem(photo));
-    //     }
-    // };
+    useEffect(() => {
+        if (prepareItem.currentItem != null) {
+            let photo: IItemData = {
+                file: prepareItem.currentItem,
+            };
+            dispatch(prepareClothes(photo));
+        }
+    }, [dispatch, prepareItem.currentItem]);
+
+    const add = () => {
+        const item = prepareItem.itemResp;
+        if (item == null) {
+            return
+        }
+        dispatch(addClothes({
+            id: item.id,
+            link: getValue(fields, 'link'),
+            brand: getValue(fields, 'brand'),
+            price: Number(getValue(fields, 'price')),
+            color: getValue(fields, 'color'),
+            sex: 'unisex', // TODO required.
+            currency: 'RUB', // TODO required
+            // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
+        }))
+        navigation.navigate('Item', { index: 0 });
+        dispatch(clearAddItem());
+    }
+
+    let img = '';
+
+    if (prepareItem.itemResp) {
+        updateValue(fields, 'type', prepareItem.itemResp.type); // TODO чет не работает
+        img = prepareItem.itemResp.mask_path;
+    }
 
     return (
-        <View style={styles.container}>
-            {selectItem.currentItem ? (
-                <Image
-                    style={styles.backgroundImage}
-                    blurRadius={1}
-                    // @ts-ignore
-                    source={{ uri: selectItem.currentItem.uri }}
-                />
-            ) : null}
-            {/* <StyledButton title={'analyze'} onPress={analyze} /> */}
-            {selectItem.itemResp ? (
-                <Image
-                    style={styles.image}
-                    source={{
-                        uri: `data:image/jpg;base64,${selectItem.itemResp.mask}`
-                    }}
-                />
-            ) : null}
-            {selectItem.itemResp ? (
-                <Text style={styles.type}>
-                    {' '}
-                    Classified as {selectItem.itemResp.type}{' '}
-                </Text>
-            ) : null}
-            {selectItem.status === 'pending' ? (
-                <ActivityIndicator size="large" style={styles.indicator} />
-            ) : null}
-        </View>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+            <BigImage img={img} style={styles.imageContainer}/>
+
+            <InputContainer inputFields={fields} style={styles.bodyContainer}/>
+
+            {prepareItem.status === 'pending' ? (
+                <ActivityIndicator size="large" color={Colors.base.black} style={styles.indicator} />
+            ) : (
+                <BaseButton title={'Добавить'} onPress={add} style={styles.submitContainer} />
+            )}
+        </ScrollView>
     );
 }

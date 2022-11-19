@@ -7,9 +7,9 @@ import {
     Text
 } from 'react-native';
 import React from 'react';
-import { ClothingCategory } from '../../reducers/clothesReducer';
 import { Layout } from '../../styles';
 import { getUri } from "../../network/const";
+import {ClothingCategory} from "../../reducers/items/categories";
 
 const styles = StyleSheet.create({
     container: {

@@ -1,46 +1,48 @@
-import { StyleSheet, FlatList, View, FlatListProps } from 'react-native';
+import {StyleSheet, FlatList, View, FlatListProps, RefreshControlProps} from 'react-native';
 import React from 'react';
 import Colors from '../../styles/Colors';
 import { LookCard } from './LookCard';
 import { IGetLookData } from '../../network';
+import {Layout} from "../../styles";
+import {getUri} from "../../network/const";
 
 const styles = StyleSheet.create({
-    wardrobeImageBackground: {
-        backgroundColor: Colors.base.lightgray,
-        borderRadius: 18,
-        margin: 10
-    },
-    menuItemSize: { height: 100, width: 100 },
     container: {
+        height: '100%',
+        width: '100%',
+        alignItems: 'center',
         backgroundColor: 'transparent',
-        alignContent: 'space-between',
-        justifyContent: 'space-around'
+    },
+    columnWrapper: {
+        minWidth: 348,
+        marginVertical: Layout.margins.small,
+        justifyContent: 'flex-start'
     }
 });
 
-interface LooksListProps extends FlatListProps<IGetLookData> {
-    navigation?: any;
+interface LooksListProps {
     looks: Array<IGetLookData>;
+    refreshControl?: React.ReactElement<RefreshControlProps>;
 }
 
 export const LookList = (props: LooksListProps) => {
-    console.log(props);
-
     return (
         <View style={styles.container}>
             <FlatList
-                {...props}
                 data={props.looks}
                 numColumns={2}
                 keyExtractor={(item) => `${item.description}`}
-                contentContainerStyle={styles.container}
+                columnWrapperStyle={styles.columnWrapper}
+                horizontal={false}
+                showsVerticalScrollIndicator={false}
                 renderItem={(item) => (
                     <LookCard
-                        imgURI={`http://leonidperl.in${item.item.img_path}`}
+                        imgURI={getUri(item.item.img)}
                         callbackfn={() => {}}
                         name={item.item.description}
                     />
                 )}
+                refreshControl={props.refreshControl}
             />
         </View>
     );

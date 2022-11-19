@@ -16,8 +16,6 @@ import {
 } from '@gorhom/bottom-sheet';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors, Layout } from '../../styles';
-import { choosePhoto } from '../../reducers/itemEditorReducer';
-import { fetchUsersClothes } from '../../reducers/clothesReducer';
 import CategoriesScreen from './ItemsScreen/CategoriesScreen';
 import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
@@ -25,6 +23,8 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import StyledButton from '../../components/base/StyledButton';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
 import { useNavigation } from '@react-navigation/native';
+import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
+import {choosePhoto} from "../../reducers/items/clothesReducer";
 
 const styles = StyleSheet.create({
     container: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
 
     selectContainer: {
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: Colors.base.white,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around'
@@ -82,13 +82,12 @@ export default function WardrobeScreen() {
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             quality: 1
         });
-        dispatch(choosePhoto(result));
-        navigation.navigate('AddItem');
+        if (!result.cancelled) {
+            dispatch(choosePhoto(result));
+            navigation.navigate('AddItem');
+            closeModal();
+        }
     };
-
-    useEffect(() => {
-        dispatch(fetchUsersClothes());
-    }, [dispatch]);
 
     const menuItems = [
         {
@@ -143,7 +142,7 @@ export default function WardrobeScreen() {
                 ref={bottomSheetModalRef}
                 index={0}
                 snapPoints={snapPoints}
-                backgroundStyle={{ backgroundColor: Colors.base.lightgray }}
+                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.31)' }}
                 handleIndicatorStyle={{ backgroundColor: Colors.base.black }}
             >
                 <View style={styles.selectContainer}>
@@ -158,12 +157,14 @@ export default function WardrobeScreen() {
                         title={'Добавить лук'}
                         onPress={() => {
                             navigation.navigate('CreateLook');
+                            closeModal();
                         }}
                     />
                     <StyledButton
                         title={'Камера'}
                         onPress={() => {
                             navigation.navigate('ImageRecognizer');
+                            closeModal();
                         }}
                     />
                     <StyledButton title={'Из библиотеки'} onPress={pickImage} />

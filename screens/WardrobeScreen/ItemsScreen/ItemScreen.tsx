@@ -10,7 +10,7 @@ import {
 
 import { Colors, Layout } from '../../../styles';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { selectUserItems } from '../../../reducers/clothesReducer';
+import { selectUserItems } from '../../../reducers/items/clothesReducer';
 import { RootNavigation, ThingScreenRouteProp } from '../../../types';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import IconButton from '../../../components/base/IconButton';

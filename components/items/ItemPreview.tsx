@@ -7,13 +7,13 @@ import {
 } from 'react-native';
 import React from 'react';
 import { View } from '../base/Themed';
-import { Colors, Layout } from '../../styles';
-import { Clothes } from '../../reducers/clothesReducer';
+import { Layout } from '../../styles';
+import { Clothes } from '../../reducers/items/clothesReducer';
 import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: 'transparent',
         marginHorizontal: Layout.margins.small
     },
     previewContainer: {
@@ -23,11 +23,13 @@ const styles = StyleSheet.create({
     },
     preview: {
         flex: 1,
-        resizeMode: 'center'
+        resizeMode: 'center',
+        borderRadius: Layout.cornerRadius
     },
     caption: {
-        marginTop: Layout.margins.small / 2,
-        marginLeft: Layout.margins.default,
+        maxWidth: 150,
+        marginTop: Layout.margins.micro,
+        paddingLeft: Layout.margins.default,
         fontSize: 12,
         fontWeight: 'bold'
     }

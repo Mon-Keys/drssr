@@ -6,15 +6,15 @@ import ItemScreen from '../../screens/WardrobeScreen/ItemsScreen/ItemScreen';
 
 const Stack = createNativeStackNavigator();
 
-export function Wardrobe(): any {
+export function WardrobeNavigation(): any {
     return (
         <Stack.Navigator
-            initialRouteName="Wardrobe"
+            initialRouteName="Category"
             screenOptions={{
                 headerShown: false
             }}
         >
-            <Stack.Screen name="Wardrobe" component={WardrobeScreen} />
+            <Stack.Screen name="Category" component={WardrobeScreen} />
             <Stack.Screen
                 name="ItemsByCategory"
                 component={ItemsByCategoryScreen}

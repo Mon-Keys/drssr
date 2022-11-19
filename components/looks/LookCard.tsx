@@ -1,25 +1,28 @@
-import { Image, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import {Image, TouchableOpacity, StyleSheet, Text} from 'react-native';
+import { View } from '../base/Themed';
 import React from 'react';
 import Colors from '../../styles/Colors';
+import {Layout} from "../../styles";
 
 const styles = StyleSheet.create({
-    wardrobeImageBackground: {
-        backgroundColor: Colors.base.white,
-        height: 270,
+    container: {
+        marginHorizontal: Layout.margins.small
+    },
+    previewContainer: {
+        height: 260,
         width: 160,
-        borderRadius: 14,
-        marginHorizontal: 5,
-        marginVertical: 20
+        borderRadius: Layout.cornerRadius
     },
     lookImage: {
-        height: 270,
-        width: 160,
-        borderRadius: 14,
-        resizeMode: 'contain'
+        flex: 1,
+        resizeMode: 'center',
+        borderRadius: Layout.cornerRadius
     },
     lookText: {
+        maxWidth: 160,
+        marginTop: Layout.margins.micro,
         fontFamily: 'proxima-nova',
-        fontSize: 16
+        fontSize: 12
     }
 });
 
@@ -30,17 +33,17 @@ export interface LookCardProps {
 }
 
 export const LookCard = (props: LookCardProps) => {
-    console.log(props);
-
     return (
         <TouchableOpacity
-            style={[styles.wardrobeImageBackground]}
+            style={styles.container}
             onLongPress={() => {}}
             onPress={props.callbackfn}
             delayLongPress={300}
         >
-            <Image style={styles.lookImage} source={{ uri: props.imgURI }} />
-            <Text style={styles.lookText}> {props.name} </Text>
+            <View style={styles.previewContainer}>
+                <Image style={styles.lookImage} source={{ uri: props.imgURI }}/>
+            </View>
+            <Text style={styles.lookText} numberOfLines={1}> {props.name} </Text>
         </TouchableOpacity>
     );
 };
