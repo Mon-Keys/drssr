@@ -13,7 +13,7 @@ import StyledButton from '../../components/base/StyledButton';
 import Colors from '../../styles/Colors';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {fetchUserData, selectUser, signUpUser} from '../../reducers/userReducer';
+import {fetchUserData, loginUser, selectUser, signUpUser} from '../../reducers/userReducer';
 import { ISignupData } from '../../network';
 
 const styles = StyleSheet.create({
@@ -65,7 +65,12 @@ export default function SignupScreenModal({
             description: 'test user'
         };
 
-        dispatch(signUpUser(data));
+        dispatch(signUpUser(data)).then(() => {
+            dispatch(loginUser({
+                login: data.nickname,
+                password: data.password
+            })); // TODO ващет бэк должен сразу куку сетить
+        });
     };
 
     return (

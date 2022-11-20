@@ -56,8 +56,8 @@ export function RootNavigator() {
                     name="ImageRecognizer"
                     component={ImageRecognizerScreen}
                 />
-                <Stack.Screen name="CreateLook" component={CreateLookModal} />
-                <Stack.Screen name="SaveLook" component={SaveLookModal} />
+                <Stack.Screen name="CreateLook" component={CreateLookModal} options={{ title: 'Создание образа' }} />
+                <Stack.Screen name="SaveLook" component={SaveLookModal} options={{ title: 'Создание образа' }} />
             </Stack.Group>
         </Stack.Navigator>
     );

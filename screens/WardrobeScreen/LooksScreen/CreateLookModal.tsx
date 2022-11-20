@@ -24,12 +24,13 @@ import { addLookPhoto } from '../../../reducers/createLookReducer';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import BaseButton from "../../../components/base/BaseButton";
 import {InputFieldData} from "../../../components/item/InputContainer";
+import EmptyView from "../../../components/base/EmptyView";
 
 const styles = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%',
-        backgroundColor: 'transparent',
+        backgroundColor: Colors.base.white,
     },
     addButton: {
         position: 'absolute',
@@ -38,7 +39,6 @@ const styles = StyleSheet.create({
         right: 20,
     },
     lookArea: {
-        backgroundColor: Colors.base.white,
         height: 700,
         width: 500
     },
@@ -124,26 +124,32 @@ export default function CreateLookModal({
                         color={Colors.base.black}
                     />
                 </Pressable>
-                <ViewShot
-                    onCapture={() => {}}
-                    //@ts-ignore
-                    ref={ref}
-                    options={{ result: 'base64', format: 'jpg', quality: 0.8 }}
-                >
-                    <View style={styles.lookArea}>
-                        {boardItems.map((item) => (
-                            <EditableImage
-                                style={styles.defaultImage}
-                                source={{ uri: item }}
-                            />
-                        ))}
-                    </View>
-                </ViewShot>
-                <BaseButton
-                    title={'Далее'}
-                    style={styles.nextButton}
-                    onPress={proceed}
-                />
+                {(boardItems.length == 0) ? (
+                    <EmptyView textHeader={'Создайте образ'} text={'Добавляйте вещи с помощью +'}  />
+                ) : (
+                    <>
+                        <ViewShot
+                            onCapture={() => {}}
+                            //@ts-ignore
+                            ref={ref}
+                            options={{ result: 'base64', format: 'jpg', quality: 0.8 }}
+                        >
+                            <View style={styles.lookArea}>
+                                {boardItems.map((item) => (
+                                    <EditableImage
+                                        style={styles.defaultImage}
+                                        source={{ uri: item }}
+                                    />
+                                ))}
+                            </View>
+                        </ViewShot>
+                        <BaseButton
+                            title={'Далее'}
+                            style={styles.nextButton}
+                            onPress={proceed}
+                        />
+                    </>
+                )}
                 <BottomSheetModal
                     ref={bottomSheetModalRef}
                     index={0}
@@ -176,7 +182,7 @@ export default function CreateLookModal({
                                     }}
                                 />
                             )}
-                            keyExtractor={(item: Clothes) => `${item.id}`}
+                            // keyExtractor={(item: Clothes) => `${item.id}`}
                             numColumns={3}
                         />
                     </View>
