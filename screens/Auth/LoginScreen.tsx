@@ -48,8 +48,8 @@ export default function TabTwoScreen({
 
     const submitLogin = () => {
         const loginData: ILoginData = {
-            login: login,
-            password: password
+            login: login.trim(),
+            password: password.trim()
         };
         dispatch(loginUser(loginData))
     };
@@ -60,23 +60,23 @@ export default function TabTwoScreen({
                 <InputField
                     icon={<Person color={Colors.base.darkgray} />}
                     placeholderTextColor={Colors.base.darkgray}
-                    placeholder={'имя пользователя'}
+                    placeholder={'Никнейм'}
                     value={login}
                     onChangeText={onChangeLogin}
                 />
                 <InputField
                     icon={<Person color={Colors.base.darkgray} />}
                     placeholderTextColor={Colors.base.darkgray}
-                    placeholder={'пароль'}
+                    placeholder={'Пароль'}
                     value={password}
                     onChangeText={onChangePassword}
                     password={true}
                 />
 
-                <StyledButton title="войти" onPress={submitLogin} />
+                <StyledButton title="Войти" onPress={submitLogin} />
 
                 <StyledButton
-                    title="зарегистрироваться"
+                    title="Зарегистрироваться"
                     onPress={() => {
                         navigation.navigate('Signup');
                     }}

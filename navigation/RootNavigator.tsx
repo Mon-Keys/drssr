@@ -38,8 +38,8 @@ export function RootNavigator() {
                 />
             ) : (
                 <>
-                    <Stack.Screen name="Login" component={LoginScreen} />
-                    <Stack.Screen name="Signup" component={SignupScreenModal} />
+                    <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Вход в аккаунт' }} />
+                    <Stack.Screen name="Signup" component={SignupScreenModal} options={{ title: 'Регистрация' }} />
                 </>
             ))}
             <Stack.Screen

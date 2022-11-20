@@ -117,6 +117,7 @@ export const userSlice = createSlice({
             .addCase(signUpUser.fulfilled, (state, action) => {
                 state.status = 'resolved';
                 state.userData = action.payload as unknown as User;
+                state.isLoggedIn = true;
             })
             .addCase(signUpUser.rejected, (state) => {
                 state.status = 'rejected';

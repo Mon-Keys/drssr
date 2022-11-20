@@ -90,10 +90,12 @@ export default function AddItemModal() {
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-            <BigImage img={img} style={styles.imageContainer}/>
+            <BigImage img={img} style={styles.imageContainer} loading={prepareItem.status === 'pending'}/>
 
             {prepareItem.status === 'pending' ? (
-                <ActivityIndicator size="large" color={Colors.base.black} style={styles.indicator} />
+                <>
+                    <ActivityIndicator size="large" color={Colors.base.black} style={styles.indicator} />
+                </>
             ) : (
                 <>
                     <InputContainer inputFields={fields} style={styles.bodyContainer}/>

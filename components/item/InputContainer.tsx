@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ViewStyle, FlatList, ScrollView} from 'react-native';
+import {StyleSheet, View, ViewStyle, ScrollView} from 'react-native';
 
 import { Colors, Layout } from '../../styles';
 import InputForItem from "./InputForItem";
@@ -54,22 +54,19 @@ export default function InputContainer(props: InputContainerPrpops) {
     return (
         <View style={props.style}>
             <View style={styles.imageContainer}>
-                <ScrollView>
-                    <View>
-                        {props.inputFields.map((item) => {
-                            return (
-                                <InputForItem
-                                    style={styles.inputField}
-                                    title={item.title}
-                                    onChangeText={item.onChange}
-                                    value={item.value}
-                                    placeholder={item.placeholder}
-                                    placeholderTextColor={Colors.base.darkgray}
-                                />
-                            );
-                        })}
-                    </View>
-                </ScrollView>
+                {props.inputFields.map((item) => {
+                    return (
+                        <InputForItem
+                            key={item.key}
+                            style={styles.inputField}
+                            title={item.title}
+                            onChangeText={item.onChange}
+                            value={item.value}
+                            placeholder={item.placeholder}
+                            placeholderTextColor={Colors.base.darkgray}
+                        />
+                    );
+                })}
             </View>
         </View>
     );

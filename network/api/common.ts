@@ -60,6 +60,20 @@ export interface IGetLookData extends ILookData {
     img_path: string;
 }
 
+function GenerateRandomString(length: number): string {
+    let result           = '';
+    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+function GenerateRandomName(): string {
+    return GenerateRandomString(10) + '.jpg';
+}
+
 // TODO пока все запросы на вещи луки тут, но ваще по хорошему они должны быть в разных классах для стилиста и юзера
 export default class Common {
     checkImage(data: IItemData) {
@@ -69,7 +83,7 @@ export default class Common {
             //@ts-ignore
             uri: data.file.uri,
             type: 'image/jpg',
-            name: 'name.jpg'
+            name: GenerateRandomName()
         });
         return http.post('/private/clothes', bodyFormData, {
             withCredentials: true,

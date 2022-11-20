@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Image, ViewStyle} from 'react-native';
+import {StyleSheet, View, Image, ViewStyle, ActivityIndicator} from 'react-native';
 
 import { Colors, Layout } from '../../styles';
 import { getUri } from '../../network/const';
@@ -7,6 +7,7 @@ import { getUri } from '../../network/const';
 export interface BigImage {
     img: string;
     style?: ViewStyle;
+    loading?: boolean | false,
 }
 
 const styles = StyleSheet.create({
@@ -26,12 +27,14 @@ export default function BigImage(props: BigImage) {
     return (
         <View style={props.style}>
             <View style={styles.imageContainer}>
-                <Image
-                    style={styles.image}
-                    source={{
-                        uri: getUri(props.img)
-                    }}
-                />
+                {(!props.loading) ? (
+                    <Image
+                        style={styles.image}
+                        source={{
+                            uri: getUri(props.img)
+                        }}
+                    />
+                ) : null}
             </View>
         </View>
     );

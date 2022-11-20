@@ -2,7 +2,7 @@ import {
     StyleSheet,
     ActivityIndicator,
     Platform,
-    StatusBar
+    StatusBar, KeyboardAvoidingView
 } from 'react-native';
 import React from 'react';
 import { View } from '../../components/base/Themed';
@@ -13,24 +13,18 @@ import StyledButton from '../../components/base/StyledButton';
 import Colors from '../../styles/Colors';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { selectUser, signUpUser } from '../../reducers/userReducer';
+import {fetchUserData, selectUser, signUpUser} from '../../reducers/userReducer';
 import { ISignupData } from '../../network';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-        backgroundColor: Colors.base.white
-    },
-    formContainer: {
         alignItems: 'center',
-        height: 300,
-        alignContent: 'space-between',
-        justifyContent: 'space-between',
-        backgroundColor: Colors.base.white
+        backgroundColor: Colors.base.white,
+
+        justifyContent: 'space-around',
     },
+
     title: {
         fontSize: 20,
         fontWeight: 'bold'
@@ -39,6 +33,10 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         height: 1,
         width: '80%'
+    },
+
+    inp: {
+        marginBottom: 48
     }
 });
 
@@ -48,22 +46,20 @@ export default function SignupScreenModal({
     const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
 
-    // const [date, setDate] = React.useState<Date>(new Date(343223543));
-    // const [open, setOpen] = React.useState<boolean>(false);
-
     const [nickname, onChangeNickname] = React.useState<string>('');
 
     const [email, onChangeEmail] = React.useState<string>('');
 
     const [password, onChangePassword] = React.useState<string>('');
+    const [password2, onChangePassword2] = React.useState<string>('');
 
     const [birthdate, onChangeBirthdate] = React.useState<string>('');
 
     const submitSignup = () => {
         const data: ISignupData = {
-            nickname: nickname,
-            password: password,
-            email: email,
+            nickname: nickname.trim(),
+            password: password.trim(),
+            email: email.trim(),
             birth_date: new Date(),
             name: 'test',
             description: 'test user'
@@ -74,57 +70,61 @@ export default function SignupScreenModal({
 
     return (
         <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <InputField
-                    icon={<Person color={Colors.base.darkgray} />}
-                    placeholder={'имя пользователя'}
-                    placeholderTextColor={Colors.base.darkgray}
-                    value={nickname}
-                    onChangeText={onChangeNickname}
-                />
-                <InputField
-                    icon={<Person color={Colors.base.darkgray} />}
-                    placeholder={'почта'}
-                    placeholderTextColor={Colors.base.darkgray}
-                    value={email}
-                    onChangeText={onChangeEmail}
-                    keyboardType={'email-address'}
-                />
-                <InputField
-                    icon={<Person color={Colors.base.darkgray} />}
-                    placeholder={'пароль'}
-                    value={password}
-                    placeholderTextColor={Colors.base.darkgray}
-                    onChangeText={onChangePassword}
-                    password={true}
-                />
-                <InputField
-                    icon={<Person color={Colors.base.darkgray} />}
-                    placeholder={'дата рождения'}
-                    value={birthdate}
-                    placeholderTextColor={Colors.base.darkgray}
-                    onChangeText={onChangeBirthdate}
-                />
+            <View style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}/>
+            <View style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}/>
+            <View style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}/>
+            <InputField
+                icon={<Person color={Colors.base.darkgray} />}
+                placeholder={'Никнейм'}
+                placeholderTextColor={Colors.base.darkgray}
+                value={nickname}
+                onChangeText={onChangeNickname}
+            />
+            <InputField
+                icon={<Person color={Colors.base.darkgray} />}
+                placeholder={'Почта'}
+                placeholderTextColor={Colors.base.darkgray}
+                value={email}
+                onChangeText={onChangeEmail}
+                keyboardType={'email-address'}
+            />
+            <InputField
+                icon={<Person color={Colors.base.darkgray} />}
+                placeholder={'Пароль'}
+                value={password}
+                placeholderTextColor={Colors.base.darkgray}
+                onChangeText={onChangePassword}
+                password={true}
+            />
+            <InputField
+                icon={<Person color={Colors.base.darkgray} />}
+                placeholder={'Повторите пароль'}
+                value={password2}
+                placeholderTextColor={Colors.base.darkgray}
+                onChangeText={onChangePassword2}
+                password={true}
+            />
+            <View style={{ marginTop: 21 }}>
                 <StyledButton
                     title="Зарегистрироваться"
                     onPress={submitSignup}
                 />
-
-                <StyledButton
-                    title="Войти"
-                    onPress={() => {
-                        navigation.navigate('Login');
-                    }}
-                />
-                {user.status === 'pending' ? (
-                    <ActivityIndicator
-                        size={'large'}
-                        color={Colors.base.black}
-                    />
-                ) : (
-                    <View />
-                )}
             </View>
+            {/*<StyledButton*/}
+            {/*    title="Войти"*/}
+            {/*    onPress={() => {*/}
+            {/*        navigation.navigate('Login');*/}
+            {/*    }}*/}
+            {/*/>*/}
+            {user.status === 'pending' ? (
+                <ActivityIndicator
+                    size={'large'}
+                    color={Colors.base.black}
+                />
+            ) : (
+                <View />
+            )}
+            <View style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}/>
         </View>
     );
 }
