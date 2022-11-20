@@ -13,6 +13,7 @@ const linking: LinkingOptions<RootStackParamList> = {
     prefixes: [Linking.createURL('/')],
     config: {
         screens: {
+            Start: 'Start',
             Root: {
                 screens: {
                     Home: {

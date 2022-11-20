@@ -21,6 +21,7 @@ declare global {
 }
 
 export type RootStackParamList = {
+    Start: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     ImageRecognizer: undefined;
     Signup: undefined;

@@ -14,14 +14,14 @@ export interface User {
 }
 
 interface UserState {
-    isLoggedIn: boolean;
+    isLoggedIn: boolean | null;
     userData: User;
     status: string;
     error: string;
 }
 
 const initialState = {
-    isLoggedIn: false,
+    isLoggedIn: null,
     userData: {},
     status: '',
     error: ''
@@ -108,6 +108,7 @@ export const userSlice = createSlice({
             })
             .addCase(fetchUserData.rejected, (state) => {
                 state.status = 'rejected';
+                state.isLoggedIn = false;
             })
             .addCase(signUpUser.pending, (state) => {
                 state.status = 'pending';

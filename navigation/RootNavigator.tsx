@@ -11,15 +11,26 @@ import { RootStackParamList } from '../types';
 import { BottomTabNavigator } from './TapBarNavigation/TapBar';
 import NotFoundScreenModal from '../screens/Modals/NotFoundScreenModal';
 import { useAppSelector } from '../hooks/useAppSelector';
-import { selectUser } from '../reducers/userReducer';
+import {fetchUserData, selectUser} from '../reducers/userReducer';
+import {useAppDispatch} from "../hooks/useAppDispatch";
+import StartScreen from "../screens/Auth/StartScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
+    const dispatch = useAppDispatch();
+
+    React.useEffect(() => {
+        setTimeout(() => dispatch(fetchUserData()), 1200);
+    }, [dispatch]);
+
     const isLoggedIn = useAppSelector(selectUser).isLoggedIn;
+
     return (
         <Stack.Navigator>
-            {isLoggedIn ? (
+            {isLoggedIn === null ? (
+                <Stack.Screen name="Start" component={StartScreen} options={{headerShown: false}}/>
+            ) : (isLoggedIn ? (
                 <Stack.Screen
                     name="Root"
                     component={BottomTabNavigator}
@@ -30,7 +41,7 @@ export function RootNavigator() {
                     <Stack.Screen name="Login" component={LoginScreen} />
                     <Stack.Screen name="Signup" component={SignupScreenModal} />
                 </>
-            )}
+            ))}
             <Stack.Screen
                 name="NotFound"
                 component={NotFoundScreenModal}
