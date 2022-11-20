@@ -11,7 +11,6 @@ export const prepareClothes = createAsyncThunk<PrepareClothesResponse, IItemData
 
             return response.data;
         } catch (error: any) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }
@@ -29,7 +28,6 @@ export const addClothes = createAsyncThunk<IClothesData, IItemData>(
 
             return response.data;
         } catch (error: any) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }

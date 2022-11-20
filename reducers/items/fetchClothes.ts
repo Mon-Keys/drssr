@@ -13,7 +13,6 @@ export const fetchUsersClothes = createAsyncThunk<Array<IClothesData>>(
 
             return response.data;
         } catch (error: any) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }

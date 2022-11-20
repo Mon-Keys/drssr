@@ -23,19 +23,13 @@ export const newLook = createAsyncThunk<ILookData, ILookData>(
     'user/signUpUser',
     async (lookData, { rejectWithValue }) => {
         try {
-            console.log('sending signup');
-            // console.log(lookData.description);
-            // console.log(lookData.clothes);
-            // console.log(lookData.filename);
             const response = await Api.Common.createNewLook(lookData);
-            // console.log(response);
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
             }
 
             return response.data;
         } catch (error: any) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }
@@ -55,15 +49,12 @@ export const createLookSlice = createSlice({
         builder
             .addCase(newLook.pending, (state) => {
                 state.status = 'pending';
-                console.log('pending');
             })
             .addCase(newLook.fulfilled, (state) => {
                 state.status = 'resolved';
-                console.log('resolved');
             })
             .addCase(newLook.rejected, (state) => {
                 state.status = 'rejected';
-                console.log('rejected');
             });
     }
 });

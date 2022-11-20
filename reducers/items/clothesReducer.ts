@@ -71,22 +71,17 @@ export const clothesSlice = createSlice({
             })
             .addCase(fetchUsersClothes.fulfilled, (state, action) => {
                 state.status = 'resolved';
-                console.log('resolved');
                 const clothes = action.payload as unknown as Array<Clothes>;
                 state.clothesData = clothes ? clothes.reverse() : Array<Clothes>();
-                console.log('done');
             })
             .addCase(fetchUsersClothes.rejected, (state) => {
                 state.status = 'rejected';
-                console.log('rejected');
             })
             .addCase(prepareClothes.pending, (state) => {
                 state.prepareClothes.status = 'pending';
-                console.log('pending prepareClothes');
             })
             .addCase(prepareClothes.fulfilled, (state, action) => {
                 state.prepareClothes.status = 'resolved';
-                console.log('resolved prepareClothes');
 
                 state.prepareClothes.itemResp = action.payload as PrepareClothesResponse;
 
@@ -95,15 +90,12 @@ export const clothesSlice = createSlice({
             })
             .addCase(prepareClothes.rejected, (state) => {
                 state.prepareClothes.status = 'rejected';
-                console.log('rejected prepareClothes');
             })
             .addCase(addClothes.fulfilled, (state, action) => {
                 state.status = 'resolved';
-                console.log('resolved');
                 const item = action.payload as unknown as Clothes;
                 const idx = state.clothesData.findIndex((element) => element.id == item.id);
                 state.clothesData[idx] = item;
-                console.log('done');
             });
     }
 });

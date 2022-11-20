@@ -26,7 +26,6 @@ export const fetchUsersLooks = createAsyncThunk<Array<ILookData>>(
 
             return response.data;
         } catch (error: any) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }
@@ -48,15 +47,11 @@ export const looksSlice = createSlice({
             })
             .addCase(fetchUsersLooks.fulfilled, (state, action) => {
                 state.status = 'resolved';
-                console.log('resolved');
                 state.LooksData =
                     action.payload as unknown as Array<IGetLookData>;
-                // console.log(action);
-                console.log('done');
             })
             .addCase(fetchUsersLooks.rejected, (state) => {
                 state.status = 'rejected';
-                console.log('rejected');
             });
     }
 });
