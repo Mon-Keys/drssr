@@ -20,9 +20,9 @@ export function updateValue(array: Array<InputFieldData>, key: string, value: st
     }
 }
 
-export function getValue(array: Array<InputFieldData>, key: string) {
+export function getValue(array: Array<InputFieldData>, key: string): string {
     const data = array.find((item) => item.key == key);
-    if (data) {
+    if (data && data.value) {
         return data.value;
     }
     return '';

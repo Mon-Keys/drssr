@@ -58,6 +58,7 @@ export interface IGetLookData extends ILookData {
     id: number;
     clothes: Array<IClothesLookData>;
     img_path: string;
+    description: string;
 }
 
 function GenerateRandomString(length: number): string {
@@ -70,11 +71,11 @@ function GenerateRandomString(length: number): string {
     return result;
 }
 
-function GenerateRandomName(): string {
+export function GenerateRandomName(): string {
     return GenerateRandomString(10) + '.jpg';
 }
 
-// TODO пока все запросы на вещи луки тут, но ваще по хорошему они должны быть в разных классах для стилиста и юзера
+// TODO пока все запросы на вещи и образы тут, но ваще по хорошему они должны быть в разных классах для стилиста и юзера
 export default class Common {
     checkImage(data: IItemData) {
         let bodyFormData = new FormData();

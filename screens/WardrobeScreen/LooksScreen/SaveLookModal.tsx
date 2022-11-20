@@ -17,6 +17,7 @@ import { RootStackScreenProps } from '../../../types';
 import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
 import InputContainer, {getValue, InputFieldData} from "../../../components/item/InputContainer";
 import BaseButton from "../../../components/base/BaseButton";
+import {GenerateRandomName} from "../../../network/api/common";
 // @ts-ignore
 
 const styles = StyleSheet.create({
@@ -68,20 +69,17 @@ export default function SaveLookModal({
 
 
     const fields: Array<InputFieldData> = [
-        {key: 'name', title: 'Название образа', placeholder: 'Придумайте название образа'},
-        {key: 'description', title: 'Описание', placeholder: 'Добавьте описание для лука'},
+        // {key: 'name', title: 'Название образа', placeholder: 'Придумайте название образа'},
+        {key: 'description', title: 'Описание', placeholder: 'Добавьте описание для образа'},
     ]
 
     const addLook = () => {
-        const name = getValue(fields, 'name');
+        // const name = getValue(fields, 'name');
         const description = getValue(fields, 'description');
 
-        console.log({ name, description });
         const look: ILookData = {
             img: lookSelector.look.img,
-            filename: `${name}${description}${Math.floor(
-                Math.random() * 100
-            )}.jpg`,
+            filename: GenerateRandomName(),
             clothes: [
                 {
                     id: 1,
@@ -91,7 +89,7 @@ export default function SaveLookModal({
                     }
                 }
             ],
-            description: name + ' ' + description
+            description: description
         };
 
         // @ts-ignore

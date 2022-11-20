@@ -5,6 +5,8 @@ import { LookCard } from './LookCard';
 import { IGetLookData } from '../../network';
 import {Layout} from "../../styles";
 import {getUri} from "../../network/const";
+import {useNavigation} from "@react-navigation/native";
+import {RootNavigation} from "../../types";
 
 const styles = StyleSheet.create({
     container: {
@@ -26,6 +28,8 @@ interface LooksListProps {
 }
 
 export const LookList = (props: LooksListProps) => {
+    const navigation = useNavigation<RootNavigation>();
+
     return (
         <View style={styles.container}>
             <FlatList
@@ -35,11 +39,13 @@ export const LookList = (props: LooksListProps) => {
                 columnWrapperStyle={styles.columnWrapper}
                 horizontal={false}
                 showsVerticalScrollIndicator={false}
-                renderItem={(item) => (
+                renderItem={({item}) => (
                     <LookCard
-                        imgURI={getUri(item.item.img_path)}
-                        callbackfn={() => {}}
-                        name={item.item.description}
+                        imgURI={getUri(item.img_path)}
+                        callbackfn={() => {
+                            navigation.navigate('Look', {index: props.looks.indexOf(item)})
+                        }}
+                        name={item.description}
                     />
                 )}
                 refreshControl={props.refreshControl}

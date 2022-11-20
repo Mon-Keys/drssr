@@ -1,8 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import Api, { IGetLookData, ILookData } from '../network/';
+import {IClothesLookData} from "../network/api/common";
 
-interface LookState {
+export interface ILook {
+    id: number;
+    clothes: Array<IClothesLookData>;
+    img_path: string;
+    description: string;
+}
+
+interface Looks {
     LooksData: Array<IGetLookData>;
     status: string;
     error: string;
@@ -12,7 +20,7 @@ const initialState = {
     LooksData: [],
     status: '',
     error: ''
-} as LookState;
+} as Looks;
 
 export const fetchUsersLooks = createAsyncThunk<Array<ILookData>>(
     'Looks/fetchUsersLooks',

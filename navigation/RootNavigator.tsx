@@ -14,6 +14,7 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import {fetchUserData, selectUser} from '../reducers/userReducer';
 import {useAppDispatch} from "../hooks/useAppDispatch";
 import StartScreen from "../screens/Auth/StartScreen";
+import LookScreen from "../screens/WardrobeScreen/LooksScreen/LookScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -58,6 +59,7 @@ export function RootNavigator() {
                 />
                 <Stack.Screen name="CreateLook" component={CreateLookModal} options={{ title: 'Создание образа' }} />
                 <Stack.Screen name="SaveLook" component={SaveLookModal} options={{ title: 'Создание образа' }} />
+                <Stack.Screen name="Look" component={LookScreen} options={{ headerShown: false }} />
             </Stack.Group>
         </Stack.Navigator>
     );

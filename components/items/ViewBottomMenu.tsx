@@ -14,8 +14,6 @@ import {BottomSheetModalMethods} from "@gorhom/bottom-sheet/lib/typescript/types
 
 export interface ViewBottomMenuProps {
     children: ReactNode;
-    // open: boolean;
-    // closer: () => void;
     modalRef:  React.RefObject<BottomSheetModalMethods>;
 }
 
@@ -37,14 +35,7 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
 
     const navigation = useNavigation<RootNavigation>();
 
-    const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
-    const snapPoints = React.useMemo(() => ['40%'], []);
-
-    const openModal = () => {
-        if (props.modalRef.current) {
-            props.modalRef.current.present();
-        }
-    };
+    const snapPoints = React.useMemo(() => ['30%'], []);
 
     const closeModal = () => {
         if (props.modalRef.current) {
@@ -82,21 +73,21 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
                             color={Colors.base.black}
                         />
                     </Pressable>
+                    <StyledButton title={'Добавить вещь'} onPress={pickImage} />
+                    {/*<StyledButton*/}
+                    {/*    title={'Камера'}*/}
+                    {/*    onPress={() => {*/}
+                    {/*        navigation.navigate('ImageRecognizer');*/}
+                    {/*        closeModal();*/}
+                    {/*    }}*/}
+                    {/*/>*/}
                     <StyledButton
-                        title={'Добавить лук'}
+                        title={'Создать образ'}
                         onPress={() => {
                             navigation.navigate('CreateLook');
                             closeModal();
                         }}
                     />
-                    <StyledButton
-                        title={'Камера'}
-                        onPress={() => {
-                            navigation.navigate('ImageRecognizer');
-                            closeModal();
-                        }}
-                    />
-                    <StyledButton title={'Из библиотеки'} onPress={pickImage} />
                 </View>
             </BottomSheetModal>
         </BottomSheetModalProvider>

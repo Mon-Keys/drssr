@@ -24,6 +24,7 @@ export type RootStackParamList = {
     Start: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     ImageRecognizer: undefined;
+    Profile: undefined;
     Signup: undefined;
     Login: undefined;
     Edit: undefined;
@@ -37,6 +38,9 @@ export type RootStackParamList = {
         category: string;
     };
     Item: {
+        index: number;
+    };
+    Look: {
         index: number;
     };
 };

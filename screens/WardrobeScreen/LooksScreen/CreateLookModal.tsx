@@ -113,7 +113,6 @@ export default function CreateLookModal({
         });
     };
 
-    // @ts-ignore
     return (
         <BottomSheetModalProvider>
             <View style={styles.container}>
