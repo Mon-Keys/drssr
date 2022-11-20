@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import {ActivityIndicator, ScrollView, StyleSheet} from 'react-native';
+import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
 
 import {useAppSelector} from '../../../hooks/useAppSelector';
 import {useAppDispatch} from '../../../hooks/useAppDispatch';
@@ -92,12 +92,13 @@ export default function AddItemModal() {
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <BigImage img={img} style={styles.imageContainer}/>
 
-            <InputContainer inputFields={fields} style={styles.bodyContainer}/>
-
             {prepareItem.status === 'pending' ? (
                 <ActivityIndicator size="large" color={Colors.base.black} style={styles.indicator} />
             ) : (
-                <BaseButton title={'Сохранить'} onPress={add} style={styles.submitContainer} />
+                <>
+                    <InputContainer inputFields={fields} style={styles.bodyContainer}/>
+                    <BaseButton title={'Сохранить'} onPress={add} style={styles.submitContainer} />
+                </>
             )}
         </ScrollView>
     );
