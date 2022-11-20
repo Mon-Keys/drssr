@@ -84,7 +84,7 @@ export default function AddItemModal() {
     let img = '';
 
     if (prepareItem.itemResp) {
-        updateValue(fields, 'type', prepareItem.itemResp.type); // TODO чет не работает
+        updateValue(fields, 'type', prepareItem.itemResp.type);
         img = prepareItem.itemResp.mask_path;
     }
 
