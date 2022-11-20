@@ -5,7 +5,7 @@ import {
     RefreshControl,
     SafeAreaView,
     Platform,
-    StatusBar
+    StatusBar, View, Text, FlatList, Image
 } from 'react-native';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -15,6 +15,10 @@ import { RootNavigation } from '../../types';
 import Colors from '../../styles/Colors';
 import { ProfileCard } from '../../components/base/ProfileCard';
 import { useNavigation } from "@react-navigation/native";
+import {getPosts} from "../../reducers/posts/createPost";
+import {selectPosts} from "../../reducers/posts/postReducer";
+import {retry} from "@reduxjs/toolkit/query";
+import {selectLook} from "../../reducers/lookReducer";
 
 const styles = StyleSheet.create({
     container: {
@@ -43,15 +47,19 @@ export default function ProfileScreen() {
     const navigation = useNavigation<RootNavigation>();
 
     const { userData } = useAppSelector(selectUser);
+    const posts = useAppSelector(selectPosts);
+    // const posts = useAppSelector(selectLook);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(fetchUserData());
+        dispatch(getPosts());
     }, [dispatch]);
 
     const refresh = () => {
         dispatch(fetchUserData());
+        dispatch(getPosts());
     };
 
     return (
@@ -80,6 +88,17 @@ export default function ProfileScreen() {
                         'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                     }
                 />
+                {/*<FlatList*/}
+                {/*    data={posts}*/}
+                {/*    numColumns={2}*/}
+                {/*    renderItem={({item}) => (*/}
+                {/*        <View style={{ width: 40, height: 60, backgroundColor: Colors.base.darkgray }}>*/}
+                {/*            /!*<Image source={{ uri: item.img_path }} />*!/*/}
+                {/*            /!*<Image source={{ uri: item.previews[0] }} />*!/*/}
+                {/*            <Text>{item.type + item.id}</Text>*/}
+                {/*        </View>*/}
+                {/*    )}*/}
+                {/*/>*/}
             </ScrollView>
         </SafeAreaView>
     );

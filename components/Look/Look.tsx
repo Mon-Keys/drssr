@@ -9,6 +9,8 @@ import BaseButton from "../base/BaseButton";
 import {useNavigation} from "@react-navigation/native";
 import {RootNavigation} from "../../types";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {createPost} from "../../reducers/posts/createPost";
+import {ICreatePost} from "../../network/api/common";
 
 const styles = StyleSheet.create({
     container: {
@@ -50,7 +52,13 @@ export const Look = ({look} : {look: ILook}) => {
     const dispatch = useAppDispatch();
 
     const publish = () => {
-        // dispatch(createPost())
+        const post: ICreatePost = {
+            element_id: look.id,
+            type: 'look',
+            description: 'захардкоженное описание поста',
+            previews: [look.img_path],
+        }
+        dispatch(createPost(post))
         navigation.navigate('Profile');
     }
 

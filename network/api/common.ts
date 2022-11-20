@@ -1,5 +1,8 @@
 import http from "../instace"
 import * as ImagePicker from "expo-image-picker";
+import {Clothes} from "../../reducers/items/clothesReducer";
+import {ILook} from "../../reducers/lookReducer";
+import {IPost} from "../../reducers/posts/post";
 
 
 export interface IItemData {
@@ -61,6 +64,13 @@ export interface IGetLookData extends ILookData {
     description: string;
 }
 
+export interface ICreatePost {
+    element_id: number;
+    type: string;
+    description: string;
+    previews: Array<string>;
+}
+
 function GenerateRandomString(length: number): string {
     let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -108,5 +118,19 @@ export default class Common {
         return http.get<Array<IGetLookData>>(
             `/private/looks/all?limit=${limit}&offset=${offset}`
         );
+    }
+
+    createPost(data: ICreatePost) {
+        // return http.post('/private/posts', {
+        //     element_id: data.element_id,
+        //     type: data.type,
+        //     description: data.description,
+        //     previews: {}
+        // });
+        return http.post<ILookData>('/private/posts', data);
+    }
+
+    getPosts() {
+        return http.get<Array<IPost>>(`/private/posts/all?limit=${10}&offset=${0}`);
     }
 }
