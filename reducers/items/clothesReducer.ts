@@ -27,8 +27,8 @@ export interface PrepareClothesResponse {
 
 export interface PrepareClothes {
     currentItem?: ImagePicker.ImagePickerResult | null;
-    itemResp: PrepareClothesResponse | null;
-    status: string
+    itemResp?: PrepareClothesResponse | null;
+    status?: string | ''
 }
 
 interface ClothesState {
@@ -40,7 +40,7 @@ interface ClothesState {
 
 const initialState = {
     clothesData: [],
-    prepareClothes: {status: '', itemResp: null},
+    prepareClothes: {},
     status: '',
     error: ''
 } as ClothesState;

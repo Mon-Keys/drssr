@@ -8,22 +8,14 @@ import {
     StatusBar,
     View
 } from 'react-native';
-import { RootNavigation } from '../../types';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {
-    BottomSheetModal,
-    BottomSheetModalProvider
-} from '@gorhom/bottom-sheet';
-import * as ImagePicker from 'expo-image-picker';
 import { Colors, Layout } from '../../styles';
 import CategoriesScreen from './ItemsScreen/CategoriesScreen';
 import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
 import { AntDesign, Entypo } from '@expo/vector-icons';
-import StyledButton from '../../components/base/StyledButton';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
-import { useNavigation } from '@react-navigation/native';
-import {choosePhoto} from "../../reducers/items/clothesReducer";
+import ViewBottomMenu from "../../components/items/ViewBottomMenu";
+import {BottomSheetModal} from "@gorhom/bottom-sheet";
 
 const styles = StyleSheet.create({
     container: {
@@ -59,35 +51,35 @@ const styles = StyleSheet.create({
 });
 
 export default function WardrobeScreen() {
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
+    //
+    // const navigation = useNavigation<RootNavigation>();
+    //
+    // const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
+    // const snapPoints = React.useMemo(() => ['40%'], []);
+    //
+    // const openModal = () => {
+    //     // @ts-ignore
+    //     bottomSheetModalRef.current.present();
+    // };
+    //
+    // const closeModal = () => {
+    //     // @ts-ignore
+    //     bottomSheetModalRef.current.close();
+    // };
+    //
+    // const pickImage = async () => {
+    //     let result = await ImagePicker.launchImageLibraryAsync({
+    //         mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    //         quality: 1
+    //     });
+    //     if (!result.cancelled) {
+    //         dispatch(choosePhoto(result));
+    //         navigation.navigate('AddItem');
+    //         closeModal();
+    //     }
+    // };
 
-    const navigation = useNavigation<RootNavigation>();
-
-    const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
-    const snapPoints = React.useMemo(() => ['40%'], []);
-
-    const openModal = () => {
-        // @ts-ignore
-        bottomSheetModalRef.current.present();
-    };
-
-    const closeModal = () => {
-        // @ts-ignore
-        bottomSheetModalRef.current.close();
-    };
-
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            quality: 1
-        });
-        if (!result.cancelled) {
-            dispatch(choosePhoto(result));
-            navigation.navigate('AddItem');
-            closeModal();
-        }
-    };
-// wedwe
     const menuItems = [
         {
             name: 'Вещи',
@@ -103,8 +95,15 @@ export default function WardrobeScreen() {
         ReactElement<any, any>
     >(menuItems[0].component);
 
+    const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
+    const openModal = () => {
+        if (bottomSheetModalRef.current) {
+            bottomSheetModalRef.current.present();
+        }
+    };
+
     return (
-        <BottomSheetModalProvider>
+        <ViewBottomMenu modalRef={bottomSheetModalRef}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerContainer}>
                     <IconButton
@@ -137,38 +136,6 @@ export default function WardrobeScreen() {
                 </View>
                 <View style={styles.mainContainer}>{currentScreen}</View>
             </SafeAreaView>
-            <BottomSheetModal
-                ref={bottomSheetModalRef}
-                index={0}
-                snapPoints={snapPoints}
-                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.31)' }}
-                handleIndicatorStyle={{ backgroundColor: Colors.base.black }}
-            >
-                <View style={styles.selectContainer}>
-                    <Pressable onPress={closeModal}>
-                        <Entypo
-                            name="cross"
-                            size={24}
-                            color={Colors.base.black}
-                        />
-                    </Pressable>
-                    <StyledButton
-                        title={'Добавить лук'}
-                        onPress={() => {
-                            navigation.navigate('CreateLook');
-                            closeModal();
-                        }}
-                    />
-                    <StyledButton
-                        title={'Камера'}
-                        onPress={() => {
-                            navigation.navigate('ImageRecognizer');
-                            closeModal();
-                        }}
-                    />
-                    <StyledButton title={'Из библиотеки'} onPress={pickImage} />
-                </View>
-            </BottomSheetModal>
-        </BottomSheetModalProvider>
+        </ViewBottomMenu>
     );
 }

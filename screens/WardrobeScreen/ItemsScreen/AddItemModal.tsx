@@ -59,6 +59,10 @@ export default function AddItemModal() {
         }
     }, [dispatch, prepareItem.currentItem]);
 
+    navigation.addListener('beforeRemove', ()=>{
+        dispatch(clearAddItem());
+    })
+
     const add = () => {
         const item = prepareItem.itemResp;
         if (item == null) {
@@ -75,7 +79,6 @@ export default function AddItemModal() {
             // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
         }))
         navigation.navigate('Item', { index: 0 });
-        dispatch(clearAddItem());
     }
 
     let img = '';

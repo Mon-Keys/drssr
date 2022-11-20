@@ -1,21 +1,16 @@
-import { SimpleLineIcons } from '@expo/vector-icons';
-import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import React from 'react';
 import {
     Platform,
-    StatusBar,
     StyleSheet,
     Image,
     KeyboardAvoidingView,
     ActivityIndicator, ScrollView
 } from 'react-native';
-import InputField from '../../../components/base/InputField';
-import StyledButton from '../../../components/base/StyledButton';
 import { View } from '../../../components/base/Themed';
 
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { newLook, selectCreateLook } from '../../../reducers/createLookReducer';
-import {Colors, Layout} from '../../../styles';
+import { Layout } from '../../../styles';
 import { useDispatch } from 'react-redux';
 import { ILookData } from '../../../network';
 import { RootStackScreenProps } from '../../../types';

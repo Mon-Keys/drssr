@@ -22,6 +22,8 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import {useAppDispatch} from "../../../hooks/useAppDispatch";
 import {fetchUsersClothes} from "../../../reducers/items/fetchClothes";
+import ViewBottomMenu from "../../../components/items/ViewBottomMenu";
+import {BottomSheetModal} from "@gorhom/bottom-sheet";
 
 const styles = StyleSheet.create({
     container: {
@@ -75,59 +77,69 @@ export default function ItemsByCategoryScreen() {
         dispatch(fetchUsersClothes());
     };
 
+    const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
+    const openModal = () => {
+        if (bottomSheetModalRef.current) {
+            bottomSheetModalRef.current.present();
+        }
+    };
+
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.headerContainer}>
-                <IconButton
-                    style={styles.flexZero}
-                    icon={
-                        <AntDesign
-                            name="back"
-                            size={24}
-                            color={Colors.base.black}
-                        />
-                    }
-                    onPress={() => navigation.goBack()}
-                />
-                <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitleText}>{category}</Text>
+        <ViewBottomMenu modalRef={bottomSheetModalRef} >
+            <SafeAreaView style={styles.container}>
+                <View style={styles.headerContainer}>
+                    <IconButton
+                        style={styles.flexZero}
+                        icon={
+                            <AntDesign
+                                name="back"
+                                size={24}
+                                color={Colors.base.black}
+                            />
+                        }
+                        onPress={() => navigation.goBack()}
+                    />
+                    <View style={styles.headerTitleContainer}>
+                        <Text style={styles.headerTitleText}>{category}</Text>
+                    </View>
+                    <IconButton
+                        style={styles.flexZero}
+                        icon={
+                            <AntDesign
+                                name="plus"
+                                onPress={openModal}
+                                size={24}
+                                color={Colors.base.black}
+                            />
+                        }
+                    />
                 </View>
-                <IconButton
-                    style={styles.flexZero}
-                    icon={
-                        <AntDesign
-                            name="search1"
-                            size={24}
-                            color={Colors.base.black}
-                        />
-                    }
-                />
-            </View>
-            <View style={styles.bodyContainer}>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    numColumns={2}
-                    columnWrapperStyle={styles.columnWrapper}
-                    data={clothingByCategory}
-                    renderItem={({ item }) => (
-                        <ItemPreview
-                            clothes={item}
-                            onPress={() =>
-                                navigation.navigate('Item', {
-                                    index: clothing.indexOf(item)
-                                })
-                            }
-                        />
-                    )}
-                    refreshControl={
-                        <RefreshControl
-                            tintColor={Colors.base.black}
-                            refreshing={refreshing}
-                            onRefresh={refresh}
-                        />
-                    }
-                />
-            </View>
-        </SafeAreaView>
+                <View style={styles.bodyContainer}>
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        numColumns={2}
+                        columnWrapperStyle={styles.columnWrapper}
+                        data={clothingByCategory}
+                        renderItem={({ item }) => (
+                            <ItemPreview
+                                clothes={item}
+                                onPress={() =>
+                                    navigation.navigate('Item', {
+                                        index: clothing.indexOf(item)
+                                    })
+                                }
+                            />
+                        )}
+                        refreshControl={
+                            <RefreshControl
+                                tintColor={Colors.base.black}
+                                refreshing={refreshing}
+                                onRefresh={refresh}
+                            />
+                        }
+                    />
+                </View>
+            </SafeAreaView>
+        </ViewBottomMenu>
     );
 }
