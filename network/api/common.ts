@@ -68,7 +68,7 @@ export interface ICreatePost {
     element_id: number;
     type: string;
     description: string;
-    previews: Array<string>;
+    previews?: Array<string>;
 }
 
 function GenerateRandomString(length: number): string {

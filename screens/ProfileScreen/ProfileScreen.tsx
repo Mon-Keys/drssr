@@ -19,6 +19,9 @@ import {getPosts} from "../../reducers/posts/createPost";
 import {selectPosts} from "../../reducers/posts/postReducer";
 import {retry} from "@reduxjs/toolkit/query";
 import {selectLook} from "../../reducers/lookReducer";
+import {IPost} from "../../reducers/posts/post";
+import {Layout} from "../../styles";
+import {PostPreview} from "../../components/posts/PostPreview";
 
 const styles = StyleSheet.create({
     container: {
@@ -38,6 +41,18 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50
+    },
+
+    postsContainer: {
+        margin: Layout.margins.default,
+        backgroundColor: Colors.base.white,
+        borderRadius: Layout.cornerRadius,
+        padding: Layout.margins.small
+    },
+    postsWrapper: {
+        justifyContent: 'space-between',
+        marginHorizontal: Layout.margins.default,
+        marginVertical: Layout.margins.small,
     }
 });
 
@@ -48,7 +63,6 @@ export default function ProfileScreen() {
 
     const { userData } = useAppSelector(selectUser);
     const posts = useAppSelector(selectPosts);
-    // const posts = useAppSelector(selectLook);
 
     const dispatch = useAppDispatch();
 
@@ -88,17 +102,15 @@ export default function ProfileScreen() {
                         'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                     }
                 />
-                {/*<FlatList*/}
-                {/*    data={posts}*/}
-                {/*    numColumns={2}*/}
-                {/*    renderItem={({item}) => (*/}
-                {/*        <View style={{ width: 40, height: 60, backgroundColor: Colors.base.darkgray }}>*/}
-                {/*            /!*<Image source={{ uri: item.img_path }} />*!/*/}
-                {/*            /!*<Image source={{ uri: item.previews[0] }} />*!/*/}
-                {/*            <Text>{item.type + item.id}</Text>*/}
-                {/*        </View>*/}
-                {/*    )}*/}
-                {/*/>*/}
+                <FlatList
+                    style={styles.postsContainer}
+                    columnWrapperStyle={styles.postsWrapper}
+                    data={posts}
+                    numColumns={2}
+                    renderItem={({item}) => (
+                        <PostPreview post={item}/>
+                    )}
+                />
             </ScrollView>
         </SafeAreaView>
     );

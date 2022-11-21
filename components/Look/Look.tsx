@@ -56,7 +56,7 @@ export const Look = ({look} : {look: ILook}) => {
             element_id: look.id,
             type: 'look',
             description: 'захардкоженное описание поста',
-            previews: [look.img_path],
+            // previews: [look.img_path],
         }
         dispatch(createPost(post))
         navigation.navigate('Profile');
@@ -69,7 +69,7 @@ export const Look = ({look} : {look: ILook}) => {
                     <Image style={styles.lookImage} source={{ uri: getUri(look.img_path) }}/>
                 </View>
                 <View style={styles.descriptionContainer}>
-                    <Text style={styles.lookText}>{'look.d escr iptionl ook. descr iptionl ook.dk.d escr iptionl ook. descr iptionl ook.descrlook.d escr iptionl ook. descr iptionl ook.descr iptionlook.de scription ewf look.description'}{look.description}</Text>
+                    <Text style={styles.lookText}>{look.description}</Text>
                 </View>
                 <BaseButton title={'Опубликовать'} style={styles.button} onPress={publish} />
             </ScrollView>
