@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
-import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 
 import {useAppSelector} from '../../../hooks/useAppSelector';
 import {useAppDispatch} from '../../../hooks/useAppDispatch';
@@ -43,11 +43,10 @@ export default function AddItemModal() {
 
     const fields: Array<InputFieldData> = [
         {key: 'type', title: 'Тип вещи', placeholder: 'Например джинсы'},
-        {key: 'name', title: 'Название', placeholder: 'Дайте название вещи'},
-        // {key: 'link', title: 'Ссылка', placeholder: 'Ссылка на вещь в магазине'},
+        // {key: 'name', title: 'Название', placeholder: 'Дайте название вещи'},
+        {key: 'link', title: 'Ссылка', placeholder: 'Ссылка на вещь в магазине'},
         {key: 'brand', title: 'Бренд', placeholder: 'Укажите бренд'},
-        // {key: 'price', title: 'Цена', placeholder: 'Укажите цену вещи'},
-        // {key: 'color', title: 'Цвет', placeholder: 'Укажите цвет вещи'},
+        {key: 'price', title: 'Цена', placeholder: 'Укажите цену вещи'},
     ]
 
     useEffect(() => {
@@ -70,6 +69,7 @@ export default function AddItemModal() {
         }
         dispatch(addClothes({
             id: item.id,
+            type: getValue(fields, 'type'),
             link: getValue(fields, 'link'),
             brand: getValue(fields, 'brand'),
             price: Number(getValue(fields, 'price')),

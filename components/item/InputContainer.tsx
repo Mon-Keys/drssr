@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ViewStyle, ScrollView} from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 
 import { Colors, Layout } from '../../styles';
 import InputForItem from "./InputForItem";
