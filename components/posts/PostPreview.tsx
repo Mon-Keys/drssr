@@ -23,14 +23,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     likeButton: {
-        // margin: Layout.margins.default,
-        width: 24,
-        height: 24,
+        width: 28,
+        height: 28,
         position: 'absolute',
         bottom: 14,
         right: 14,
-        borderRadius: 20,
-        backgroundColor: 'green',
+        borderRadius: 28,
+        backgroundColor: Colors.base.lightgray,
     },
 });
 
@@ -54,14 +53,20 @@ export const PostPreview = ({post} : {post: IPost}) => {
         return ''
     }
 
+    const [isLike, setLike] = React.useState(true);
+
     return (
         <View style={styles.container}>
-            <View style={styles.postImage} />
-            {/*<Image style={styles.postImage} source={{ uri: getUriPreview(post) }}/>*/}
+            {/*<View style={styles.postImage} />*/}
+            <Image style={styles.postImage} source={{ uri: getUriPreview(post) }}/>
             <View style={styles.likeButton}>
-                <IconButton style={{ flex:1, alignItems: 'center', justifyContent: 'center' }} icon={(
-                    <AntDesign name={'hearto'} size={18} color={Colors.base.darkgray} />
-                )} />
+                <IconButton
+                    style={{ flex:1, alignItems: 'center', justifyContent: 'center' }}
+                    onPress={() => {setLike(!isLike)}}
+                    icon={(
+                        <AntDesign name={'hearto'} size={18} color={isLike ? Colors.base.black : Colors.base.darkgray} />
+                    )}
+                />
             </View>
             {/*<BaseButton title={'Опубликовать'} style={styles.likeButton} onPress={publish} />*/}
         </View>

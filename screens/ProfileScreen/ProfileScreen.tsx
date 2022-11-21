@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
     },
 
     postsContainer: {
-        margin: Layout.margins.default,
-        backgroundColor: Colors.base.white,
-        borderRadius: Layout.cornerRadius,
-        padding: Layout.margins.small
+        // margin: Layout.margins.default,
+        // backgroundColor: Colors.base.white,
+        // borderRadius: Layout.cornerRadius,
+        // padding: Layout.margins.small
     },
     postsWrapper: {
         justifyContent: 'space-between',
