@@ -1,20 +1,19 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import Api, { IClothesData, IItemData } from "../../network";
-import { PrepareClothesResponse } from "./clothesReducer";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import Api, { IClothesData, IItemData } from '../../network';
+import { PrepareClothesResponse } from './clothesReducer';
 
+export const prepareClothes = createAsyncThunk<
+    PrepareClothesResponse,
+    IItemData
+>('items/prepareClothes', async (data, { rejectWithValue }) => {
+    try {
+        const response = await Api.Common.checkImage(data);
 
-export const prepareClothes = createAsyncThunk<PrepareClothesResponse, IItemData>(
-    'items/prepareClothes',
-    async (data, { rejectWithValue }) => {
-        try {
-            const response = await Api.Common.checkImage(data);
-
-            return response.data;
-        } catch (error: any) {
-            return rejectWithValue(error.message);
-        }
+        return response.data;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
     }
-);
+});
 
 export const addClothes = createAsyncThunk<IClothesData, IItemData>(
     'items/addClothes',

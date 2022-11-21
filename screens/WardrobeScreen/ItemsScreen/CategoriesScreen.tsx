@@ -8,10 +8,9 @@ import { Colors, Layout } from '../../../styles';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { RootNavigation } from '../../../types';
 import { useNavigation } from '@react-navigation/native';
-import EmptyView from "../../../components/base/EmptyView";
-import {getCategories} from "../../../reducers/items/categories";
-import {fetchUsersClothes} from "../../../reducers/items/fetchClothes";
-import {fetchUsersLooks} from "../../../reducers/lookReducer";
+import EmptyView from '../../../components/base/EmptyView';
+import { getCategories } from '../../../reducers/items/categories';
+import { fetchUsersClothes } from '../../../reducers/items/fetchClothes';
 
 const styles = StyleSheet.create({
     container: {
@@ -73,7 +72,10 @@ export default function CategoriesScreen() {
                     }
                 />
             ) : (
-                <EmptyView textHeader={'Здесь пока пусто'} text={'Добавьте вещи с помощью +'} />
+                <EmptyView
+                    textHeader={'Здесь пока пусто'}
+                    text={'Добавьте вещи с помощью +'}
+                />
             )}
         </View>
     );

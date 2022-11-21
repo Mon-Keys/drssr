@@ -1,5 +1,7 @@
 //@ts-nocheck
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+//@ts-ignore
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Api, { ILookData } from '../network';
 import { RootState } from '../store';
 

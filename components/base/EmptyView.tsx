@@ -1,6 +1,6 @@
-import React  from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import {Colors, Layout} from "../../styles";
+import { Colors, Layout } from '../../styles';
 
 interface EmptyViewProps {
     textHeader?: string;

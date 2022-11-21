@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import React from 'react';
 import { Layout } from '../../styles';
-import { getUri } from "../../network/const";
-import {ClothingCategory} from "../../reducers/items/categories";
+import { getUri } from '../../network/const';
+import { ClothingCategory } from '../../reducers/items/categories';
 
 const styles = StyleSheet.create({
     container: {

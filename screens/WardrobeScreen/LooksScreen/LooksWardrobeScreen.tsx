@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
 import { Colors } from '../../../styles';
-import EmptyView from "../../../components/base/EmptyView";
+import EmptyView from '../../../components/base/EmptyView';
 
 export default function LooksWardrobeScreen() {
     const looks = useAppSelector(selectLook);
@@ -17,7 +17,7 @@ export default function LooksWardrobeScreen() {
     const refresh = () => {
         dispatch(fetchUsersLooks());
     };
-    const flatListRef = React.useRef();
+    // const flatListRef = React.useRef();
     React.useEffect(() => {
         dispatch(fetchUsersLooks());
     }, [dispatch]);
@@ -44,7 +44,10 @@ export default function LooksWardrobeScreen() {
                     }
                 />
             ) : (
-                <EmptyView textHeader={'Здесь пока пусто'} text={'Создайте образ с помощью +'}/>
+                <EmptyView
+                    textHeader={'Здесь пока пусто'}
+                    text={'Создайте образ с помощью +'}
+                />
             )}
         </>
     );

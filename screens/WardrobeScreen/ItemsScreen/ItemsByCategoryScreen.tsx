@@ -6,7 +6,8 @@ import {
     View,
     FlatList,
     Platform,
-    StatusBar, RefreshControl
+    StatusBar,
+    RefreshControl
 } from 'react-native';
 
 import { Colors, Layout } from '../../../styles';
@@ -20,10 +21,10 @@ import {
     RootNavigation
 } from '../../../types';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import {useAppDispatch} from "../../../hooks/useAppDispatch";
-import {fetchUsersClothes} from "../../../reducers/items/fetchClothes";
-import ViewBottomMenu from "../../../components/items/ViewBottomMenu";
-import {BottomSheetModal} from "@gorhom/bottom-sheet";
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { fetchUsersClothes } from '../../../reducers/items/fetchClothes';
+import ViewBottomMenu from '../../../components/items/ViewBottomMenu';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 
 const styles = StyleSheet.create({
     container: {
@@ -85,7 +86,7 @@ export default function ItemsByCategoryScreen() {
     };
 
     return (
-        <ViewBottomMenu modalRef={bottomSheetModalRef} >
+        <ViewBottomMenu modalRef={bottomSheetModalRef}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerContainer}>
                     <IconButton

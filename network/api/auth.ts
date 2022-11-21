@@ -1,5 +1,4 @@
-import http from "../instace"
-
+import http from '../instace';
 
 export interface ILoginData {
     login: string;

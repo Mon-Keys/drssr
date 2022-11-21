@@ -3,7 +3,6 @@ import React, { ReactElement } from 'react';
 import {
     StyleSheet,
     SafeAreaView,
-    Pressable,
     Platform,
     StatusBar,
     View
@@ -12,10 +11,10 @@ import { Colors, Layout } from '../../styles';
 import CategoriesScreen from './ItemsScreen/CategoriesScreen';
 import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
-import { AntDesign, Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
-import ViewBottomMenu from "../../components/items/ViewBottomMenu";
-import {BottomSheetModal} from "@gorhom/bottom-sheet";
+import ViewBottomMenu from '../../components/items/ViewBottomMenu';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 
 const styles = StyleSheet.create({
     container: {

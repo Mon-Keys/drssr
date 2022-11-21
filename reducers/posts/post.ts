@@ -1,5 +1,5 @@
-import {Clothes} from "../items/clothesReducer";
-import {ILook} from "../lookReducer";
+import { Clothes } from '../items/clothesReducer';
+import { ILook } from '../lookReducer';
 
 export interface IPost {
     id: number;

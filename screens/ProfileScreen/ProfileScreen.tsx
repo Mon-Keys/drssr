@@ -5,7 +5,8 @@ import {
     RefreshControl,
     SafeAreaView,
     Platform,
-    StatusBar, View, Text, FlatList, Image
+    StatusBar,
+    FlatList
 } from 'react-native';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -14,14 +15,11 @@ import { fetchUserData, selectUser } from '../../reducers/userReducer';
 import { RootNavigation } from '../../types';
 import Colors from '../../styles/Colors';
 import { ProfileCard } from '../../components/base/ProfileCard';
-import { useNavigation } from "@react-navigation/native";
-import {getPosts} from "../../reducers/posts/createPost";
-import {selectPosts} from "../../reducers/posts/postReducer";
-import {retry} from "@reduxjs/toolkit/query";
-import {selectLook} from "../../reducers/lookReducer";
-import {IPost} from "../../reducers/posts/post";
-import {Layout} from "../../styles";
-import {PostPreview} from "../../components/posts/PostPreview";
+import { useNavigation } from '@react-navigation/native';
+import { getPosts } from '../../reducers/posts/createPost';
+import { selectPosts } from '../../reducers/posts/postReducer';
+import { Layout } from '../../styles';
+import { PostPreview } from '../../components/posts/PostPreview';
 
 const styles = StyleSheet.create({
     container: {
@@ -52,7 +50,7 @@ const styles = StyleSheet.create({
     postsWrapper: {
         justifyContent: 'space-between',
         marginHorizontal: Layout.margins.default,
-        marginVertical: Layout.margins.small,
+        marginVertical: Layout.margins.small
     }
 });
 
@@ -107,9 +105,7 @@ export default function ProfileScreen() {
                     columnWrapperStyle={styles.postsWrapper}
                     data={posts}
                     numColumns={2}
-                    renderItem={({item}) => (
-                        <PostPreview post={item}/>
-                    )}
+                    renderItem={({ item }) => <PostPreview post={item} />}
                 />
             </ScrollView>
         </SafeAreaView>

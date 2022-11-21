@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    StyleSheet,
-    Pressable,
-    FlatList
-} from 'react-native';
+import { StyleSheet, Pressable, FlatList } from 'react-native';
 
 import { View } from '../../../components/base/Themed';
 
@@ -17,26 +13,25 @@ import {
 import { EditableImage } from '../../../components/editor/EditableImage';
 import { Item } from '../../../components/editor/Item';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { Clothes, selectUserItems } from '../../../reducers/items/clothesReducer';
+import { selectUserItems } from '../../../reducers/items/clothesReducer';
 import ViewShot from 'react-native-view-shot';
 import { RootStackScreenProps } from '../../../types';
 import { addLookPhoto } from '../../../reducers/createLookReducer';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import BaseButton from "../../../components/base/BaseButton";
-import {InputFieldData} from "../../../components/item/InputContainer";
-import EmptyView from "../../../components/base/EmptyView";
+import BaseButton from '../../../components/base/BaseButton';
+import EmptyView from '../../../components/base/EmptyView';
 
 const styles = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%',
-        backgroundColor: Colors.base.white,
+        backgroundColor: Colors.base.white
     },
     addButton: {
         position: 'absolute',
         zIndex: 10,
         top: 20,
-        right: 20,
+        right: 20
     },
     lookArea: {
         height: 700,
@@ -70,8 +65,8 @@ const styles = StyleSheet.create({
         bottom: 14,
         left: '50%',
         width: 120,
-        marginLeft: -60,
-    },
+        marginLeft: -60
+    }
 });
 
 export interface ItemMock {
@@ -123,15 +118,22 @@ export default function CreateLookModal({
                         color={Colors.base.black}
                     />
                 </Pressable>
-                {(boardItems.length == 0) ? (
-                    <EmptyView textHeader={'Создайте образ'} text={'Добавляйте вещи с помощью +'}  />
+                {boardItems.length == 0 ? (
+                    <EmptyView
+                        textHeader={'Создайте образ'}
+                        text={'Добавляйте вещи с помощью +'}
+                    />
                 ) : (
                     <>
                         <ViewShot
                             onCapture={() => {}}
                             //@ts-ignore
                             ref={ref}
-                            options={{ result: 'base64', format: 'jpg', quality: 0.8 }}
+                            options={{
+                                result: 'base64',
+                                format: 'jpg',
+                                quality: 0.8
+                            }}
                         >
                             <View style={styles.lookArea}>
                                 {boardItems.map((item) => (

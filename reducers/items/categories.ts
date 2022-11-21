@@ -1,6 +1,5 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { selectUserItems } from "./clothesReducer";
-
+import { createSelector } from '@reduxjs/toolkit';
+import { selectUserItems } from './clothesReducer';
 
 export interface ClothingCategory {
     caption: string;

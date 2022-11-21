@@ -4,7 +4,7 @@ import { View } from '../../components/base/Themed';
 import StyledButton from '../../components/base/StyledButton';
 import { logoutUser } from '../../reducers/userReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { Colors } from "../../styles";
+import { Colors } from '../../styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -12,14 +12,14 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
 
-        backgroundColor: Colors.base.lightgray,
+        backgroundColor: Colors.base.lightgray
     },
     tempContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'transparent'
-    },
+    }
 });
 
 export default function SettingsModalScreen() {

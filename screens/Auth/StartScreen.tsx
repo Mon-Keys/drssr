@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import { View } from '../../components/base/Themed';
-import { Colors, Layout } from "../../styles";
+import { Colors, Layout } from '../../styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.base.lightgray
     },
     headerTitle: {
-        fontSize: Layout.fontSize.header*3,
+        fontSize: Layout.fontSize.header * 3,
         color: Colors.base.black
     },
     caption: {
