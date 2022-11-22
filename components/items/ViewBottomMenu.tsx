@@ -86,7 +86,7 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
         closeMenu();
     }
 
-    const createLook = () => () => {
+    const createLook = () => {
         navigation.navigate('CreateLook');
         closeMenu();
     }

@@ -128,6 +128,7 @@ export default function ProfileScreen() {
                     />
                     <Pressable onPress={openMenu} ><Text>Create Post</Text></Pressable>
                     <FlatList
+                        scrollEnabled={false}
                         style={styles.postsContainer}
                         columnWrapperStyle={styles.postsWrapper}
                         data={posts}

@@ -105,8 +105,8 @@ export default function SaveLookModal({
             //@ts-ignore
             dispatch(fetchUsersLooks()).then(() => {
                 //@ts-ignore
-                // navigation.navigate('Wardrobe');
-                navigation.goBack();
+                navigation.navigate('Wardrobe');
+                // navigation.pop(2); // TODO очень опасно
             });
         });
     };
