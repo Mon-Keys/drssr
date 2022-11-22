@@ -100,9 +100,6 @@ export default function CreateLookModal({
     const proceed = () => {
         //@ts-ignore
         ref.current.capture().then((uri) => {
-            console.log('captue done');
-            console.log('captue done');
-            console.log('captue done');
             dispatch(addLookPhoto(uri));
             navigation.navigate('SaveLook');
         });

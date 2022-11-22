@@ -85,7 +85,7 @@ export default function AddItemModal() {
             currency: 'RUB', // TODO required
             // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
         }));
-        navigation.navigate('Item', { index: 0 });
+        navigation.navigate('Item', { id: item.id });
     };
 
     let img = '';

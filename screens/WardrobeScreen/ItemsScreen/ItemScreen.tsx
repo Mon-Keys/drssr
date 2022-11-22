@@ -50,9 +50,26 @@ export default function ItemScreen() {
     const navigation = useNavigation<RootNavigation>();
 
     const route = useRoute<ThingScreenRouteProp>();
-    const { index } = route.params;
+    const { id } = route.params;
 
-    const item = clothing[index];
+    let item = clothing[0];
+    const itemTemp = clothing.find((item) => item.id == id);
+    if (itemTemp) {
+        item = itemTemp;
+    } else {
+        navigation.goBack();
+    }
+
+    const getNameScreen = () => {
+        let name = '';
+        if (item && item.type) {
+            name += item.type;
+        }
+        if (item && item.brand) {
+            name += ' ' + item.brand;
+        }
+        return name == '' ? 'Вещь' : name;
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -70,7 +87,7 @@ export default function ItemScreen() {
                 />
                 <View style={styles.headerTitleContainer}>
                     <Text style={styles.headerTitleText}>
-                        {item.type + ' ' + item.brand}
+                        {getNameScreen()}
                     </Text>
                 </View>
             </View>

@@ -15,6 +15,8 @@ import { fetchUserData, selectUser } from '../reducers/userReducer';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import StartScreen from '../screens/Auth/StartScreen';
 import LookScreen from '../screens/WardrobeScreen/LooksScreen/LookScreen';
+import LooksForNewPostModal from "../screens/Modals/LooksForNewPostModal";
+import CreatePostModal from "../screens/Modals/CreatePostModal";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -87,6 +89,16 @@ export function RootNavigator() {
                     name="Look"
                     component={LookScreen}
                     options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="LooksForNewPost"
+                    component={LooksForNewPostModal}
+                    options={{ title: 'Выберете образ' }}
+                />
+                <Stack.Screen
+                    name="CreatePost"
+                    component={CreatePostModal}
+                    options={{ title: 'Новая публикация' }}
                 />
             </Stack.Group>
         </Stack.Navigator>

@@ -10,7 +10,7 @@ import {
 
 import { Colors, Layout } from '../../../styles';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { RootNavigation, ThingScreenRouteProp } from '../../../types';
+import {LookRouteProp, RootNavigation, ThingScreenRouteProp} from '../../../types';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import IconButton from '../../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
@@ -49,10 +49,10 @@ export default function LookScreen() {
     const looks = useAppSelector(selectLook);
     const navigation = useNavigation<RootNavigation>();
 
-    const route = useRoute<ThingScreenRouteProp>();
-    const { index } = route.params;
+    const route = useRoute<LookRouteProp>();
+    const { id } = route.params;
 
-    const look = looks.LooksData[index];
+    const look = looks.LooksData.find((item) => item.id == id) || looks.LooksData[0]; // не гуд так делать, но как-то похуй, работать будет
 
     return (
         <SafeAreaView style={styles.container}>

@@ -7,7 +7,7 @@ import { ILook } from '../../reducers/lookReducer';
 import { getUri } from '../../network/const';
 import BaseButton from '../base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
-import { RootNavigation } from '../../types';
+import { TapBarNavigation } from '../../types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { createPost } from '../../reducers/posts/createPost';
 import { ICreatePost } from '../../network/api/common';
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 });
 
 export const Look = ({ look }: { look: ILook }) => {
-    const navigation = useNavigation<RootNavigation>();
+    const navigation = useNavigation<TapBarNavigation>();
 
     const dispatch = useAppDispatch();
 

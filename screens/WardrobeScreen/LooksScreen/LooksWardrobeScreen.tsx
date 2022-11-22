@@ -7,8 +7,12 @@ import { useAppSelector } from '../../../hooks/useAppSelector';
 import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
 import { Colors } from '../../../styles';
 import EmptyView from '../../../components/base/EmptyView';
+import {useNavigation} from "@react-navigation/native";
+import {RootNavigation} from "../../../types";
 
 export default function LooksWardrobeScreen() {
+    const navigation = useNavigation<RootNavigation>();
+
     const looks = useAppSelector(selectLook);
     const dispatch = useAppDispatch();
 
@@ -35,6 +39,11 @@ export default function LooksWardrobeScreen() {
             {isLooks() ? (
                 <LookList
                     looks={looks.LooksData}
+                    onPressLookCard={(id) => {
+                        navigation.navigate('Look', {
+                            id: id
+                        });
+                    }}
                     refreshControl={
                         <RefreshControl
                             tintColor={Colors.base.black}

@@ -2,22 +2,19 @@ import React, { ReactNode } from 'react';
 import {StyleSheet, View, Pressable, Text} from 'react-native';
 
 import {Colors, Layout} from '../../styles';
-import {choosePhoto, selectUserItems} from '../../reducers/items/clothesReducer';
 import {
     BottomSheetModal,
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
 import { Entypo } from '@expo/vector-icons';
-import StyledButton from '../base/StyledButton';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useNavigation } from '@react-navigation/native';
-import { RootNavigation } from '../../types';
-import * as ImagePicker from 'expo-image-picker';
+import {RootNavigation, TapBarNavigation} from '../../types';
 import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import {useAppSelector} from "../../hooks/useAppSelector";
 
 export interface ViewBottomMenuProps {
     children: ReactNode;
+    hasClothes: boolean;
+    hasLooks: boolean;
     modalRef: React.RefObject<BottomSheetModalMethods>;
 }
 
@@ -27,9 +24,8 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     selectContainer: {
-        backgroundColor: Colors.base.white,
         flex: 1,
-        justifyContent: 'space-around'
+        backgroundColor: Colors.base.white
     },
     headerMenuContainer: {
         flexDirection: 'row',
@@ -50,18 +46,18 @@ const styles = StyleSheet.create({
         fontSize: Layout.fontSize.big,
         fontWeight: 'bold',
         color: Colors.base.black,
+    },
+    helpText: {
+        fontSize: Layout.fontSize.default,
+        color: Colors.base.black,
     }
 });
 
-export default function ViewBottomMenu(props: ViewBottomMenuProps) {
-    const dispatch = useAppDispatch();
-
+export default function NewPostBottomMenu(props: ViewBottomMenuProps) {
+    const tapBarNavigation = useNavigation<TapBarNavigation>();
     const navigation = useNavigation<RootNavigation>();
 
-    const clothes = useAppSelector(selectUserItems);
-    const hasClothes: boolean = clothes && clothes.length > 0;
-
-    const snapPoints = React.useMemo(() => ['25%'], []); // с камерой 30%
+    const snapPoints = React.useMemo(() => ['25%'], []);
 
     const closeMenu = () => {
         if (props.modalRef.current) {
@@ -69,27 +65,20 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
         }
     };
 
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            quality: 1
-        });
-        if (!result.cancelled) {
-            dispatch(choosePhoto(result));
-            navigation.navigate('AddItem');
-            closeMenu();
-        }
+    const goWardrobe = () => {
+        tapBarNavigation.navigate('Wardrobe');
+        closeMenu();
     };
 
-    const openCamera = () => {
-        navigation.navigate('ImageRecognizer');
-        closeMenu();
-    }
-
-    const createLook = () => () => {
+    const newLook = () => {
         navigation.navigate('CreateLook');
         closeMenu();
-    }
+    };
+
+    const selectLook = () => {
+        navigation.navigate('LooksForNewPost');
+        closeMenu();
+    };
 
     return (
         <BottomSheetModalProvider>
@@ -103,7 +92,7 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
             >
                 <View style={styles.selectContainer}>
                     <View style={styles.headerMenuContainer}>
-                        <Text style={styles.headerMenu}>Обновление гардероба</Text>
+                        <Text style={styles.headerMenu}>Создание публикации</Text>
                         <Pressable onPress={closeMenu}>
                             <Entypo
                                 name="cross"
@@ -113,19 +102,29 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
                         </Pressable>
                     </View>
                     <View style={styles.bodyMenuContainer}>
-                        <Pressable onPress={pickImage} >
-                            <Text style={styles.bodyMenuButton}>Добавить вещь</Text>
-                        </Pressable>
-                        {/*<Pressable onPress={openCamera} >*/}
-                        {/*    <Text style={styles.bodyMenuButton}>Сфотографировать вещь</Text>*/}
-                        {/*</Pressable>*/}
-                        {hasClothes ? (
+                        {!props.hasClothes ? (
                             <>
-                                <Pressable onPress={createLook} >
-                                    <Text style={styles.bodyMenuButton}>Создать образ</Text>
+                                <Text style={styles.helpText}>Сперва добавьте вещей в свой гардероб</Text>
+                                <Pressable onPress={goWardrobe} >
+                                    <Text style={styles.bodyMenuButton}>Перейти в гардероб</Text>
                                 </Pressable>
                             </>
-                        ) : null}
+                        ) : !props.hasLooks ? (
+                            <>
+                                <Pressable onPress={newLook} >
+                                    <Text style={styles.bodyMenuButton}>Новый образ</Text>
+                                </Pressable>
+                            </>
+                        ) : (
+                            <>
+                                <Pressable onPress={newLook} >
+                                    <Text style={styles.bodyMenuButton}>Новый образ</Text>
+                                </Pressable>
+                                <Pressable onPress={selectLook} >
+                                    <Text style={styles.bodyMenuButton}>Существующий образ</Text>
+                                </Pressable>
+                            </>
+                        )}
                     </View>
                 </View>
             </BottomSheetModal>

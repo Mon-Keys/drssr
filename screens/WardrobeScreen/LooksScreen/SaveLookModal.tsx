@@ -105,7 +105,8 @@ export default function SaveLookModal({
             //@ts-ignore
             dispatch(fetchUsersLooks()).then(() => {
                 //@ts-ignore
-                navigation.navigate('Wardrobe');
+                // navigation.navigate('Wardrobe');
+                navigation.goBack();
             });
         });
     };

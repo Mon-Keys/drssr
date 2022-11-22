@@ -42,8 +42,6 @@ export const createLookSlice = createSlice({
     initialState,
     reducers: {
         addLookPhoto: (state, action: PayloadAction<string>) => {
-            console.log('event triggered');
-            console.log(action.payload.slice(0, 200));
             state.look.img = action.payload;
         }
     },

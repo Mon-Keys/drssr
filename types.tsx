@@ -13,6 +13,7 @@ import {
     NativeStackNavigationProp,
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
+import LooksForNewPostModal from "./screens/Modals/LooksForNewPostModal";
 
 declare global {
     namespace ReactNavigation {
@@ -24,7 +25,6 @@ export type RootStackParamList = {
     Start: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     ImageRecognizer: undefined;
-    Profile: undefined;
     Signup: undefined;
     Login: undefined;
     Edit: undefined;
@@ -38,11 +38,16 @@ export type RootStackParamList = {
         category: string;
     };
     Item: {
-        index: number;
+        id: number;
     };
     Look: {
-        index: number;
+        id: number;
     };
+    LooksForNewPost: undefined;
+    CreatePost: {
+        type: string;
+        id: number;
+    }
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -66,8 +71,12 @@ export type RootNavigation = NativeStackNavigationProp<
     'Root'
 >;
 
+export type TapBarNavigation = NativeStackNavigationProp<RootTabParamList, 'Home'>;
+
 export type ClothingByCategoryScreenRouteProp = RouteProp<
     RootStackParamList,
     'ItemsByCategory'
 >;
 export type ThingScreenRouteProp = RouteProp<RootStackParamList, 'Item'>;
+export type LookRouteProp = RouteProp<RootStackParamList, 'Look'>;
+export type CreatePostRouteProp = RouteProp<RootStackParamList, 'CreatePost'>;

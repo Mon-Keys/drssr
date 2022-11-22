@@ -6,7 +6,7 @@ import {
     SafeAreaView,
     Platform,
     StatusBar,
-    FlatList
+    FlatList, Pressable, Text
 } from 'react-native';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -20,6 +20,11 @@ import { getPosts } from '../../reducers/posts/createPost';
 import { selectPosts } from '../../reducers/posts/postReducer';
 import { Layout } from '../../styles';
 import { PostPreview } from '../../components/posts/PostPreview';
+import NewPostBottomMenu from "../../components/profile/NewPostBottomMenu";
+import {BottomSheetModal} from "@gorhom/bottom-sheet";
+import {fetchUsersLooks, selectLooks} from "../../reducers/lookReducer";
+import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
+import {selectUserItems} from "../../reducers/items/clothesReducer";
 
 const styles = StyleSheet.create({
     container: {
@@ -62,11 +67,23 @@ export default function ProfileScreen() {
     const { userData } = useAppSelector(selectUser);
     const posts = useAppSelector(selectPosts);
 
+    const clothes = useAppSelector(selectUserItems);
+    const hasClothes = (): boolean => {
+        return clothes && clothes.length > 0;
+    };
+
+    const looks = useAppSelector(selectLooks);
+    const hasLooks = (): boolean => {
+        return looks && looks.length > 0;
+    };
+
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(fetchUserData());
         dispatch(getPosts());
+        dispatch(fetchUsersClothes());
+        dispatch(fetchUsersLooks());
     }, [dispatch]);
 
     const refresh = () => {
@@ -74,40 +91,51 @@ export default function ProfileScreen() {
         dispatch(getPosts());
     };
 
+    const MenuRef = React.useRef<BottomSheetModal>(null);
+
+    const openMenu = () => {
+        if (MenuRef.current) {
+            MenuRef.current.present();
+        }
+    };
+
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView
-                refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={refresh}
+        <NewPostBottomMenu modalRef={MenuRef} hasClothes={hasClothes()} hasLooks={hasLooks()} >
+            <SafeAreaView style={styles.container}>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={refresh}
+                        />
+                    }
+                >
+                    <ProfileCard
+                        avatarSrc={
+                            'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                        }
+                        name={userData.name}
+                        isVerified={userData.stylist || false}
+                        subscribersAmount={3500}
+                        location={'Москва'}
+                        settingsAction={() => {
+                            navigation.navigate('Settings');
+                        }}
+                        shareAction={() => {}}
+                        description={
+                            'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
+                        }
                     />
-                }
-            >
-                <ProfileCard
-                    avatarSrc={
-                        'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
-                    }
-                    name={userData.name}
-                    isVerified={userData.stylist || false}
-                    subscribersAmount={3500}
-                    location={'Москва'}
-                    settingsAction={() => {
-                        navigation.navigate('Settings');
-                    }}
-                    shareAction={() => {}}
-                    description={
-                        'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
-                    }
-                />
-                <FlatList
-                    style={styles.postsContainer}
-                    columnWrapperStyle={styles.postsWrapper}
-                    data={posts}
-                    numColumns={2}
-                    renderItem={({ item }) => <PostPreview post={item} />}
-                />
-            </ScrollView>
-        </SafeAreaView>
+                    <Pressable onPress={openMenu} ><Text>Create Post</Text></Pressable>
+                    <FlatList
+                        style={styles.postsContainer}
+                        columnWrapperStyle={styles.postsWrapper}
+                        data={posts}
+                        numColumns={2}
+                        renderItem={({ item }) => <PostPreview post={item} />}
+                    />
+                </ScrollView>
+            </SafeAreaView>
+        </NewPostBottomMenu>
     );
 }
