@@ -20,143 +20,148 @@ export interface Feeds {
 
 const initialState = {
     SubscribtionFeed: {
-        data: [{
-            id: 1,
-            creator_id: 1,
-            type: 'look',
-            clothes: [
-                {
-                    id: 1,
-                    brand: "dss",
-                    color: "dsds",
-                    currency: "RUB",
-                    link: "link",
-                    type: "Boots",
-                    img_path: "clothesImg",
-                    mask_path: "clothesMaskImg",
-                    owner_id: 1,
-                    price: 10000,
-                    sex: "male",
-                    description: "clothes description",
-                }
-            ],
-            look: {
+        data: [
+            {
                 id: 1,
+                creator_id: 1,
+                type: 'look',
                 clothes: [
-                {
+                    {
+                        id: 1,
+                        brand: 'dss',
+                        color: 'dsds',
+                        currency: 'RUB',
+                        link: 'link',
+                        type: 'Boots',
+                        img_path: 'clothesImg',
+                        mask_path: 'clothesMaskImg',
+                        owner_id: 1,
+                        price: 10000,
+                        sex: 'male',
+                        description: 'clothes description'
+                    }
+                ],
+                look: {
                     id: 1,
-                    brand: "dss",
-                    color: "dsds",
-                    currency: "RUB",
-                    link: "link",
-                    type: "Boots",
-                    img_path: "clothesImg",
-                    mask_path: "clothesMaskImg",
-                    owner_id: 1,
-                    price: 10000,
-                    sex: "male",
-                    description: "clothes description",
-                }
-            ],
-                img_path: 'img',
-                description: 'desc'
-            },
-            previews: ['img1', 'img2'],
-            likes: 123213
-        }],
+                    clothes: [
+                        {
+                            id: 1,
+                            brand: 'dss',
+                            color: 'dsds',
+                            currency: 'RUB',
+                            link: 'link',
+                            type: 'Boots',
+                            img_path: 'clothesImg',
+                            mask_path: 'clothesMaskImg',
+                            owner_id: 1,
+                            price: 10000,
+                            sex: 'male',
+                            description: 'clothes description'
+                        }
+                    ],
+                    img_path: 'img',
+                    description: 'desc'
+                },
+                previews: ['img1', 'img2'],
+                likes: 123213
+            }
+        ],
         status: 'ready'
     },
     DiscoverFeed: {
-        data: [{
-            id: 1,
-            creator_id: 1,
-            type: 'look',
-            clothes: [
-                {
-                    id: 1,
-                    brand: "dss",
-                    color: "dsds",
-                    currency: "RUB",
-                    link: "link",
-                    type: "Boots",
-                    img_path: "clothesImg",
-                    mask_path: "clothesMaskImg",
-                    owner_id: 1,
-                    price: 10000,
-                    sex: "male",
-                    description: "clothes description",
-                }
-            ],
-            look: {
+        data: [
+            {
                 id: 1,
+                creator_id: 1,
+                type: 'look',
                 clothes: [
-                {
+                    {
+                        id: 1,
+                        brand: 'dss',
+                        color: 'dsds',
+                        currency: 'RUB',
+                        link: 'link',
+                        type: 'Boots',
+                        img_path: 'clothesImg',
+                        mask_path: 'clothesMaskImg',
+                        owner_id: 1,
+                        price: 10000,
+                        sex: 'male',
+                        description: 'clothes description'
+                    }
+                ],
+                look: {
                     id: 1,
-                    brand: "dss",
-                    color: "dsds",
-                    currency: "RUB",
-                    link: "link",
-                    type: "Boots",
-                    img_path: "clothesImg",
-                    mask_path: "clothesMaskImg",
-                    owner_id: 1,
-                    price: 10000,
-                    sex: "male",
-                    description: "clothes description",
-                }
-            ],
-                img_path: 'img',
-                description: 'desc'
-            },
-            previews: ['img1', 'img2'],
-            likes: 123213
-        }],
+                    clothes: [
+                        {
+                            id: 1,
+                            brand: 'dss',
+                            color: 'dsds',
+                            currency: 'RUB',
+                            link: 'link',
+                            type: 'Boots',
+                            img_path: 'clothesImg',
+                            mask_path: 'clothesMaskImg',
+                            owner_id: 1,
+                            price: 10000,
+                            sex: 'male',
+                            description: 'clothes description'
+                        }
+                    ],
+                    img_path: 'img',
+                    description: 'desc'
+                },
+                previews: ['img1', 'img2'],
+                likes: 123213
+            }
+        ],
         status: 'ready'
     },
     FavoriteFeed: {
-        data: [{
-            id: 1,
-            creator_id: 1,
-            type: 'look',
-            clothes: [
-                {
-                    id: 1,
-                    brand: "dss",
-                    color: "dsds",
-                    currency: "RUB",
-                    link: "link",
-                    type: "Boots",
-                    img_path: "clothesImg",
-                    mask_path: "clothesMaskImg",
-                    owner_id: 1,
-                    price: 10000,
-                    sex: "male",
-                    description: "clothes description",
-                }
-            ],
-            look: {
+        data: [
+            {
                 id: 1,
+                creator_id: 1,
+                type: 'look',
                 clothes: [
-                {
+                    {
+                        id: 1,
+                        brand: 'dss',
+                        color: 'dsds',
+                        currency: 'RUB',
+                        link: 'link',
+                        type: 'Boots',
+                        img_path: 'clothesImg',
+                        mask_path: 'clothesMaskImg',
+                        owner_id: 1,
+                        price: 10000,
+                        sex: 'male',
+                        description: 'clothes description'
+                    }
+                ],
+                look: {
                     id: 1,
-                    brand: "dss",
-                    color: "dsds",
-                    currency: "RUB",
-                    link: "link",
-                    type: "Boots",
-                    img_path: "clothesImg",
-                    mask_path: "clothesMaskImg",
-                    owner_id: 1,
-                    price: 10000,
-                    sex: "male",
-                    description: "clothes description",
-                }
-            ],
-                img_path: 'img',
-                description: 'desc'
-            },
-            previews: ['img1', 'img2'],
-            likes: 123213
+                    clothes: [
+                        {
+                            id: 1,
+                            brand: 'dss',
+                            color: 'dsds',
+                            currency: 'RUB',
+                            link: 'link',
+                            type: 'Boots',
+                            img_path: 'clothesImg',
+                            mask_path: 'clothesMaskImg',
+                            owner_id: 1,
+                            price: 10000,
+                            sex: 'male',
+                            description: 'clothes description'
+                        }
+                    ],
+                    img_path: 'img',
+                    description: 'desc'
+                },
+                previews: ['img1', 'img2'],
+                likes: 123213
             }
         ],
         status: 'ready'

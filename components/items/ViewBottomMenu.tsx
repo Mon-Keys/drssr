@@ -65,7 +65,7 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
                 ref={props.modalRef}
                 index={0}
                 snapPoints={snapPoints}
-                containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.31)' }}
+                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.31)' }}
                 handleIndicatorStyle={{ backgroundColor: Colors.base.black }}
             >
                 <View style={styles.selectContainer}>
