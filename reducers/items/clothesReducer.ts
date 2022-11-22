@@ -100,7 +100,7 @@ export const clothesSlice = createSlice({
                 state.status = 'resolved';
                 const item = action.payload as unknown as Clothes;
                 const idx = state.clothesData.findIndex(
-                    (element) => element.id == item.id
+                    (element) => element.id === item.id
                 );
                 state.clothesData[idx] = item;
             });

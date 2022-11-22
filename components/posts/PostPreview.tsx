@@ -45,7 +45,7 @@ export const PostPreview = ({ post }: { post: IPost }) => {
                 path = item.clothes.img_path;
             }
         }
-        if (path != '') {
+        if (path !== '') {
             return getUri(path);
         }
         return '';

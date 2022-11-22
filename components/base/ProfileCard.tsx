@@ -104,7 +104,7 @@ export const ProfileCard = (props: ProfileCardProps) => (
             <Share style={styles.rightButton} color={Colors.base.darkgray} />
             <View style={styles.nameContainer}>
                 <Text style={styles.name}> {props.name} </Text>
-                <ProfileVerified color='white' />
+                <ProfileVerified color="white" />
             </View>
             <View style={styles.descriptionContainer}>
                 <Text style={styles.descriptionText}>{props.description}</Text>

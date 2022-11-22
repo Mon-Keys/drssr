@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: Layout.margins.default
+    },
+    scroll: {
+        margin: Layout.margins.default
     }
 });
 

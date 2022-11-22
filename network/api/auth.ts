@@ -66,7 +66,7 @@ export default class Auth {
      *
      * @beta
      */
-     stylistUser() {
+    stylistUser() {
         return http.post<any>('/private/users/stylist', {
             withCredentials: true
         });

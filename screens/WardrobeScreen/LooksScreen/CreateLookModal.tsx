@@ -118,7 +118,7 @@ export default function CreateLookModal({
                         color={Colors.base.black}
                     />
                 </Pressable>
-                {boardItems.length == 0 ? (
+                {boardItems.length === 0 ? (
                     <EmptyView
                         textHeader={'Создайте образ'}
                         text={'Добавляйте вещи с помощью +'}
