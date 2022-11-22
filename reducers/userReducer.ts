@@ -91,6 +91,22 @@ export const logoutUser = createAsyncThunk<IUserData>(
     }
 );
 
+export const stylist = createAsyncThunk<IUserData>(
+    'user/stylist',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await Api.Auth.stylistUser();
+            if (response.status !== 200) {
+                throw new Error(`Error, status ${response.status}`);
+            }
+
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
 export const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -123,7 +139,6 @@ export const userSlice = createSlice({
                 state.status = 'rejected';
                 // state.error = action.payload
             })
-
             .addCase(loginUser.pending, (state) => {
                 state.status = 'pending';
                 state.error = '';
@@ -147,6 +162,17 @@ export const userSlice = createSlice({
                 state.status = 'resolved';
             })
             .addCase(logoutUser.rejected, (state) => {
+                state.status = 'rejected';
+            })
+            .addCase(stylist.pending, (state) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(stylist.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                state.userData = action.payload as unknown as User;
+            })
+            .addCase(stylist.rejected, (state) => {
                 state.status = 'rejected';
             });
     }

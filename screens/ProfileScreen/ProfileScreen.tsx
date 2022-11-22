@@ -17,9 +17,10 @@ import Colors from '../../styles/Colors';
 import { ProfileCard } from '../../components/base/ProfileCard';
 import { useNavigation } from '@react-navigation/native';
 import { getPosts } from '../../reducers/posts/createPost';
+import { stylist } from '../../reducers/userReducer';
 import { selectPosts } from '../../reducers/posts/postReducer';
 import { Layout } from '../../styles';
-import { PostPreview } from '../../components/posts/PostPreview';
+import { BecomeStylistCard } from '../../components/base/BecomeStylistCard';
 
 const styles = StyleSheet.create({
     container: {
@@ -74,6 +75,10 @@ export default function ProfileScreen() {
         dispatch(getPosts());
     };
 
+    const becomeStyist = () => {
+        dispatch(stylist());
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView
@@ -100,13 +105,16 @@ export default function ProfileScreen() {
                         'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                     }
                 />
-                <FlatList
+                <BecomeStylistCard
+                    becomeStylist={becomeStyist}
+                />
+                {/* <FlatList
                     style={styles.postsContainer}
                     columnWrapperStyle={styles.postsWrapper}
                     data={posts}
                     numColumns={2}
                     renderItem={({ item }) => <PostPreview post={item} />}
-                />
+                /> */}
             </ScrollView>
         </SafeAreaView>
     );

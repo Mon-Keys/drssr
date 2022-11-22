@@ -57,4 +57,18 @@ export default class Auth {
             withCredentials: true
         });
     }
+
+    /**
+     * Returns axios request handle
+     * Removes user session
+     * @remarks
+     * This method is part of the network subsystem.
+     *
+     * @beta
+     */
+     stylistUser() {
+        return http.post<any>('/private/users/stylist', {
+            withCredentials: true
+        });
+    }
 }
