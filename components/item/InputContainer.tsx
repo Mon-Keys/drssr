@@ -17,14 +17,14 @@ export function updateValue(
     key: string,
     value: string
 ) {
-    const idx = array.findIndex((item) => item.key == key);
-    if (idx != -1) {
+    const idx = array.findIndex((item) => item.key === key);
+    if (idx !== -1) {
         array[idx].value = value;
     }
 }
 
 export function getValue(array: Array<InputFieldData>, key: string): string {
-    const data = array.find((item) => item.key == key);
+    const data = array.find((item) => item.key === key);
     if (data && data.value) {
         return data.value;
     }

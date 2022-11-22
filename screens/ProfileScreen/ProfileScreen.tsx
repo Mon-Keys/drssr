@@ -5,21 +5,19 @@ import {
     RefreshControl,
     SafeAreaView,
     Platform,
-    StatusBar,
-    FlatList
+    StatusBar
 } from 'react-native';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { fetchUserData, selectUser } from '../../reducers/userReducer';
+import { fetchUserData, selectUser, stylist } from '../../reducers/userReducer';
 import { RootNavigation } from '../../types';
 import Colors from '../../styles/Colors';
 import { ProfileCard } from '../../components/base/ProfileCard';
 import { useNavigation } from '@react-navigation/native';
 import { getPosts } from '../../reducers/posts/createPost';
-import { selectPosts } from '../../reducers/posts/postReducer';
 import { Layout } from '../../styles';
-import { PostPreview } from '../../components/posts/PostPreview';
+import { BecomeStylistCard } from '../../components/base/BecomeStylistCard';
 
 const styles = StyleSheet.create({
     container: {
@@ -60,7 +58,7 @@ export default function ProfileScreen() {
     const navigation = useNavigation<RootNavigation>();
 
     const { userData } = useAppSelector(selectUser);
-    const posts = useAppSelector(selectPosts);
+    // const posts = useAppSelector(selectPosts);
 
     const dispatch = useAppDispatch();
 
@@ -72,6 +70,10 @@ export default function ProfileScreen() {
     const refresh = () => {
         dispatch(fetchUserData());
         dispatch(getPosts());
+    };
+
+    const becomeStyist = () => {
+        dispatch(stylist());
     };
 
     return (
@@ -100,13 +102,14 @@ export default function ProfileScreen() {
                         'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                     }
                 />
-                <FlatList
+                <BecomeStylistCard becomeStylist={becomeStyist} />
+                {/* <FlatList
                     style={styles.postsContainer}
                     columnWrapperStyle={styles.postsWrapper}
                     data={posts}
                     numColumns={2}
                     renderItem={({ item }) => <PostPreview post={item} />}
-                />
+                /> */}
             </ScrollView>
         </SafeAreaView>
     );
