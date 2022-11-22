@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 
 import { Colors, Layout } from '../../styles';
-import InputForItem from "./InputForItem";
-
+import InputForItem from './InputForItem';
 
 export interface InputFieldData {
     key: string;
@@ -13,7 +12,11 @@ export interface InputFieldData {
     placeholder?: string | '';
 }
 
-export function updateValue(array: Array<InputFieldData>, key: string, value: string) {
+export function updateValue(
+    array: Array<InputFieldData>,
+    key: string,
+    value: string
+) {
     const idx = array.findIndex((item) => item.key == key);
     if (idx != -1) {
         array[idx].value = value;
@@ -37,7 +40,7 @@ const styles = StyleSheet.create({
     imageContainer: {
         flex: 1,
         backgroundColor: Colors.base.white,
-        borderRadius: Layout.cornerRadius,
+        borderRadius: Layout.cornerRadius
     },
     inputField: {
         marginVertical: Layout.margins.small,
@@ -47,10 +50,12 @@ const styles = StyleSheet.create({
 
 export default function InputContainer(props: InputContainerPrpops) {
     props.inputFields.forEach((item) => {
+        //@ts-ignore
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const [text, onChangeText] = React.useState(item.value);
         item.value = text;
         item.onChange = onChangeText;
-    })
+    });
     return (
         <View style={props.style}>
             <View style={styles.imageContainer}>

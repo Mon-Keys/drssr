@@ -1,8 +1,7 @@
-import {Image, TouchableOpacity, StyleSheet, Text} from 'react-native';
+import { Image, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { View } from '../base/Themed';
 import React from 'react';
-import Colors from '../../styles/Colors';
-import {Layout} from "../../styles";
+import { Layout } from '../../styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -41,9 +40,15 @@ export const LookCard = (props: LookCardProps) => {
             delayLongPress={300}
         >
             <View style={styles.previewContainer}>
-                <Image style={styles.lookImage} source={{ uri: props.imgURI }}/>
+                <Image
+                    style={styles.lookImage}
+                    source={{ uri: props.imgURI }}
+                />
             </View>
-            <Text style={styles.lookText} numberOfLines={1}> {props.name} </Text>
+            <Text style={styles.lookText} numberOfLines={1}>
+                {' '}
+                {props.name}{' '}
+            </Text>
         </TouchableOpacity>
     );
 };

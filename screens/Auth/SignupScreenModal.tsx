@@ -1,19 +1,13 @@
-import {
-    StyleSheet,
-    ActivityIndicator,
-    Platform,
-    StatusBar, KeyboardAvoidingView
-} from 'react-native';
+import { StyleSheet, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { View } from '../../components/base/Themed';
-import { RootStackScreenProps } from '../../types';
 import InputField from '../../components/base/InputField';
 import Person from '../../components/icons/person';
 import StyledButton from '../../components/base/StyledButton';
 import Colors from '../../styles/Colors';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {fetchUserData, loginUser, selectUser, signUpUser} from '../../reducers/userReducer';
+import { loginUser, selectUser, signUpUser } from '../../reducers/userReducer';
 import { ISignupData } from '../../network';
 
 const styles = StyleSheet.create({
@@ -22,7 +16,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Colors.base.white,
 
-        justifyContent: 'space-around',
+        justifyContent: 'space-around'
     },
 
     title: {
@@ -40,9 +34,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function SignupScreenModal({
+export default function SignupScreenModal(/*{
     navigation
-}: RootStackScreenProps<'Signup'>) {
+}: RootStackScreenProps<'Signup'>*/) {
     const user = useAppSelector(selectUser);
     const dispatch = useAppDispatch();
 
@@ -52,8 +46,6 @@ export default function SignupScreenModal({
 
     const [password, onChangePassword] = React.useState<string>('');
     const [password2, onChangePassword2] = React.useState<string>('');
-
-    const [birthdate, onChangeBirthdate] = React.useState<string>('');
 
     const submitSignup = () => {
         const data: ISignupData = {
@@ -66,18 +58,26 @@ export default function SignupScreenModal({
         };
 
         dispatch(signUpUser(data)).then(() => {
-            dispatch(loginUser({
-                login: data.nickname,
-                password: data.password
-            })); // TODO ващет бэк должен сразу куку сетить
+            dispatch(
+                loginUser({
+                    login: data.nickname,
+                    password: data.password
+                })
+            ); // TODO ващет бэк должен сразу куку сетить
         });
     };
 
     return (
         <View style={styles.container}>
-            <View style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}/>
-            <View style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}/>
-            <View style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}/>
+            <View
+                style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}
+            />
+            <View
+                style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}
+            />
+            <View
+                style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}
+            />
             <InputField
                 icon={<Person color={Colors.base.darkgray} />}
                 placeholder={'Никнейм'}
@@ -122,14 +122,13 @@ export default function SignupScreenModal({
             {/*    }}*/}
             {/*/>*/}
             {user.status === 'pending' ? (
-                <ActivityIndicator
-                    size={'large'}
-                    color={Colors.base.black}
-                />
+                <ActivityIndicator size={'large'} color={Colors.base.black} />
             ) : (
                 <View />
             )}
-            <View style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}/>
+            <View
+                style={{ maxHeight: 80, width: 5, backgroundColor: 'green' }}
+            />
         </View>
     );
 }

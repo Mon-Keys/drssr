@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {createPost, getPosts} from "./createPost";
-import {IPost, PostsState} from "./post";
-import {RootState} from "../../store";
+import { createPost, getPosts } from './createPost';
+import { IPost, PostsState } from './post';
+import { RootState } from '../../store';
 
 const initialState = {
     posts: [],
@@ -15,7 +15,7 @@ export const postsSlice = createSlice({
     reducers: {
         loadData: (state) => {
             console.log('not done loadData111', state);
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -47,7 +47,7 @@ export const postsSlice = createSlice({
             })
             .addCase(getPosts.rejected, (state) => {
                 state.status = 'rejected';
-            })
+            });
     }
 });
 

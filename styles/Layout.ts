@@ -22,6 +22,6 @@ export default {
         big: 18,
         default: 14,
         small: 12,
-        micro: 8,
+        micro: 8
     }
 };

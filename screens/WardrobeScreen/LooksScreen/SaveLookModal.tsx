@@ -4,7 +4,8 @@ import {
     StyleSheet,
     Image,
     KeyboardAvoidingView,
-    ActivityIndicator, ScrollView
+    ActivityIndicator,
+    ScrollView
 } from 'react-native';
 import { View } from '../../../components/base/Themed';
 
@@ -15,15 +16,18 @@ import { useDispatch } from 'react-redux';
 import { ILookData } from '../../../network';
 import { RootStackScreenProps } from '../../../types';
 import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
-import InputContainer, {getValue, InputFieldData} from "../../../components/item/InputContainer";
-import BaseButton from "../../../components/base/BaseButton";
-import {GenerateRandomName} from "../../../network/api/common";
+import InputContainer, {
+    getValue,
+    InputFieldData
+} from '../../../components/item/InputContainer';
+import BaseButton from '../../../components/base/BaseButton';
+import { GenerateRandomName } from '../../../network/api/common';
 // @ts-ignore
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     lookContainer: {
         width: 354,
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
         marginVertical: Layout.margins.default
     },
     buttonSave: {
-      marginBottom: Layout.margins.default,
+        marginBottom: Layout.margins.default
     },
     indicator: {
         position: 'absolute',
@@ -67,11 +71,14 @@ export default function SaveLookModal({
 
     const looks = useAppSelector(selectLook);
 
-
     const fields: Array<InputFieldData> = [
         // {key: 'name', title: 'Название образа', placeholder: 'Придумайте название образа'},
-        {key: 'description', title: 'Описание', placeholder: 'Добавьте описание для образа'},
-    ]
+        {
+            key: 'description',
+            title: 'Описание',
+            placeholder: 'Добавьте описание для образа'
+        }
+    ];
 
     const addLook = () => {
         // const name = getValue(fields, 'name');
@@ -104,7 +111,7 @@ export default function SaveLookModal({
     };
 
     return (
-        <ScrollView nestedScrollEnabled={true} horizontal={false} >
+        <ScrollView nestedScrollEnabled={true} horizontal={false}>
             <View style={styles.container}>
                 <View style={styles.lookContainer}>
                     <Image
@@ -127,10 +134,17 @@ export default function SaveLookModal({
                     ) : null}
                 </View>
                 <KeyboardAvoidingView
-                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 >
-                    <InputContainer inputFields={fields} style={styles.infoContainer}  />
-                    <BaseButton title='Сохранить' onPress={addLook} style={styles.buttonSave} />
+                    <InputContainer
+                        inputFields={fields}
+                        style={styles.infoContainer}
+                    />
+                    <BaseButton
+                        title="Сохранить"
+                        onPress={addLook}
+                        style={styles.buttonSave}
+                    />
                 </KeyboardAvoidingView>
             </View>
         </ScrollView>

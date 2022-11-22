@@ -1,5 +1,5 @@
-import {createAsyncThunk} from "@reduxjs/toolkit";
-import Api, {IClothesData} from "../../network";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import Api, { IClothesData } from '../../network';
 
 export const fetchUsersClothes = createAsyncThunk<Array<IClothesData>>(
     'items/fetchUsersClothes',

@@ -4,7 +4,7 @@ import { userSlice } from '../reducers/userReducer';
 import { clothesSlice } from '../reducers/items/clothesReducer';
 import { createLookSlice } from '../reducers/createLookReducer';
 import { looksSlice } from '../reducers/lookReducer';
-import { postsSlice } from "../reducers/posts/postReducer";
+import { postsSlice } from '../reducers/posts/postReducer';
 
 const combinedReducer = combineReducers({
     user: userSlice.reducer,

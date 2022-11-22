@@ -1,4 +1,4 @@
-import http from "../instace";
+import http from '../instace';
 
 export interface IUserData {
     nickname: string;

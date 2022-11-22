@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as AxiosLogger from 'axios-logger';
 import { baseURL } from './const';
-import { setGlobalConfig } from "axios-logger";
+import { setGlobalConfig } from 'axios-logger';
 
 const axiosClient = axios.create({
     baseURL: baseURL,
@@ -15,20 +15,20 @@ setGlobalConfig({
     prefixText: false,
     status: true,
     url: false,
-    method: false,
-})
+    method: false
+});
 axiosClient.interceptors.request.use((request) => {
     return AxiosLogger.requestLogger(request, {
         url: true,
         method: true,
-        data: false,
+        data: false
     });
 }, AxiosLogger.errorLogger);
 
 axiosClient.interceptors.response.use((response) => {
     return AxiosLogger.responseLogger(response, {
         dateFormat: 'HH:MM:ss',
-        data: false,
+        data: false
     });
 }, AxiosLogger.errorLogger);
 

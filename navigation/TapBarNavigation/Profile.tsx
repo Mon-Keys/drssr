@@ -1,8 +1,7 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as React from "react";
-import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
-import SettingsModalScreen from "../../screens/Modals/SettingsModal";
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as React from 'react';
+import ProfileScreen from '../../screens/ProfileScreen/ProfileScreen';
+import SettingsModalScreen from '../../screens/Modals/SettingsModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,13 +10,10 @@ export function ProfileNavigation(): any {
         <Stack.Navigator
             initialRouteName="ProfilePreview"
             screenOptions={{
-                headerShown: false,
+                headerShown: false
             }}
         >
-            <Stack.Screen
-                name="ProfilePreview"
-                component={ProfileScreen}
-            />
+            <Stack.Screen name="ProfilePreview" component={ProfileScreen} />
             <Stack.Screen
                 name="Settings"
                 component={SettingsModalScreen}

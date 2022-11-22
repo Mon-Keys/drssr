@@ -51,7 +51,7 @@ export default function TabTwoScreen({
             login: login.trim(),
             password: password.trim()
         };
-        dispatch(loginUser(loginData))
+        dispatch(loginUser(loginData));
     };
 
     return (

@@ -11,10 +11,10 @@ import { RootStackParamList } from '../types';
 import { BottomTabNavigator } from './TapBarNavigation/TapBar';
 import NotFoundScreenModal from '../screens/Modals/NotFoundScreenModal';
 import { useAppSelector } from '../hooks/useAppSelector';
-import {fetchUserData, selectUser} from '../reducers/userReducer';
-import {useAppDispatch} from "../hooks/useAppDispatch";
-import StartScreen from "../screens/Auth/StartScreen";
-import LookScreen from "../screens/WardrobeScreen/LooksScreen/LookScreen";
+import { fetchUserData, selectUser } from '../reducers/userReducer';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import StartScreen from '../screens/Auth/StartScreen';
+import LookScreen from '../screens/WardrobeScreen/LooksScreen/LookScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -30,8 +30,12 @@ export function RootNavigator() {
     return (
         <Stack.Navigator>
             {isLoggedIn === null ? (
-                <Stack.Screen name="Start" component={StartScreen} options={{headerShown: false}}/>
-            ) : (isLoggedIn ? (
+                <Stack.Screen
+                    name="Start"
+                    component={StartScreen}
+                    options={{ headerShown: false }}
+                />
+            ) : isLoggedIn ? (
                 <Stack.Screen
                     name="Root"
                     component={BottomTabNavigator}
@@ -39,27 +43,51 @@ export function RootNavigator() {
                 />
             ) : (
                 <>
-                    <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Вход в аккаунт' }} />
-                    <Stack.Screen name="Signup" component={SignupScreenModal} options={{ title: 'Регистрация' }} />
+                    <Stack.Screen
+                        name="Login"
+                        component={LoginScreen}
+                        options={{ title: 'Вход в аккаунт' }}
+                    />
+                    <Stack.Screen
+                        name="Signup"
+                        component={SignupScreenModal}
+                        options={{ title: 'Регистрация' }}
+                    />
                 </>
-            ))}
+            )}
             <Stack.Screen
                 name="NotFound"
                 component={NotFoundScreenModal}
                 options={{ title: 'Oops!' }}
             />
             <Stack.Group screenOptions={{ presentation: 'card' }}>
-                <Stack.Screen name="AddItem" component={AddItemModal} options={{
-                    title: 'Добавить вещь',
-                }} />
+                <Stack.Screen
+                    name="AddItem"
+                    component={AddItemModal}
+                    options={{
+                        title: 'Добавить вещь'
+                    }}
+                />
                 <Stack.Screen name="Post" component={PostModalScreen} />
                 <Stack.Screen
                     name="ImageRecognizer"
                     component={ImageRecognizerScreen}
                 />
-                <Stack.Screen name="CreateLook" component={CreateLookModal} options={{ title: 'Создание образа' }} />
-                <Stack.Screen name="SaveLook" component={SaveLookModal} options={{ title: 'Создание образа' }} />
-                <Stack.Screen name="Look" component={LookScreen} options={{ headerShown: false }} />
+                <Stack.Screen
+                    name="CreateLook"
+                    component={CreateLookModal}
+                    options={{ title: 'Создание образа' }}
+                />
+                <Stack.Screen
+                    name="SaveLook"
+                    component={SaveLookModal}
+                    options={{ title: 'Создание образа' }}
+                />
+                <Stack.Screen
+                    name="Look"
+                    component={LookScreen}
+                    options={{ headerShown: false }}
+                />
             </Stack.Group>
         </Stack.Navigator>
     );

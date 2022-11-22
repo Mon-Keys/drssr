@@ -3,11 +3,12 @@ import {
     StyleSheet,
     ButtonProps,
     Pressable,
-    Text, ViewStyle
+    Text,
+    ViewStyle
 } from 'react-native';
 import Colors from '../../styles/Colors';
-import { Layout } from "../../styles";
-import {View} from "./Themed";
+import { Layout } from '../../styles';
+import { View } from './Themed';
 
 interface StyledButtonProps extends ButtonProps {
     style?: ViewStyle;
@@ -16,11 +17,11 @@ interface StyledButtonProps extends ButtonProps {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: Colors.base.black,
-        borderRadius: Layout.cornerRadius,
+        borderRadius: Layout.cornerRadius
     },
     buttonPressed: {
         backgroundColor: Colors.base.darkgray,
-        borderRadius: Layout.cornerRadius,
+        borderRadius: Layout.cornerRadius
     },
     buttonTitle: {
         textAlign: 'center',
@@ -29,14 +30,14 @@ const styles = StyleSheet.create({
 
         color: Colors.base.white,
         fontSize: Layout.fontSize.big,
-        fontFamily: 'proxima-nova',
+        fontFamily: 'proxima-nova'
     }
 });
 
 const BaseButton = (props: StyledButtonProps) => {
     return (
         <Pressable onPress={props.onPress} style={props.style}>
-            {({pressed}) => (
+            {({ pressed }) => (
                 <View style={pressed ? styles.buttonPressed : styles.button}>
                     <Text style={styles.buttonTitle}>{props.title}</Text>
                 </View>

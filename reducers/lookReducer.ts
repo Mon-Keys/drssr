@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import Api, { IGetLookData, ILookData } from '../network/';
-import {IClothesLookData} from "../network/api/common";
+import { IClothesLookData } from '../network/api/common';
 
 export interface ILook {
     id: number;
@@ -44,7 +44,7 @@ export const looksSlice = createSlice({
     initialState,
     reducers: {
         loadData: (state) => {
-            // console.log('not done', state);
+            console.log('not done', state);
         }
     },
     extraReducers: (builder) => {

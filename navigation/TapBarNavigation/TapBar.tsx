@@ -11,8 +11,8 @@ import {
 import { Pressable, StyleSheet } from 'react-native';
 import SearchScreen from '../../screens/SearchScreen/DiscoverScreen';
 import * as React from 'react';
-import { WardrobeNavigation } from "./Wardrobe";
-import { ProfileNavigation } from "./Profile";
+import { WardrobeNavigation } from './Wardrobe';
+import { ProfileNavigation } from './Profile';
 
 const styles = StyleSheet.create({
     iconAlignment: {
@@ -60,7 +60,7 @@ export function BottomTabNavigator() {
                                 style={styles.info}
                             />
                         </Pressable>
-                    ),
+                    )
                 })}
             />
             <BottomTab.Screen
@@ -69,7 +69,7 @@ export function BottomTabNavigator() {
                 options={{
                     tabBarIcon: ({ color }) => (
                         <AntDesign name="hearto" size={28} color={color} />
-                    ),
+                    )
                 }}
             />
             <BottomTab.Screen
@@ -82,7 +82,7 @@ export function BottomTabNavigator() {
                             size={28}
                             color={color}
                         />
-                    ),
+                    )
                 }}
             />
             <BottomTab.Screen
@@ -91,7 +91,7 @@ export function BottomTabNavigator() {
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Ionicons name="person" size={28} color={color} />
-                    ),
+                    )
                 }}
             />
         </BottomTab.Navigator>

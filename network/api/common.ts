@@ -1,9 +1,6 @@
-import http from "../instace"
-import * as ImagePicker from "expo-image-picker";
-import {Clothes} from "../../reducers/items/clothesReducer";
-import {ILook} from "../../reducers/lookReducer";
-import {IPost} from "../../reducers/posts/post";
-
+import http from '../instace';
+import * as ImagePicker from 'expo-image-picker';
+import { IPost } from '../../reducers/posts/post';
 
 export interface IItemData {
     id?: number;
@@ -72,11 +69,14 @@ export interface ICreatePost {
 }
 
 function GenerateRandomString(length: number): string {
-    let result           = '';
-    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    let characters =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        );
     }
     return result;
 }
@@ -131,6 +131,8 @@ export default class Common {
     }
 
     getPosts() {
-        return http.get<Array<IPost>>(`/private/posts/all?limit=${10}&offset=${0}`);
+        return http.get<Array<IPost>>(
+            `/private/posts/all?limit=${10}&offset=${0}`
+        );
     }
 }

@@ -10,14 +10,12 @@ import {
 
 import { Colors, Layout } from '../../../styles';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { selectUserItems } from '../../../reducers/items/clothesReducer';
 import { RootNavigation, ThingScreenRouteProp } from '../../../types';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import IconButton from '../../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
-import Item from '../../../components/items/Item';
-import {selectLook} from "../../../reducers/lookReducer";
-import {Look} from "../../../components/Look/Look";
+import { selectLook } from '../../../reducers/lookReducer';
+import { Look } from '../../../components/Look/Look';
 
 const styles = StyleSheet.create({
     container: {
@@ -71,9 +69,7 @@ export default function LookScreen() {
                     onPress={() => navigation.goBack()}
                 />
                 <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitleText}>
-                        {'Образ'}
-                    </Text>
+                    <Text style={styles.headerTitleText}>{'Образ'}</Text>
                 </View>
             </View>
             <Look look={look} />

@@ -1,3 +1,1 @@
-
-export default class Stylist {
-}
+export default class Stylist {}

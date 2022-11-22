@@ -1,16 +1,16 @@
-import {Image, TouchableOpacity, StyleSheet, Text, ScrollView} from 'react-native';
+import { Image, StyleSheet, Text, ScrollView } from 'react-native';
 import { View } from '../base/Themed';
 import React from 'react';
 import Colors from '../../styles/Colors';
-import {Layout} from "../../styles";
-import {ILook} from "../../reducers/lookReducer";
-import {getUri} from "../../network/const";
-import BaseButton from "../base/BaseButton";
-import {useNavigation} from "@react-navigation/native";
-import {RootNavigation} from "../../types";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {createPost} from "../../reducers/posts/createPost";
-import {ICreatePost} from "../../network/api/common";
+import { Layout } from '../../styles';
+import { ILook } from '../../reducers/lookReducer';
+import { getUri } from '../../network/const';
+import BaseButton from '../base/BaseButton';
+import { useNavigation } from '@react-navigation/native';
+import { RootNavigation } from '../../types';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { createPost } from '../../reducers/posts/createPost';
+import { ICreatePost } from '../../network/api/common';
 
 const styles = StyleSheet.create({
     container: {
@@ -42,11 +42,11 @@ const styles = StyleSheet.create({
         fontSize: Layout.fontSize.default
     },
     button: {
-        margin: Layout.margins.default,
-    },
+        margin: Layout.margins.default
+    }
 });
 
-export const Look = ({look} : {look: ILook}) => {
+export const Look = ({ look }: { look: ILook }) => {
     const navigation = useNavigation<RootNavigation>();
 
     const dispatch = useAppDispatch();
@@ -55,23 +55,30 @@ export const Look = ({look} : {look: ILook}) => {
         const post: ICreatePost = {
             element_id: look.id,
             type: 'look',
-            description: 'захардкоженное описание поста',
+            description: 'захардкоженное описание поста'
             // previews: [look.img_path],
-        }
-        dispatch(createPost(post))
+        };
+        dispatch(createPost(post));
         navigation.navigate('Profile');
-    }
+    };
 
     return (
         <View style={styles.container}>
             <ScrollView style={{ flex: 1 }} scrollEnabled={true}>
                 <View style={styles.previewContainer}>
-                    <Image style={styles.lookImage} source={{ uri: getUri(look.img_path) }}/>
+                    <Image
+                        style={styles.lookImage}
+                        source={{ uri: getUri(look.img_path) }}
+                    />
                 </View>
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.lookText}>{look.description}</Text>
                 </View>
-                <BaseButton title={'Опубликовать'} style={styles.button} onPress={publish} />
+                <BaseButton
+                    title={'Опубликовать'}
+                    style={styles.button}
+                    onPress={publish}
+                />
             </ScrollView>
         </View>
     );
