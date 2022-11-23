@@ -76,12 +76,12 @@ export function RootNavigator() {
                 <Stack.Screen
                     name="CreateLook"
                     component={CreateLookModal}
-                    options={{ title: 'Создание образа' }}
+                    options={{ title: 'Создание лука' }}
                 />
                 <Stack.Screen
                     name="SaveLook"
                     component={SaveLookModal}
-                    options={{ title: 'Создание образа' }}
+                    options={{ title: 'Создание лука' }}
                 />
                 <Stack.Screen
                     name="Look"

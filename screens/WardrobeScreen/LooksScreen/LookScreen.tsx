@@ -69,7 +69,7 @@ export default function LookScreen() {
                     onPress={() => navigation.goBack()}
                 />
                 <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitleText}>{'Образ'}</Text>
+                    <Text style={styles.headerTitleText}>{'лук'}</Text>
                 </View>
             </View>
             <Look look={look} />

@@ -3,6 +3,8 @@ import { Image, Pressable, StyleSheet } from 'react-native';
 import React from 'react';
 import { Colors } from '../../styles';
 import { AntDesign } from '@expo/vector-icons';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { likePost } from '../../reducers/feedReducer';
 
 const styles = StyleSheet.create({
     likeButton: {
@@ -19,19 +21,37 @@ const styles = StyleSheet.create({
 });
 
 export interface LikeFeedCardButtonProps {
-    callback: () => void;
+    id: number;
+    currentLikes: number;
 }
 
 export const LikeFeedCardButton = (props: LikeFeedCardButtonProps) => {
+    const dispatch = useAppDispatch();
+    const [liked, setLiked] = React.useState(false);
+
     return (
-        <Pressable>
+        <Pressable
+            onPress={() => {
+                setLiked(!liked);
+                dispatch(
+                    likePost({ id: props.id, likesAmount: props.currentLikes })
+                );
+            }}
+        >
             <View style={styles.likeButton}>
-                <AntDesign
-                    style={styles.heartIcon}
-                    name="hearto"
-                    size={10}
-                    color={Colors.base.black}
-                />
+                {liked ? (
+                    <AntDesign
+                        name="heart"
+                        size={10}
+                        color={Colors.base.black}
+                    />
+                ) : (
+                    <AntDesign
+                        name="hearto"
+                        size={10}
+                        color={Colors.base.black}
+                    />
+                )}
             </View>
         </Pressable>
     );

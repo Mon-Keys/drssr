@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     lookImage: {
         flex: 1,
-        resizeMode: 'cover', // TODO временно пока луки маленькие
+        resizeMode: 'cover', // TODO временно пока Луки маленькие
         borderRadius: Layout.cornerRadius
     },
     descriptionContainer: {

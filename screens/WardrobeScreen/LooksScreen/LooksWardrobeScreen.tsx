@@ -46,7 +46,7 @@ export default function LooksWardrobeScreen() {
             ) : (
                 <EmptyView
                     textHeader={'Здесь пока пусто'}
-                    text={'Создайте образ с помощью +'}
+                    text={'Создайте лук с помощью +'}
                 />
             )}
         </>

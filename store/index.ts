@@ -5,13 +5,15 @@ import { clothesSlice } from '../reducers/items/clothesReducer';
 import { createLookSlice } from '../reducers/createLookReducer';
 import { looksSlice } from '../reducers/lookReducer';
 import { postsSlice } from '../reducers/posts/postReducer';
+import { feedSlice } from '../reducers/feedReducer';
 
 const combinedReducer = combineReducers({
     user: userSlice.reducer,
     clothes: clothesSlice.reducer,
     createLook: createLookSlice.reducer,
     looks: looksSlice.reducer,
-    posts: postsSlice.reducer
+    posts: postsSlice.reducer,
+    feeds: feedSlice.reducer
 });
 
 // https://codesandbox.io/s/reset-state-redux-toolkit-p515y?file=/src/store.ts

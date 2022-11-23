@@ -72,16 +72,20 @@ export default function SaveLookModal({
     const looks = useAppSelector(selectLook);
 
     const fields: Array<InputFieldData> = [
-        // {key: 'name', title: 'Название образа', placeholder: 'Придумайте название образа'},
+        {
+            key: 'name',
+            title: 'Название лука',
+            placeholder: 'Придумайте название лука'
+        },
         {
             key: 'description',
             title: 'Описание',
-            placeholder: 'Добавьте описание для образа'
+            placeholder: 'Добавьте описание для лука'
         }
     ];
 
     const addLook = () => {
-        // const name = getValue(fields, 'name');
+        const name = getValue(fields, 'name');
         const description = getValue(fields, 'description');
 
         const look: ILookData = {

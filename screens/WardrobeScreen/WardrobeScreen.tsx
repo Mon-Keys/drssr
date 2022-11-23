@@ -85,7 +85,7 @@ export default function WardrobeScreen() {
             component: <CategoriesScreen />
         },
         {
-            name: 'Образы',
+            name: 'Луки',
             component: <LooksWardrobeScreen />
         }
     ];

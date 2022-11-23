@@ -85,7 +85,7 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
                     {/*    }}*/}
                     {/*/>*/}
                     <StyledButton
-                        title={'Создать образ'}
+                        title={'Создать лук'}
                         onPress={() => {
                             navigation.navigate('CreateLook');
                             closeModal();

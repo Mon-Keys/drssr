@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
     postImage: {
         flex: 1,
-        resizeMode: 'cover', // TODO временно пока луки маленькие
+        resizeMode: 'cover', // TODO временно пока Луки маленькие
         borderRadius: Layout.cornerRadius,
 
         backgroundColor: 'red'
