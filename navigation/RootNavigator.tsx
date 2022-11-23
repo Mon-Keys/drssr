@@ -15,8 +15,8 @@ import { fetchUserData, selectUser } from '../reducers/userReducer';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import StartScreen from '../screens/Auth/StartScreen';
 import LookScreen from '../screens/WardrobeScreen/LooksScreen/LookScreen';
-import LooksForNewPostModal from "../screens/Modals/LooksForNewPostModal";
-import CreatePostModal from "../screens/Modals/CreatePostModal";
+import LooksForNewPostModal from '../screens/Modals/LooksForNewPostModal';
+import CreatePostModal from '../screens/Modals/CreatePostModal';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
