@@ -1,20 +1,19 @@
 import React, { ReactNode } from 'react';
 import {StyleSheet, View, Pressable, Text} from 'react-native';
 
-import {Colors, Layout} from '../../styles';
+import { Colors, Layout } from '../../styles';
 import {choosePhoto, selectUserItems} from '../../reducers/items/clothesReducer';
 import {
     BottomSheetModal,
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
 import { Entypo } from '@expo/vector-icons';
-import StyledButton from '../base/StyledButton';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from '../../types';
 import * as ImagePicker from 'expo-image-picker';
 import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import {useAppSelector} from "../../hooks/useAppSelector";
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 export interface ViewBottomMenuProps {
     children: ReactNode;

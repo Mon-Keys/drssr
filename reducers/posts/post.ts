@@ -5,9 +5,9 @@ export interface IPost {
     id: number;
     creator_id: number;
     type: string;
-    clothes?: Clothes;
+    clothes?: Array<Clothes>;
     look?: ILook;
-    previews: Array<string>;
+    previews_paths: Array<string>;
     likes: number;
 }
 

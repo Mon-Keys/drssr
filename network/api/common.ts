@@ -68,6 +68,15 @@ export interface ICreatePost {
     previews?: Array<string>;
 }
 
+export interface IReaction {
+    id: number;
+    isLike: boolean;
+}
+
+export interface IReactionResult {
+    likes: number;
+}
+
 function GenerateRandomString(length: number): string {
     let result = '';
     let characters =
@@ -85,7 +94,7 @@ export function GenerateRandomName(): string {
     return GenerateRandomString(10) + '.jpg';
 }
 
-// TODO пока все запросы на вещи и образы тут, но ваще по хорошему они должны быть в разных классах для стилиста и юзера
+// TODO пока все запросы на вещи и Луки тут, но ваще по хорошему они должны быть в разных классах для стилиста и юзера
 export default class Common {
     checkImage(data: IItemData) {
         let bodyFormData = new FormData();
@@ -130,9 +139,40 @@ export default class Common {
         return http.post<ILookData>('/private/posts', data);
     }
 
-    getPosts() {
+    getPosts(limit: number = 10, offset: number = 0) {
         return http.get<Array<IPost>>(
-            `/private/posts/all?limit=${10}&offset=${0}`
+            `/private/posts/all?limit=${limit}&offset=${offset}`
         );
+    }
+
+    getFavoritePosts(limit: number = 10, offset: number = 0) {
+        return http.get<Array<IPost>>(
+            `/private/posts/likes?limit=${limit}&offset=${offset}`,
+            {
+                withCredentials: true
+            }
+        );
+    }
+
+    getDiscoverPosts(limit: number = 10, offset: number = 0) {
+        return http.get<Array<IPost>>(
+            `/public/posts/all?limit=${limit}&offset=${offset}`
+        );
+    }
+
+    getSubscribtionPosts(limit: number = 10, offset: number = 0) {
+        return http.get<Array<IPost>>(
+            `/public/posts/all?limit=${limit}&offset=${offset}`
+        );
+    }
+
+    like(id: number, likes: number) {
+        return http.post(`/private/posts/likes?id=${id}`, {
+            likes: likes
+        });
+    }
+
+    dislike(id: number, likes: number) {
+        return http.delete(`/private/posts/likes?id=${id}`);
     }
 }

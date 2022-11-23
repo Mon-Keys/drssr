@@ -1,7 +1,9 @@
 import { View } from '../base/Themed';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, FlatListProps, StyleSheet } from 'react-native';
 import React from 'react';
 import { FeedCard, FeedCardProps } from './FeedCard';
+import { Feed } from '../../reducers/feedReducer';
+import { IPost } from '../../reducers/posts/post';
 
 const styles = StyleSheet.create({
     image: { width: 170, height: 240, resizeMode: 'cover', borderRadius: 14 },
@@ -14,8 +16,9 @@ const styles = StyleSheet.create({
     }
 });
 
-export interface FeedCommonProps {
+export interface FeedCommonProps extends FlatListProps<IPost> {
     navigation: any;
+    feed?: Feed;
 }
 
 const dataMock: Array<FeedCardProps> = [
@@ -69,13 +72,15 @@ const dataMock: Array<FeedCardProps> = [
 export const FeedCommon = (props: FeedCommonProps) => (
     <View style={styles.container}>
         <FlatList
-            data={dataMock}
+            {...props}
+            data={props.feed?.data}
             numColumns={2}
             keyExtractor={(item) => `${item.id}`}
             style={styles.container}
             renderItem={(item) => (
                 <FeedCard
-                    previewSrc={item.item.previewSrc}
+                    hasLikeButton={true}
+                    post={item.item}
                     onPress={() => props.navigation.navigate('Post')}
                     id={item.item.id}
                 />

@@ -4,6 +4,7 @@ export default {
     },
     profile: {
         defaultWidth: 354,
+        defaultHeight: 630,
         avatarSize: 90
     }
 };

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
     postImage: {
         flex: 1,
-        resizeMode: 'cover', // TODO временно пока луки маленькие
+        resizeMode: 'cover', // TODO временно пока Луки маленькие
         borderRadius: Layout.cornerRadius,
     },
     likeButton: {
@@ -43,7 +43,7 @@ export const PostPreview = ({ post }: { post: IPost }) => {
                 path = item.clothes.img_path;
             }
         }
-        if (path != '') {
+        if (path !== '') {
             return getUri(path);
         }
         return '';

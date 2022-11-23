@@ -60,12 +60,26 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         resizeMode: 'center'
     },
-    nextButton: {
+    arrow: {
+        backgroundColor: 'transparent'
+    },
+    arrowContainer: {
         position: 'absolute',
-        bottom: 14,
-        left: '50%',
-        width: 120,
-        marginLeft: -60
+        bottom: 35,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 14,
+        width: '100%'
+    },
+    arrowBox: {
+        height: 35,
+        maxWidth: 170,
+        minWidth: 135,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 14,
+        backgroundColor: 'black'
     }
 });
 
@@ -84,6 +98,8 @@ export default function CreateLookModal({
 
     const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
     const snapPoints = React.useMemo(() => ['80%'], []);
+
+    const [maxZIndex, setMaxZIndex] = React.useState(0);
 
     const openModal = () => {
         // @ts-ignore
@@ -105,6 +121,10 @@ export default function CreateLookModal({
         });
     };
 
+    const removeItem = (id: number) => {
+        setBoardItems(boardItems.filter((value, index) => index !== id));
+    };
+
     return (
         <BottomSheetModalProvider>
             <View style={styles.container}>
@@ -115,7 +135,7 @@ export default function CreateLookModal({
                         color={Colors.base.black}
                     />
                 </Pressable>
-                {boardItems.length == 0 ? (
+                {boardItems.length === 0 ? (
                     <EmptyView
                         textHeader={'Создайте образ'}
                         text={'Добавляйте вещи с помощью +'}
@@ -133,19 +153,35 @@ export default function CreateLookModal({
                             }}
                         >
                             <View style={styles.lookArea}>
-                                {boardItems.map((item) => (
+                                {boardItems.map((item, index) => (
                                     <EditableImage
+                                        onLongPress={() => {
+                                            removeItem(index);
+                                        }}
+                                        maxZIndex={maxZIndex}
+                                        setMaxZIndex={() => {
+                                            setMaxZIndex(maxZIndex + 1);
+                                        }}
                                         style={styles.defaultImage}
                                         source={{ uri: item }}
                                     />
                                 ))}
                             </View>
                         </ViewShot>
-                        <BaseButton
-                            title={'Далее'}
-                            style={styles.nextButton}
+
+                        <Pressable
                             onPress={proceed}
-                        />
+                            style={styles.arrowContainer}
+                        >
+                            <View style={styles.arrowBox}>
+                                <AntDesign
+                                    style={styles.arrow}
+                                    name="arrowright"
+                                    size={24}
+                                    color={Colors.base.white}
+                                />
+                            </View>
+                        </Pressable>
                     </>
                 )}
                 <BottomSheetModal

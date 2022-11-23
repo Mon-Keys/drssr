@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import Api, { IGetLookData, ILookData } from '../network/';
-import { IClothesLookData } from '../network/api/common';
+import { Clothes } from './items/clothesReducer';
 
 export interface ILook {
     id: number;
-    clothes: Array<IClothesLookData>;
+    clothes: Array<Clothes>;
     img_path: string;
     description: string;
 }
