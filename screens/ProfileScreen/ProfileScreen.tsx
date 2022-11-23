@@ -17,7 +17,10 @@ import { ProfileCard } from '../../components/base/ProfileCard';
 import { useNavigation } from '@react-navigation/native';
 import { getPosts } from '../../reducers/posts/createPost';
 import { Layout } from '../../styles';
+import { selectPosts } from '../../reducers/posts/postReducer';
 import { BecomeStylistCard } from '../../components/base/BecomeStylistCard';
+import { PostPreview } from '../../components/posts/PostPreview';
+import { FlatList } from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,9 +41,8 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 50
     },
-
     postsContainer: {
-        // margin: Layout.margins.default,
+        // marginTop: 50,
         // backgroundColor: Colors.base.white,
         // borderRadius: Layout.cornerRadius,
         // padding: Layout.margins.small
@@ -58,7 +60,7 @@ export default function ProfileScreen() {
     const navigation = useNavigation<RootNavigation>();
 
     const { userData } = useAppSelector(selectUser);
-    // const posts = useAppSelector(selectPosts);
+    const posts = useAppSelector(selectPosts);
 
     const dispatch = useAppDispatch();
 
@@ -102,14 +104,18 @@ export default function ProfileScreen() {
                         'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                     }
                 />
-                <BecomeStylistCard becomeStylist={becomeStyist} />
-                {/* <FlatList
-                    style={styles.postsContainer}
-                    columnWrapperStyle={styles.postsWrapper}
-                    data={posts}
-                    numColumns={2}
-                    renderItem={({ item }) => <PostPreview post={item} />}
-                /> */}
+                {userData.stylist && 
+                    <FlatList
+                        style={styles.postsContainer}
+                        columnWrapperStyle={styles.postsWrapper}
+                        data={posts}
+                        numColumns={2}
+                        renderItem={({ item }) => <PostPreview post={item} />}
+                    />
+                }
+                {!userData.stylist && 
+                    <BecomeStylistCard becomeStylist={becomeStyist} />
+                }
             </ScrollView>
         </SafeAreaView>
     );

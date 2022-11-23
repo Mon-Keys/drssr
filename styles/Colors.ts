@@ -5,6 +5,7 @@ export default {
         darkgray: '#959595',
         white: '#FFFFFF',
         red: '#E81818',
-        yellow: '#FFD509'
+        yellow: '#FFD509',
+        transparent: 'transparent',
     }
 };
