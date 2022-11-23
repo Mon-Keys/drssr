@@ -1,26 +1,35 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
     StyleSheet,
     ScrollView,
     RefreshControl,
     SafeAreaView,
     Platform,
-    StatusBar
+    StatusBar,
+    FlatList, Pressable, Text
 } from 'react-native';
 
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { fetchUserData, selectUser, stylist } from '../../reducers/userReducer';
-import { RootNavigation } from '../../types';
+import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {fetchUserData, selectUser, stylist} from '../../reducers/userReducer';
+import {RootNavigation} from '../../types';
 import Colors from '../../styles/Colors';
-import { ProfileCard } from '../../components/base/ProfileCard';
-import { useNavigation } from '@react-navigation/native';
-import { getPosts } from '../../reducers/posts/createPost';
-import { Layout } from '../../styles';
-import { selectPosts } from '../../reducers/posts/postReducer';
-import { BecomeStylistCard } from '../../components/base/BecomeStylistCard';
-import { PostPreview } from '../../components/posts/PostPreview';
-import { FlatList } from 'react-native-gesture-handler';
+import {ProfileCard} from '../../components/base/ProfileCard';
+import {useNavigation} from '@react-navigation/native';
+import {getPosts} from '../../reducers/posts/createPost';
+import {Layout} from '../../styles';
+import {selectPosts} from '../../reducers/posts/postReducer';
+import {BecomeStylistCard} from '../../components/base/BecomeStylistCard';
+import {PostPreview} from '../../components/posts/PostPreview';
+import NewPostBottomMenu from "../../components/profile/NewPostBottomMenu";
+import {BottomSheetModal} from "@gorhom/bottom-sheet";
+import {fetchUsersLooks, selectLooks} from "../../reducers/lookReducer";
+import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
+import {selectUserItems} from "../../reducers/items/clothesReducer";
+import BaseButton from "../../components/base/BaseButton";
+// =======
+// import { FlatList } from 'react-native-gesture-handler'; TODO что это?
+// >>>>>>> dev
 
 const styles = StyleSheet.create({
     container: {
@@ -59,14 +68,26 @@ export default function ProfileScreen() {
 
     const navigation = useNavigation<RootNavigation>();
 
-    const { userData } = useAppSelector(selectUser);
+    const {userData} = useAppSelector(selectUser);
     const posts = useAppSelector(selectPosts);
+
+    const clothes = useAppSelector(selectUserItems);
+    const hasClothes = (): boolean => {
+        return clothes && clothes.length > 0;
+    };
+
+    const looks = useAppSelector(selectLooks);
+    const hasLooks = (): boolean => {
+        return looks && looks.length > 0;
+    };
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(fetchUserData());
         dispatch(getPosts());
+        dispatch(fetchUsersClothes());
+        dispatch(fetchUsersLooks());
     }, [dispatch]);
 
     const refresh = () => {
@@ -74,50 +95,65 @@ export default function ProfileScreen() {
         dispatch(getPosts());
     };
 
+    const MenuRef = React.useRef<BottomSheetModal>(null);
+
+    const openMenu = () => {
+        if (MenuRef.current) {
+            MenuRef.current.present();
+        }
+    }
+
     const becomeStyist = () => {
         dispatch(stylist());
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView
-                refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={refresh}
-                    />
-                }
-            >
-                <ProfileCard
-                    avatarSrc={
-                        'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+        <NewPostBottomMenu modalRef={MenuRef} hasClothes={hasClothes()} hasLooks={hasLooks()}>
+            <SafeAreaView style={styles.container}>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={refresh}
+                        />
                     }
-                    name={userData.name}
-                    isVerified={userData.stylist || false}
-                    subscribersAmount={3500}
-                    location={'Москва'}
-                    settingsAction={() => {
-                        navigation.navigate('Settings');
-                    }}
-                    shareAction={() => {}}
-                    editAction={() => {}}
-                    description={
-                        'Сотворю твой успех с помощью 100+ огненных луков. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
-                    }
-                />
-                {userData.stylist && (
-                    <FlatList
-                        style={styles.postsContainer}
-                        columnWrapperStyle={styles.postsWrapper}
-                        data={posts}
-                        numColumns={2}
-                        renderItem={({ item }) => <PostPreview post={item} />}
+                >
+                    <ProfileCard
+                        avatarSrc={
+                            'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                        }
+                        name={userData.name}
+                        isVerified={userData.stylist || false}
+                        subscribersAmount={3500}
+                        location={'Москва'}
+                        settingsAction={() => {
+                            navigation.navigate('Settings');
+                        }}
+                        shareAction={() => {
+                        }}
+                        editAction={() => {
+                        }}
+                        description={
+                            'Сотворю твой успех с помощью 100+ огненных луков. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
+                        }
                     />
-                )}
-                {!userData.stylist && (
-                    <BecomeStylistCard becomeStylist={becomeStyist} />
-                )}
-            </ScrollView>
-        </SafeAreaView>
+                    {userData.stylist && (
+                        <>
+                            <BaseButton title={'Опубликовать'} onPress={openMenu} style={{ marginHorizontal: Layout.margins.default, marginTop: Layout.margins.default }} />
+                            <FlatList
+                                style={styles.postsContainer}
+                                columnWrapperStyle={styles.postsWrapper}
+                                data={posts}
+                                numColumns={2}
+                                renderItem={({item}) => <PostPreview post={item}/>}
+                            />
+                        </>
+                    )}
+                    {!userData.stylist && (
+                        <BecomeStylistCard becomeStylist={becomeStyist}/>
+                    )}
+                </ScrollView>
+            </SafeAreaView>
+        </NewPostBottomMenu>
     );
 }

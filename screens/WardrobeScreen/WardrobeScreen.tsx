@@ -50,42 +50,13 @@ const styles = StyleSheet.create({
 });
 
 export default function WardrobeScreen() {
-    // const dispatch = useAppDispatch();
-    //
-    // const navigation = useNavigation<RootNavigation>();
-    //
-    // const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
-    // const snapPoints = React.useMemo(() => ['40%'], []);
-    //
-    // const openModal = () => {
-    //     // @ts-ignore
-    //     bottomSheetModalRef.current.present();
-    // };
-    //
-    // const closeModal = () => {
-    //     // @ts-ignore
-    //     bottomSheetModalRef.current.close();
-    // };
-    //
-    // const pickImage = async () => {
-    //     let result = await ImagePicker.launchImageLibraryAsync({
-    //         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    //         quality: 1
-    //     });
-    //     if (!result.cancelled) {
-    //         dispatch(choosePhoto(result));
-    //         navigation.navigate('AddItem');
-    //         closeModal();
-    //     }
-    // };
-
     const menuItems = [
         {
             name: 'Вещи',
             component: <CategoriesScreen />
         },
         {
-            name: 'Луки',
+            name: 'Образы',
             component: <LooksWardrobeScreen />
         }
     ];

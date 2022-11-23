@@ -67,5 +67,6 @@ export const looksSlice = createSlice({
 export const { loadData } = looksSlice.actions;
 
 export const selectLook = (state: RootState) => state.looks;
+export const selectLooks = (state: RootState) => state.looks.LooksData;
 
 export default looksSlice.reducer;

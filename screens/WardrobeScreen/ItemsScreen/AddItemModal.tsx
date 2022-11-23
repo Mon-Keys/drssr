@@ -49,12 +49,11 @@ export default function AddItemModal() {
     const dispatch = useAppDispatch();
 
     const fields: Array<InputFieldData> = [
-        { key: 'type', title: 'Тип вещи', placeholder: 'Например джинсы' },
-        { key: 'name', title: 'Название', placeholder: 'Дайте название вещи' },
-        // {key: 'link', title: 'Ссылка', placeholder: 'Ссылка на вещь в магазине'},
-        { key: 'brand', title: 'Бренд', placeholder: 'Укажите бренд' }
-        // {key: 'price', title: 'Цена', placeholder: 'Укажите цену вещи'},
-        // {key: 'color', title: 'Цвет', placeholder: 'Укажите цвет вещи'},
+        {key: 'type', title: 'Тип вещи', placeholder: 'Например джинсы'},
+        // {key: 'name', title: 'Название', placeholder: 'Дайте название вещи'},
+        {key: 'link', title: 'Ссылка', placeholder: 'Ссылка на вещь в магазине'},
+        {key: 'brand', title: 'Бренд', placeholder: 'Укажите бренд'},
+        {key: 'price', title: 'Цена', placeholder: 'Укажите цену вещи'},
     ];
 
     useEffect(() => {
@@ -75,19 +74,18 @@ export default function AddItemModal() {
         if (item == null) {
             return;
         }
-        dispatch(
-            addClothes({
-                id: item.id,
-                link: getValue(fields, 'link'),
-                brand: getValue(fields, 'brand'),
-                price: Number(getValue(fields, 'price')),
-                color: getValue(fields, 'color'),
-                sex: 'unisex', // TODO required.
-                currency: 'RUB' // TODO required
-                // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
-            })
-        );
-        navigation.navigate('Item', { index: 0 });
+        dispatch(addClothes({
+            id: item.id,
+            type: getValue(fields, 'type'),
+            link: getValue(fields, 'link'),
+            brand: getValue(fields, 'brand'),
+            price: Number(getValue(fields, 'price')),
+            color: getValue(fields, 'color'),
+            sex: 'unisex', // TODO required.
+            currency: 'RUB', // TODO required
+            // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
+        }));
+        navigation.navigate('Item', { id: item.id });
     };
 
     let img = '';

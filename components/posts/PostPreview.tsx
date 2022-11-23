@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: 'cover', // TODO временно пока Луки маленькие
         borderRadius: Layout.cornerRadius,
-
-        backgroundColor: 'red'
     },
     likeButton: {
         width: 28,
@@ -55,7 +53,6 @@ export const PostPreview = ({ post }: { post: IPost }) => {
 
     return (
         <View style={styles.container}>
-            {/*<View style={styles.postImage} />*/}
             <Image
                 style={styles.postImage}
                 source={{ uri: getUriPreview(post) }}
@@ -83,7 +80,6 @@ export const PostPreview = ({ post }: { post: IPost }) => {
                     }
                 />
             </View>
-            {/*<BaseButton title={'Опубликовать'} style={styles.likeButton} onPress={publish} />*/}
         </View>
     );
 };

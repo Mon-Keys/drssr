@@ -3,14 +3,16 @@ import { View } from '../base/Themed';
 import React from 'react';
 import Colors from '../../styles/Colors';
 import { Layout } from '../../styles';
-import { ILook } from '../../reducers/lookReducer';
+import {ILook, selectLook} from '../../reducers/lookReducer';
 import { getUri } from '../../network/const';
 import BaseButton from '../base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
-import { RootNavigation } from '../../types';
+import { TapBarNavigation } from '../../types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { createPost } from '../../reducers/posts/createPost';
 import { ICreatePost } from '../../network/api/common';
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {selectUser} from "../../reducers/userReducer";
 
 const styles = StyleSheet.create({
     container: {
@@ -50,7 +52,10 @@ const styles = StyleSheet.create({
 });
 
 export const Look = ({ look }: { look: ILook }) => {
-    const navigation = useNavigation<RootNavigation>();
+    const navigation = useNavigation<TapBarNavigation>();
+
+    const user = useAppSelector(selectUser);
+    const isStylist = user.userData.stylist;
 
     const dispatch = useAppDispatch();
 
@@ -77,11 +82,13 @@ export const Look = ({ look }: { look: ILook }) => {
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.lookText}>{look.description}</Text>
                 </View>
-                <BaseButton
-                    title={'Опубликовать'}
-                    style={styles.button}
-                    onPress={publish}
-                />
+                {isStylist ? (
+                    <BaseButton
+                        title={'Опубликовать'}
+                        style={styles.button}
+                        onPress={publish}
+                    />
+                ) : null}
             </ScrollView>
         </View>
     );

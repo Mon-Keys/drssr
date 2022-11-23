@@ -126,7 +126,7 @@ export default function ItemsByCategoryScreen() {
                                 clothes={item}
                                 onPress={() =>
                                     navigation.navigate('Item', {
-                                        index: clothing.indexOf(item)
+                                        id: item.id
                                     })
                                 }
                             />

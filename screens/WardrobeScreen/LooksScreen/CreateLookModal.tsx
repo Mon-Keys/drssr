@@ -137,7 +137,7 @@ export default function CreateLookModal({
                 </Pressable>
                 {boardItems.length === 0 ? (
                     <EmptyView
-                        textHeader={'Создайте лук'}
+                        textHeader={'Создайте образ'}
                         text={'Добавляйте вещи с помощью +'}
                     />
                 ) : (

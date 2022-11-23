@@ -74,13 +74,13 @@ export default function SaveLookModal({
     const fields: Array<InputFieldData> = [
         {
             key: 'name',
-            title: 'Название лука',
-            placeholder: 'Придумайте название лука'
+            title: 'Название образа',
+            placeholder: 'Придумайте название образа'
         },
         {
             key: 'description',
             title: 'Описание',
-            placeholder: 'Добавьте описание для лука'
+            placeholder: 'Добавьте описание для образа'
         }
     ];
 
@@ -110,6 +110,7 @@ export default function SaveLookModal({
             dispatch(fetchUsersLooks()).then(() => {
                 //@ts-ignore
                 navigation.navigate('Wardrobe');
+                // navigation.pop(2); // TODO очень опасно
             });
         });
     };
