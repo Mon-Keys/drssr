@@ -26,6 +26,7 @@ import {BottomSheetModal} from "@gorhom/bottom-sheet";
 import {fetchUsersLooks, selectLooks} from "../../reducers/lookReducer";
 import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
 import {selectUserItems} from "../../reducers/items/clothesReducer";
+import BaseButton from "../../components/base/BaseButton";
 // =======
 // import { FlatList } from 'react-native-gesture-handler'; TODO что это?
 // >>>>>>> dev
@@ -105,7 +106,6 @@ export default function ProfileScreen() {
     const becomeStyist = () => {
         dispatch(stylist());
     };
-    // <Pressable onPress={openMenu} ><Text>Create Post</Text></Pressable>
 
     return (
         <NewPostBottomMenu modalRef={MenuRef} hasClothes={hasClothes()} hasLooks={hasLooks()}>
@@ -138,13 +138,16 @@ export default function ProfileScreen() {
                         }
                     />
                     {userData.stylist && (
-                        <FlatList
-                            style={styles.postsContainer}
-                            columnWrapperStyle={styles.postsWrapper}
-                            data={posts}
-                            numColumns={2}
-                            renderItem={({item}) => <PostPreview post={item}/>}
-                        />
+                        <>
+                            <BaseButton title={'Опубликовать'} onPress={openMenu} style={{ marginHorizontal: Layout.margins.default, marginTop: Layout.margins.default }} />
+                            <FlatList
+                                style={styles.postsContainer}
+                                columnWrapperStyle={styles.postsWrapper}
+                                data={posts}
+                                numColumns={2}
+                                renderItem={({item}) => <PostPreview post={item}/>}
+                            />
+                        </>
                     )}
                     {!userData.stylist && (
                         <BecomeStylistCard becomeStylist={becomeStyist}/>

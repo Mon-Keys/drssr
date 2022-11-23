@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     buttonTitle: {
         textAlign: 'center',
 
-        padding: Layout.margins.default,
+        padding: Layout.margins.small,
 
         color: Colors.base.white,
         fontSize: Layout.fontSize.big,
