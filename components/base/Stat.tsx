@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Pressable, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import Colors from '../../styles/Colors';
 
 export interface CheapProps {
@@ -13,20 +13,20 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginHorizontal: 13,
+        marginHorizontal: 13
     },
     valueText: {
         color: Colors.base.black,
         fontSize: 22,
         fontFamily: 'proxima-nova',
-        textAlign: 'center',
+        textAlign: 'center'
     },
     descriptionText: {
         color: Colors.base.darkgray,
         fontSize: 16,
         fontFamily: 'proxima-nova',
-        textAlign: 'center',
-    },
+        textAlign: 'center'
+    }
 });
 
 const Stat = (props: CheapProps) => {

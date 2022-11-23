@@ -3,14 +3,12 @@ import { Image, Pressable, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import Colors from '../../styles/Colors';
 import ProfileVerified from '../icons/profileVerified';
-import Location from '../icons/location';
 import Settings from '../icons/settings';
 import Share from '../icons/share';
 import { Layout, Abstracts } from '../../styles';
-import Cheap from './Cheap';
 import { FlatList } from 'react-native-gesture-handler';
 import Stat from './Stat';
-import BaseButton from './BaseButton';
+// import BaseButton from './BaseButton';
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -25,7 +23,7 @@ const styles = StyleSheet.create({
         borderRadius: Layout.cornerRadius,
         width: Abstracts.profile.defaultWidth,
         alignItems: 'center',
-        flex: 1,
+        flex: 1
     },
     image: {
         width: Abstracts.profile.avatarSize,
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
         borderColor: Colors.base.white
     },
     headerContainer: {
-        height: 30,
+        height: 30
     },
     name: {
         fontSize: 24,
@@ -46,28 +44,28 @@ const styles = StyleSheet.create({
     nameContainer: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     statsContainer: {
-        flex: 1,
+        flex: 1
     },
     descriptionContainer: {
         height: 60,
-        width: 330,
+        width: 330
     },
     descriptionText: {
         color: Colors.base.black,
         fontSize: 14,
         fontFamily: 'proxima-nova',
-        textAlign: 'center',
+        textAlign: 'center'
     },
     bottomContainer: {
-        height: 10,
+        height: 10
     },
     secondaryText: {
         color: Colors.base.darkgray,
         fontSize: 16,
-        fontFamily: 'proxima-nova',
+        fontFamily: 'proxima-nova'
     },
     leftButton: {
         position: 'absolute',
@@ -91,12 +89,12 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.base.lightgray,
         borderRadius: Layout.cornerRadius,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     editText: {
         fontSize: 16,
         fontFamily: 'proxima-nova'
-    },
+    }
 });
 
 export interface ProfileCardProps {
@@ -128,15 +126,19 @@ export const ProfileCard = (props: ProfileCardProps) => {
     ];
     return (
         <View style={styles.cardContainer}>
-            <View style={{height: 50}}></View>
+            <View style={{ height: 50 }} />
             <View style={styles.mountContainer}>
-                <View style={styles.headerContainer}></View>
-                <Pressable style={styles.leftButton} onPress={props.settingsAction}>
-                    <Settings
-                        color={Colors.base.darkgray}
-                    />
+                <View style={styles.headerContainer} />
+                <Pressable
+                    style={styles.leftButton}
+                    onPress={props.settingsAction}
+                >
+                    <Settings color={Colors.base.darkgray} />
                 </Pressable>
-                <Share style={styles.rightButton} color={Colors.base.darkgray} />
+                <Share
+                    style={styles.rightButton}
+                    color={Colors.base.darkgray}
+                />
                 <View style={styles.nameContainer}>
                     <Text style={styles.name}> {props.name} </Text>
                     <ProfileVerified color="white" />
@@ -151,25 +153,22 @@ export const ProfileCard = (props: ProfileCardProps) => {
                         horizontal={true}
                         data={stats}
                         renderItem={({ item }) => {
-                            return (
-                                <Stat
-                                    value={item.value}
-                                    desc={item.desc}
-                                />
-                            );
+                            return <Stat value={item.value} desc={item.desc} />;
                         }}
                     />
                 </View>
                 <View style={styles.statsContainer}>
-                <Pressable style={styles.edit} onPress={props.editAction}>
-                    <Text style={styles.editText}> Редактировать </Text>
-                    {/* <BaseButton
+                    <Pressable style={styles.edit} onPress={props.editAction}>
+                        <Text style={styles.editText}> Редактировать </Text>
+                        {/* <BaseButton
                         title='Редактировать'
                     /> */}
-                </Pressable>
+                    </Pressable>
                 </View>
                 <View style={styles.descriptionContainer}>
-                    <Text numberOfLines={3} style={styles.descriptionText}>{props.description}</Text>
+                    <Text numberOfLines={3} style={styles.descriptionText}>
+                        {props.description}
+                    </Text>
                 </View>
                 <View style={styles.bottomContainer}>
                     {/* <Text style={styles.secondaryText}>

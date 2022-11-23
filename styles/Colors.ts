@@ -6,6 +6,6 @@ export default {
         white: '#FFFFFF',
         red: '#E81818',
         yellow: '#FFD509',
-        transparent: 'transparent',
+        transparent: 'transparent'
     }
 };

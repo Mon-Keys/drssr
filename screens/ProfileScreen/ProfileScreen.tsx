@@ -100,11 +100,12 @@ export default function ProfileScreen() {
                         navigation.navigate('Settings');
                     }}
                     shareAction={() => {}}
+                    editAction={() => {}}
                     description={
                         'Сотворю твой успех с помощью 100+ огненных образов. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                     }
                 />
-                {userData.stylist && 
+                {userData.stylist && (
                     <FlatList
                         style={styles.postsContainer}
                         columnWrapperStyle={styles.postsWrapper}
@@ -112,10 +113,10 @@ export default function ProfileScreen() {
                         numColumns={2}
                         renderItem={({ item }) => <PostPreview post={item} />}
                     />
-                }
-                {!userData.stylist && 
+                )}
+                {!userData.stylist && (
                     <BecomeStylistCard becomeStylist={becomeStyist} />
-                }
+                )}
             </ScrollView>
         </SafeAreaView>
     );
