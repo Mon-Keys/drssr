@@ -4,7 +4,8 @@ import {
     StyleSheet,
     TextInput,
     TextInputProps,
-    View
+    View,
+    Text
 } from 'react-native';
 import Colors from '../../styles/Colors';
 
@@ -13,7 +14,9 @@ import Eye from '../icons/eye';
 
 interface InputFieldProps extends Omit<TextInputProps, 'secureTextEntry'> {
     password?: boolean;
+    valid: boolean;
     icon: JSX.Element;
+    errorText: string;
 }
 
 const styles = StyleSheet.create({
@@ -27,6 +30,17 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         backgroundColor: Colors.base.lightgray,
+        borderRadius: 9,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 9,
+        width: 288,
+        height: 36
+    },
+    errorInputContainer: {
+        backgroundColor: Colors.base.lightgray,
+        borderColor: Colors.base.red,
+        borderWidth: 1,
         borderRadius: 9,
         flexDirection: 'row',
         alignItems: 'center',
@@ -57,13 +71,11 @@ const InputField = (props: InputFieldProps) => {
     let icon: JSX.Element = <View />;
     if (props.icon) {
         icon = props.icon;
-        // icon.props.style = styles.icon
     }
 
     return (
         <SafeAreaView>
-            <View style={styles.inputContainer}>
-                {/* <Person style={styles.icon}></Person> */}
+            <View style={props.valid ? styles.inputContainer : styles.errorInputContainer}>
                 {icon}
                 <TextInput
                     style={styles.input}
@@ -73,6 +85,12 @@ const InputField = (props: InputFieldProps) => {
                 />
                 {hidePassIcon}
             </View>
+            {!props.valid && 
+                <Text style={{color: 'red', textAlign: 'center', maxWidth: 300}}>{props.errorText}</Text>
+            }
+            {props.valid && 
+                <Text style={{textAlign: 'center', maxWidth: 300}}></Text>
+            }
         </SafeAreaView>
     );
 };

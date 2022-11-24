@@ -1,12 +1,13 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet } from 'react-native';
+import { Platform, StatusBar, StyleSheet, Text } from 'react-native';
 import InputField from '../../components/base/InputField';
-
+import { nameRegExp, passwordRegExp } from '../../constants/validation';
 import { View } from '../../components/base/Themed';
 import StyledButton from '../../components/base/StyledButton';
 import Person from '../../components/icons/person';
 import Key from '../../components/icons/key';
-import { loginUser } from '../../reducers/userReducer';
+import { loginUser, selectUser } from '../../reducers/userReducer';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { ILoginData } from '../../network';
 import { RootStackScreenProps } from '../../types';
@@ -41,13 +42,13 @@ const styles = StyleSheet.create({
 export default function TabTwoScreen({
     navigation
 }: RootStackScreenProps<'Login'>) {
-    const [login, setLogin] = React.useState<string>('');
+    const user = useAppSelector(selectUser);
 
+    const [login, setLogin] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
 
-    const [loginValid, setLoginValid] = React.useState<boolean>(false);
-
-    const [passwordValid, setPasswordValid] = React.useState<boolean>(false);
+    const [loginValid, setLoginValid] = React.useState<boolean>(true);
+    const [passwordValid, setPasswordValid] = React.useState<boolean>(true);
 
     const dispatch = useAppDispatch();
 
@@ -56,15 +57,21 @@ export default function TabTwoScreen({
             login: login.trim(),
             password: password.trim()
         };
-        dispatch(loginUser(loginData));
+        setLoginValid(nameRegExp.test(login))
+        setPasswordValid(passwordRegExp.test(password))
+        if (nameRegExp.test(login) && passwordRegExp.test(password)) {
+            dispatch(loginUser(loginData));
+        }
     };
 
     const onChangeLogin = (text: string) => {
         setLogin(text)
+        setLoginValid(nameRegExp.test(text))
     };
 
     const onChangePassword = (text: string) => {
         setPassword(text)
+        setPasswordValid(passwordRegExp.test(text))
     };
 
     return (
@@ -76,6 +83,8 @@ export default function TabTwoScreen({
                     placeholder={'Никнейм'}
                     value={login}
                     onChangeText={onChangeLogin}
+                    valid={loginValid}
+                    errorText={'Неверный формат никнейма'}
                 />
                 <InputField
                     icon={<Key />}
@@ -84,7 +93,16 @@ export default function TabTwoScreen({
                     value={password}
                     onChangeText={onChangePassword}
                     password={true}
+                    valid={passwordValid}
+                    errorText={'Пароль должен состоять из 8-20 латинских букв'}
                 />
+
+                {user.status === 'rejected' && 
+                    <Text style={{color: 'red', textAlign: 'center', maxWidth: 300}}>Неверный логин или пароль</Text>
+                }
+                {user.status !== 'rejected' && 
+                    <Text style={{textAlign: 'center', maxWidth: 300}}></Text>
+                }
 
                 <StyledButton title="Войти" onPress={submitLogin} />
 
