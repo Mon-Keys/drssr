@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Svg, { G, Path, Defs, ClipPath, SvgProps } from 'react-native-svg';
 
 export interface IconProps extends SvgProps {
@@ -7,7 +6,7 @@ export interface IconProps extends SvgProps {
 
 const SvgComponent = (props: IconProps) => (
     <Svg
-        width={16}
+        width={20}
         height={18}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

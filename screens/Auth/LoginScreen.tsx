@@ -5,6 +5,7 @@ import InputField from '../../components/base/InputField';
 import { View } from '../../components/base/Themed';
 import StyledButton from '../../components/base/StyledButton';
 import Person from '../../components/icons/person';
+import Key from '../../components/icons/key';
 import { loginUser } from '../../reducers/userReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { ILoginData } from '../../network';
@@ -40,9 +41,13 @@ const styles = StyleSheet.create({
 export default function TabTwoScreen({
     navigation
 }: RootStackScreenProps<'Login'>) {
-    const [login, onChangeLogin] = React.useState<string>('');
+    const [login, setLogin] = React.useState<string>('');
 
-    const [password, onChangePassword] = React.useState<string>('');
+    const [password, setPassword] = React.useState<string>('');
+
+    const [loginValid, setLoginValid] = React.useState<boolean>(false);
+
+    const [passwordValid, setPasswordValid] = React.useState<boolean>(false);
 
     const dispatch = useAppDispatch();
 
@@ -52,6 +57,14 @@ export default function TabTwoScreen({
             password: password.trim()
         };
         dispatch(loginUser(loginData));
+    };
+
+    const onChangeLogin = (text: string) => {
+        setLogin(text)
+    };
+
+    const onChangePassword = (text: string) => {
+        setPassword(text)
     };
 
     return (
@@ -65,7 +78,7 @@ export default function TabTwoScreen({
                     onChangeText={onChangeLogin}
                 />
                 <InputField
-                    icon={<Person color={Colors.base.darkgray} />}
+                    icon={<Key />}
                     placeholderTextColor={Colors.base.darkgray}
                     placeholder={'Пароль'}
                     value={password}

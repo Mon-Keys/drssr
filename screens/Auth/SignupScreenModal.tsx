@@ -3,6 +3,8 @@ import React from 'react';
 import { View } from '../../components/base/Themed';
 import InputField from '../../components/base/InputField';
 import Person from '../../components/icons/person';
+import Key from '../../components/icons/key';
+import Mail from '../../components/icons/mail';
 import StyledButton from '../../components/base/StyledButton';
 import Colors from '../../styles/Colors';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -86,7 +88,7 @@ export default function SignupScreenModal(/*{
                 onChangeText={onChangeNickname}
             />
             <InputField
-                icon={<Person color={Colors.base.darkgray} />}
+                icon={<Mail />}
                 placeholder={'Почта'}
                 placeholderTextColor={Colors.base.darkgray}
                 value={email}
@@ -94,7 +96,7 @@ export default function SignupScreenModal(/*{
                 keyboardType={'email-address'}
             />
             <InputField
-                icon={<Person color={Colors.base.darkgray} />}
+                icon={<Key />}
                 placeholder={'Пароль'}
                 value={password}
                 placeholderTextColor={Colors.base.darkgray}
@@ -102,7 +104,7 @@ export default function SignupScreenModal(/*{
                 password={true}
             />
             <InputField
-                icon={<Person color={Colors.base.darkgray} />}
+                icon={<Key />}
                 placeholder={'Повторите пароль'}
                 value={password2}
                 placeholderTextColor={Colors.base.darkgray}
