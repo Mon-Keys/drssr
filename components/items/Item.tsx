@@ -27,11 +27,13 @@ const styles = StyleSheet.create({
         marginHorizontal: Layout.margins.default
     },
     modalTitle: {
+        fontSize: Layout.fontSize.big,
         fontWeight: 'bold',
         marginBottom: 15,
         textAlign: "center"
     },
     modalText: {
+        fontSize: Layout.fontSize.default,
         marginBottom: 15,
         textAlign: "center",
         maxWidth: 300
