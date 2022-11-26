@@ -60,17 +60,6 @@ export default function ItemScreen() {
         navigation.goBack();
     }
 
-    const getNameScreen = () => {
-        let name = '';
-        if (item && item.type) {
-            name += item.type;
-        }
-        if (item && item.brand) {
-            name += ' ' + item.brand;
-        }
-        return name == '' ? 'Вещь' : name;
-    };
-
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
@@ -87,7 +76,7 @@ export default function ItemScreen() {
                 />
                 <View style={styles.headerTitleContainer}>
                     <Text style={styles.headerTitleText}>
-                        {getNameScreen()}
+                        {'Вещь'}
                     </Text>
                 </View>
             </View>

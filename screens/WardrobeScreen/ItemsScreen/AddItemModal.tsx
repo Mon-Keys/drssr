@@ -14,6 +14,7 @@ import { addClothes, prepareClothes } from '../../../reducers/items/addItem';
 import BigImage from '../../../components/item/BigImage';
 import { Layout } from '../../../styles';
 import InputContainer, {
+    checkValidation,
     getValue,
     InputFieldData,
     updateValue
@@ -21,6 +22,7 @@ import InputContainer, {
 import BaseButton from '../../../components/base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from '../../../types';
+import { linkItemRegExp, typeItemRegExp} from '../../../constants/validation';
 
 const styles = StyleSheet.create({
     container: {
@@ -49,11 +51,48 @@ export default function AddItemModal() {
     const dispatch = useAppDispatch();
 
     const fields: Array<InputFieldData> = [
-        {key: 'type', title: 'Тип вещи', placeholder: 'Например джинсы'},
-        // {key: 'name', title: 'Название', placeholder: 'Дайте название вещи'},
-        {key: 'link', title: 'Ссылка', placeholder: 'Ссылка на вещь в магазине'},
-        {key: 'brand', title: 'Бренд', placeholder: 'Укажите бренд'},
-        {key: 'price', title: 'Цена', placeholder: 'Укажите цену вещи'},
+        {
+            key: 'type',
+            title: 'Тип вещи',
+            placeholder: 'Например джинсы',
+            validationFunc: (text) => {
+                if (text === '') {
+                    return 'Заполните поле'
+                }
+                if (!typeItemRegExp.test(text)) {
+                    return 'Используйте только буквы';
+                }
+                return '';
+            }
+        },
+        {
+            key: 'link',
+            title: 'Ссылка',
+            placeholder: 'Ссылка на вещь в магазине',
+            validationFunc: (text) => {
+                if (text === '') {
+                    return ''
+                }
+                if (!linkItemRegExp.test(text)) {
+                    return 'Неверный формат ссылки';
+                }
+                return '';
+            }
+        },
+        {
+            key: 'brand',
+            title: 'Бренд',
+            placeholder: 'Укажите бренд',
+            validationFunc: (text) => {
+                if (text === '') {
+                    return ''
+                }
+                if (text.length > 30) {
+                    return 'Слишко длинное название бренда';
+                }
+                return '';
+            }
+        },
     ];
 
     useEffect(() => {
@@ -71,7 +110,7 @@ export default function AddItemModal() {
 
     const add = () => {
         const item = prepareItem.itemResp;
-        if (item == null) {
+        if (item == null || !checkValidation(fields)) {
             return;
         }
         dispatch(addClothes({
