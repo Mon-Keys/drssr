@@ -29,7 +29,6 @@ export const FeedCard = (props: FeedCardProps) => (
             <Image
                 style={styles.image}
                 source={(() => {
-                    console.log(props.post.look?.img_path);
                     if (props.post.previews_paths) {
                         return {
                             uri: `${

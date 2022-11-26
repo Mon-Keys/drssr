@@ -84,7 +84,6 @@ export default function DiscoverScreen({
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        console.log('1');
         dispatch(fetchFavoritePosts());
     }, [dispatch]);
 

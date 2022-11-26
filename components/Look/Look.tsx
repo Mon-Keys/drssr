@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, ScrollView } from 'react-native';
+import {Image, StyleSheet, Text, ScrollView, FlatList} from 'react-native';
 import { View } from '../base/Themed';
 import React from 'react';
 import Colors from '../../styles/Colors';
@@ -7,24 +7,24 @@ import {ILook, selectLook} from '../../reducers/lookReducer';
 import { getUri } from '../../network/const';
 import BaseButton from '../base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
-import { TapBarNavigation } from '../../types';
+import {RootNavigation, TapBarNavigation} from '../../types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { createPost } from '../../reducers/posts/createPost';
 import { ICreatePost } from '../../network/api/common';
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {selectUser} from "../../reducers/userReducer";
+import ItemPreview from "../Look/ItemPreview";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
+        // width: '100%',
         backgroundColor: 'transparent'
     },
     previewContainer: {
         height: 450,
         margin: Layout.margins.default,
-        borderRadius: Layout.cornerRadius,
-        backgroundColor: 'red'
+        borderRadius: Layout.cornerRadius
     },
     lookImage: {
         flex: 1,
@@ -34,14 +34,22 @@ const styles = StyleSheet.create({
     descriptionContainer: {
         backgroundColor: Colors.base.white,
         marginHorizontal: Layout.margins.default,
-        borderRadius: Layout.cornerRadius
+        borderRadius: Layout.cornerRadius,
+        padding: Layout.margins.default
     },
     lookText: {
-        marginVertical: Layout.margins.small,
         marginHorizontal: Layout.margins.default,
+        marginBottom: Layout.margins.small,
 
+        color: Colors.base.black,
         fontFamily: 'proxima-nova',
         fontSize: Layout.fontSize.default
+    },
+    itemsTitle: {
+        marginBottom: Layout.margins.small,
+        fontSize: Layout.fontSize.default,
+        fontWeight: 'bold',
+        color: Colors.base.black,
     },
     button: {
         margin: Layout.margins.default
@@ -52,7 +60,8 @@ const styles = StyleSheet.create({
 });
 
 export const Look = ({ look }: { look: ILook }) => {
-    const navigation = useNavigation<TapBarNavigation>();
+    const TapBarNavigation = useNavigation<TapBarNavigation>();
+    const navigation = useNavigation<RootNavigation>();
 
     const user = useAppSelector(selectUser);
     const isStylist = user.userData.stylist;
@@ -64,10 +73,10 @@ export const Look = ({ look }: { look: ILook }) => {
             element_id: look.id,
             type: 'look',
             description: 'захардкоженное описание поста'
-            // previews: [look.img_path],
+            // previews: [look.img_path]
         };
         dispatch(createPost(post));
-        navigation.navigate('Profile');
+        TapBarNavigation.navigate('Profile');
     };
 
     return (
@@ -78,9 +87,25 @@ export const Look = ({ look }: { look: ILook }) => {
                         style={styles.lookImage}
                         source={{ uri: getUri(look.img_path) }}
                     />
+                    {look.description ? (
+                        <Text style={styles.lookText}>{look.description}</Text>
+                    ) : null}
                 </View>
                 <View style={styles.descriptionContainer}>
-                    <Text style={styles.lookText}>{look.description}</Text>
+                    <Text style={styles.itemsTitle}>Вещи в образе</Text>
+                    <FlatList
+                        data={look.clothes}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={({item}) => (
+                            <ItemPreview
+                                clothes={item}
+                                onPress={() => navigation.navigate('Item', {
+                                    id: item.id
+                                })}
+                            />
+                        )}
+                    />
                 </View>
                 {isStylist ? (
                     <BaseButton

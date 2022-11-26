@@ -52,7 +52,6 @@ export const clothesSlice = createSlice({
     initialState,
     reducers: {
         loadData: (state) => {
-            console.log('not done loadData111', state);
         },
         choosePhoto: (
             state,

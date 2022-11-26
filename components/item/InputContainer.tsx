@@ -11,6 +11,7 @@ export interface InputFieldData {
     // onChange?: React.Dispatch<React.SetStateAction<string | undefined>>;
     onChange?: ((text: string) => void) | undefined;
     placeholder?: string | '';
+    required?: boolean | false;
     validationFunc?: ((text: string) => string) | undefined;
     errorMsg?: string | '';
 }
@@ -36,7 +37,12 @@ export function getValue(array: Array<InputFieldData>, key: string): string {
 
 // return true - all fields is valid
 export function checkValidation(array: Array<InputFieldData>): boolean {
-    return !array.find((item) => item.errorMsg !== '');
+    array.forEach((item) => {
+        if (item.errorMsg !== '' || item.required && item.value?.trim() === '') {
+            return false
+        }
+    });
+    return true;
 }
 
 export interface InputContainerPrpops {
