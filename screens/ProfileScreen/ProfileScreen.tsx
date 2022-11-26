@@ -27,9 +27,6 @@ import {fetchUsersLooks, selectLooks} from "../../reducers/lookReducer";
 import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
 import {selectUserItems} from "../../reducers/items/clothesReducer";
 import BaseButton from "../../components/base/BaseButton";
-// =======
-// import { FlatList } from 'react-native-gesture-handler'; TODO что это?
-// >>>>>>> dev
 
 const styles = StyleSheet.create({
     container: {

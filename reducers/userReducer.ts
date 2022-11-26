@@ -123,7 +123,7 @@ export const userSlice = createSlice({
                 state.isLoggedIn = true;
             })
             .addCase(fetchUserData.rejected, (state) => {
-                state.status = 'rejected';
+                state.status = 'rejectedCookie';
                 state.isLoggedIn = false;
             })
             .addCase(signUpUser.pending, (state) => {

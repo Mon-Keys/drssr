@@ -32,7 +32,6 @@ export default function SettingsModalScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.tempContainer}>
-                <Text style={{ color: 'black' }}>aga</Text>
                 <StyledButton title={'logout'} onPress={logout} />
             </View>
         </View>
