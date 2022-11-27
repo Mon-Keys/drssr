@@ -211,8 +211,7 @@ export const feedSlice = createSlice({
     name: 'Feeds',
     initialState,
     reducers: {
-        loadData: (state) => {
-        }
+        loadData: (state) => {}
     },
     extraReducers: (builder) => {
         builder

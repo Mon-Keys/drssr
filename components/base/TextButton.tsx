@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         fontSize: Layout.fontSize.big,
         fontFamily: 'proxima-nova',
 
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     }
 });
 

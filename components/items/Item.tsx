@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Text, Linking, Modal} from 'react-native';
+import { StyleSheet, View, Text, Linking, Modal } from 'react-native';
 
 import { Colors, Layout } from '../../styles';
 import { Clothes } from '../../reducers/items/clothesReducer';
 import BigImage from '../item/BigImage';
-import BaseButton from "../base/BaseButton";
-import TextButton from "../base/TextButton";
+import BaseButton from '../base/BaseButton';
+import TextButton from '../base/TextButton';
 
 const styles = StyleSheet.create({
     container: {
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
         fontSize: Layout.fontSize.big,
         fontWeight: 'bold',
         marginBottom: 15,
-        textAlign: "center"
+        textAlign: 'center'
     },
     modalText: {
         fontSize: Layout.fontSize.default,
         marginBottom: 15,
-        textAlign: "center",
+        textAlign: 'center',
         maxWidth: 300
     },
     modalContainer: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 7
-    },
+    }
 });
 
 export default function Item({ item }: { item: Clothes }) {
@@ -74,25 +74,27 @@ export default function Item({ item }: { item: Clothes }) {
 
     const hasLink = () => {
         return item.link && item.link != '';
-    }
+    };
 
     const [modalVisible, setModalVisible] = React.useState(false);
 
     const goToStore = () => {
         Linking.openURL(item.link);
-    }
+    };
 
     return (
         <View style={styles.container}>
             <BigImage img={item.mask_path} style={styles.imageContainer} />
-            <Text style={styles.descriptionContainer}>
-                {getNameScreen()}
-            </Text>
+            <Text style={styles.descriptionContainer}>{getNameScreen()}</Text>
             {hasLink() ? (
-                <BaseButton title={'В магазин'} style={styles.buttonContainer} onPress={() => setModalVisible(true)} />
+                <BaseButton
+                    title={'В магазин'}
+                    style={styles.buttonContainer}
+                    onPress={() => setModalVisible(true)}
+                />
             ) : null}
             <Modal
-                animationType='fade'
+                animationType="fade"
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
@@ -101,11 +103,21 @@ export default function Item({ item }: { item: Clothes }) {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalTitle}>{'Перейти по ссылке '}</Text>
+                        <Text style={styles.modalTitle}>
+                            {'Перейти по ссылке '}
+                        </Text>
                         <Text style={styles.modalText}>{item.link}</Text>
                         <View style={{ flexDirection: 'row' }}>
-                            <TextButton title={'Да'} style={styles.buttonContainer} onPress={goToStore} />
-                            <TextButton title={'Нет'} style={styles.buttonContainer} onPress={() => setModalVisible(false)} />
+                            <TextButton
+                                title={'Да'}
+                                style={styles.buttonContainer}
+                                onPress={goToStore}
+                            />
+                            <TextButton
+                                title={'Нет'}
+                                style={styles.buttonContainer}
+                                onPress={() => setModalVisible(false)}
+                            />
                         </View>
                     </View>
                 </View>

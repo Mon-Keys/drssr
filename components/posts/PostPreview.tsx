@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     postImage: {
         flex: 1,
         resizeMode: 'cover', // TODO временно пока Луки маленькие
-        borderRadius: Layout.cornerRadius,
+        borderRadius: Layout.cornerRadius
     },
     likeButton: {
         width: 28,

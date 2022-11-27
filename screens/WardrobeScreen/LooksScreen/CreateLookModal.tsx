@@ -16,11 +16,11 @@ import { useAppSelector } from '../../../hooks/useAppSelector';
 import { selectUserItems } from '../../../reducers/items/clothesReducer';
 import ViewShot from 'react-native-view-shot';
 import { RootStackScreenProps } from '../../../types';
-import {addLookData, addLookPhoto} from '../../../reducers/createLookReducer';
+import { addLookData, addLookPhoto } from '../../../reducers/createLookReducer';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import EmptyView from '../../../components/base/EmptyView';
-import { getUri } from "../../../network/const";
-import * as Console from "console";
+import { getUri } from '../../../network/const';
+import * as Console from 'console';
 
 const styles = StyleSheet.create({
     container: {
@@ -97,9 +97,9 @@ export default function CreateLookModal({
         const ids: Array<number> = [];
         boardItems.forEach((item) => {
             ids.push(item.id);
-        })
-        return ids
-    }
+        });
+        return ids;
+    };
 
     const clothes = useAppSelector(selectUserItems);
 
@@ -132,7 +132,7 @@ export default function CreateLookModal({
     };
 
     const addItem = (id: number, path: string) => {
-        setBoardItems([...boardItems, {id: id, image: getUri(path)}]);
+        setBoardItems([...boardItems, { id: id, image: getUri(path) }]);
     };
     const removeItem = (ind: number) => {
         setBoardItems(boardItems.filter((value, index) => index !== ind));
@@ -221,7 +221,7 @@ export default function CreateLookModal({
                                 <Item
                                     imgURI={`http://leonidperl.in/${item.mask_path}`}
                                     callbackfn={() => {
-                                        addItem(item.id, item.mask_path)
+                                        addItem(item.id, item.mask_path);
                                         closeModal();
                                     }}
                                 />

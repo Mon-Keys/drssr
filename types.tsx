@@ -13,7 +13,7 @@ import {
     NativeStackNavigationProp,
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
-import LooksForNewPostModal from "./screens/Modals/LooksForNewPostModal";
+import LooksForNewPostModal from './screens/Modals/LooksForNewPostModal';
 
 declare global {
     namespace ReactNavigation {
@@ -47,7 +47,7 @@ export type RootStackParamList = {
     CreatePost: {
         type: string;
         id: number;
-    }
+    };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -71,7 +71,10 @@ export type RootNavigation = NativeStackNavigationProp<
     'Root'
 >;
 
-export type TapBarNavigation = NativeStackNavigationProp<RootTabParamList, 'Home'>;
+export type TapBarNavigation = NativeStackNavigationProp<
+    RootTabParamList,
+    'Home'
+>;
 
 export type ClothingByCategoryScreenRouteProp = RouteProp<
     RootStackParamList,

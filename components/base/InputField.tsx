@@ -75,7 +75,13 @@ const InputField = (props: InputFieldProps) => {
 
     return (
         <SafeAreaView>
-            <View style={props.valid ? styles.inputContainer : styles.errorInputContainer}>
+            <View
+                style={
+                    props.valid
+                        ? styles.inputContainer
+                        : styles.errorInputContainer
+                }
+            >
                 {icon}
                 <TextInput
                     style={styles.input}
@@ -85,12 +91,16 @@ const InputField = (props: InputFieldProps) => {
                 />
                 {hidePassIcon}
             </View>
-            {!props.valid && 
-                <Text style={{color: 'red', textAlign: 'center', maxWidth: 300}}>{props.errorText}</Text>
-            }
-            {props.valid && 
-                <Text style={{textAlign: 'center', maxWidth: 300}}></Text>
-            }
+            {!props.valid && (
+                <Text
+                    style={{ color: 'red', textAlign: 'center', maxWidth: 300 }}
+                >
+                    {props.errorText}
+                </Text>
+            )}
+            {props.valid && (
+                <Text style={{ textAlign: 'center', maxWidth: 300 }}></Text>
+            )}
         </SafeAreaView>
     );
 };

@@ -22,7 +22,7 @@ import InputContainer, {
 import BaseButton from '../../../components/base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from '../../../types';
-import { linkItemRegExp, typeItemRegExp} from '../../../constants/validation';
+import { linkItemRegExp, typeItemRegExp } from '../../../constants/validation';
 
 const styles = StyleSheet.create({
     container: {
@@ -57,7 +57,7 @@ export default function AddItemModal() {
             placeholder: 'Например джинсы',
             validationFunc: (text) => {
                 if (text === '') {
-                    return 'Заполните поле'
+                    return 'Заполните поле';
                 }
                 if (!typeItemRegExp.test(text)) {
                     return 'Используйте только буквы';
@@ -71,7 +71,7 @@ export default function AddItemModal() {
             placeholder: 'Ссылка на вещь в магазине',
             validationFunc: (text) => {
                 if (text === '') {
-                    return ''
+                    return '';
                 }
                 if (!linkItemRegExp.test(text)) {
                     return 'Неверный формат ссылки';
@@ -85,14 +85,14 @@ export default function AddItemModal() {
             placeholder: 'Укажите бренд',
             validationFunc: (text) => {
                 if (text === '') {
-                    return ''
+                    return '';
                 }
                 if (text.length > 30) {
                     return 'Слишко длинное название бренда';
                 }
                 return '';
             }
-        },
+        }
     ];
 
     useEffect(() => {
@@ -113,17 +113,19 @@ export default function AddItemModal() {
         if (item == null || !checkValidation(fields)) {
             return;
         }
-        dispatch(addClothes({
-            id: item.id,
-            type: getValue(fields, 'type'),
-            link: getValue(fields, 'link'),
-            brand: getValue(fields, 'brand'),
-            price: Number(getValue(fields, 'price')),
-            color: getValue(fields, 'color'),
-            sex: 'unisex', // TODO required.
-            currency: 'RUB', // TODO required
-            // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
-        }));
+        dispatch(
+            addClothes({
+                id: item.id,
+                type: getValue(fields, 'type'),
+                link: getValue(fields, 'link'),
+                brand: getValue(fields, 'brand'),
+                price: Number(getValue(fields, 'price')),
+                color: getValue(fields, 'color'),
+                sex: 'unisex', // TODO required.
+                currency: 'RUB' // TODO required
+                // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
+            })
+        );
         navigation.navigate('Item', { id: item.id });
     };
 

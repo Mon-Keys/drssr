@@ -1,20 +1,30 @@
 import React from 'react';
-import {StyleSheet, Text, Platform, StatusBar, ScrollView, Image} from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    Platform,
+    StatusBar,
+    ScrollView,
+    Image
+} from 'react-native';
 import { View } from '../../components/base/Themed';
 import StyledButton from '../../components/base/StyledButton';
 import { logoutUser } from '../../reducers/userReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {Colors, Layout} from '../../styles';
-import {getUri} from "../../network/const";
-import BaseButton from "../../components/base/BaseButton";
-import {useAppSelector} from "../../hooks/useAppSelector";
-import {selectLooks} from "../../reducers/lookReducer";
-import {selectUserItems} from "../../reducers/items/clothesReducer";
-import {useNavigation, useRoute} from "@react-navigation/native";
-import {CreatePostRouteProp, TapBarNavigation} from "../../types";
-import {ICreatePost} from "../../network/api/common";
-import {createPost} from "../../reducers/posts/createPost";
-import InputContainer, {getValue, InputFieldData} from "../../components/item/InputContainer";
+import { Colors, Layout } from '../../styles';
+import { getUri } from '../../network/const';
+import BaseButton from '../../components/base/BaseButton';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { selectLooks } from '../../reducers/lookReducer';
+import { selectUserItems } from '../../reducers/items/clothesReducer';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { CreatePostRouteProp, TapBarNavigation } from '../../types';
+import { ICreatePost } from '../../network/api/common';
+import { createPost } from '../../reducers/posts/createPost';
+import InputContainer, {
+    getValue,
+    InputFieldData
+} from '../../components/item/InputContainer';
 
 const styles = StyleSheet.create({
     container: {
@@ -81,16 +91,24 @@ export default function CreatePostModal() {
     }
 
     const fields: Array<InputFieldData> = [
-        {key: 'name', title: 'Название', placeholder: 'Дайте название публикации'},
-        {key: 'description', title: 'Описание', placeholder: 'Расскажите подробнее о вашем образе'},
-        {key: 'price', title: 'Цена', placeholder: 'Укажите цену образа'},
+        {
+            key: 'name',
+            title: 'Название',
+            placeholder: 'Дайте название публикации'
+        },
+        {
+            key: 'description',
+            title: 'Описание',
+            placeholder: 'Расскажите подробнее о вашем образе'
+        },
+        { key: 'price', title: 'Цена', placeholder: 'Укажите цену образа' }
     ];
 
     const publish = () => {
         const post: ICreatePost = {
             element_id: id,
             type: type,
-            description: getValue(fields, 'description'),
+            description: getValue(fields, 'description')
             // previews: [look.img_path],
         };
         dispatch(createPost(post));
@@ -106,7 +124,10 @@ export default function CreatePostModal() {
                         source={{ uri: getUri(defaultPreview) }}
                     />
                 </View>
-                <InputContainer inputFields={fields} style={styles.inputContainer}/>
+                <InputContainer
+                    inputFields={fields}
+                    style={styles.inputContainer}
+                />
                 <BaseButton
                     title={'Опубликовать'}
                     style={styles.button}

@@ -1,8 +1,11 @@
 import React, { ReactNode } from 'react';
-import {StyleSheet, View, Pressable, Text} from 'react-native';
+import { StyleSheet, View, Pressable, Text } from 'react-native';
 
 import { Colors, Layout } from '../../styles';
-import {choosePhoto, selectUserItems} from '../../reducers/items/clothesReducer';
+import {
+    choosePhoto,
+    selectUserItems
+} from '../../reducers/items/clothesReducer';
 import {
     BottomSheetModal,
     BottomSheetModalProvider
@@ -13,7 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from '../../types';
 import * as ImagePicker from 'expo-image-picker';
 import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
-import { useAppSelector } from "../../hooks/useAppSelector";
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 export interface ViewBottomMenuProps {
     children: ReactNode;
@@ -33,22 +36,22 @@ const styles = StyleSheet.create({
     headerMenuContainer: {
         flexDirection: 'row',
         marginHorizontal: Layout.margins.default,
-        alignItems: 'center',
+        alignItems: 'center'
     },
     headerMenu: {
         flex: 1,
 
         fontSize: Layout.fontSize.default,
-        color: Colors.base.black,
+        color: Colors.base.black
     },
     bodyMenuContainer: {
-        margin: Layout.margins.default,
+        margin: Layout.margins.default
     },
     bodyMenuButton: {
         paddingVertical: Layout.margins.small,
         fontSize: Layout.fontSize.big,
         fontWeight: 'bold',
-        color: Colors.base.black,
+        color: Colors.base.black
     }
 });
 
@@ -83,12 +86,12 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
     const openCamera = () => {
         navigation.navigate('ImageRecognizer');
         closeMenu();
-    }
+    };
 
     const createLook = () => {
         navigation.navigate('CreateLook');
         closeMenu();
-    }
+    };
 
     return (
         <BottomSheetModalProvider>
@@ -102,7 +105,9 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
             >
                 <View style={styles.selectContainer}>
                     <View style={styles.headerMenuContainer}>
-                        <Text style={styles.headerMenu}>Обновление гардероба</Text>
+                        <Text style={styles.headerMenu}>
+                            Обновление гардероба
+                        </Text>
                         <Pressable onPress={closeMenu}>
                             <Entypo
                                 name="cross"
@@ -112,16 +117,20 @@ export default function ViewBottomMenu(props: ViewBottomMenuProps) {
                         </Pressable>
                     </View>
                     <View style={styles.bodyMenuContainer}>
-                        <Pressable onPress={pickImage} >
-                            <Text style={styles.bodyMenuButton}>Добавить вещь</Text>
+                        <Pressable onPress={pickImage}>
+                            <Text style={styles.bodyMenuButton}>
+                                Добавить вещь
+                            </Text>
                         </Pressable>
                         {/*<Pressable onPress={openCamera} >*/}
                         {/*    <Text style={styles.bodyMenuButton}>Сфотографировать вещь</Text>*/}
                         {/*</Pressable>*/}
                         {hasClothes ? (
                             <>
-                                <Pressable onPress={createLook} >
-                                    <Text style={styles.bodyMenuButton}>Создать образ</Text>
+                                <Pressable onPress={createLook}>
+                                    <Text style={styles.bodyMenuButton}>
+                                        Создать образ
+                                    </Text>
                                 </Pressable>
                             </>
                         ) : null}

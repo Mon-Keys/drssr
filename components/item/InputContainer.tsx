@@ -38,8 +38,11 @@ export function getValue(array: Array<InputFieldData>, key: string): string {
 // return true - all fields is valid
 export function checkValidation(array: Array<InputFieldData>): boolean {
     array.forEach((item) => {
-        if (item.errorMsg !== '' || item.required && item.value?.trim() === '') {
-            return false
+        if (
+            item.errorMsg !== '' ||
+            (item.required && item.value?.trim() === '')
+        ) {
+            return false;
         }
     });
     return true;
@@ -75,7 +78,7 @@ export default function InputContainer(props: InputContainerPrpops) {
             if (item.validationFunc) {
                 onChangeErrorMsg(item.validationFunc(text.trim()));
             }
-        }
+        };
     });
     return (
         <View style={props.style}>

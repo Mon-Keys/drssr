@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     errorMsg: {
         color: Colors.base.red,
-        fontSize: Layout.fontSize.small,
+        fontSize: Layout.fontSize.small
     }
 });
 

@@ -51,8 +51,7 @@ export const clothesSlice = createSlice({
     name: 'clothes',
     initialState,
     reducers: {
-        loadData: (state) => {
-        },
+        loadData: (state) => {},
         choosePhoto: (
             state,
             action: PayloadAction<ImagePicker.ImagePickerResult>
