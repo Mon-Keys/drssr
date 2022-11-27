@@ -75,7 +75,16 @@ export default function SaveLookModal({
         {
             key: 'name',
             title: 'Название образа',
-            placeholder: 'Придумайте название образа'
+            placeholder: 'Придумайте название образа',
+            validationFunc: (text) => {
+                if (text === '') {
+                    return ''
+                }
+                if (text.length > 30) {
+                    return 'Слишко длинное название';
+                }
+                return '';
+            }
         },
         {
             key: 'description',
@@ -91,26 +100,23 @@ export default function SaveLookModal({
         const look: ILookData = {
             img: lookSelector.look.img,
             filename: GenerateRandomName(),
-            clothes: [
-                {
-                    id: 1,
-                    coords: {
-                        x: 300,
-                        y: 450
-                    }
+            clothes: lookSelector.look.clothes.map((id) => {return {
+                id: id,
+                coords: {
+                    x: 300,
+                    y: 450
                 }
-            ],
+            }}),
+            name: name,
             description: description
         };
 
         // @ts-ignore
         dispatch(newLook(look)).then(() => {
-            console.log('success');
             //@ts-ignore
             dispatch(fetchUsersLooks()).then(() => {
                 //@ts-ignore
                 navigation.navigate('Wardrobe');
-                // navigation.pop(2); // TODO очень опасно
             });
         });
     };

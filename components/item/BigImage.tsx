@@ -12,7 +12,7 @@ export interface BigImageProps {
 
 const styles = StyleSheet.create({
     imageContainer: {
-        height: 300,
+        height: 400,
         backgroundColor: Colors.base.white,
         borderRadius: Layout.cornerRadius
     },

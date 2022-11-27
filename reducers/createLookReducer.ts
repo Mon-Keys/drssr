@@ -10,6 +10,7 @@ interface CreateLookState {
     error: string;
     look: {
         img: string;
+        clothes: Array<number>;
     };
 }
 
@@ -17,7 +18,8 @@ const initialState = {
     status: '',
     error: '',
     look: {
-        img: ''
+        img: '',
+        clothes: [],
     }
 } as CreateLookState;
 
@@ -43,7 +45,10 @@ export const createLookSlice = createSlice({
     reducers: {
         addLookPhoto: (state, action: PayloadAction<string>) => {
             state.look.img = action.payload;
-        }
+        },
+        addLookData: (state, action) => {
+            state.look.clothes = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -59,7 +64,7 @@ export const createLookSlice = createSlice({
     }
 });
 
-export const { addLookPhoto } = createLookSlice.actions;
+export const { addLookPhoto, addLookData } = createLookSlice.actions;
 
 export const selectCreateLook = (state: RootState) => state.createLook;
 

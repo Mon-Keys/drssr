@@ -15,6 +15,7 @@ export interface InputFieldProps
     title: string;
     value?: string;
     style?: ViewStyle;
+    errorMsg?: string | '';
 }
 
 const styles = StyleSheet.create({
@@ -26,6 +27,10 @@ const styles = StyleSheet.create({
     input: {
         color: Colors.base.black,
         fontSize: Layout.fontSize.default
+    },
+    errorMsg: {
+        color: Colors.base.red,
+        fontSize: Layout.fontSize.small,
     }
 });
 
@@ -34,6 +39,7 @@ export default function InputForItem(props: InputFieldProps) {
         <View style={props.style}>
             <Text style={styles.title}>{props.title}</Text>
             <TextInput {...props} style={styles.input} />
+            <Text style={styles.errorMsg}>{props.errorMsg}</Text>
         </View>
     );
 }

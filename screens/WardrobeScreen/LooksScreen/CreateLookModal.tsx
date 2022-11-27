@@ -16,10 +16,11 @@ import { useAppSelector } from '../../../hooks/useAppSelector';
 import { selectUserItems } from '../../../reducers/items/clothesReducer';
 import ViewShot from 'react-native-view-shot';
 import { RootStackScreenProps } from '../../../types';
-import { addLookPhoto } from '../../../reducers/createLookReducer';
+import {addLookData, addLookPhoto} from '../../../reducers/createLookReducer';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import BaseButton from '../../../components/base/BaseButton';
 import EmptyView from '../../../components/base/EmptyView';
+import { getUri } from "../../../network/const";
+import * as Console from "console";
 
 const styles = StyleSheet.create({
     container: {
@@ -83,15 +84,23 @@ const styles = StyleSheet.create({
     }
 });
 
-export interface ItemMock {
+export interface Item {
+    id: number;
     image: string;
-    id: string;
 }
 
 export default function CreateLookModal({
     navigation
 }: RootStackScreenProps<'CreateLook'>) {
-    const [boardItems, setBoardItems] = React.useState<Array<string>>([]);
+    const [boardItems, setBoardItems] = React.useState<Array<Item>>([]);
+    const getItemsIds = (): Array<number> => {
+        const ids: Array<number> = [];
+        boardItems.forEach((item) => {
+            ids.push(item.id);
+        })
+        return ids
+    }
+
     const clothes = useAppSelector(selectUserItems);
 
     const dispatch = useAppDispatch();
@@ -115,14 +124,18 @@ export default function CreateLookModal({
 
     const proceed = () => {
         //@ts-ignore
-        ref.current.capture().then((uri) => {
-            dispatch(addLookPhoto(uri));
+        ref.current.capture().then((lookImg) => {
+            dispatch(addLookPhoto(lookImg));
+            dispatch(addLookData(getItemsIds()));
             navigation.navigate('SaveLook');
         });
     };
 
-    const removeItem = (id: number) => {
-        setBoardItems(boardItems.filter((value, index) => index !== id));
+    const addItem = (id: number, path: string) => {
+        setBoardItems([...boardItems, {id: id, image: getUri(path)}]);
+    };
+    const removeItem = (ind: number) => {
+        setBoardItems(boardItems.filter((value, index) => index !== ind));
     };
 
     return (
@@ -163,7 +176,7 @@ export default function CreateLookModal({
                                             setMaxZIndex(maxZIndex + 1);
                                         }}
                                         style={styles.defaultImage}
-                                        source={{ uri: item }}
+                                        source={{ uri: item.image }}
                                     />
                                 ))}
                             </View>
@@ -208,10 +221,7 @@ export default function CreateLookModal({
                                 <Item
                                     imgURI={`http://leonidperl.in/${item.mask_path}`}
                                     callbackfn={() => {
-                                        setBoardItems([
-                                            ...boardItems,
-                                            `http://leonidperl.in/${item.mask_path}`
-                                        ]);
+                                        addItem(item.id, item.mask_path)
                                         closeModal();
                                     }}
                                 />

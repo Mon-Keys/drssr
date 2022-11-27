@@ -27,7 +27,6 @@ export default function SavedHomeScreen({
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        console.log('1');
         dispatch(fetchSubscribtionPosts());
     }, [dispatch]);
 

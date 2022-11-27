@@ -39,7 +39,7 @@ export const LookList = (props: LooksListProps) => {
                     <LookCard
                         imgURI={getUri(item.img_path)}
                         callbackfn={() => props.onPressLookCard(item.id)}
-                        name={item.description}
+                        name={item.name}
                     />
                 )}
                 refreshControl={props.refreshControl}

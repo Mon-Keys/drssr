@@ -50,6 +50,7 @@ interface IClothesInsideLookData {
 export interface ILookData {
     img: string;
     filename: string;
+    name: string;
     description: string;
     clothes: Array<IClothesInsideLookData>;
 }

@@ -128,8 +128,6 @@ const initialState = {
 export const fetchFavoritePosts = createAsyncThunk<Array<IPost>>(
     'Feeds/fetchFavoritePosts',
     async (_, { rejectWithValue }) => {
-        console.log('dsadsadssssa');
-
         try {
             const response = await Api.Common.getFavoritePosts(10, 0);
 
@@ -147,15 +145,12 @@ export const fetchFavoritePosts = createAsyncThunk<Array<IPost>>(
 export const fetchSubscribtionPosts = createAsyncThunk<Array<IPost>>(
     'Feeds/fetchSubscribtionPosts',
     async (_, { rejectWithValue }) => {
-        console.log('dsadsadssssa');
         try {
-            console.log('dsadsadsa');
             const response = await Api.Common.getSubscribtionPosts(10, 0);
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
             }
-            console.log(response.data);
             return response.data;
         } catch (error: any) {
             return rejectWithValue(error.message);
@@ -166,8 +161,6 @@ export const fetchSubscribtionPosts = createAsyncThunk<Array<IPost>>(
 export const fetchDiscoverPosts = createAsyncThunk<Array<IPost>>(
     'Feeds/fetchDiscoverPosts',
     async (_, { rejectWithValue }) => {
-        console.log('dsadsadssssa');
-
         try {
             const response = await Api.Common.getDiscoverPosts(10, 0);
 
@@ -219,7 +212,6 @@ export const feedSlice = createSlice({
     initialState,
     reducers: {
         loadData: (state) => {
-            console.log('not done', state);
         }
     },
     extraReducers: (builder) => {
