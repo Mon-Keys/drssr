@@ -14,7 +14,6 @@ export const postsSlice = createSlice({
     initialState,
     reducers: {
         loadData: (state) => {
-            console.log('not done loadData111', state);
         }
     },
     extraReducers: (builder) => {

@@ -58,12 +58,6 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
                 method: 'POST',
                 body: createFormData(image)
             })
-                .then((response) => {
-                    console.log('response', response);
-                })
-                .catch((error) => {
-                    console.log('error', error);
-                });
         }
     };
 

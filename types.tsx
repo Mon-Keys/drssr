@@ -37,6 +37,9 @@ export type RootStackParamList = {
     ItemsByCategory: {
         category: string;
     };
+    ItemInWardrobe: {
+        id: number;
+    };
     Item: {
         id: number;
     };

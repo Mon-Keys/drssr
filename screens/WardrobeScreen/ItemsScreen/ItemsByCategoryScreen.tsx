@@ -125,7 +125,7 @@ export default function ItemsByCategoryScreen() {
                             <ItemPreview
                                 clothes={item}
                                 onPress={() =>
-                                    navigation.navigate('Item', {
+                                    navigation.navigate('ItemInWardrobe', {
                                         id: item.id
                                     })
                                 }

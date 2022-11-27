@@ -3,7 +3,7 @@ import { View } from '../base/Themed';
 import React from 'react';
 import Colors from '../../styles/Colors';
 import { Layout } from '../../styles';
-import {ILook, selectLook} from '../../reducers/lookReducer';
+import { ILook } from '../../reducers/lookReducer';
 import { getUri } from '../../network/const';
 import BaseButton from '../base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     lookImage: {
         flex: 1,
-        resizeMode: 'cover', // TODO временно пока Луки маленькие
+        resizeMode: 'center',
         borderRadius: Layout.cornerRadius
     },
     descriptionContainer: {
