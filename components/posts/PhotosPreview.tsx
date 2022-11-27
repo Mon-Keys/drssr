@@ -46,6 +46,7 @@ export default function PhotosPreview(props: PhotosPreviewProps) {
     }
     const addPhoto = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
+            base64: true,
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             quality: 1
         });

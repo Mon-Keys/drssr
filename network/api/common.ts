@@ -67,7 +67,7 @@ export interface ICreatePost {
     type: string;
     name: string;
     description: string;
-    previews?: Array<ImagePicker.ImagePickerResult>;
+    previews?: Array<string>;
 }
 
 export interface IReaction {
@@ -132,13 +132,7 @@ export default class Common {
     }
 
     createPost(data: ICreatePost) {
-        // return http.post('/private/posts', {
-        //     element_id: data.element_id,
-        //     type: data.type,
-        //     description: data.description,
-        //     previews: {}
-        // });
-        return http.post<ILookData>('/private/posts', data);
+        return http.post('/private/posts', data);
     }
 
     getPosts(limit: number = 10, offset: number = 0) {

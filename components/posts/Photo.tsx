@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     },
     preview: {
         flex: 1,
-        resizeMode: 'center',
+        borderRadius: Layout.cornerRadius,
+        resizeMode: 'cover',
     }
 });
 
