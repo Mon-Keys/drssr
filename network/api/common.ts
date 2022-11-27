@@ -65,8 +65,9 @@ export interface IGetLookData extends ILookData {
 export interface ICreatePost {
     element_id: number;
     type: string;
+    name: string;
     description: string;
-    previews?: Array<string>;
+    previews?: Array<ImagePicker.ImagePickerResult>;
 }
 
 export interface IReaction {

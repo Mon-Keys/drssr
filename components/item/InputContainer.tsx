@@ -91,6 +91,7 @@ export default function InputContainer(props: InputContainerPrpops) {
                             placeholder={item.placeholder}
                             placeholderTextColor={Colors.base.darkgray}
                             errorMsg={item.errorMsg}
+                            multiline
                         />
                     );
                 })}

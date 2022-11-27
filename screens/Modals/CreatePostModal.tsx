@@ -15,6 +15,8 @@ import {CreatePostRouteProp, TapBarNavigation} from "../../types";
 import {ICreatePost} from "../../network/api/common";
 import {createPost} from "../../reducers/posts/createPost";
 import InputContainer, {getValue, InputFieldData} from "../../components/item/InputContainer";
+import PhotosPreview from "../../components/posts/PhotosPreview";
+import {clearNewPost, selectNewPosts} from "../../reducers/posts/postReducer";
 
 const styles = StyleSheet.create({
     container: {
@@ -48,12 +50,17 @@ const styles = StyleSheet.create({
     button: {
         margin: Layout.margins.default
     },
+    photosContainer: {
+        backgroundColor: 'transparent'
+    },
     inputContainer: {
         marginHorizontal: Layout.margins.default
     }
 });
 
 export default function CreatePostModal() {
+    const newPost = useAppSelector(selectNewPosts);
+
     const navigation = useNavigation<TapBarNavigation>();
     const route = useRoute<CreatePostRouteProp>();
 
@@ -62,6 +69,8 @@ export default function CreatePostModal() {
     const dispatch = useAppDispatch();
 
     let defaultPreview = '';
+    let defaultName = '';
+    let defaultDescription = '';
 
     switch (type) {
         case 'look': {
@@ -69,6 +78,8 @@ export default function CreatePostModal() {
             const look = looks.find((item) => item.id == id) || looks[0]; // не гуд так делать, но как-то похуй, работать будет
 
             defaultPreview = look.img_path;
+            defaultName = look.name;
+            defaultDescription = look.description;
             break;
         }
         case 'clothes': {
@@ -81,31 +92,38 @@ export default function CreatePostModal() {
     }
 
     const fields: Array<InputFieldData> = [
-        {key: 'name', title: 'Название', placeholder: 'Дайте название публикации'},
-        {key: 'description', title: 'Описание', placeholder: 'Расскажите подробнее о вашем образе'},
-        {key: 'price', title: 'Цена', placeholder: 'Укажите цену образа'},
+        {
+            key: 'name',
+            title: 'Название',
+            placeholder: 'Дайте название публикации',
+            value: defaultName,
+        },
+        {
+            key: 'description',
+            title: 'Описание',
+            placeholder: 'Расскажите подробнее о вашем образе',
+            value: defaultDescription
+        },
     ];
 
     const publish = () => {
         const post: ICreatePost = {
             element_id: id,
             type: type,
+            name: getValue(fields, 'name'),
             description: getValue(fields, 'description'),
-            // previews: [look.img_path],
+            // previews: newPost.previews_paths,
         };
-        dispatch(createPost(post));
+        dispatch(createPost(post)).then(() => {
+            dispatch(clearNewPost());
+        });
         navigation.navigate('Profile');
     };
 
     return (
         <View style={styles.container}>
             <ScrollView style={{ flex: 1 }} scrollEnabled={true}>
-                <View style={styles.previewContainer}>
-                    <Image
-                        style={styles.lookImage}
-                        source={{ uri: getUri(defaultPreview) }}
-                    />
-                </View>
+                <PhotosPreview photo={{img: defaultPreview}} style={styles.photosContainer} />
                 <InputContainer inputFields={fields} style={styles.inputContainer}/>
                 <BaseButton
                     title={'Опубликовать'}

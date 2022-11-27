@@ -1,10 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { createPost, getPosts } from './createPost';
-import { IPost, PostsState } from './post';
+import {INewPost, IPost, PostsState} from './post';
 import { RootState } from '../../store';
+import * as ImagePicker from "expo-image-picker";
+
+const initPrepareNewPost: INewPost = {
+    type: '',
+    previews_paths: [],
+}
 
 const initialState = {
     posts: [],
+    prepareNewPost: initPrepareNewPost,
     status: '',
     error: ''
 } as PostsState;
@@ -14,6 +21,21 @@ export const postsSlice = createSlice({
     initialState,
     reducers: {
         loadData: (state) => {
+        },
+        addPhotoForNewPost: (
+            state,
+            action: PayloadAction<ImagePicker.ImageInfo>
+        ) => {
+            state.prepareNewPost.previews_paths.unshift(action.payload);
+        },
+        deletePhotoForNewPost: (
+            state,
+            action
+        ) => {
+            state.prepareNewPost.previews_paths = state.prepareNewPost.previews_paths.filter((item, index) => index !== action.payload);
+        },
+        clearNewPost: (state) => {
+            state.prepareNewPost = initPrepareNewPost;
         }
     },
     extraReducers: (builder) => {
@@ -50,8 +72,9 @@ export const postsSlice = createSlice({
     }
 });
 
-// export const { loadData, choosePhoto, clearAddItem } = clothesSlice.actions
-//
+export const { addPhotoForNewPost, deletePhotoForNewPost, clearNewPost } = postsSlice.actions
+
 export const selectPosts = (state: RootState) => state.posts.posts;
+export const selectNewPosts = (state: RootState) => state.posts.prepareNewPost;
 
 export default postsSlice.reducer;
