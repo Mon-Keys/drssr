@@ -14,7 +14,7 @@ import {LookRouteProp, RootNavigation, ThingScreenRouteProp} from '../../../type
 import { useNavigation, useRoute } from '@react-navigation/native';
 import IconButton from '../../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
-import { selectLook } from '../../../reducers/lookReducer';
+import { selectLook } from '../../../reducers/looks/lookReducer';
 import { Look } from '../../../components/Look/Look';
 
 const styles = StyleSheet.create({

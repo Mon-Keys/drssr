@@ -1,28 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import Api, { IGetLookData, ILookData } from '../network/';
-import { Clothes } from './items/clothesReducer';
-
-export interface ILook {
-    id: number;
-    clothes: Array<Clothes>;
-    img_path: string;
-    description: string;
-}
-
-interface Looks {
-    LooksData: Array<IGetLookData>;
-    status: string;
-    error: string;
-}
+import { RootState } from '../../store';
+import Api  from '../../network';
+import {ILook, ILooks} from "./looks";
 
 const initialState = {
     LooksData: [],
     status: '',
     error: ''
-} as Looks;
+} as ILooks;
 
-export const fetchUsersLooks = createAsyncThunk<Array<ILookData>>(
+export const fetchUsersLooks = createAsyncThunk<Array<ILook>>(
     'Looks/fetchUsersLooks',
     async (_, { rejectWithValue }) => {
         try {
@@ -54,7 +41,7 @@ export const looksSlice = createSlice({
             .addCase(fetchUsersLooks.fulfilled, (state, action) => {
                 state.status = 'resolved';
                 state.LooksData =
-                    action.payload as unknown as Array<IGetLookData>;
+                    action.payload as unknown as Array<ILook>;
             })
             .addCase(fetchUsersLooks.rejected, (state) => {
                 state.status = 'rejected';

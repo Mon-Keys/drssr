@@ -23,7 +23,7 @@ import {BecomeStylistCard} from '../../components/base/BecomeStylistCard';
 import {PostPreview} from '../../components/posts/PostPreview';
 import NewPostBottomMenu from "../../components/profile/NewPostBottomMenu";
 import {BottomSheetModal} from "@gorhom/bottom-sheet";
-import {fetchUsersLooks, selectLooks} from "../../reducers/lookReducer";
+import {fetchUsersLooks, selectLooks} from "../../reducers/looks/lookReducer";
 import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
 import {selectUserItems} from "../../reducers/items/clothesReducer";
 import BaseButton from "../../components/base/BaseButton";

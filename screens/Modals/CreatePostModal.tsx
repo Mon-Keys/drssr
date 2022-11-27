@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import {Colors, Layout} from '../../styles';
 import BaseButton from "../../components/base/BaseButton";
 import {useAppSelector} from "../../hooks/useAppSelector";
-import {selectLooks} from "../../reducers/lookReducer";
+import {selectLooks} from "../../reducers/looks/lookReducer";
 import {selectUserItems} from "../../reducers/items/clothesReducer";
 import {useNavigation, useRoute} from "@react-navigation/native";
 import {CreatePostRouteProp, TapBarNavigation} from "../../types";

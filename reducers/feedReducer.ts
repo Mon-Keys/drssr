@@ -2,8 +2,7 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import Api, { IGetLookData, ILookData } from '../network/';
-import { IClothesLookData, IReaction } from '../network/api/common';
+import Api from '../network/';
 import { IPost } from './posts/post';
 
 export interface Feed {
@@ -26,26 +25,26 @@ const initialState = {
                 type: 'look',
                 look: {
                     id: 1,
-                    clothes: [
-                        {
-                            id: 1,
-                            brand: 'dss',
-                            color: 'dsds',
-                            currency: 'RUB',
-                            link: 'link',
-                            type: 'Boots',
-                            img_path: 'clothesImg',
-                            mask_path: 'clothesMaskImg',
-                            owner_id: 1,
-                            price: 10000,
-                            sex: 'male',
-                            description: 'clothes description'
-                        }
-                    ],
+                    // clothes: [
+                    //     {
+                    //         id: 1,
+                    //         brand: 'dss',
+                    //         color: 'dsds',
+                    //         currency: 'RUB',
+                    //         link: 'link',
+                    //         type: 'Boots',
+                    //         img_path: 'clothesImg',
+                    //         mask_path: 'clothesMaskImg',
+                    //         owner_id: 1,
+                    //         price: 10000,
+                    //         sex: 'male',
+                    //         description: 'clothes description'
+                    //     }
+                    // ],
                     img_path: 'img',
                     description: 'desc'
                 },
-                previews: [
+                previews_paths: [
                     'https://media-cdn.tripadvisor.com/media/photo-s/0c/bb/a3/97/predator-ride-in-the.jpg',
                     'img2'
                 ],
@@ -62,26 +61,26 @@ const initialState = {
                 type: 'look',
                 look: {
                     id: 1,
-                    clothes: [
-                        {
-                            id: 1,
-                            brand: 'dss',
-                            color: 'dsds',
-                            currency: 'RUB',
-                            link: 'link',
-                            type: 'Boots',
-                            img_path: 'clothesImg',
-                            mask_path: 'clothesMaskImg',
-                            owner_id: 1,
-                            price: 10000,
-                            sex: 'male',
-                            description: 'clothes description'
-                        }
-                    ],
+                    // clothes: [
+                    //     {
+                    //         id: 1,
+                    //         brand: 'dss',
+                    //         color: 'dsds',
+                    //         currency: 'RUB',
+                    //         link: 'link',
+                    //         type: 'Boots',
+                    //         img_path: 'clothesImg',
+                    //         mask_path: 'clothesMaskImg',
+                    //         owner_id: 1,
+                    //         price: 10000,
+                    //         sex: 'male',
+                    //         description: 'clothes description'
+                    //     }
+                    // ],
                     img_path: 'img',
                     description: 'desc'
                 },
-                previews: [
+                previews_paths: [
                     'https://media-cdn.tripadvisor.com/media/photo-s/0c/bb/a3/97/predator-ride-in-the.jpg',
                     'img2'
                 ],
@@ -98,26 +97,26 @@ const initialState = {
                 type: 'look',
                 look: {
                     id: 1,
-                    clothes: [
-                        {
-                            id: 1,
-                            brand: 'dss',
-                            color: 'dsds',
-                            currency: 'RUB',
-                            link: 'link',
-                            type: 'Boots',
-                            img_path: 'clothesImg',
-                            mask_path: 'clothesMaskImg',
-                            owner_id: 1,
-                            price: 10000,
-                            sex: 'male',
-                            description: 'clothes description'
-                        }
-                    ],
+                    // clothes: [
+                    //     {
+                    //         id: 1,
+                    //         brand: 'dss',
+                    //         color: 'dsds',
+                    //         currency: 'RUB',
+                    //         link: 'link',
+                    //         type: 'Boots',
+                    //         img_path: 'clothesImg',
+                    //         mask_path: 'clothesMaskImg',
+                    //         owner_id: 1,
+                    //         price: 10000,
+                    //         sex: 'male',
+                    //         description: 'clothes description'
+                    //     }
+                    // ],
                     img_path: 'img',
                     description: 'desc'
                 },
-                previews: ['img1', 'img2'],
+                previews_paths: ['img1', 'img2'],
                 likes: 123213
             }
         ],

@@ -2,9 +2,12 @@
 //@ts-ignore
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import Api, { ILookData } from '../network';
-import { RootState } from '../store';
+import Api from '../../network';
+import { RootState } from '../../store';
+import {ICreateLook} from "../../network/api/common";
+import {ILook} from "./looks";
 
+// есть интерфейс ICreateLook он для пост запроса, их надо синхронизировать
 interface CreateLookState {
     status: string;
     error: string;
@@ -23,7 +26,7 @@ const initialState = {
     }
 } as CreateLookState;
 
-export const newLook = createAsyncThunk<ILookData, ILookData>(
+export const newLook = createAsyncThunk<ILook, ICreateLook>(
     'user/signUpUser',
     async (lookData, { rejectWithValue }) => {
         try {

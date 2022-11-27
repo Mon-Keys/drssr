@@ -3,8 +3,6 @@ import User, { IUserData, IUpdateUserData } from './api/user';
 import Common, {
     IItemData,
     IClothesData,
-    ILookData,
-    IGetLookData
 } from './api/common';
 import Stylist from './api/stylist';
 
@@ -15,8 +13,6 @@ export {
     ISignupData,
     IItemData,
     IClothesData,
-    ILookData,
-    IGetLookData
 };
 
 export default {
