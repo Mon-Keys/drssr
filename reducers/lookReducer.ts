@@ -43,8 +43,7 @@ export const looksSlice = createSlice({
     name: 'Looks',
     initialState,
     reducers: {
-        loadData: (state) => {
-        }
+        loadData: (state) => {}
     },
     extraReducers: (builder) => {
         builder

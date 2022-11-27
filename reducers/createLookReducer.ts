@@ -19,7 +19,7 @@ const initialState = {
     error: '',
     look: {
         img: '',
-        clothes: [],
+        clothes: []
     }
 } as CreateLookState;
 
@@ -48,7 +48,7 @@ export const createLookSlice = createSlice({
         },
         addLookData: (state, action) => {
             state.look.clothes = action.payload;
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
