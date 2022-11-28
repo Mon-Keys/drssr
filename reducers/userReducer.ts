@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import Api, { ILoginData, IUserData, ISignupData } from '../network/';
+import Api, { ILoginData, IUserData, ISignupData, IUpdateUserData } from '../network/';
+import { IAvatarData } from '../network/api/user';
 
 export interface User {
     nickname: string;
     email: string;
     name: string;
-    avatarURI?: string;
+    avatar: string;
     stylist?: boolean;
     birthDate?: string;
     description?: string;
@@ -107,6 +108,46 @@ export const stylist = createAsyncThunk<IUserData>(
     }
 );
 
+export const updateUserData = createAsyncThunk<IUserData, IUpdateUserData>(
+    'user/update',
+    async (dataToUpdate, { rejectWithValue }) => {
+        try {
+            const response = await Api.User.updateUser(dataToUpdate);
+            if (response.status !== 200) {
+                throw new Error(`Error, status ${response.status}`);
+            }
+
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const addAvatar = createAsyncThunk<IUserData, IAvatarData>(
+    'user/addAvatar', 
+    async (data, { rejectWithValue }) => {
+    try {
+        const response = await Api.User.addAvatar(data);
+
+        return response.data;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+
+export const deleteAvatar = createAsyncThunk<IUserData>(
+    'user/deleteAvatar', 
+    async (data, { rejectWithValue }) => {
+    try {
+        const response = await Api.User.deleteAvatar();
+
+        return response.data;
+    } catch (error: any) {
+        return rejectWithValue(error.message);
+    }
+});
+
 export const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -173,6 +214,39 @@ export const userSlice = createSlice({
                 state.userData = action.payload as unknown as User;
             })
             .addCase(stylist.rejected, (state) => {
+                state.status = 'rejected';
+            })
+            .addCase(updateUserData.pending, (state) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(updateUserData.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                state.userData = action.payload as unknown as User;
+            })
+            .addCase(updateUserData.rejected, (state) => {
+                state.status = 'rejected';
+            })
+            .addCase(addAvatar.pending, (state) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(addAvatar.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                state.userData = action.payload as unknown as User;
+            })
+            .addCase(addAvatar.rejected, (state) => {
+                state.status = 'rejected';
+            })
+            .addCase(deleteAvatar.pending, (state) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(deleteAvatar.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                state.userData = action.payload as unknown as User;
+            })
+            .addCase(deleteAvatar.rejected, (state) => {
                 state.status = 'rejected';
             });
     }
