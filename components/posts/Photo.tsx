@@ -3,31 +3,32 @@ import {
     GestureResponderEvent,
     Image,
     Pressable,
-    StyleSheet, TouchableOpacity,
+    StyleSheet,
+    TouchableOpacity,
     ViewStyle
 } from 'react-native';
 import React from 'react';
 import { Layout } from '../../styles';
 import { getUri } from '../../network/const';
-import * as ImagePicker from "expo-image-picker";
+import * as ImagePicker from 'expo-image-picker';
 
 const styles = StyleSheet.create({
     container: {
         height: 245,
         width: 150,
-        borderRadius: Layout.cornerRadius,
+        borderRadius: Layout.cornerRadius
     },
     preview: {
         flex: 1,
         borderRadius: Layout.cornerRadius,
-        resizeMode: 'cover',
+        resizeMode: 'cover'
     }
 });
 
 interface PhotoProps {
     imgData?: ImagePicker.ImageInfo;
     imgPath: string;
-    onLongPress?: ((event: GestureResponderEvent) => void);
+    onLongPress?: (event: GestureResponderEvent) => void;
     style?: ViewStyle;
 }
 

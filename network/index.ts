@@ -1,9 +1,6 @@
 import Auth, { ILoginData, ISignupData } from './api/auth';
 import User, { IUserData, IUpdateUserData } from './api/user';
-import Common, {
-    IItemData,
-    IClothesData,
-} from './api/common';
+import Common, { IItemData, IClothesData } from './api/common';
 import Stylist from './api/stylist';
 
 export {
@@ -12,7 +9,7 @@ export {
     IUserData,
     ISignupData,
     IItemData,
-    IClothesData,
+    IClothesData
 };
 
 export default {

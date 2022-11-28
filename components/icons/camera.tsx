@@ -1,4 +1,4 @@
-import Svg, {Path, SvgProps} from "react-native-svg";
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
 export interface IconProps extends SvgProps {
     color?: string;
@@ -18,7 +18,7 @@ const SvgComponent = (props: IconProps) => {
                 fill={props.color}
             />
         </Svg>
-    )
-}
+    );
+};
 
 export default SvgComponent;

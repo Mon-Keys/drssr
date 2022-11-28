@@ -10,17 +10,23 @@ import {
 import { View } from '../../../components/base/Themed';
 
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { newLook, selectCreateLook } from '../../../reducers/looks/createLookReducer';
+import {
+    newLook,
+    selectCreateLook
+} from '../../../reducers/looks/createLookReducer';
 import { Layout } from '../../../styles';
 import { useDispatch } from 'react-redux';
 import { RootStackScreenProps } from '../../../types';
-import { fetchUsersLooks, selectLook } from '../../../reducers/looks/lookReducer';
+import {
+    fetchUsersLooks,
+    selectLook
+} from '../../../reducers/looks/lookReducer';
 import InputContainer, {
     getValue,
     InputFieldData
 } from '../../../components/item/InputContainer';
 import BaseButton from '../../../components/base/BaseButton';
-import {GenerateRandomName, ICreateLook} from '../../../network/api/common';
+import { GenerateRandomName, ICreateLook } from '../../../network/api/common';
 // @ts-ignore
 
 const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
 import { Clothes } from '../items/clothesReducer';
-import * as ImagePicker from "expo-image-picker";
-import { ILook } from "../looks/looks";
+import * as ImagePicker from 'expo-image-picker';
+import { ILook } from '../looks/looks';
 
 export interface IPost {
     id: number;

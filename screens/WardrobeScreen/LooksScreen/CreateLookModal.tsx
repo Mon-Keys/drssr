@@ -159,7 +159,7 @@ export default function CreateLookModal({
                 ) : (
                     <>
                         <ViewShot
-                            onCapture={() => { }}
+                            onCapture={() => {}}
                             //@ts-ignore
                             ref={ref}
                             options={{

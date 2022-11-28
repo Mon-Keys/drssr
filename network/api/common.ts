@@ -1,7 +1,7 @@
 import http from '../instace';
 import * as ImagePicker from 'expo-image-picker';
 import { IPost } from '../../reducers/posts/post';
-import {ILook, ILooks} from "../../reducers/looks/looks";
+import { ILook, ILooks } from '../../reducers/looks/looks';
 
 export interface IItemData {
     id?: number;
@@ -36,7 +36,7 @@ export interface IClothesInsideLookData {
     coords: {
         x: number;
         y: number;
-    }
+    };
 }
 
 export interface ICreateLook {

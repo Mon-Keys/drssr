@@ -76,13 +76,13 @@ export const Look = ({ look }: { look: ILook }) => {
             look.clothes.forEach((item) => {
                 const foundItem = allClothes.find((i) => i.id === item.id);
                 if (foundItem) {
-                    clothesInLook.push(foundItem)
+                    clothesInLook.push(foundItem);
                 }
-            })
+            });
         }
 
         return clothesInLook;
-    }
+    };
 
     return (
         <View style={styles.container}>

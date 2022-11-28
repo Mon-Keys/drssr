@@ -3,7 +3,7 @@ import React from 'react';
 import { LookCard } from './LookCard';
 import { Layout } from '../../styles';
 import { getUri } from '../../network/const';
-import { ILook } from "../../reducers/looks/looks";
+import { ILook } from '../../reducers/looks/looks';
 
 const styles = StyleSheet.create({
     container: {

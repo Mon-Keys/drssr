@@ -2,17 +2,18 @@ import { View } from '../base/Themed';
 import {
     GestureResponderEvent,
     Pressable,
-    StyleSheet, TouchableOpacity,
+    StyleSheet,
+    TouchableOpacity,
     ViewStyle
 } from 'react-native';
 import React from 'react';
-import {Colors, Layout} from '../../styles';
-import {AntDesign} from "@expo/vector-icons";
-import Camera from "../icons/camera";
-import * as ImagePicker from "expo-image-picker";
-import {choosePhoto} from "../../reducers/items/clothesReducer";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {addPhotoForNewPost} from "../../reducers/posts/postReducer";
+import { Colors, Layout } from '../../styles';
+import { AntDesign } from '@expo/vector-icons';
+import Camera from '../icons/camera';
+import * as ImagePicker from 'expo-image-picker';
+import { choosePhoto } from '../../reducers/items/clothesReducer';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { addPhotoForNewPost } from '../../reducers/posts/postReducer';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,12 +23,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    icon: {
-    }
+    icon: {}
 });
 
 interface AddPhotoButtonProps {
-    onPress: ((event: GestureResponderEvent) => void);
+    onPress: (event: GestureResponderEvent) => void;
     style?: ViewStyle;
 }
 
