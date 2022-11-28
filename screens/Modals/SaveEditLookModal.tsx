@@ -128,7 +128,7 @@ export default function SaveEditLookModal({
             name: name,
             description: description
         };
-        console.log(lookSelector.look.clothes)
+        console.log(lookSelector.look.clothes);
 
         // @ts-ignore
         dispatch(updateLook({ look: newLook1, id: route.params.id })).then(
@@ -149,7 +149,7 @@ export default function SaveEditLookModal({
                     <Image
                         style={
                             lookSelector.status === 'pending' ||
-                                looks.status === 'pending'
+                            looks.status === 'pending'
                                 ? styles.lookContainerInactive
                                 : styles.lookContainer
                         }
@@ -158,7 +158,7 @@ export default function SaveEditLookModal({
                         }}
                     />
                     {lookSelector.status === 'pending' ||
-                        looks.status === 'pending' ? (
+                    looks.status === 'pending' ? (
                         <ActivityIndicator
                             size="large"
                             style={styles.indicator}

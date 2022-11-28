@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Pressable, FlatList, View } from 'react-native';
 
-
 import Colors from '../../styles/Colors';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
@@ -101,21 +100,22 @@ export interface LookItem {
 export default function EditLookModal({
     navigation
 }: RootStackScreenProps<'EditLook'>) {
-
     const route = useRoute();
     const { data } = route.params;
 
-    console.log(route.params)
+    console.log(route.params);
 
     const itemsParsed = route.params.look.clothes.map((item) => {
         const parsedItem: LookItem = {
             id: item.id,
             image: getUri(item.mask_path)
-        }
-        return parsedItem
-    })
+        };
+        return parsedItem;
+    });
 
-    const [boardItems, setBoardItems] = React.useState<Array<LookItem>>([...itemsParsed]);
+    const [boardItems, setBoardItems] = React.useState<Array<LookItem>>([
+        ...itemsParsed
+    ]);
     const getItemsIds = (): Array<number> => {
         const ids: Array<number> = [];
         boardItems.forEach((item) => {
@@ -154,10 +154,10 @@ export default function EditLookModal({
                     id: item.id,
                     coords: item.coords,
                     scaling: item.scaling,
-                    rotation: item.rotation,
+                    rotation: item.rotation
                 };
             });
-            console.log(tempItems)
+            console.log(tempItems);
             dispatch(addLookData(tempItems));
             navigation.navigate('FinishEditLook', {
                 id: route.params.id
@@ -190,7 +190,7 @@ export default function EditLookModal({
                 ) : (
                     <>
                         <ViewShot
-                            onCapture={() => { }}
+                            onCapture={() => {}}
                             //@ts-ignore
                             ref={ref}
                             options={{
@@ -236,11 +236,11 @@ export default function EditLookModal({
                                                     ),
                                                     rotation: rotation
                                                         ? Math.floor(
-                                                            +rotation.slice(
-                                                                0,
-                                                                -3
-                                                            )
-                                                        )
+                                                              +rotation.slice(
+                                                                  0,
+                                                                  -3
+                                                              )
+                                                          )
                                                         : 0
                                                 };
                                                 setBoardItems(boardItemsTemp);

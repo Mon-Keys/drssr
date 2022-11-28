@@ -19,7 +19,7 @@ import LooksForNewPostModal from './screens/Modals/LooksForNewPostModal';
 
 declare global {
     namespace ReactNavigation {
-        interface RootParamList extends RootStackParamList { }
+        interface RootParamList extends RootStackParamList {}
     }
 }
 

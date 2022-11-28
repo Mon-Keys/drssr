@@ -134,7 +134,7 @@ export default function CreateLookModal({
                     image: getUri(item.image)
                 };
             });
-            console.log(tempItems)
+            console.log(tempItems);
             dispatch(addLookData(tempItems));
             navigation.navigate('SaveLook');
         });
@@ -178,7 +178,7 @@ export default function CreateLookModal({
                 ) : (
                     <>
                         <ViewShot
-                            onCapture={() => { }}
+                            onCapture={() => {}}
                             //@ts-ignore
                             ref={ref}
                             options={{
@@ -224,11 +224,11 @@ export default function CreateLookModal({
                                                     ),
                                                     rotation: rotation
                                                         ? Math.floor(
-                                                            +rotation.slice(
-                                                                0,
-                                                                -3
-                                                            )
-                                                        )
+                                                              +rotation.slice(
+                                                                  0,
+                                                                  -3
+                                                              )
+                                                          )
                                                         : 0
                                                 };
                                                 setBoardItems(boardItemsTemp);

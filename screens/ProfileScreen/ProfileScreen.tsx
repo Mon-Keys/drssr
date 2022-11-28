@@ -134,8 +134,8 @@ export default function ProfileScreen() {
                         settingsAction={() => {
                             navigation.navigate('Settings');
                         }}
-                        shareAction={() => { }}
-                        editAction={() => { }}
+                        shareAction={() => {}}
+                        editAction={() => {}}
                         description={
                             'Сотворю твой успех с помощью 100+ огненных луков. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                         }
@@ -153,7 +153,7 @@ export default function ProfileScreen() {
                             <View
                                 style={{
                                     width: '100%',
-                                    alignItems: "center"
+                                    alignItems: 'center'
                                 }}
                             >
                                 <FeedCommon

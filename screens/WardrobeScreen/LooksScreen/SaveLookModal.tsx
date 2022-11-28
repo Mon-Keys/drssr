@@ -145,7 +145,7 @@ export default function SaveLookModal({
                     <Image
                         style={
                             lookSelector.status === 'pending' ||
-                                looks.status === 'pending'
+                            looks.status === 'pending'
                                 ? styles.lookContainerInactive
                                 : styles.lookContainer
                         }
@@ -154,7 +154,7 @@ export default function SaveLookModal({
                         }}
                     />
                     {lookSelector.status === 'pending' ||
-                        looks.status === 'pending' ? (
+                    looks.status === 'pending' ? (
                         <ActivityIndicator
                             size="large"
                             style={styles.indicator}

@@ -51,7 +51,7 @@ export const updateLook = createAsyncThunk<ILook, IupdateLook>(
     'createLook/update',
     async (lookData, { rejectWithValue }) => {
         try {
-            console.log(lookData.look.clothes)
+            console.log(lookData.look.clothes);
             const response = await Api.Common.updateLook(
                 lookData.look,
                 lookData.id

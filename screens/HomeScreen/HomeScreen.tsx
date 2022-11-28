@@ -54,8 +54,7 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
             name: 'Лента',
             //@ts-ignore
             component: <SubscriptionsFeedScreen navigation={navigation} />
-        },
-
+        }
     ];
 
     const [currentScreen, setCurrentScreen] = React.useState<

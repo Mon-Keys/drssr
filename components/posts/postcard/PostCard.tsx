@@ -133,15 +133,15 @@ function _renderClothesItem(props) {
     return (
         <Pressable onPress={props.item.onPress}>
             <View style={styles.itemCard}>
-
                 <Image
                     style={styles.itemCardImage}
-                    source={{ uri: `http://leonidperl.in/${props.item.mask_path}` }}
+                    source={{
+                        uri: `http://leonidperl.in/${props.item.mask_path}`
+                    }}
                 />
                 <Text style={styles.itemCardSign}>{props.item.brand}</Text>
             </View>
         </Pressable>
-
     );
 }
 
@@ -209,18 +209,17 @@ export const PostCard = (props: PostCardProps) => {
     } else {
         data = [props.post.look.img_path];
     }
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
     var clothesData = props.post.look.clothes.map((item) => {
         const onPress = () => {
-            navigation.navigate('Item', { id: item.id })
-        }
+            navigation.navigate('Item', { id: item.id });
+        };
         return {
             ...item,
             onPress
-        }
+        };
     });
-
 
     return (
         <ScrollView
