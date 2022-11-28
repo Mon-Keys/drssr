@@ -23,6 +23,10 @@ export interface IAvatarData {
     file: ImagePicker.ImagePickerResult;
 }
 
+export interface ICheckStylist {
+    exists: boolean;
+}
+
 
 export default class User {
     /**
@@ -86,5 +90,33 @@ export default class User {
      */
     deleteAvatar() {
         return http.delete<IUserData>('/private/users/avatar');
+    }
+
+    /**
+     * Returns axios request handle
+     * Removes user session
+     * @remarks
+     * This method is part of the network subsystem.
+     *
+     * @beta
+     */
+     requestStylist() {
+        return http.post<any>('/private/users/stylist', {
+            withCredentials: true
+        });
+    }
+
+    /**
+     * Returns axios request handle
+     * Removes user session
+     * @remarks
+     * This method is part of the network subsystem.
+     *
+     * @beta
+     */
+     checkStylist() {
+        return http.get<ICheckStylist>('/private/users/stylist', {
+            withCredentials: true
+        });
     }
 }

@@ -4,12 +4,8 @@ import React from 'react';
 import Colors from '../../styles/Colors';
 import ProfileVerified from '../icons/profileVerified';
 import Settings from '../icons/settings';
-import Share from '../icons/share';
 import { Layout, Abstracts } from '../../styles';
-import { FlatList } from 'react-native-gesture-handler';
-import Stat from './Stat';
-import { useNavigation } from '@react-navigation/native';
-import { RootNavigation } from '../../types';
+// import { FlatList } from 'react-native-gesture-handler';
 import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({
@@ -139,10 +135,10 @@ export const ProfileCard = (props: ProfileCardProps) => {
                 >
                     <Settings color={Colors.base.darkgray} />
                 </Pressable>
-                <Share
+                {/* <Share
                     style={styles.rightButton}
                     color={Colors.base.darkgray}
-                />
+                /> */}
                 <View style={styles.nameContainer}>
                     <Text style={styles.name}> {props.name} </Text>
                     {props.isVerified &&

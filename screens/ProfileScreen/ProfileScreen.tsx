@@ -11,7 +11,7 @@ import {
 
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { fetchUserData, selectUser, stylist } from '../../reducers/userReducer';
+import { checkStylist, fetchUserData, requestStylist, selectUser } from '../../reducers/userReducer';
 import { RootNavigation, RootTabScreenProps } from '../../types';
 import Colors from '../../styles/Colors';
 import { ProfileCard } from '../../components/base/ProfileCard';
@@ -28,6 +28,7 @@ import { fetchUsersClothes } from '../../reducers/items/fetchClothes';
 import { selectUserItems } from '../../reducers/items/clothesReducer';
 import BaseButton from '../../components/base/BaseButton';
 import { FeedCommon } from '../../components/feed/FeedCommon';
+import { RequestStylist } from '../../components/base/RequestStylist';
 
 const styles = StyleSheet.create({
     container: {
@@ -66,7 +67,8 @@ export default function ProfileScreen() {
 
     const navigation = useNavigation<RootNavigation>();
 
-    const { userData } = useAppSelector(selectUser);
+    const user = useAppSelector(selectUser);
+    const userData = user.userData
     const posts = useAppSelector(selectPosts);
 
     const clothes = useAppSelector(selectUserItems);
@@ -82,6 +84,7 @@ export default function ProfileScreen() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        dispatch(checkStylist())
         dispatch(fetchUserData());
         dispatch(getPosts());
         dispatch(fetchUsersClothes());
@@ -89,6 +92,7 @@ export default function ProfileScreen() {
     }, [dispatch]);
 
     const refresh = () => {
+        dispatch(checkStylist())
         dispatch(fetchUserData());
         dispatch(getPosts());
     };
@@ -102,7 +106,7 @@ export default function ProfileScreen() {
     };
 
     const becomeStyist = () => {
-        dispatch(stylist());
+        dispatch(requestStylist());
     };
 
     return (
@@ -159,8 +163,11 @@ export default function ProfileScreen() {
                             </View>
                         </>
                     )}
-                    {!userData.stylist && (
+                    {!userData.stylist && !user.isRequest && (
                         <BecomeStylistCard becomeStylist={becomeStyist} />
+                    )}
+                    {!userData.stylist && user.isRequest && (
+                        <RequestStylist />
                     )}
                 </ScrollView>
             </SafeAreaView>
