@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import Api, { ILoginData, IUserData, ISignupData, IUpdateUserData } from '../network/';
-import { IAvatarData } from '../network/api/user';
+import { IAvatarData, ICheckStylist } from '../network/api/user';
 
 export interface User {
     nickname: string;
@@ -19,6 +19,7 @@ interface UserState {
     userData: User;
     status: string;
     error: string;
+    isRequest?: boolean;
 }
 
 const initialState = {
@@ -92,11 +93,27 @@ export const logoutUser = createAsyncThunk<IUserData>(
     }
 );
 
-export const stylist = createAsyncThunk<IUserData>(
-    'user/stylist',
+export const requestStylist = createAsyncThunk<IUserData>(
+    'user/requestStylist',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await Api.Auth.stylistUser();
+            const response = await Api.User.requestStylist();
+            if (response.status !== 200) {
+                throw new Error(`Error, status ${response.status}`);
+            }
+
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const checkStylist = createAsyncThunk<ICheckStylist>(
+    'user/checkStylist',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await Api.User.checkStylist();
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
             }
@@ -205,15 +222,26 @@ export const userSlice = createSlice({
             .addCase(logoutUser.rejected, (state) => {
                 state.status = 'rejected';
             })
-            .addCase(stylist.pending, (state) => {
+            .addCase(requestStylist.pending, (state) => {
                 state.status = 'pending';
                 state.error = '';
             })
-            .addCase(stylist.fulfilled, (state, action) => {
+            .addCase(requestStylist.fulfilled, (state, action) => {
                 state.status = 'resolved';
                 state.userData = action.payload as unknown as User;
             })
-            .addCase(stylist.rejected, (state) => {
+            .addCase(requestStylist.rejected, (state) => {
+                state.status = 'rejected';
+            })
+            .addCase(checkStylist.pending, (state) => {
+                state.status = 'pending';
+                state.error = '';
+            })
+            .addCase(checkStylist.fulfilled, (state, action) => {
+                state.status = 'resolved';
+                state.isRequest = action.payload.exists as unknown as boolean;
+            })
+            .addCase(checkStylist.rejected, (state) => {
                 state.status = 'rejected';
             })
             .addCase(updateUserData.pending, (state) => {
