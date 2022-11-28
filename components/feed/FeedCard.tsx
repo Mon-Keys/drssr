@@ -32,8 +32,8 @@ export const FeedCard = (props: FeedCardProps) => (
                     if (props.post.previews_paths) {
                         return {
                             uri: `${
-                                props.post.previews_paths.isEmpty()
-                                    ? `http://leonidperl.in/${props.post.previews[0]}`
+                                props.post.previews_paths[0]
+                                    ? `http://leonidperl.in/`
                                     : `http://leonidperl.in/${props.post.previews[0]}`
                             }`
                         };
