@@ -16,7 +16,10 @@ import { useAppSelector } from '../../../hooks/useAppSelector';
 import { selectUserItems } from '../../../reducers/items/clothesReducer';
 import ViewShot from 'react-native-view-shot';
 import { RootStackScreenProps } from '../../../types';
-import { addLookData, addLookPhoto } from '../../../reducers/looks/createLookReducer';
+import {
+    addLookData,
+    addLookPhoto
+} from '../../../reducers/looks/createLookReducer';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import EmptyView from '../../../components/base/EmptyView';
 import { getUri } from '../../../network/const';
