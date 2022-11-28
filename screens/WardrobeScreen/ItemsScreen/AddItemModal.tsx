@@ -126,7 +126,7 @@ export default function AddItemModal() {
                 // description: 'Google Фото – это удобный сервис для хранения фото и видео. Они упорядочиваются автоматически, и вы можете делиться ими с кем захотите.',
             })
         );
-        navigation.navigate('Item', { id: item.id });
+        navigation.navigate('ItemInWardrobe', { id: item.id });
     };
 
     let img = '';

@@ -17,10 +17,9 @@ import StartScreen from '../screens/Auth/StartScreen';
 import LookScreen from '../screens/WardrobeScreen/LooksScreen/LookScreen';
 import LooksForNewPostModal from '../screens/Modals/LooksForNewPostModal';
 import CreatePostModal from '../screens/Modals/CreatePostModal';
-import ItemScreen from '../screens/WardrobeScreen/ItemsScreen/ItemScreen';
 import EditLookModal from '../screens/Modals/EditLookModal';
-import WardrobeScreen from '../screens/WardrobeScreen/WardrobeScreen';
 import SaveEditLookModal from '../screens/Modals/SaveEditLookModal';
+import ItemModal from "../screens/Modals/ItemModal";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -106,8 +105,8 @@ export function RootNavigator() {
                 />
                 <Stack.Screen
                     name="Item"
-                    component={ItemScreen}
-                    options={{ headerShown: false }}
+                    component={ItemModal}
+                    options={{ title: 'Вещь' }}
                 />
                 <Stack.Screen
                     name="LooksForNewPost"
