@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-    StyleSheet,
-    Text,
-    Platform,
-    StatusBar,
-    ScrollView,
-    Image
-} from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { View } from '../../components/base/Themed';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Colors, Layout } from '../../styles';
@@ -24,7 +17,6 @@ import InputContainer, {
 } from '../../components/item/InputContainer';
 import PhotosPreview from '../../components/posts/PhotosPreview';
 import { clearNewPost, selectNewPosts } from '../../reducers/posts/postReducer';
-import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({
     container: {
@@ -63,10 +55,8 @@ export default function CreatePostModal() {
             const look = looks.find((item) => item.id == id) || looks[0]; // не гуд так делать, но как-то похуй, работать будет
 
             defaultPreview = look.img_path;
-            defaultName = look.name;
-            defaultDescription = look.description
-                ? look.description
-                : 'описание';
+            defaultName = look.name || '';
+            defaultDescription = look.description || '';
             break;
         }
         case 'clothes': {
@@ -82,12 +72,14 @@ export default function CreatePostModal() {
         {
             key: 'name',
             title: 'Название',
-            placeholder: 'Дайте название публикации'
+            placeholder: 'Дайте название публикации',
+            value: defaultName
         },
         {
             key: 'description',
             title: 'Описание',
-            placeholder: 'Расскажите подробнее о вашем образе'
+            placeholder: 'Расскажите подробнее о вашем образе',
+            value: defaultDescription
         },
         { key: 'price', title: 'Цена', placeholder: 'Укажите цену образа' }
     ];
@@ -116,16 +108,6 @@ export default function CreatePostModal() {
                     photo={{ img: defaultPreview }}
                     style={styles.photosContainer}
                 />
-                <InputContainer
-                    inputFields={fields}
-                    style={styles.inputContainer}
-                />
-                <View style={styles.previewContainer}>
-                    <Image
-                        style={styles.lookImage}
-                        source={{ uri: getUri(defaultPreview) }}
-                    />
-                </View>
                 <InputContainer
                     inputFields={fields}
                     style={styles.inputContainer}

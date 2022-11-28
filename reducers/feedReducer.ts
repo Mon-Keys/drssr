@@ -1,9 +1,11 @@
-//нахуя владимир лункин регает 10000000 папок для каждой отдельной функции?
+//нахуя владимир лункин регает 10000000 папок для каждой отдельной функции? ,'cnghfrnbrc
+// бля видел бы ты перловые файлы на 30к строк кода
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import Api from '../network/';
 import { IPost } from './posts/post';
+import { Clothes } from './items/clothesReducer';
 
 export interface Feed {
     data: Array<IPost>;
@@ -14,6 +16,7 @@ export interface Feeds {
     SubscribtionFeed: Feed;
     DiscoverFeed: Feed;
     FavoriteFeed: Feed;
+    cacheClothes: Array<Clothes>;
 }
 
 const initialState = {
@@ -121,7 +124,8 @@ const initialState = {
             }
         ],
         status: 'ready'
-    }
+    },
+    cacheClothes: []
 } as Feeds;
 
 export const fetchFavoritePosts = createAsyncThunk<Array<IPost>>(
@@ -163,6 +167,22 @@ export const fetchDiscoverPosts = createAsyncThunk<Array<IPost>>(
         try {
             const response = await Api.Common.getDiscoverPosts(10, 0);
 
+            if (response.status !== 200) {
+                throw new Error(`Error, status ${response.status}`);
+            }
+
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const fetchClothesById = createAsyncThunk<Clothes, number>(
+    'Feeds/fetchClothesById',
+    async (id, { rejectWithValue }) => {
+        try {
+            const response = await Api.Common.getClothesById(id);
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
             }
@@ -243,6 +263,10 @@ export const feedSlice = createSlice({
             })
             .addCase(fetchSubscribtionPosts.rejected, (state) => {
                 state.SubscribtionFeed.status = 'rejected';
+            })
+            .addCase(fetchClothesById.fulfilled, (state, action) => {
+                const clothes = action.payload as Clothes;
+                state.cacheClothes.push(clothes);
             });
     }
 });
@@ -250,5 +274,6 @@ export const feedSlice = createSlice({
 export const { loadData } = feedSlice.actions;
 
 export const selectFeeds = (state: RootState) => state.feeds;
+export const selectFeedClothes = (state: RootState) => state.feeds.cacheClothes;
 
 export default feedSlice.reducer;

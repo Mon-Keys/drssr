@@ -1,7 +1,8 @@
 import http from '../instace';
 import * as ImagePicker from 'expo-image-picker';
 import { IPost } from '../../reducers/posts/post';
-import { ILook, ILooks } from '../../reducers/looks/looks';
+import { ILook } from '../../reducers/looks/looks';
+import {Clothes} from "../../reducers/items/clothesReducer";
 
 export interface IItemData {
     id?: number;
@@ -177,5 +178,9 @@ export default class Common {
 
     dislike(id: number, likes: number) {
         return http.delete(`/private/posts/likes?id=${id}`);
+    }
+
+    getClothesById(id: number) {
+        return http.get<Clothes>(`/public/clothes?id=${id}`);
     }
 }
