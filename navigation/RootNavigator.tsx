@@ -19,7 +19,7 @@ import LooksForNewPostModal from '../screens/Modals/LooksForNewPostModal';
 import CreatePostModal from '../screens/Modals/CreatePostModal';
 import EditLookModal from '../screens/Modals/EditLookModal';
 import SaveEditLookModal from '../screens/Modals/SaveEditLookModal';
-import ItemModal from "../screens/Modals/ItemModal";
+import ItemModal from '../screens/Modals/ItemModal';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

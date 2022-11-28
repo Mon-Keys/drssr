@@ -5,7 +5,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import Api from '../network/';
 import { IPost } from './posts/post';
-import { Clothes } from "./items/clothesReducer";
+import { Clothes } from './items/clothesReducer';
 
 export interface Feed {
     data: Array<IPost>;
@@ -265,7 +265,7 @@ export const feedSlice = createSlice({
                 state.SubscribtionFeed.status = 'rejected';
             })
             .addCase(fetchClothesById.fulfilled, (state, action) => {
-                const clothes = action.payload as Clothes
+                const clothes = action.payload as Clothes;
                 state.cacheClothes.push(clothes);
             });
     }
