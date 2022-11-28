@@ -18,6 +18,8 @@ import LookScreen from '../screens/WardrobeScreen/LooksScreen/LookScreen';
 import LooksForNewPostModal from '../screens/Modals/LooksForNewPostModal';
 import CreatePostModal from '../screens/Modals/CreatePostModal';
 import ItemScreen from '../screens/WardrobeScreen/ItemsScreen/ItemScreen';
+import EditLookModal from '../screens/Modals/EditLookModal';
+import WardrobeScreen from '../screens/WardrobeScreen/WardrobeScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -80,6 +82,7 @@ export function RootNavigator() {
                     name="ImageRecognizer"
                     component={ImageRecognizerScreen}
                 />
+                <Stack.Screen name="EditLook" component={EditLookModal} />
                 <Stack.Screen
                     name="CreateLook"
                     component={CreateLookModal}

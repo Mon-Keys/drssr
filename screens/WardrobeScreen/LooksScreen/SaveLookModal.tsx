@@ -118,8 +118,18 @@ export default function SaveLookModal({
             description: description
         };
 
+        console.log(lookSelector.look.clothes)
         // @ts-ignore
-        dispatch(newLook(look)).then(() => {
+        const newLook1: ILook = {
+            img: lookSelector.look.img,
+            filename: GenerateRandomName(),
+            clothes: lookSelector.look.clothes,
+            name: name,
+            description: description
+        }
+
+        // @ts-ignore
+        dispatch(newLook(newLook1)).then(() => {
             //@ts-ignore
             dispatch(fetchUsersLooks()).then(() => {
                 //@ts-ignore
@@ -135,7 +145,7 @@ export default function SaveLookModal({
                     <Image
                         style={
                             lookSelector.status === 'pending' ||
-                            looks.status === 'pending'
+                                looks.status === 'pending'
                                 ? styles.lookContainerInactive
                                 : styles.lookContainer
                         }
@@ -144,7 +154,7 @@ export default function SaveLookModal({
                         }}
                     />
                     {lookSelector.status === 'pending' ||
-                    looks.status === 'pending' ? (
+                        looks.status === 'pending' ? (
                         <ActivityIndicator
                             size="large"
                             style={styles.indicator}

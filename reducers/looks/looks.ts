@@ -7,7 +7,10 @@ export interface IClothesLookData {
     coords: {
         x: number;
         y: number;
+        z: number;
     };
+    rotation: number;
+    scaling: number;
 }
 
 export interface ILook {

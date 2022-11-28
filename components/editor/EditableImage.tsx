@@ -22,6 +22,7 @@ interface EditableImageProps extends ImageProps {
     maxZIndex: number;
     setMaxZIndex: () => void;
     onLongPress: () => void;
+    setParams: (x, y, z, scale, rotation) => void;
 }
 
 export const EditableImage = (props: EditableImageProps) => {
@@ -30,9 +31,26 @@ export const EditableImage = (props: EditableImageProps) => {
     return (
         <View style={{ ...styles.imageContainer, zIndex: zIndex }}>
             <Gestures
-                onChange={() => {
+                scalable={{
+                    min: 0.33,
+                    max: 3
+                }}
+                onChange={(event, styles) => {
+                    console.log(styles.transform[0].scale)
+                    console.log(styles.transform[1].rotate)
+                    console.log(event.nativeEvent.pageX)
+                    console.log(event.nativeEvent.pageY)
                     setZIndex(props.maxZIndex + 1);
                     props.setMaxZIndex();
+                }}
+                onEnd={(event, styles) => {
+                    console.log(styles.transform[0].scale)
+                    console.log(styles.transform[1].rotate)
+                    console.log(event.nativeEvent.pageX)
+                    console.log(event.nativeEvent.pageY)
+                    setZIndex(props.maxZIndex + 1);
+                    props.setMaxZIndex();
+                    props.setParams(event.nativeEvent.pageX, event.nativeEvent.pageY, props.maxZIndex + 1, styles.transform[0].scale, styles.transform[1].rotate);
                 }}
             >
                 <Pressable

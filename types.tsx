@@ -13,12 +13,13 @@ import {
     NativeStackNavigationProp,
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
+import { ILook } from './reducers/looks/looks';
 import { IPost } from './reducers/posts/post';
 import LooksForNewPostModal from './screens/Modals/LooksForNewPostModal';
 
 declare global {
     namespace ReactNavigation {
-        interface RootParamList extends RootStackParamList {}
+        interface RootParamList extends RootStackParamList { }
     }
 }
 
@@ -33,6 +34,9 @@ export type RootStackParamList = {
     NotFound: undefined;
     CreateLook: undefined;
     SaveLook: undefined;
+    EditLook: {
+        look: ILook;
+    };
     Post: {
         post: IPost;
     };

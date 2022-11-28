@@ -122,6 +122,15 @@ export const Look = ({ look }: { look: ILook }) => {
                         onPress={goToCreatePost}
                     />
                 ) : null}
+                <BaseButton
+                    title={'Редактировать'}
+                    style={styles.button}
+                    onPress={() => {
+                        navigation.navigate('EditLook', {
+                            look: look
+                        });
+                    }}
+                />
             </ScrollView>
         </View>
     );

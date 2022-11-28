@@ -8,7 +8,8 @@ import {
     StatusBar,
     FlatList,
     Pressable,
-    Text
+    Text,
+    View
 } from 'react-native';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -29,6 +30,7 @@ import { fetchUsersLooks, selectLooks } from '../../reducers/looks/lookReducer';
 import { fetchUsersClothes } from '../../reducers/items/fetchClothes';
 import { selectUserItems } from '../../reducers/items/clothesReducer';
 import BaseButton from '../../components/base/BaseButton';
+import { FeedCommon } from '../../components/feed/FeedCommon';
 
 const styles = StyleSheet.create({
     container: {
@@ -132,8 +134,8 @@ export default function ProfileScreen() {
                         settingsAction={() => {
                             navigation.navigate('Settings');
                         }}
-                        shareAction={() => {}}
-                        editAction={() => {}}
+                        shareAction={() => { }}
+                        editAction={() => { }}
                         description={
                             'Сотворю твой успех с помощью 100+ огненных луков. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                         }
@@ -148,15 +150,17 @@ export default function ProfileScreen() {
                                     marginTop: Layout.margins.default
                                 }}
                             />
-                            <FlatList
-                                style={styles.postsContainer}
-                                columnWrapperStyle={styles.postsWrapper}
-                                data={posts}
-                                numColumns={2}
-                                renderItem={({ item }) => (
-                                    <PostPreview post={item} />
-                                )}
-                            />
+                            <View
+                                style={{
+                                    width: '100%',
+                                    alignItems: "center"
+                                }}
+                            >
+                                <FeedCommon
+                                    navigation={navigation}
+                                    feed={{ data: posts, status: 'ready' }}
+                                />
+                            </View>
                         </>
                     )}
                     {!userData.stylist && (

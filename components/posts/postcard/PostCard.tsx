@@ -4,7 +4,8 @@ import {
     View,
     Text,
     SafeAreaView,
-    Dimensions
+    Dimensions,
+    Pressable
 } from 'react-native';
 import React, { useRef } from 'react';
 import { IPost } from '../../reducers/posts/post';
@@ -13,6 +14,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Colors } from '../../../styles';
 import IconButton from '../../base/IconButton';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export interface PostCardProps {
     goBackCallback: () => void;
@@ -129,13 +131,17 @@ function _renderItem(props) {
 
 function _renderClothesItem(props) {
     return (
-        <View style={styles.itemCard}>
-            <Image
-                style={styles.itemCardImage}
-                source={{ uri: `http://leonidperl.in/${props.item.mask_path}` }}
-            />
-            <Text style={styles.itemCardSign}>{props.item.brand}</Text>
-        </View>
+        <Pressable onPress={props.item.onPress}>
+            <View style={styles.itemCard}>
+
+                <Image
+                    style={styles.itemCardImage}
+                    source={{ uri: `http://leonidperl.in/${props.item.mask_path}` }}
+                />
+                <Text style={styles.itemCardSign}>{props.item.brand}</Text>
+            </View>
+        </Pressable>
+
     );
 }
 
@@ -203,12 +209,18 @@ export const PostCard = (props: PostCardProps) => {
     } else {
         data = [props.post.look.img_path];
     }
+    const navigation = useNavigation()
 
-    var clothesData = props.post.look.clothes.map((item) => item);
-    console.log(props.post.description);
-    console.log(props.post.look.description);
-    console.log(props.post.look.name);
-    console.log(props.post.name);
+    var clothesData = props.post.look.clothes.map((item) => {
+        const onPress = () => {
+            navigation.navigate('Item', { id: item.id })
+        }
+        return {
+            ...item,
+            onPress
+        }
+    });
+
 
     return (
         <ScrollView
@@ -332,14 +344,14 @@ export const PostCard = (props: PostCardProps) => {
                 <View style={styles.postDescriptionBottomContainer}>
                     <View style={styles.postDescriptionContainer}>
                         <Text style={styles.postDescriptionName}>
-                            Звезда токио
+                            {props.post.name}
                         </Text>
                         <Text style={styles.postDescriptionPrice}>
                             Общая стоимость: 10 500 руб
                         </Text>
 
                         <Text style={styles.postDescriptionDescription}>
-                            {props.post.look.description}
+                            {props.post.description}
                         </Text>
                     </View>
                 </View>

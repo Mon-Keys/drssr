@@ -25,7 +25,6 @@ export default function PostModalScreen({
 }: RootStackScreenProps<'Post'>) {
     const route = useRoute<PostRouteProp>();
     const { post } = route.params;
-    console.log(route.params);
 
     return (
         <View style={styles.container}>

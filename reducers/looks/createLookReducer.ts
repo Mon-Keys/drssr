@@ -51,6 +51,7 @@ export const createLookSlice = createSlice({
         },
         addLookData: (state, action) => {
             state.look.clothes = action.payload;
+            console.log(state.look.clothes)
         }
     },
     extraReducers: (builder) => {

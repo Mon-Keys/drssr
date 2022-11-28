@@ -1,30 +1,28 @@
 import React from 'react';
-import { StyleSheet, Pressable, FlatList } from 'react-native';
+import { StyleSheet, Pressable, FlatList, View } from 'react-native';
 
-import { View } from '../../../components/base/Themed';
 
-import Colors from '../../../styles/Colors';
+import Colors from '../../styles/Colors';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import {
     BottomSheetModal,
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
-import { EditableImage } from '../../../components/editor/EditableImage';
-import { Item } from '../../../components/editor/Item';
-import { useAppSelector } from '../../../hooks/useAppSelector';
-import { selectUserItems } from '../../../reducers/items/clothesReducer';
+import { EditableImage } from '../../components/editor/EditableImage';
+import { Item } from '../../components/editor/Item';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { selectUserItems } from '../../reducers/items/clothesReducer';
 import ViewShot from 'react-native-view-shot';
-import { RootStackScreenProps } from '../../../types';
+import { RootStackScreenProps } from '../../types';
 import {
     addLookData,
     addLookPhoto
-} from '../../../reducers/looks/createLookReducer';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import EmptyView from '../../../components/base/EmptyView';
-import { getUri } from '../../../network/const';
-import * as Console from 'console';
-import { LookItem } from '../../Modals/EditLookModal';
+} from '../../reducers/looks/createLookReducer';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import EmptyView from '../../components/base/EmptyView';
+import { getUri } from '../../network/const';
+import { useRoute } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     container: {
@@ -88,10 +86,34 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function CreateLookModal({
+export interface LookItem {
+    id: number;
+    image: string;
+    rotation: number;
+    scaling: number;
+    coords: {
+        x: number;
+        z: number;
+        y: number;
+    };
+}
+
+export default function EditLookModal({
     navigation
-}: RootStackScreenProps<'CreateLook'>) {
-    const [boardItems, setBoardItems] = React.useState<Array<LookItem>>([]);
+}: RootStackScreenProps<'EditLook'>) {
+
+    const route = useRoute();
+    const { data } = route.params;
+
+    const itemsParsed = route.params.look.clothes.map((item) => {
+        const parsedItem: LookItem = {
+            id: item.id,
+            image: getUri(item.mask_path)
+        }
+        return parsedItem
+    })
+
+    const [boardItems, setBoardItems] = React.useState<Array<LookItem>>([...itemsParsed]);
     const getItemsIds = (): Array<number> => {
         const ids: Array<number> = [];
         boardItems.forEach((item) => {
@@ -125,36 +147,13 @@ export default function CreateLookModal({
         //@ts-ignore
         ref.current.capture().then((lookImg) => {
             dispatch(addLookPhoto(lookImg));
-            const tempItems = boardItems.map((item) => {
-                return {
-                    id: item.id,
-                    coords: item.coords,
-                    scaling: item.scaling,
-                    rotation: item.rotation,
-                    image: getUri(item.image)
-                };
-            });
-            console.log(tempItems)
-            dispatch(addLookData(tempItems));
+            dispatch(addLookData(getItemsIds()));
             navigation.navigate('SaveLook');
         });
     };
 
     const addItem = (id: number, path: string) => {
-        setBoardItems([
-            ...boardItems,
-            {
-                id: id,
-                image: getUri(path),
-                scaling: 100,
-                rotation: 0,
-                coords: {
-                    x: 0,
-                    y: 0,
-                    z: 0
-                }
-            }
-        ]);
+        setBoardItems([...boardItems, { id: id, image: getUri(path) }]);
     };
     const removeItem = (ind: number) => {
         setBoardItems(boardItems.filter((value, index) => index !== ind));
@@ -199,41 +198,6 @@ export default function CreateLookModal({
                                         }}
                                         style={styles.defaultImage}
                                         source={{ uri: item.image }}
-                                        setParams={(
-                                            x,
-                                            y,
-                                            z,
-                                            scale,
-                                            rotation
-                                        ) => {
-                                            if (boardItems.find) {
-                                                const item = boardItems.find(
-                                                    (item, ix) => ix == index
-                                                );
-                                                let boardItemsTemp = boardItems;
-                                                boardItemsTemp[index] = {
-                                                    coords: {
-                                                        x: Math.floor(x),
-                                                        y: Math.floor(y),
-                                                        z: Math.floor(z)
-                                                    },
-                                                    image: item?.image,
-                                                    id: item.id,
-                                                    scaling: Math.floor(
-                                                        scale * 100
-                                                    ),
-                                                    rotation: rotation
-                                                        ? Math.floor(
-                                                            +rotation.slice(
-                                                                0,
-                                                                -3
-                                                            )
-                                                        )
-                                                        : 0
-                                                };
-                                                setBoardItems(boardItemsTemp);
-                                            }
-                                        }}
                                     />
                                 ))}
                             </View>
