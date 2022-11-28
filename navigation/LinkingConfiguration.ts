@@ -47,7 +47,8 @@ const linking: LinkingOptions<RootStackParamList> = {
             AddItem: 'AddItem',
             CreateLook: 'CreateLook',
             SaveLook: 'SaveLook',
-            Post: 'Post'
+            Post: 'Post',
+            FinishEditLook: 'FinishEditLook'
         }
     }
 };

@@ -105,6 +105,8 @@ export default function EditLookModal({
     const route = useRoute();
     const { data } = route.params;
 
+    console.log(route.params)
+
     const itemsParsed = route.params.look.clothes.map((item) => {
         const parsedItem: LookItem = {
             id: item.id,
@@ -147,8 +149,19 @@ export default function EditLookModal({
         //@ts-ignore
         ref.current.capture().then((lookImg) => {
             dispatch(addLookPhoto(lookImg));
-            dispatch(addLookData(getItemsIds()));
-            navigation.navigate('SaveLook');
+            const tempItems = boardItems.map((item) => {
+                return {
+                    id: item.id,
+                    coords: item.coords,
+                    scaling: item.scaling,
+                    rotation: item.rotation,
+                };
+            });
+            console.log(tempItems)
+            dispatch(addLookData(tempItems));
+            navigation.navigate('FinishEditLook', {
+                id: route.params.id
+            });
         });
     };
 
@@ -198,6 +211,41 @@ export default function EditLookModal({
                                         }}
                                         style={styles.defaultImage}
                                         source={{ uri: item.image }}
+                                        setParams={(
+                                            x,
+                                            y,
+                                            z,
+                                            scale,
+                                            rotation
+                                        ) => {
+                                            if (boardItems.find) {
+                                                const item = boardItems.find(
+                                                    (item, ix) => ix == index
+                                                );
+                                                let boardItemsTemp = boardItems;
+                                                boardItemsTemp[index] = {
+                                                    coords: {
+                                                        x: Math.floor(x),
+                                                        y: Math.floor(y),
+                                                        z: Math.floor(z)
+                                                    },
+                                                    image: item?.image,
+                                                    id: item.id,
+                                                    scaling: Math.floor(
+                                                        scale * 100
+                                                    ),
+                                                    rotation: rotation
+                                                        ? Math.floor(
+                                                            +rotation.slice(
+                                                                0,
+                                                                -3
+                                                            )
+                                                        )
+                                                        : 0
+                                                };
+                                                setBoardItems(boardItemsTemp);
+                                            }
+                                        }}
                                     />
                                 ))}
                             </View>

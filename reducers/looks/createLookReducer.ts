@@ -26,11 +26,36 @@ const initialState = {
     }
 } as CreateLookState;
 
+export interface IupdateLook {
+    look: ILook;
+    id: number;
+}
+
 export const newLook = createAsyncThunk<ILook, ICreateLook>(
     'user/signUpUser',
     async (lookData, { rejectWithValue }) => {
         try {
             const response = await Api.Common.createNewLook(lookData);
+            if (response.status !== 200) {
+                throw new Error(`Error, status ${response.status}`);
+            }
+
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+export const updateLook = createAsyncThunk<ILook, IupdateLook>(
+    'createLook/update',
+    async (lookData, { rejectWithValue }) => {
+        try {
+            console.log(lookData.look.clothes)
+            const response = await Api.Common.updateLook(
+                lookData.look,
+                lookData.id
+            );
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
             }
@@ -51,7 +76,7 @@ export const createLookSlice = createSlice({
         },
         addLookData: (state, action) => {
             state.look.clothes = action.payload;
-            console.log(state.look.clothes)
+            console.log(state.look.clothes);
         }
     },
     extraReducers: (builder) => {
@@ -63,6 +88,15 @@ export const createLookSlice = createSlice({
                 state.status = 'resolved';
             })
             .addCase(newLook.rejected, (state) => {
+                state.status = 'rejected';
+            })
+            .addCase(updateLook.pending, (state) => {
+                state.status = 'pending';
+            })
+            .addCase(updateLook.fulfilled, (state) => {
+                state.status = 'resolved';
+            })
+            .addCase(updateLook.rejected, (state) => {
                 state.status = 'rejected';
             });
     }

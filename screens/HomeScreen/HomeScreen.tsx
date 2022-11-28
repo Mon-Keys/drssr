@@ -51,15 +51,11 @@ const styles = StyleSheet.create({
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
     const menuItems = [
         {
-            name: 'Подписки',
+            name: 'Лента',
             //@ts-ignore
             component: <SubscriptionsFeedScreen navigation={navigation} />
         },
-        {
-            name: 'Рекомендации',
-            //@ts-ignore
-            component: <SavedHomeScreen navigation={navigation} />
-        }
+
     ];
 
     const [currentScreen, setCurrentScreen] = React.useState<
@@ -75,7 +71,7 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
             {menuOpen ? (
                 <View style={styles.cheapOuterContainer}>
                     <View style={styles.cheapInnerContainer}>
-                        <IconButton
+                        {/* <IconButton
                             icon={
                                 <AntDesign
                                     name="search1"
@@ -89,7 +85,7 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
                             onPress={() => {
                                 setMenuOpen(!menuOpen);
                             }}
-                        />
+                        /> */}
                         <CheapButtons
                             cheaps={menuItems}
                             currentScreen={(component) => {

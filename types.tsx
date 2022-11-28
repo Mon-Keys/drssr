@@ -36,6 +36,10 @@ export type RootStackParamList = {
     SaveLook: undefined;
     EditLook: {
         look: ILook;
+        id: number;
+    };
+    FinishEditLook: {
+        id: number;
     };
     Post: {
         post: IPost;

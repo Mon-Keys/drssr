@@ -15,6 +15,7 @@ import { AntDesign } from '@expo/vector-icons';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
 import ViewBottomMenu from '../../components/items/ViewBottomMenu';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import CheapButtons from '../../components/base/CheapButtons';
 
 const styles = StyleSheet.create({
     container: {
@@ -29,7 +30,6 @@ const styles = StyleSheet.create({
         flex: 0,
         margin: Layout.margins.default,
         marginBottom: Layout.margins.small,
-
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
@@ -76,7 +76,7 @@ export default function WardrobeScreen() {
         <ViewBottomMenu modalRef={bottomSheetModalRef}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <IconButton
+                    {/* <IconButton
                         style={styles.buttonPlus}
                         icon={
                             <AntDesign
@@ -85,8 +85,8 @@ export default function WardrobeScreen() {
                                 color={Colors.base.black}
                             />
                         }
-                    />
-                    <Cheaps
+                    /> */}
+                    <CheapButtons
                         cheaps={menuItems}
                         currentScreen={(component) => {
                             setCurrentScreen(component);

@@ -7,26 +7,24 @@ import {
     ActivityIndicator,
     ScrollView
 } from 'react-native';
-import { View } from '../../../components/base/Themed';
+import { View } from '../../components/base/Themed';
 
-import { useAppSelector } from '../../../hooks/useAppSelector';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import {
-    newLook,
+    updateLook,
     selectCreateLook
-} from '../../../reducers/looks/createLookReducer';
-import { Layout } from '../../../styles';
+} from '../../reducers/looks/createLookReducer';
+import { Layout } from '../../styles';
 import { useDispatch } from 'react-redux';
-import { RootStackScreenProps } from '../../../types';
-import {
-    fetchUsersLooks,
-    selectLook
-} from '../../../reducers/looks/lookReducer';
+import { RootStackScreenProps } from '../../types';
+import { fetchUsersLooks, selectLook } from '../../reducers/looks/lookReducer';
 import InputContainer, {
     getValue,
     InputFieldData
-} from '../../../components/item/InputContainer';
-import BaseButton from '../../../components/base/BaseButton';
-import { GenerateRandomName, ICreateLook } from '../../../network/api/common';
+} from '../../components/item/InputContainer';
+import BaseButton from '../../components/base/BaseButton';
+import { GenerateRandomName, ICreateLook } from '../../network/api/common';
+import { useRoute } from '@react-navigation/native';
 // @ts-ignore
 
 const styles = StyleSheet.create({
@@ -67,7 +65,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function SaveLookModal({
+export default function SaveEditLookModal({
     navigation
 }: RootStackScreenProps<'SaveLook'>) {
     const lookSelector = useAppSelector(selectCreateLook);
@@ -75,6 +73,10 @@ export default function SaveLookModal({
     const dispatch = useDispatch();
 
     const looks = useAppSelector(selectLook);
+    const route = useRoute();
+    const { data } = route.params;
+
+    console.log(route.params);
 
     const fields: Array<InputFieldData> = [
         {
@@ -122,20 +124,22 @@ export default function SaveLookModal({
         // @ts-ignore
         const newLook1: ILook = {
             img: lookSelector.look.img,
-            filename: GenerateRandomName(),
             clothes: lookSelector.look.clothes,
             name: name,
             description: description
         };
+        console.log(lookSelector.look.clothes)
 
         // @ts-ignore
-        dispatch(newLook(newLook1)).then(() => {
-            //@ts-ignore
-            dispatch(fetchUsersLooks()).then(() => {
+        dispatch(updateLook({ look: newLook1, id: route.params.id })).then(
+            () => {
                 //@ts-ignore
-                navigation.navigate('Wardrobe');
-            });
-        });
+                dispatch(fetchUsersLooks()).then(() => {
+                    //@ts-ignore
+                    navigation.navigate('Wardrobe');
+                });
+            }
+        );
     };
 
     return (

@@ -127,7 +127,8 @@ export const Look = ({ look }: { look: ILook }) => {
                     style={styles.button}
                     onPress={() => {
                         navigation.navigate('EditLook', {
-                            look: look
+                            look: look,
+                            id: look.id
                         });
                     }}
                 />

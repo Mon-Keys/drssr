@@ -20,6 +20,7 @@ import CreatePostModal from '../screens/Modals/CreatePostModal';
 import ItemScreen from '../screens/WardrobeScreen/ItemsScreen/ItemScreen';
 import EditLookModal from '../screens/Modals/EditLookModal';
 import WardrobeScreen from '../screens/WardrobeScreen/WardrobeScreen';
+import SaveEditLookModal from '../screens/Modals/SaveEditLookModal';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -92,6 +93,11 @@ export function RootNavigator() {
                     name="SaveLook"
                     component={SaveLookModal}
                     options={{ title: 'Создание образа' }}
+                />
+                <Stack.Screen
+                    name="FinishEditLook"
+                    component={SaveEditLookModal}
+                    options={{ title: 'Сохранение изменений' }}
                 />
                 <Stack.Screen
                     name="Look"

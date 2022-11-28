@@ -96,7 +96,7 @@ export default function DiscoverScreen({
             {menuOpen ? (
                 <View style={styles.cheapOuterContainer}>
                     <View style={styles.cheapInnerContainer}>
-                        <IconButton
+                        {/* <IconButton
                             icon={
                                 <AntDesign
                                     name="search1"
@@ -110,7 +110,7 @@ export default function DiscoverScreen({
                             onPress={() => {
                                 setMenuOpen(!menuOpen);
                             }}
-                        />
+                        /> */}
                         <View style={styles.headerContainer}>
                             <Text style={styles.headerText}>Избранное</Text>
                         </View>
