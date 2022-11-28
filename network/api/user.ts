@@ -1,9 +1,11 @@
 import http from '../instace';
+import { GenerateRandomName } from './common';
+import * as ImagePicker from 'expo-image-picker';
 
 export interface IUserData {
     nickname: string;
     email: string;
-    avatar?: string;
+    avatar: string;
     stylist: boolean;
     description?: string;
     ctime: number;
@@ -13,10 +15,14 @@ export interface IUpdateUserData {
     nickname: string;
     email: string;
     name: string;
-    avatar: string; // [Base64]
     birth_date: string;
     description: string;
 }
+
+export interface IAvatarData {
+    file: ImagePicker.ImagePickerResult;
+}
+
 
 export default class User {
     /**
@@ -32,7 +38,7 @@ export default class User {
     }
 
     updateUser(data: IUpdateUserData) {
-        return http.put<IUpdateUserData>('/private/users/', data);
+        return http.put<IUserData>('/private/users', data);
     }
 
     /**
@@ -45,5 +51,40 @@ export default class User {
      */
     deleteUser() {
         return http.delete('/private/users');
+    }
+
+    /**
+     * Returns axios request handle
+     * Deletes user account by Cookie, requires Cookie
+     * @remarks
+     * This method is part of the network subsystem.
+     *
+     * @beta
+     */
+    addAvatar(data: IAvatarData) {
+        let bodyFormData = new FormData();
+
+        bodyFormData.append('file', {
+            //@ts-ignore
+            uri: data.file.uri,
+            type: 'image/jpg',
+            name: GenerateRandomName()
+        });
+        return http.post<IUserData>('/private/users/avatar', bodyFormData, {
+            withCredentials: true,
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
+    }
+
+    /**
+     * Returns axios request handle
+     * Deletes user account by Cookie, requires Cookie
+     * @remarks
+     * This method is part of the network subsystem.
+     *
+     * @beta
+     */
+    deleteAvatar() {
+        return http.delete<IUserData>('/private/users/avatar');
     }
 }

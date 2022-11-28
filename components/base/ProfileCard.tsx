@@ -8,11 +8,12 @@ import Share from '../icons/share';
 import { Layout, Abstracts } from '../../styles';
 import { FlatList } from 'react-native-gesture-handler';
 import Stat from './Stat';
-// import BaseButton from './BaseButton';
+import { useNavigation } from '@react-navigation/native';
+import { RootNavigation } from '../../types';
+import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({
     cardContainer: {
-        height: 310,
         backgroundColor: Colors.base.transparent,
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -23,7 +24,6 @@ const styles = StyleSheet.create({
         borderRadius: Layout.cornerRadius,
         width: Abstracts.profile.defaultWidth,
         alignItems: 'center',
-        flex: 1
     },
     image: {
         width: Abstracts.profile.avatarSize,
@@ -35,23 +35,27 @@ const styles = StyleSheet.create({
         borderColor: Colors.base.white
     },
     headerContainer: {
-        height: 30
+        height: 40
     },
     name: {
         fontSize: 24,
         fontFamily: 'proxima-nova'
     },
     nameContainer: {
-        flex: 1,
+        height: 40,
         flexDirection: 'row',
         alignItems: 'center'
     },
     statsContainer: {
-        flex: 1
+        height: 50,
     },
     descriptionContainer: {
-        height: 60,
-        width: 330
+        minHeight: 30,
+        maxHeight: 60,
+        width: 320,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
     },
     descriptionText: {
         color: Colors.base.black,
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     bottomContainer: {
-        height: 10
+        height: 20
     },
     secondaryText: {
         color: Colors.base.darkgray,
@@ -102,7 +106,6 @@ export interface ProfileCardProps {
     name: string;
     isVerified: boolean;
     subscribersAmount: number;
-    location?: string;
     settingsAction: () => void;
     shareAction: () => void;
     editAction: () => void;
@@ -110,20 +113,21 @@ export interface ProfileCardProps {
 }
 
 export const ProfileCard = (props: ProfileCardProps) => {
-    const stats = [
-        {
-            value: '3,8К',
-            desc: 'Подписчики'
-        },
-        {
-            value: '5,4К',
-            desc: 'Лайки'
-        },
-        {
-            value: '7',
-            desc: 'Публикации'
-        }
-    ];
+    // const stats = [
+    //     {
+    //         value: '3,8К',
+    //         desc: 'Подписчики'
+    //     },
+    //     {
+    //         value: '5,4К',
+    //         desc: 'Лайки'
+    //     },
+    //     {
+    //         value: '7',
+    //         desc: 'Публикации'
+    //     }
+    // ];
+
     return (
         <View style={styles.cardContainer}>
             <View style={{ height: 50 }} />
@@ -141,9 +145,11 @@ export const ProfileCard = (props: ProfileCardProps) => {
                 />
                 <View style={styles.nameContainer}>
                     <Text style={styles.name}> {props.name} </Text>
-                    <ProfileVerified color="white" />
+                    {props.isVerified &&
+                        <ProfileVerified color="white" />
+                    }
                 </View>
-                <View style={styles.statsContainer}>
+                {/* <View style={styles.statsContainer}>
                     <FlatList
                         scrollEnabled={false}
                         showsHorizontalScrollIndicator={false}
@@ -156,13 +162,10 @@ export const ProfileCard = (props: ProfileCardProps) => {
                             return <Stat value={item.value} desc={item.desc} />;
                         }}
                     />
-                </View>
+                </View> */}
                 <View style={styles.statsContainer}>
                     <Pressable style={styles.edit} onPress={props.editAction}>
                         <Text style={styles.editText}> Редактировать </Text>
-                        {/* <BaseButton
-                        title='Редактировать'
-                    /> */}
                     </Pressable>
                 </View>
                 <View style={styles.descriptionContainer}>
@@ -170,17 +173,12 @@ export const ProfileCard = (props: ProfileCardProps) => {
                         {props.description}
                     </Text>
                 </View>
-                <View style={styles.bottomContainer}>
-                    {/* <Text style={styles.secondaryText}>
-                        {props.location}
-                    </Text>
-                    <Location color='gray'/> */}
-                </View>
+                <View style={styles.bottomContainer} />
             </View>
             <Image
                 style={styles.image}
                 source={{
-                    uri: 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                    uri: props.avatarSrc !== './media/defaults/avatar.webp' ? getUri(props.avatarSrc) : 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
                 }}
             />
         </View>
