@@ -57,13 +57,7 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
             fetch('http://leonidperl.in:5001/upload', {
                 method: 'POST',
                 body: createFormData(image)
-            })
-                .then((response) => {
-                    console.log('response', response);
-                })
-                .catch((error) => {
-                    console.log('error', error);
-                });
+            });
         }
     };
 

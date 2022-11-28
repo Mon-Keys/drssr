@@ -1,6 +1,7 @@
 import http from '../instace';
 import * as ImagePicker from 'expo-image-picker';
 import { IPost } from '../../reducers/posts/post';
+import { ILook, ILooks } from '../../reducers/looks/looks';
 
 export interface IItemData {
     id?: number;
@@ -30,16 +31,7 @@ export interface IClothesData {
     description: string;
 }
 
-export interface IClothesLookData {
-    id: number;
-    coords: {
-        x: number;
-        y: number;
-    };
-    name: string;
-}
-
-interface IClothesInsideLookData {
+export interface IClothesInsideLookData {
     id: number;
     coords: {
         x: number;
@@ -47,7 +39,7 @@ interface IClothesInsideLookData {
     };
 }
 
-export interface ILookData {
+export interface ICreateLook {
     img: string;
     filename: string;
     name: string;
@@ -55,16 +47,10 @@ export interface ILookData {
     clothes: Array<IClothesInsideLookData>;
 }
 
-export interface IGetLookData extends ILookData {
-    id: number;
-    clothes: Array<IClothesLookData>;
-    img_path: string;
-    description: string;
-}
-
 export interface ICreatePost {
     element_id: number;
     type: string;
+    name: string;
     description: string;
     previews?: Array<string>;
 }
@@ -120,24 +106,18 @@ export default class Common {
         return http.get<Array<IClothesData>>('/private/clothes');
     }
 
-    createNewLook(data: ILookData) {
-        return http.post<ILookData>('/private/looks', data);
+    createNewLook(data: ICreateLook) {
+        return http.post<ICreateLook>('/private/looks', data);
     }
 
     getLooks(limit: number, offset: number) {
-        return http.get<Array<IGetLookData>>(
+        return http.get<Array<ILook>>(
             `/private/looks/all?limit=${limit}&offset=${offset}`
         );
     }
 
     createPost(data: ICreatePost) {
-        // return http.post('/private/posts', {
-        //     element_id: data.element_id,
-        //     type: data.type,
-        //     description: data.description,
-        //     previews: {}
-        // });
-        return http.post<ILookData>('/private/posts', data);
+        return http.post('/private/posts', data);
     }
 
     getPosts(limit: number = 10, offset: number = 0) {

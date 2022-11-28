@@ -3,17 +3,15 @@ import { View } from '../base/Themed';
 import React from 'react';
 import Colors from '../../styles/Colors';
 import { Layout } from '../../styles';
-import { ILook, selectLook } from '../../reducers/lookReducer';
+import { ILook } from '../../reducers/looks/lookReducer';
 import { getUri } from '../../network/const';
 import BaseButton from '../base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation, TapBarNavigation } from '../../types';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { createPost } from '../../reducers/posts/createPost';
-import { ICreatePost } from '../../network/api/common';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { selectUser } from '../../reducers/userReducer';
 import ItemPreview from '../Look/ItemPreview';
+import { selectUserItems } from '../../reducers/items/clothesReducer';
 
 const styles = StyleSheet.create({
     container: {
@@ -28,7 +26,7 @@ const styles = StyleSheet.create({
     },
     lookImage: {
         flex: 1,
-        resizeMode: 'cover', // TODO временно пока Луки маленькие
+        resizeMode: 'center',
         borderRadius: Layout.cornerRadius
     },
     descriptionContainer: {
@@ -64,19 +62,26 @@ export const Look = ({ look }: { look: ILook }) => {
     const navigation = useNavigation<RootNavigation>();
 
     const user = useAppSelector(selectUser);
+    const allClothes = useAppSelector(selectUserItems);
     const isStylist = user.userData.stylist;
 
-    const dispatch = useAppDispatch();
+    const goToCreatePost = () => {
+        navigation.navigate('CreatePost', { type: 'look', id: look.id });
+    };
 
-    const publish = () => {
-        const post: ICreatePost = {
-            element_id: look.id,
-            type: 'look',
-            description: 'захардкоженное описание поста'
-            // previews: [look.img_path]
-        };
-        dispatch(createPost(post));
-        TapBarNavigation.navigate('Profile');
+    const getClothesInLook = (): Array<Clothes> => {
+        const clothesInLook: Array<Clothes> = [];
+
+        if (look.clothes) {
+            look.clothes.forEach((item) => {
+                const foundItem = allClothes.find((i) => i.id === item.id);
+                if (foundItem) {
+                    clothesInLook.push(foundItem);
+                }
+            });
+        }
+
+        return clothesInLook;
     };
 
     return (
@@ -94,7 +99,7 @@ export const Look = ({ look }: { look: ILook }) => {
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.itemsTitle}>Вещи в образе</Text>
                     <FlatList
-                        data={look.clothes}
+                        data={getClothesInLook()}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         renderItem={({ item }) => (
@@ -107,13 +112,14 @@ export const Look = ({ look }: { look: ILook }) => {
                                 }
                             />
                         )}
+                        keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
                 {isStylist ? (
                     <BaseButton
                         title={'Опубликовать'}
                         style={styles.button}
-                        onPress={publish}
+                        onPress={goToCreatePost}
                     />
                 ) : null}
             </ScrollView>

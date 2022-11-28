@@ -4,7 +4,7 @@ import { RefreshControl } from 'react-native';
 import { LookList } from '../../components/looks/LooksList';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { fetchUsersLooks, selectLook } from '../../reducers/lookReducer';
+import { fetchUsersLooks, selectLook } from '../../reducers/looks/lookReducer';
 import { Colors } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from '../../types';

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
     postImage: {
         flex: 1,
-        resizeMode: 'cover', // TODO временно пока Луки маленькие
+        resizeMode: 'cover',
         borderRadius: Layout.cornerRadius
     },
     likeButton: {
@@ -40,8 +40,11 @@ export const PostPreview = ({ post }: { post: IPost }) => {
             }
         } else if (item.type === 'clothes') {
             if (item.clothes) {
-                path = item.clothes.img_path;
+                path = item.clothes[0].img_path;
             }
+        }
+        if (item.previews_paths) {
+            path = item.previews_paths[0];
         }
         if (path !== '') {
             return getUri(path);

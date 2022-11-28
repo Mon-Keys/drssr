@@ -2,8 +2,8 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { userSlice } from '../reducers/userReducer';
 import { clothesSlice } from '../reducers/items/clothesReducer';
-import { createLookSlice } from '../reducers/createLookReducer';
-import { looksSlice } from '../reducers/lookReducer';
+import { createLookSlice } from '../reducers/looks/createLookReducer';
+import { looksSlice } from '../reducers/looks/lookReducer';
 import { postsSlice } from '../reducers/posts/postReducer';
 import { feedSlice } from '../reducers/feedReducer';
 

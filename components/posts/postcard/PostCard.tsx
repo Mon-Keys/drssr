@@ -199,7 +199,7 @@ export const PostCard = (props: PostCardProps) => {
     let itemsRef = useRef<Carousel<any>>();
     var data;
     if (props.post.previews_paths) {
-        data = [props.post.look.img_path, ...props.post.previews_paths];
+        data = [...props.post.previews_paths, props.post.look.img_path];
     } else {
         data = [props.post.look.img_path];
     }

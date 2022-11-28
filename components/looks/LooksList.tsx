@@ -1,9 +1,9 @@
 import { StyleSheet, FlatList, View, RefreshControlProps } from 'react-native';
 import React from 'react';
 import { LookCard } from './LookCard';
-import { IGetLookData } from '../../network';
 import { Layout } from '../../styles';
 import { getUri } from '../../network/const';
+import { ILook } from '../../reducers/looks/looks';
 
 const styles = StyleSheet.create({
     container: {
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 interface LooksListProps {
-    looks: Array<IGetLookData>;
+    looks: Array<ILook>;
     onPressLookCard: (index: number) => void;
     refreshControl?: React.ReactElement<RefreshControlProps>;
 }

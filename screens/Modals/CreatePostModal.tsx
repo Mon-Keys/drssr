@@ -8,14 +8,11 @@ import {
     Image
 } from 'react-native';
 import { View } from '../../components/base/Themed';
-import StyledButton from '../../components/base/StyledButton';
-import { logoutUser } from '../../reducers/userReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Colors, Layout } from '../../styles';
-import { getUri } from '../../network/const';
 import BaseButton from '../../components/base/BaseButton';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { selectLooks } from '../../reducers/lookReducer';
+import { selectLooks } from '../../reducers/looks/lookReducer';
 import { selectUserItems } from '../../reducers/items/clothesReducer';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { CreatePostRouteProp, TapBarNavigation } from '../../types';
@@ -25,6 +22,9 @@ import InputContainer, {
     getValue,
     InputFieldData
 } from '../../components/item/InputContainer';
+import PhotosPreview from '../../components/posts/PhotosPreview';
+import { clearNewPost, selectNewPosts } from '../../reducers/posts/postReducer';
+import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({
     container: {
@@ -32,38 +32,20 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: Colors.base.lightgray
     },
-    previewContainer: {
-        height: 450,
-        margin: Layout.margins.default,
-        borderRadius: Layout.cornerRadius,
-        backgroundColor: 'red'
-    },
-    lookImage: {
-        flex: 1,
-        resizeMode: 'cover', // TODO временно пока луки маленькие
-        borderRadius: Layout.cornerRadius
-    },
-    descriptionContainer: {
-        backgroundColor: Colors.base.white,
-        marginHorizontal: Layout.margins.default,
-        borderRadius: Layout.cornerRadius
-    },
-    lookText: {
-        marginVertical: Layout.margins.small,
-        marginHorizontal: Layout.margins.default,
-
-        fontFamily: 'proxima-nova',
-        fontSize: Layout.fontSize.default
-    },
-    button: {
-        margin: Layout.margins.default
+    photosContainer: {
+        backgroundColor: 'transparent'
     },
     inputContainer: {
         marginHorizontal: Layout.margins.default
+    },
+    button: {
+        margin: Layout.margins.default
     }
 });
 
 export default function CreatePostModal() {
+    const newPost = useAppSelector(selectNewPosts);
+
     const navigation = useNavigation<TapBarNavigation>();
     const route = useRoute<CreatePostRouteProp>();
 
@@ -72,6 +54,8 @@ export default function CreatePostModal() {
     const dispatch = useAppDispatch();
 
     let defaultPreview = '';
+    let defaultName = '';
+    let defaultDescription = '';
 
     switch (type) {
         case 'look': {
@@ -79,6 +63,10 @@ export default function CreatePostModal() {
             const look = looks.find((item) => item.id == id) || looks[0]; // не гуд так делать, но как-то похуй, работать будет
 
             defaultPreview = look.img_path;
+            defaultName = look.name;
+            defaultDescription = look.description
+                ? look.description
+                : 'описание';
             break;
         }
         case 'clothes': {
@@ -108,16 +96,30 @@ export default function CreatePostModal() {
         const post: ICreatePost = {
             element_id: id,
             type: type,
-            description: getValue(fields, 'description')
+            name: getValue(fields, 'name'),
+            description: getValue(fields, 'description'),
+            previews: newPost.previews_paths.map<string>(
+                (item) => item.base64 || ''
+            )
             // previews: [look.img_path],
         };
-        dispatch(createPost(post));
+        dispatch(createPost(post)).then(() => {
+            dispatch(clearNewPost());
+        });
         navigation.navigate('Profile');
     };
 
     return (
         <View style={styles.container}>
             <ScrollView style={{ flex: 1 }} scrollEnabled={true}>
+                <PhotosPreview
+                    photo={{ img: defaultPreview }}
+                    style={styles.photosContainer}
+                />
+                <InputContainer
+                    inputFields={fields}
+                    style={styles.inputContainer}
+                />
                 <View style={styles.previewContainer}>
                     <Image
                         style={styles.lookImage}

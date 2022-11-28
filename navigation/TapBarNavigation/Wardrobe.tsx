@@ -19,7 +19,7 @@ export function WardrobeNavigation(): any {
                 name="ItemsByCategory"
                 component={ItemsByCategoryScreen}
             />
-            <Stack.Screen name="Item" component={ItemScreen} />
+            <Stack.Screen name="ItemInWardrobe" component={ItemScreen} />
         </Stack.Navigator>
     );
 }

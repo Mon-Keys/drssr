@@ -10,18 +10,23 @@ import {
 import { View } from '../../../components/base/Themed';
 
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { newLook, selectCreateLook } from '../../../reducers/createLookReducer';
+import {
+    newLook,
+    selectCreateLook
+} from '../../../reducers/looks/createLookReducer';
 import { Layout } from '../../../styles';
 import { useDispatch } from 'react-redux';
-import { ILookData } from '../../../network';
 import { RootStackScreenProps } from '../../../types';
-import { fetchUsersLooks, selectLook } from '../../../reducers/lookReducer';
+import {
+    fetchUsersLooks,
+    selectLook
+} from '../../../reducers/looks/lookReducer';
 import InputContainer, {
     getValue,
     InputFieldData
 } from '../../../components/item/InputContainer';
 import BaseButton from '../../../components/base/BaseButton';
-import { GenerateRandomName } from '../../../network/api/common';
+import { GenerateRandomName, ICreateLook } from '../../../network/api/common';
 // @ts-ignore
 
 const styles = StyleSheet.create({
@@ -97,7 +102,7 @@ export default function SaveLookModal({
         const name = getValue(fields, 'name');
         const description = getValue(fields, 'description');
 
-        const look: ILookData = {
+        const look: ICreateLook = {
             img: lookSelector.look.img,
             filename: GenerateRandomName(),
             clothes: lookSelector.look.clothes.map((id) => {
