@@ -71,7 +71,11 @@ export function RootNavigator() {
                         title: 'Добавить вещь'
                     }}
                 />
-                <Stack.Screen name="Post" component={PostModalScreen} />
+                <Stack.Screen
+                    name="Post"
+                    component={PostModalScreen}
+                    options={{ headerShown: false }}
+                />
                 <Stack.Screen
                     name="ImageRecognizer"
                     component={ImageRecognizerScreen}

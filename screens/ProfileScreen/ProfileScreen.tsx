@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
     StyleSheet,
     ScrollView,
@@ -6,26 +6,28 @@ import {
     SafeAreaView,
     Platform,
     StatusBar,
-    FlatList, Pressable, Text
+    FlatList,
+    Pressable,
+    Text
 } from 'react-native';
 
-import {useAppSelector} from '../../hooks/useAppSelector';
-import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {fetchUserData, selectUser, stylist} from '../../reducers/userReducer';
-import {RootNavigation} from '../../types';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { fetchUserData, selectUser, stylist } from '../../reducers/userReducer';
+import { RootNavigation } from '../../types';
 import Colors from '../../styles/Colors';
-import {ProfileCard} from '../../components/base/ProfileCard';
-import {useNavigation} from '@react-navigation/native';
-import {getPosts} from '../../reducers/posts/createPost';
-import {Layout} from '../../styles';
-import {selectPosts} from '../../reducers/posts/postReducer';
-import {BecomeStylistCard} from '../../components/base/BecomeStylistCard';
-import {PostPreview} from '../../components/posts/PostPreview';
+import { ProfileCard } from '../../components/base/ProfileCard';
+import { useNavigation } from '@react-navigation/native';
+import { getPosts } from '../../reducers/posts/createPost';
+import { Layout } from '../../styles';
+import { selectPosts } from '../../reducers/posts/postReducer';
+import { BecomeStylistCard } from '../../components/base/BecomeStylistCard';
+import { PostPreview } from '../../components/posts/PostPreview';
 import NewPostBottomMenu from "../../components/profile/NewPostBottomMenu";
-import {BottomSheetModal} from "@gorhom/bottom-sheet";
-import {fetchUsersLooks, selectLooks} from "../../reducers/looks/lookReducer";
-import {fetchUsersClothes} from "../../reducers/items/fetchClothes";
-import {selectUserItems} from "../../reducers/items/clothesReducer";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { fetchUsersLooks, selectLooks } from "../../reducers/looks/lookReducer";
+import { fetchUsersClothes } from "../../reducers/items/fetchClothes";
+import { selectUserItems } from "../../reducers/items/clothesReducer";
 import BaseButton from "../../components/base/BaseButton";
 
 const styles = StyleSheet.create({
@@ -65,7 +67,7 @@ export default function ProfileScreen() {
 
     const navigation = useNavigation<RootNavigation>();
 
-    const {userData} = useAppSelector(selectUser);
+    const { userData } = useAppSelector(selectUser);
     const posts = useAppSelector(selectPosts);
 
     const clothes = useAppSelector(selectUserItems);
@@ -98,14 +100,18 @@ export default function ProfileScreen() {
         if (MenuRef.current) {
             MenuRef.current.present();
         }
-    }
+    };
 
     const becomeStyist = () => {
         dispatch(stylist());
     };
 
     return (
-        <NewPostBottomMenu modalRef={MenuRef} hasClothes={hasClothes()} hasLooks={hasLooks()}>
+        <NewPostBottomMenu
+            modalRef={MenuRef}
+            hasClothes={hasClothes()}
+            hasLooks={hasLooks()}
+        >
             <SafeAreaView style={styles.container}>
                 <ScrollView
                     refreshControl={
@@ -126,28 +132,35 @@ export default function ProfileScreen() {
                         settingsAction={() => {
                             navigation.navigate('Settings');
                         }}
-                        shareAction={() => {
-                        }}
-                        editAction={() => {
-                        }}
+                        shareAction={() => { }}
+                        editAction={() => { }}
                         description={
                             'Сотворю твой успех с помощью 100+ огненных луков. Моими капсулами пользуются более 2500 девушек — присоединяйся и ты!'
                         }
                     />
                     {userData.stylist && (
                         <>
-                            <BaseButton title={'Опубликовать'} onPress={openMenu} style={{ marginHorizontal: Layout.margins.default, marginTop: Layout.margins.default }} />
+                            <BaseButton
+                                title={'Опубликовать'}
+                                onPress={openMenu}
+                                style={{
+                                    marginHorizontal: Layout.margins.default,
+                                    marginTop: Layout.margins.default
+                                }}
+                            />
                             <FlatList
                                 style={styles.postsContainer}
                                 columnWrapperStyle={styles.postsWrapper}
                                 data={posts}
                                 numColumns={2}
-                                renderItem={({item}) => <PostPreview post={item}/>}
+                                renderItem={({ item }) => (
+                                    <PostPreview post={item} />
+                                )}
                             />
                         </>
                     )}
                     {!userData.stylist && (
-                        <BecomeStylistCard becomeStylist={becomeStyist}/>
+                        <BecomeStylistCard becomeStylist={becomeStyist} />
                     )}
                 </ScrollView>
             </SafeAreaView>

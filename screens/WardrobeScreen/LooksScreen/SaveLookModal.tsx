@@ -77,7 +77,7 @@ export default function SaveLookModal({
             placeholder: 'Придумайте название образа',
             validationFunc: (text) => {
                 if (text === '') {
-                    return ''
+                    return '';
                 }
                 if (text.length > 30) {
                     return 'Слишко длинное название';
@@ -99,13 +99,15 @@ export default function SaveLookModal({
         const look: ICreateLook = {
             img: lookSelector.look.img,
             filename: GenerateRandomName(),
-            clothes: lookSelector.look.clothes.map((id) => {return {
-                id: id,
-                coords: {
-                    x: 300,
-                    y: 450
-                }
-            }}),
+            clothes: lookSelector.look.clothes.map((id) => {
+                return {
+                    id: id,
+                    coords: {
+                        x: 300,
+                        y: 450
+                    }
+                };
+            }),
             name: name,
             description: description
         };

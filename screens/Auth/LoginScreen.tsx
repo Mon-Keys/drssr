@@ -57,21 +57,21 @@ export default function TabTwoScreen({
             login: login.trim(),
             password: password.trim()
         };
-        setLoginValid(nameRegExp.test(login))
-        setPasswordValid(passwordRegExp.test(password))
+        setLoginValid(nameRegExp.test(login));
+        setPasswordValid(passwordRegExp.test(password));
         if (nameRegExp.test(login) && passwordRegExp.test(password)) {
             dispatch(loginUser(loginData));
         }
     };
 
     const onChangeLogin = (text: string) => {
-        setLogin(text)
-        setLoginValid(nameRegExp.test(text))
+        setLogin(text);
+        setLoginValid(nameRegExp.test(text));
     };
 
     const onChangePassword = (text: string) => {
-        setPassword(text)
-        setPasswordValid(passwordRegExp.test(text))
+        setPassword(text);
+        setPasswordValid(passwordRegExp.test(text));
     };
 
     return (
@@ -97,12 +97,20 @@ export default function TabTwoScreen({
                     errorText={'Пароль должен состоять из 8-20 латинских букв'}
                 />
 
-                {user.status === 'rejected' && 
-                    <Text style={{color: 'red', textAlign: 'center', maxWidth: 300}}>Неверный логин или пароль</Text>
-                }
-                {user.status !== 'rejected' && 
-                    <Text style={{textAlign: 'center', maxWidth: 300}}></Text>
-                }
+                {user.status === 'rejected' && (
+                    <Text
+                        style={{
+                            color: 'red',
+                            textAlign: 'center',
+                            maxWidth: 300
+                        }}
+                    >
+                        Неверный логин или пароль
+                    </Text>
+                )}
+                {user.status !== 'rejected' && (
+                    <Text style={{ textAlign: 'center', maxWidth: 300 }}></Text>
+                )}
 
                 <StyledButton title="Войти" onPress={submitLogin} />
 

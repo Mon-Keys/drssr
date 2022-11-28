@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
-import Api  from '../../network';
-import {ILook, ILooks} from "./looks";
+import Api from '../../network';
+import { ILook, ILooks } from './looks';
 
 const initialState = {
     LooksData: [],
@@ -40,8 +40,7 @@ export const looksSlice = createSlice({
             })
             .addCase(fetchUsersLooks.fulfilled, (state, action) => {
                 state.status = 'resolved';
-                state.LooksData =
-                    action.payload as unknown as Array<ILook>;
+                state.LooksData = action.payload as unknown as Array<ILook>;
             })
             .addCase(fetchUsersLooks.rejected, (state) => {
                 state.status = 'rejected';

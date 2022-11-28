@@ -75,9 +75,7 @@ export default function ItemScreen() {
                     onPress={() => navigation.goBack()}
                 />
                 <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitleText}>
-                        {'Вещь'}
-                    </Text>
+                    <Text style={styles.headerTitleText}>{'Вещь'}</Text>
                 </View>
             </View>
             <Item item={item} />

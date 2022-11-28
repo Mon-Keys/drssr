@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const wait = (timeout) => {
+const wait = (timeout: number) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 

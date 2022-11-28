@@ -1,14 +1,14 @@
 import React, { ReactNode } from 'react';
-import {StyleSheet, View, Pressable, Text} from 'react-native';
+import { StyleSheet, View, Pressable, Text } from 'react-native';
 
-import {Colors, Layout} from '../../styles';
+import { Colors, Layout } from '../../styles';
 import {
     BottomSheetModal,
     BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import {RootNavigation, TapBarNavigation} from '../../types';
+import { RootNavigation, TapBarNavigation } from '../../types';
 import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 
 export interface ViewBottomMenuProps {
@@ -30,26 +30,26 @@ const styles = StyleSheet.create({
     headerMenuContainer: {
         flexDirection: 'row',
         marginHorizontal: Layout.margins.default,
-        alignItems: 'center',
+        alignItems: 'center'
     },
     headerMenu: {
         flex: 1,
 
         fontSize: Layout.fontSize.default,
-        color: Colors.base.black,
+        color: Colors.base.black
     },
     bodyMenuContainer: {
-        margin: Layout.margins.default,
+        margin: Layout.margins.default
     },
     bodyMenuButton: {
         paddingVertical: Layout.margins.small,
         fontSize: Layout.fontSize.big,
         fontWeight: 'bold',
-        color: Colors.base.black,
+        color: Colors.base.black
     },
     helpText: {
         fontSize: Layout.fontSize.default,
-        color: Colors.base.black,
+        color: Colors.base.black
     }
 });
 
@@ -92,7 +92,9 @@ export default function NewPostBottomMenu(props: ViewBottomMenuProps) {
             >
                 <View style={styles.selectContainer}>
                     <View style={styles.headerMenuContainer}>
-                        <Text style={styles.headerMenu}>Создание публикации</Text>
+                        <Text style={styles.headerMenu}>
+                            Создание публикации
+                        </Text>
                         <Pressable onPress={closeMenu}>
                             <Entypo
                                 name="cross"
@@ -104,24 +106,34 @@ export default function NewPostBottomMenu(props: ViewBottomMenuProps) {
                     <View style={styles.bodyMenuContainer}>
                         {!props.hasClothes ? (
                             <>
-                                <Text style={styles.helpText}>Сперва добавьте вещей в свой гардероб</Text>
-                                <Pressable onPress={goWardrobe} >
-                                    <Text style={styles.bodyMenuButton}>Перейти в гардероб</Text>
+                                <Text style={styles.helpText}>
+                                    Сперва добавьте вещей в свой гардероб
+                                </Text>
+                                <Pressable onPress={goWardrobe}>
+                                    <Text style={styles.bodyMenuButton}>
+                                        Перейти в гардероб
+                                    </Text>
                                 </Pressable>
                             </>
                         ) : !props.hasLooks ? (
                             <>
-                                <Pressable onPress={newLook} >
-                                    <Text style={styles.bodyMenuButton}>Новый образ</Text>
+                                <Pressable onPress={newLook}>
+                                    <Text style={styles.bodyMenuButton}>
+                                        Новый образ
+                                    </Text>
                                 </Pressable>
                             </>
                         ) : (
                             <>
-                                <Pressable onPress={newLook} >
-                                    <Text style={styles.bodyMenuButton}>Новый образ</Text>
+                                <Pressable onPress={newLook}>
+                                    <Text style={styles.bodyMenuButton}>
+                                        Новый образ
+                                    </Text>
                                 </Pressable>
-                                <Pressable onPress={selectLook} >
-                                    <Text style={styles.bodyMenuButton}>Существующий образ</Text>
+                                <Pressable onPress={selectLook}>
+                                    <Text style={styles.bodyMenuButton}>
+                                        Существующий образ
+                                    </Text>
                                 </Pressable>
                             </>
                         )}

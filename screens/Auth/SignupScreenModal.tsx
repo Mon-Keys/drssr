@@ -1,5 +1,9 @@
 import { StyleSheet, ActivityIndicator, Text } from 'react-native';
-import { nameRegExp, passwordRegExp, emailRegExp } from '../../constants/validation';
+import {
+    nameRegExp,
+    passwordRegExp,
+    emailRegExp
+} from '../../constants/validation';
 import React from 'react';
 import { View } from '../../components/base/Themed';
 import InputField from '../../components/base/InputField';
@@ -51,26 +55,27 @@ export default function SignupScreenModal(/*{
     const [nicknameValid, setNicknameValid] = React.useState<boolean>(true);
     const [emailValid, setEmailValid] = React.useState<boolean>(true);
     const [passwordValid, setPasswordValid] = React.useState<boolean>(true);
-    const [repeatPasswordValid, setRepeatPasswordValid] = React.useState<boolean>(true);
+    const [repeatPasswordValid, setRepeatPasswordValid] =
+        React.useState<boolean>(true);
 
     const onChangeNickname = (text: string) => {
-        setNickname(text)
-        setNicknameValid(nameRegExp.test(text))
+        setNickname(text);
+        setNicknameValid(nameRegExp.test(text));
     };
 
     const onChangeEmail = (text: string) => {
-        setEmail(text)
-        setEmailValid(emailRegExp.test(text))
+        setEmail(text);
+        setEmailValid(emailRegExp.test(text));
     };
 
     const onChangePassword = (text: string) => {
-        setPassword(text)
-        setPasswordValid(passwordRegExp.test(text))
+        setPassword(text);
+        setPasswordValid(passwordRegExp.test(text));
     };
 
     const onChangeRepeatPassword = (text: string) => {
-        setRepeatPassword(text)
-        setRepeatPasswordValid(text === password)
+        setRepeatPassword(text);
+        setRepeatPasswordValid(text === password);
     };
 
     const submitSignup = () => {
@@ -83,22 +88,24 @@ export default function SignupScreenModal(/*{
             description: 'test user'
         };
 
-        setNicknameValid(nameRegExp.test(nickname))
-        setEmailValid(emailRegExp.test(email))
-        setPasswordValid(passwordRegExp.test(password))
-        setRepeatPasswordValid(repeatPassword === password)
-        if (nameRegExp.test(nickname) &&
+        setNicknameValid(nameRegExp.test(nickname));
+        setEmailValid(emailRegExp.test(email));
+        setPasswordValid(passwordRegExp.test(password));
+        setRepeatPasswordValid(repeatPassword === password);
+        if (
+            nameRegExp.test(nickname) &&
             emailRegExp.test(email) &&
             passwordRegExp.test(password) &&
-            repeatPassword === password) {
-                dispatch(signUpUser(data)).then(() => {
-                    dispatch(
-                        loginUser({
-                            login: data.nickname,
-                            password: data.password
-                        })
-                    );
-                })
+            repeatPassword === password
+        ) {
+            dispatch(signUpUser(data)).then(() => {
+                dispatch(
+                    loginUser({
+                        login: data.nickname,
+                        password: data.password
+                    })
+                );
+            });
         }
     };
 
@@ -152,12 +159,16 @@ export default function SignupScreenModal(/*{
                 valid={repeatPasswordValid}
                 errorText={'Пароли не совпадают'}
             />
-            {user.status === 'rejected' && 
-                <Text style={{color: 'red', textAlign: 'center', maxWidth: 300}}>Такая почта уже существует </Text>
-            }
-            {user.status !== 'rejected' && 
-                <Text style={{textAlign: 'center', maxWidth: 300}}></Text>
-            }
+            {user.status === 'rejected' && (
+                <Text
+                    style={{ color: 'red', textAlign: 'center', maxWidth: 300 }}
+                >
+                    Такая почта уже существует{' '}
+                </Text>
+            )}
+            {user.status !== 'rejected' && (
+                <Text style={{ textAlign: 'center', maxWidth: 300 }}></Text>
+            )}
             <View style={{ marginTop: 21 }}>
                 <StyledButton
                     title="Зарегистрироваться"

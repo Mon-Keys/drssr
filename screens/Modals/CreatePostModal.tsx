@@ -1,19 +1,30 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    Platform,
+    StatusBar,
+    ScrollView,
+    Image
+} from 'react-native';
 import { View } from '../../components/base/Themed';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {Colors, Layout} from '../../styles';
-import BaseButton from "../../components/base/BaseButton";
-import {useAppSelector} from "../../hooks/useAppSelector";
-import {selectLooks} from "../../reducers/looks/lookReducer";
-import {selectUserItems} from "../../reducers/items/clothesReducer";
-import {useNavigation, useRoute} from "@react-navigation/native";
-import {CreatePostRouteProp, TapBarNavigation} from "../../types";
-import {ICreatePost} from "../../network/api/common";
-import {createPost} from "../../reducers/posts/createPost";
-import InputContainer, {getValue, InputFieldData} from "../../components/item/InputContainer";
-import PhotosPreview from "../../components/posts/PhotosPreview";
-import {clearNewPost, selectNewPosts} from "../../reducers/posts/postReducer";
+import { Colors, Layout } from '../../styles';
+import BaseButton from '../../components/base/BaseButton';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { selectLooks } from '../../reducers/looks/lookReducer';
+import { selectUserItems } from '../../reducers/items/clothesReducer';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { CreatePostRouteProp, TapBarNavigation } from '../../types';
+import { ICreatePost } from '../../network/api/common';
+import { createPost } from '../../reducers/posts/createPost';
+import InputContainer, {
+    getValue,
+    InputFieldData
+} from '../../components/item/InputContainer';
+import PhotosPreview from '../../components/posts/PhotosPreview';
+import { clearNewPost, selectNewPosts } from '../../reducers/posts/postReducer';
+import { getUri } from '../../network/const';
 
 const styles = StyleSheet.create({
     container: {
@@ -53,7 +64,9 @@ export default function CreatePostModal() {
 
             defaultPreview = look.img_path;
             defaultName = look.name;
-            defaultDescription = look.description;
+            defaultDescription = look.description
+                ? look.description
+                : 'описание';
             break;
         }
         case 'clothes': {
@@ -69,15 +82,14 @@ export default function CreatePostModal() {
         {
             key: 'name',
             title: 'Название',
-            placeholder: 'Дайте название публикации',
-            value: defaultName,
+            placeholder: 'Дайте название публикации'
         },
         {
             key: 'description',
             title: 'Описание',
-            placeholder: 'Расскажите подробнее о вашем образе',
-            value: defaultDescription
+            placeholder: 'Расскажите подробнее о вашем образе'
         },
+        { key: 'price', title: 'Цена', placeholder: 'Укажите цену образа' }
     ];
 
     const publish = () => {
@@ -86,7 +98,10 @@ export default function CreatePostModal() {
             type: type,
             name: getValue(fields, 'name'),
             description: getValue(fields, 'description'),
-            previews: newPost.previews_paths.map<string>((item) => item.base64 || ''),
+            previews: newPost.previews_paths.map<string>(
+                (item) => item.base64 || ''
+            )
+            // previews: [look.img_path],
         };
         dispatch(createPost(post)).then(() => {
             dispatch(clearNewPost());
@@ -97,8 +112,24 @@ export default function CreatePostModal() {
     return (
         <View style={styles.container}>
             <ScrollView style={{ flex: 1 }} scrollEnabled={true}>
-                <PhotosPreview photo={{img: defaultPreview}} style={styles.photosContainer} />
-                <InputContainer inputFields={fields} style={styles.inputContainer}/>
+                <PhotosPreview
+                    photo={{ img: defaultPreview }}
+                    style={styles.photosContainer}
+                />
+                <InputContainer
+                    inputFields={fields}
+                    style={styles.inputContainer}
+                />
+                <View style={styles.previewContainer}>
+                    <Image
+                        style={styles.lookImage}
+                        source={{ uri: getUri(defaultPreview) }}
+                    />
+                </View>
+                <InputContainer
+                    inputFields={fields}
+                    style={styles.inputContainer}
+                />
                 <BaseButton
                     title={'Опубликовать'}
                     style={styles.button}

@@ -5,7 +5,7 @@ import { Colors } from '../../styles';
 import { AntDesign } from '@expo/vector-icons';
 import { LikeFeedCardButton } from './LikeFeedCardButton';
 import { IPost } from '../../reducers/posts/post';
-import {getUri} from "../../network/const";
+import { getUri } from "../../network/const";
 
 const styles = StyleSheet.create({
     image: { width: 170, height: 240, resizeMode: 'cover', borderRadius: 14 },
@@ -33,8 +33,8 @@ export const FeedCard = (props: FeedCardProps) => (
                     if (props.post.previews_paths) {
                         return {
                             uri: getUri(props.post.previews_paths.length != 0
-                                    ? props.post.previews_paths[0]
-                                    : props.post.look.img_path
+                                ? props.post.previews_paths[0]
+                                : props.post.look.img_path
                             )
                         };
                     } else {

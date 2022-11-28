@@ -6,9 +6,8 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchUsersLooks, selectLook } from '../../reducers/looks/lookReducer';
 import { Colors } from '../../styles';
-import {useNavigation} from "@react-navigation/native";
-import {RootNavigation} from "../../types";
-
+import { useNavigation } from '@react-navigation/native';
+import { RootNavigation } from '../../types';
 
 export default function LooksForNewPostModal() {
     const navigation = useNavigation<RootNavigation>();
@@ -29,9 +28,10 @@ export default function LooksForNewPostModal() {
         <LookList
             looks={looks.LooksData}
             onPressLookCard={(id) => {
-                navigation.navigate('CreatePost', { // TODO create post with selected look
+                navigation.navigate('CreatePost', {
+                    // TODO create post with selected look
                     type: 'look',
-                    id: id,
+                    id: id
                 });
             }}
             refreshControl={

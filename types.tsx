@@ -13,7 +13,8 @@ import {
     NativeStackNavigationProp,
     NativeStackScreenProps
 } from '@react-navigation/native-stack';
-import LooksForNewPostModal from "./screens/Modals/LooksForNewPostModal";
+import { IPost } from './reducers/posts/post';
+import LooksForNewPostModal from './screens/Modals/LooksForNewPostModal';
 
 declare global {
     namespace ReactNavigation {
@@ -32,7 +33,9 @@ export type RootStackParamList = {
     NotFound: undefined;
     CreateLook: undefined;
     SaveLook: undefined;
-    Post: undefined;
+    Post: {
+        post: IPost;
+    };
     Settings: undefined;
     ItemsByCategory: {
         category: string;
@@ -50,7 +53,7 @@ export type RootStackParamList = {
     CreatePost: {
         type: string;
         id: number;
-    }
+    };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -74,12 +77,18 @@ export type RootNavigation = NativeStackNavigationProp<
     'Root'
 >;
 
-export type TapBarNavigation = NativeStackNavigationProp<RootTabParamList, 'Home'>;
+export type TapBarNavigation = NativeStackNavigationProp<
+    RootTabParamList,
+    'Home'
+>;
 
 export type ClothingByCategoryScreenRouteProp = RouteProp<
     RootStackParamList,
     'ItemsByCategory'
 >;
+
+export type PostRouteProp = RouteProp<RootStackParamList, 'Post'>;
+
 export type ThingScreenRouteProp = RouteProp<RootStackParamList, 'Item'>;
 export type LookRouteProp = RouteProp<RootStackParamList, 'Look'>;
 export type CreatePostRouteProp = RouteProp<RootStackParamList, 'CreatePost'>;

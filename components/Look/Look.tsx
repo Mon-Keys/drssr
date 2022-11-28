@@ -1,17 +1,17 @@
-import {Image, StyleSheet, Text, ScrollView, FlatList} from 'react-native';
+import { Image, StyleSheet, Text, ScrollView, FlatList } from 'react-native';
 import { View } from '../base/Themed';
 import React from 'react';
 import Colors from '../../styles/Colors';
 import { Layout } from '../../styles';
+import { ILook } from '../../reducers/looks/lookReducer';
 import { getUri } from '../../network/const';
 import BaseButton from '../base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
-import {RootNavigation, TapBarNavigation} from '../../types';
-import { useAppSelector } from "../../hooks/useAppSelector";
-import {selectUser} from "../../reducers/userReducer";
-import ItemPreview from "../Look/ItemPreview";
-import {ILook} from "../../reducers/looks/looks";
-import {Clothes, selectUserItems} from "../../reducers/items/clothesReducer";
+import { RootNavigation, TapBarNavigation } from '../../types';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { selectUser } from '../../reducers/userReducer';
+import ItemPreview from '../Look/ItemPreview';
+import { selectUserItems } from '../../reducers/items/clothesReducer';
 
 const styles = StyleSheet.create({
     container: {
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         marginBottom: Layout.margins.small,
         fontSize: Layout.fontSize.default,
         fontWeight: 'bold',
-        color: Colors.base.black,
+        color: Colors.base.black
     },
     button: {
         margin: Layout.margins.default
@@ -66,7 +66,7 @@ export const Look = ({ look }: { look: ILook }) => {
     const isStylist = user.userData.stylist;
 
     const goToCreatePost = () => {
-        navigation.navigate('CreatePost', {type: 'look', id: look.id});
+        navigation.navigate('CreatePost', { type: 'look', id: look.id });
     };
 
     const getClothesInLook = (): Array<Clothes> => {
@@ -102,12 +102,14 @@ export const Look = ({ look }: { look: ILook }) => {
                         data={getClothesInLook()}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        renderItem={({item}) => (
+                        renderItem={({ item }) => (
                             <ItemPreview
                                 clothes={item}
-                                onPress={() => navigation.navigate('Item', {
-                                    id: item.id
-                                })}
+                                onPress={() =>
+                                    navigation.navigate('Item', {
+                                        id: item.id
+                                    })
+                                }
                             />
                         )}
                         keyExtractor={(item, index) => index.toString()}
