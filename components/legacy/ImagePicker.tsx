@@ -30,8 +30,6 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
             quality: 1
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
             setImage(result);
         }
@@ -55,19 +53,11 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
     };
 
     const handleUploadPhoto = () => {
-        console.log('ssssssssssssssss');
         if (image !== undefined) {
             fetch('http://leonidperl.in:5001/upload', {
                 method: 'POST',
                 body: createFormData(image)
-            })
-                .then((response) => console.log(response))
-                .then((response) => {
-                    console.log('response', response);
-                })
-                .catch((error) => {
-                    console.log('error', error);
-                });
+            });
         }
     };
 

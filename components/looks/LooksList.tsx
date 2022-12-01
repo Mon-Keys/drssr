@@ -1,46 +1,48 @@
-import { StyleSheet, FlatList, View, FlatListProps } from 'react-native';
+import { StyleSheet, FlatList, View, RefreshControlProps } from 'react-native';
 import React from 'react';
-import Colors from '../../styles/Colors';
 import { LookCard } from './LookCard';
-import { IGetLookData } from '../../network';
+import { Layout } from '../../styles';
+import { getUri } from '../../network/const';
+import { ILook } from '../../reducers/looks/looks';
 
 const styles = StyleSheet.create({
-    wardrobeImageBackground: {
-        backgroundColor: Colors.base.lightgray,
-        borderRadius: 18,
-        margin: 10
-    },
-    menuItemSize: { height: 100, width: 100 },
     container: {
-        backgroundColor: 'transparent',
-        alignContent: 'space-between',
-        justifyContent: 'space-around'
+        height: '100%',
+        width: '100%',
+        alignItems: 'center',
+        backgroundColor: 'transparent'
+    },
+    columnWrapper: {
+        minWidth: 348,
+        marginVertical: Layout.margins.small,
+        justifyContent: 'flex-start'
     }
 });
 
-interface LooksListProps extends FlatListProps<IGetLookData> {
-    navigation?: any;
-    looks: Array<IGetLookData>;
+interface LooksListProps {
+    looks: Array<ILook>;
+    onPressLookCard: (index: number) => void;
+    refreshControl?: React.ReactElement<RefreshControlProps>;
 }
 
 export const LookList = (props: LooksListProps) => {
-    console.log(props)
-
     return (
         <View style={styles.container}>
             <FlatList
-                {...props}
                 data={props.looks}
                 numColumns={2}
                 keyExtractor={(item) => `${item.description}`}
-                contentContainerStyle={styles.container}
-                renderItem={(item) => (
+                columnWrapperStyle={styles.columnWrapper}
+                horizontal={false}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item, index }) => (
                     <LookCard
-                        imgURI={`http://leonidperl.in${item.item.img_path}`}
-                        callbackfn={() => {}}
-                        name={item.item.description}
+                        imgURI={getUri(item.img_path)}
+                        callbackfn={() => props.onPressLookCard(item.id)}
+                        name={item.name}
                     />
                 )}
+                refreshControl={props.refreshControl}
             />
         </View>
     );

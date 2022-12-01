@@ -1,5 +1,11 @@
-import React, {ReactElement} from 'react';
-import { View, Pressable, ViewStyle, ImageStyle, GestureResponderEvent } from 'react-native';
+import React, { ReactElement } from 'react';
+import {
+    View,
+    Pressable,
+    ViewStyle,
+    ImageStyle,
+    GestureResponderEvent
+} from 'react-native';
 
 interface StyledButtonProps {
     style?: ViewStyle | ImageStyle;
@@ -10,9 +16,7 @@ interface StyledButtonProps {
 const IconButton = (props: StyledButtonProps) => {
     return (
         <View style={props.style}>
-            <Pressable onPress={props.onPress}>
-                {props.icon}
-            </Pressable>
+            <Pressable onPress={props.onPress}>{props.icon}</Pressable>
         </View>
     );
 };

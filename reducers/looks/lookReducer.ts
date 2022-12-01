@@ -1,24 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import DataService, { IGetLookData, ILookData } from '../network/';
-
-interface LookState {
-    LooksData: Array<IGetLookData>;
-    status: string;
-    error: string;
-}
+import { RootState } from '../../store';
+import Api from '../../network';
+import { ILook, ILooks } from './looks';
 
 const initialState = {
     LooksData: [],
     status: '',
     error: ''
-} as LookState;
+} as ILooks;
 
-export const fetchUsersLooks = createAsyncThunk<Array<ILookData>>(
+export const fetchUsersLooks = createAsyncThunk<Array<ILook>>(
     'Looks/fetchUsersLooks',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await DataService.getUsersLooksByCookie(10, 0);
+            const response = await Api.Common.getLooks(10, 0);
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
@@ -26,7 +21,6 @@ export const fetchUsersLooks = createAsyncThunk<Array<ILookData>>(
 
             return response.data;
         } catch (error: any) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }
@@ -36,9 +30,7 @@ export const looksSlice = createSlice({
     name: 'Looks',
     initialState,
     reducers: {
-        loadData: (state) => {
-            console.log('not done', state);
-        }
+        loadData: (state) => {}
     },
     extraReducers: (builder) => {
         builder
@@ -48,15 +40,10 @@ export const looksSlice = createSlice({
             })
             .addCase(fetchUsersLooks.fulfilled, (state, action) => {
                 state.status = 'resolved';
-                console.log('resolved');
-                state.LooksData =
-                    action.payload as unknown as Array<IGetLookData>;
-                // console.log(action);
-                console.log('done');
+                state.LooksData = action.payload as unknown as Array<ILook>;
             })
             .addCase(fetchUsersLooks.rejected, (state) => {
                 state.status = 'rejected';
-                console.log('rejected');
             });
     }
 });
@@ -64,5 +51,6 @@ export const looksSlice = createSlice({
 export const { loadData } = looksSlice.actions;
 
 export const selectLook = (state: RootState) => state.looks;
+export const selectLooks = (state: RootState) => state.looks.LooksData;
 
 export default looksSlice.reducer;

@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, FlatList, View} from 'react-native';
+import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
 
-import {Layout} from "../../../styles";
-import {useAppSelector} from "../../../hooks/useAppSelector";
-import {Clothes, selectUserItems} from "../../../reducers/clothesReducer";
-import ItemPreview from "../../../components/items/ItemPreview";
+import { Layout } from '../../../styles';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { selectUserItems } from '../../../reducers/items/clothesReducer';
+import ItemPreview from '../../../components/items/ItemPreview';
 
 const styles = StyleSheet.create({
     container: {

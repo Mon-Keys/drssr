@@ -6,9 +6,16 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import {
     CompositeScreenProps,
-    NavigatorScreenParams, RouteProp
+    NavigatorScreenParams,
+    RouteProp
 } from '@react-navigation/native';
-import {NativeStackNavigationProp, NativeStackScreenProps} from '@react-navigation/native-stack';
+import {
+    NativeStackNavigationProp,
+    NativeStackScreenProps
+} from '@react-navigation/native-stack';
+import { ILook } from './reducers/looks/looks';
+import { IPost } from './reducers/posts/post';
+import LooksForNewPostModal from './screens/Modals/LooksForNewPostModal';
 
 declare global {
     namespace ReactNavigation {
@@ -17,6 +24,7 @@ declare global {
 }
 
 export type RootStackParamList = {
+    Start: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     ImageRecognizer: undefined;
     Signup: undefined;
@@ -26,14 +34,35 @@ export type RootStackParamList = {
     NotFound: undefined;
     CreateLook: undefined;
     SaveLook: undefined;
-    Post: undefined;
+    EditLook: {
+        look: ILook;
+        id: number;
+    };
+    FinishEditLook: {
+        id: number;
+    };
+    Post: {
+        post: IPost;
+    };
     Settings: undefined;
+    EditProfile: undefined;
     ItemsByCategory: {
         category: string;
     };
+    ItemInWardrobe: {
+        id: number;
+    };
     Item: {
-        index: number;
-    }
+        id: number;
+    };
+    Look: {
+        id: number;
+    };
+    LooksForNewPost: undefined;
+    CreatePost: {
+        type: string;
+        id: number;
+    };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -52,8 +81,23 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
         NativeStackScreenProps<RootStackParamList>
     >;
 
+export type RootNavigation = NativeStackNavigationProp<
+    RootStackParamList,
+    'Root'
+>;
 
-export type RootNavigation = NativeStackNavigationProp<RootStackParamList, 'Root'>;
+export type TapBarNavigation = NativeStackNavigationProp<
+    RootTabParamList,
+    'Home'
+>;
 
-export type ClothingByCategoryScreenRouteProp = RouteProp<RootStackParamList, 'ItemsByCategory'>;
+export type ClothingByCategoryScreenRouteProp = RouteProp<
+    RootStackParamList,
+    'ItemsByCategory'
+>;
+
+export type PostRouteProp = RouteProp<RootStackParamList, 'Post'>;
+export type EditProfileProp = RouteProp<RootStackParamList, 'EditProfile'>;
 export type ThingScreenRouteProp = RouteProp<RootStackParamList, 'Item'>;
+export type LookRouteProp = RouteProp<RootStackParamList, 'Look'>;
+export type CreatePostRouteProp = RouteProp<RootStackParamList, 'CreatePost'>;

@@ -13,6 +13,7 @@ const linking: LinkingOptions<RootStackParamList> = {
     prefixes: [Linking.createURL('/')],
     config: {
         screens: {
+            Start: 'Start',
             Root: {
                 screens: {
                     Home: {
@@ -46,7 +47,8 @@ const linking: LinkingOptions<RootStackParamList> = {
             AddItem: 'AddItem',
             CreateLook: 'CreateLook',
             SaveLook: 'SaveLook',
-            Post: 'Post'
+            Post: 'Post',
+            FinishEditLook: 'FinishEditLook'
         }
     }
 };

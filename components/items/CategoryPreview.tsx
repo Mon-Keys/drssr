@@ -1,8 +1,15 @@
 import { View } from '../base/Themed';
-import {GestureResponderEvent, Image, Pressable, StyleSheet, Text} from 'react-native';
+import {
+    GestureResponderEvent,
+    Image,
+    Pressable,
+    StyleSheet,
+    Text
+} from 'react-native';
 import React from 'react';
-import { ClothingCategory } from '../../reducers/clothesReducer';
 import { Layout } from '../../styles';
+import { getUri } from '../../network/const';
+import { ClothingCategory } from '../../reducers/items/categories';
 
 const styles = StyleSheet.create({
     container: {
@@ -32,7 +39,7 @@ const styles = StyleSheet.create({
 
 const ClothingCategoryPreview = ({
     category,
-    onPress,
+    onPress
 }: {
     category: ClothingCategory;
     onPress?: null | ((event: GestureResponderEvent) => void) | undefined;
@@ -46,7 +53,7 @@ const ClothingCategoryPreview = ({
                 <Image
                     style={styles.preview}
                     source={{
-                        uri: `http://leonidperl.in:80/${category.img}`
+                        uri: getUri(category.img)
                     }}
                 />
             </View>
