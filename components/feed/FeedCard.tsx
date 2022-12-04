@@ -1,17 +1,22 @@
 import { View } from '../base/Themed';
 import { Image, Pressable, StyleSheet, Text } from 'react-native';
 import React from 'react';
-import { Colors } from '../../styles';
-import { AntDesign } from '@expo/vector-icons';
 import { LikeFeedCardButton } from './LikeFeedCardButton';
 import { IPost } from '../../reducers/posts/post';
 import { getUri } from '../../network/const';
+import {Layout} from "../../styles";
 
 const styles = StyleSheet.create({
-    image: { width: 170, height: 240, resizeMode: 'cover', borderRadius: 14 },
     cardContainer: {
-        borderRadius: 14,
-    }
+        flex: 1,
+        minHeight: 240,
+        borderRadius: Layout.cornerRadius
+    },
+    image: {
+        flex: 1,
+        resizeMode: 'contain',
+        borderRadius: Layout.cornerRadius
+    },
 });
 
 export interface FeedCardProps {
@@ -23,7 +28,7 @@ export interface FeedCardProps {
 
 export const FeedCard = (props: FeedCardProps) => (
     <View style={styles.cardContainer}>
-        <Pressable onPress={props.onPress}>
+        <Pressable style={{flex: 1}} onPress={props.onPress}>
             <Image
                 style={styles.image}
                 source={(() => {

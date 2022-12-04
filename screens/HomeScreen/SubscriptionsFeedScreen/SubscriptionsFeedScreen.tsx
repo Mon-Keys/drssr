@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, RefreshControl, StyleSheet } from 'react-native';
+import {ActivityIndicator, Platform, RefreshControl, StatusBar, StyleSheet} from 'react-native';
 
 import { View } from '../../../components/base/Themed';
 import { RootTabScreenProps } from '../../../types';
@@ -15,7 +15,7 @@ import { AppDispatch } from '../../../store';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 7,
+        paddingHorizontal: 7,
         backgroundColor: 'transparent'
     }
 });
