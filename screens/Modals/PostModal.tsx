@@ -12,11 +12,7 @@ import {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
-        backgroundColor: Colors.base.black
-        // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 useless on android simulator or android 10+
+        backgroundColor: Colors.base.lightgray
     }
 });
 

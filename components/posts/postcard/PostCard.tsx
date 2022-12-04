@@ -11,7 +11,7 @@ import React, { useRef } from 'react';
 import { IPost } from '../../reducers/posts/post';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Colors } from '../../../styles';
+import {Colors, Layout} from '../../../styles';
 import IconButton from '../../base/IconButton';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -23,25 +23,23 @@ export interface PostCardProps {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        height: 260,
-        width: 160
+    scrollContainer: {
+        marginTop: 50,
+        paddingHorizontal: Layout.margins.small
     },
     postDescription: {
-        backgroundColor: Colors.base.lightgray,
-        borderRadius: 26,
+        backgroundColor: Colors.base.white,
+        borderRadius: Layout.cornerRadius,
         width: '100%',
-        height: 336
+        marginVertical: 7
     },
     itemsContainer: {
-        backgroundColor: Colors.base.lightgray,
-        borderRadius: 26,
+        backgroundColor: Colors.base.white,
+        borderRadius: Layout.cornerRadius,
         width: '100%',
-        height: 310,
-        justifyContent: 'center',
-        alignContent: 'center',
         alignItems: 'center',
-        padding: 16
+        padding: 16,
+        marginBottom: 14
     },
     postDescriptionUpperContainer: {
         height: 35,
@@ -150,58 +148,6 @@ export const PostCard = (props: PostCardProps) => {
     const [activeIndex, setActiveIndex] = React.useState(0);
     const [activeIndexItems, setActiveIndexItems] = React.useState(0);
 
-    let [state, setState] = React.useState({
-        activeIndex: 0,
-        carouselItems: [
-            {
-                title: 'Item 1',
-                text: 'Text 1'
-            },
-            {
-                title: 'Item 2',
-                text: 'Text 2'
-            },
-            {
-                title: 'Item 3',
-                text: 'Text 3'
-            },
-            {
-                title: 'Item 4',
-                text: 'Text 4'
-            },
-            {
-                title: 'Item 5',
-                text: 'Text 5'
-            }
-        ]
-    });
-
-    let [state1, setState1] = React.useState({
-        activeIndex: 0,
-        carouselItems: [
-            {
-                title: 'Item 1',
-                text: 'Text 1'
-            },
-            {
-                title: 'Item 2',
-                text: 'Text 2'
-            },
-            {
-                title: 'Item 3',
-                text: 'Text 3'
-            },
-            {
-                title: 'Item 4',
-                text: 'Text 4'
-            },
-            {
-                title: 'Item 5',
-                text: 'Text 5'
-            }
-        ]
-    });
-
     let carouselRef = useRef<Carousel<any>>();
     let itemsRef = useRef<Carousel<any>>();
     var data;
@@ -212,7 +158,7 @@ export const PostCard = (props: PostCardProps) => {
     }
     const navigation = useNavigation();
 
-    var clothesData = props.post.look.clothes.map((item) => {
+    let clothesData = props.post.look.clothes.map((item) => {
         const onPress = () => {
             navigation.navigate('Item', { id: item.id });
         };
@@ -224,11 +170,8 @@ export const PostCard = (props: PostCardProps) => {
 
     return (
         <ScrollView
-            style={{
-                flex: 1,
-                backgroundColor: Colors.base.black,
-                paddingTop: 50
-            }}
+            showsVerticalScrollIndicator={false}
+            style={styles.scrollContainer}
         >
             <View
                 style={{
