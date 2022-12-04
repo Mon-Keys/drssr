@@ -28,7 +28,7 @@ axiosClient.interceptors.request.use((request) => {
 axiosClient.interceptors.response.use((response) => {
     return AxiosLogger.responseLogger(response, {
         dateFormat: 'HH:MM:ss',
-        data: false
+        data: true
     });
 }, AxiosLogger.errorLogger);
 

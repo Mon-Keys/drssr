@@ -6,13 +6,12 @@ import { Feed } from '../../reducers/feedReducer';
 import { IPost } from '../../reducers/posts/post';
 
 const styles = StyleSheet.create({
-    image: { width: 170, height: 240, resizeMode: 'cover', borderRadius: 14 },
-    cardContainer: {
-        borderRadius: 14,
-        margin: 7
-    },
     container: {
+        flex: 1,
         backgroundColor: 'transparent'
+    },
+    columnWrapper: {
+        justifyContent: 'space-between', marginBottom: 7
     }
 });
 
@@ -29,6 +28,7 @@ export const FeedCommon = (props: FeedCommonProps) => (
             numColumns={2}
             keyExtractor={(item) => `${item.id}`}
             style={styles.container}
+            columnWrapperStyle={styles.columnWrapper}
             renderItem={(item) => (
                 <FeedCard
                     hasLikeButton={true}

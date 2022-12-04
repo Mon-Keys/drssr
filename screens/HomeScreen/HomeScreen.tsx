@@ -16,8 +16,6 @@ import SearchBar from '../../components/base/SearchBar';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         backgroundColor: 'transparent'
     },
@@ -67,35 +65,35 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
     const [menuOpen, setMenuOpen] = React.useState<boolean>(true);
     return (
         <SafeAreaView style={styles.container}>
-            {menuOpen ? (
-                <View style={styles.cheapOuterContainer}>
-                    <View style={styles.cheapInnerContainer}>
-                        {/* <IconButton
-                            icon={
-                                <AntDesign
-                                    name="search1"
-                                    size={24}
-                                    color={Colors.base.black}
-                                />
-                            }
-                            style={styles.searchIcon}
-                            //@ts-ignore
-                            title={'search'}
-                            onPress={() => {
-                                setMenuOpen(!menuOpen);
-                            }}
-                        /> */}
-                        <CheapButtons
-                            cheaps={menuItems}
-                            currentScreen={(component) => {
-                                setCurrentScreen(component);
-                            }}
-                        />
-                    </View>
-                </View>
-            ) : (
-                searchBarRef.current
-            )}
+            {/*{menuOpen ? (*/}
+            {/*    <View style={styles.cheapOuterContainer}>*/}
+            {/*        <View style={styles.cheapInnerContainer}>*/}
+            {/*            /!* <IconButton*/}
+            {/*                icon={*/}
+            {/*                    <AntDesign*/}
+            {/*                        name="search1"*/}
+            {/*                        size={24}*/}
+            {/*                        color={Colors.base.black}*/}
+            {/*                    />*/}
+            {/*                }*/}
+            {/*                style={styles.searchIcon}*/}
+            {/*                //@ts-ignore*/}
+            {/*                title={'search'}*/}
+            {/*                onPress={() => {*/}
+            {/*                    setMenuOpen(!menuOpen);*/}
+            {/*                }}*/}
+            {/*            /> *!/*/}
+            {/*            <CheapButtons*/}
+            {/*                cheaps={menuItems}*/}
+            {/*                currentScreen={(component) => {*/}
+            {/*                    setCurrentScreen(component);*/}
+            {/*                }}*/}
+            {/*            />*/}
+            {/*        </View>*/}
+            {/*    </View>*/}
+            {/*) : (*/}
+            {/*    searchBarRef.current*/}
+            {/*)}*/}
             <View style={styles.mainContainer}>{currentScreen}</View>
         </SafeAreaView>
     );

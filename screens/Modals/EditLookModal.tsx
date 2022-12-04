@@ -103,8 +103,6 @@ export default function EditLookModal({
     const route = useRoute();
     const { data } = route.params;
 
-    console.log(route.params);
-
     const itemsParsed = route.params.look.clothes.map((item) => {
         const parsedItem: LookItem = {
             id: item.id,
@@ -157,7 +155,6 @@ export default function EditLookModal({
                     rotation: item.rotation
                 };
             });
-            console.log(tempItems);
             dispatch(addLookData(tempItems));
             navigation.navigate('FinishEditLook', {
                 id: route.params.id

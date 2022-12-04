@@ -121,13 +121,6 @@ export default class Common {
     }
 
     updateLook(data: IUpdateLook, id: number) {
-        console.log('___________________________________');
-        console.log(data.clothes);
-        console.log(data.description);
-        console.log(data.filename);
-        console.log(data.name);
-        console.log(data.img.slice(0, 10));
-        console.log(data.creator_id);
         data.creator_id = 1; // backend issues epta does not work otherwise
 
         return http.put<IUpdateLook>(`/private/looks?id=${id}`, data);

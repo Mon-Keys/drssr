@@ -149,7 +149,7 @@ export const fetchSubscribtionPosts = createAsyncThunk<Array<IPost>>(
     'Feeds/fetchSubscribtionPosts',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await Api.Common.getSubscribtionPosts(10, 0);
+            const response = await Api.Common.getSubscribtionPosts(100, 0);
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
