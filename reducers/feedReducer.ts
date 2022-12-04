@@ -21,108 +21,15 @@ export interface Feeds {
 
 const initialState = {
     SubscribtionFeed: {
-        data: [
-            {
-                id: 1,
-                creator_id: 1,
-                type: 'look',
-                look: {
-                    id: 1,
-                    // clothes: [
-                    //     {
-                    //         id: 1,
-                    //         brand: 'dss',
-                    //         color: 'dsds',
-                    //         currency: 'RUB',
-                    //         link: 'link',
-                    //         type: 'Boots',
-                    //         img_path: 'clothesImg',
-                    //         mask_path: 'clothesMaskImg',
-                    //         owner_id: 1,
-                    //         price: 10000,
-                    //         sex: 'male',
-                    //         description: 'clothes description'
-                    //     }
-                    // ],
-                    img_path: 'img',
-                    description: 'desc'
-                },
-                previews_paths: [
-                    'https://media-cdn.tripadvisor.com/media/photo-s/0c/bb/a3/97/predator-ride-in-the.jpg',
-                    'img2'
-                ],
-                likes: 123213
-            }
-        ],
+        data: [],
         status: 'ready'
     },
     DiscoverFeed: {
-        data: [
-            {
-                id: 1,
-                creator_id: 1,
-                type: 'look',
-                look: {
-                    id: 1,
-                    // clothes: [
-                    //     {
-                    //         id: 1,
-                    //         brand: 'dss',
-                    //         color: 'dsds',
-                    //         currency: 'RUB',
-                    //         link: 'link',
-                    //         type: 'Boots',
-                    //         img_path: 'clothesImg',
-                    //         mask_path: 'clothesMaskImg',
-                    //         owner_id: 1,
-                    //         price: 10000,
-                    //         sex: 'male',
-                    //         description: 'clothes description'
-                    //     }
-                    // ],
-                    img_path: 'img',
-                    description: 'desc'
-                },
-                previews_paths: [
-                    'https://media-cdn.tripadvisor.com/media/photo-s/0c/bb/a3/97/predator-ride-in-the.jpg',
-                    'img2'
-                ],
-                likes: 123213
-            }
-        ],
+        data: [],
         status: 'ready'
     },
     FavoriteFeed: {
-        data: [
-            {
-                id: 1,
-                creator_id: 1,
-                type: 'look',
-                look: {
-                    id: 1,
-                    // clothes: [
-                    //     {
-                    //         id: 1,
-                    //         brand: 'dss',
-                    //         color: 'dsds',
-                    //         currency: 'RUB',
-                    //         link: 'link',
-                    //         type: 'Boots',
-                    //         img_path: 'clothesImg',
-                    //         mask_path: 'clothesMaskImg',
-                    //         owner_id: 1,
-                    //         price: 10000,
-                    //         sex: 'male',
-                    //         description: 'clothes description'
-                    //     }
-                    // ],
-                    img_path: 'img',
-                    description: 'desc'
-                },
-                previews_paths: ['img1', 'img2'],
-                likes: 123213
-            }
-        ],
+        data: [],
         status: 'ready'
     },
     cacheClothes: []
@@ -132,7 +39,7 @@ export const fetchFavoritePosts = createAsyncThunk<Array<IPost>>(
     'Feeds/fetchFavoritePosts',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await Api.Common.getFavoritePosts(10, 0);
+            const response = await Api.Common.getFavoritePosts(100, 0);
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);

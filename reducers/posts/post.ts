@@ -10,6 +10,7 @@ export interface IPost {
     look: ILook;
     previews_paths: Array<string>;
     likes: number;
+    is_liked: boolean;
 }
 
 export interface INewPost {

@@ -4,7 +4,7 @@ import React from 'react';
 import { Colors } from '../../styles';
 import { AntDesign } from '@expo/vector-icons';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { likePost } from '../../reducers/feedReducer';
+import {fetchFavoritePosts, likePost} from '../../reducers/feedReducer';
 
 const styles = StyleSheet.create({
     likeButton: {
@@ -23,20 +23,23 @@ const styles = StyleSheet.create({
 export interface LikeFeedCardButtonProps {
     id: number;
     currentLikes: number;
+    is_liked?: boolean;
 }
 
 export const LikeFeedCardButton = (props: LikeFeedCardButtonProps) => {
     const dispatch = useAppDispatch();
-    const [liked, setLiked] = React.useState(false);
+    const [liked, setLiked] = React.useState(props.is_liked);
+
+    const like = () => {
+        setLiked(!liked);
+        dispatch(
+            likePost({ id: props.id, likesAmount: props.currentLikes })
+        ).then(() => dispatch(fetchFavoritePosts()));
+    }
 
     return (
         <Pressable
-            onPress={() => {
-                setLiked(!liked);
-                dispatch(
-                    likePost({ id: props.id, likesAmount: props.currentLikes })
-                );
-            }}
+            onPress={like}
         >
             <View style={styles.likeButton}>
                 {liked ? (

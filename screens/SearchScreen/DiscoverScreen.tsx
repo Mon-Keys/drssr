@@ -26,17 +26,17 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     headerContainer: {
-        height: 40,
+        height: 53, // такой хардкод епта не просто так, чтобы EmptyView на разных экранах одинаково выглядили
         justifyContent: 'center',
         alignItems: 'center',
     },
     headerText: {
         fontSize: Layout.fontSize.big,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     },
     mainContainer: {
         flex: 1,
-        alignItems: 'center',
+        marginHorizontal: Layout.margins.small
     }
 });
 
@@ -57,7 +57,6 @@ export default function DiscoverScreen({
     }, [dispatch]);
 
     const hasFavoriteFeed = (): boolean => {
-        console.log(favoriteFeed.data.length);
         return favoriteFeed.data && favoriteFeed.data.length != 0
     }
 
@@ -84,7 +83,7 @@ export default function DiscoverScreen({
                 ) : (
                     <EmptyView
                         textHeader={'Здесь пока пусто'}
-                        text={'Добавьте вещи с помощью +'}
+                        text={'Лайкайте посты в ленте и они попадут сюда'}
                     />
                 )}
             </View>

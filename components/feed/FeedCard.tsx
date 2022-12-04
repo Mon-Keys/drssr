@@ -26,31 +26,34 @@ export interface FeedCardProps {
     post: IPost;
 }
 
-export const FeedCard = (props: FeedCardProps) => (
-    <View style={styles.cardContainer}>
-        <Pressable style={{flex: 1}} onPress={props.onPress}>
-            <Image
-                style={styles.image}
-                source={(() => {
-                    if (props.post.previews_paths) {
-                        return {
-                            uri: getUri(
-                                props.post.previews_paths.length != 0
-                                    ? props.post.previews_paths[0]
-                                    : props.post.look.img_path
-                            )
-                        };
-                    } else {
-                        return {
-                            uri: `http://leonidperl.in/${props.post.look?.img_path}`
-                        };
-                    }
-                })()}
-            />
-            <LikeFeedCardButton
-                id={props.post.id}
-                currentLikes={props.post.likes}
-            />
-        </Pressable>
-    </View>
-);
+export const FeedCard = (props: FeedCardProps) => {
+    return (
+        <View style={styles.cardContainer}>
+            <Pressable style={{flex: 1}} onPress={props.onPress}>
+                <Image
+                    style={styles.image}
+                    source={(() => {
+                        if (props.post.previews_paths) {
+                            return {
+                                uri: getUri(
+                                    props.post.previews_paths.length != 0
+                                        ? props.post.previews_paths[0]
+                                        : props.post.look.img_path
+                                )
+                            };
+                        } else {
+                            return {
+                                uri: `http://leonidperl.in/${props.post.look?.img_path}`
+                            };
+                        }
+                    })()}
+                />
+                <LikeFeedCardButton
+                    id={props.post.id}
+                    currentLikes={props.post.likes}
+                    is_liked={props.post.is_liked}
+                />
+            </Pressable>
+        </View>
+    );
+}
