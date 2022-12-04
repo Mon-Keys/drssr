@@ -274,6 +274,7 @@ export const feedSlice = createSlice({
 export const { loadData } = feedSlice.actions;
 
 export const selectFeeds = (state: RootState) => state.feeds;
+export const selectFavoriteFeeds = (state: RootState) => state.feeds.FavoriteFeed;
 export const selectFeedClothes = (state: RootState) => state.feeds.cacheClothes;
 
 export default feedSlice.reducer;

@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { Colors, Layout } from '../../styles';
 import CategoriesScreen from './ItemsScreen/CategoriesScreen';
-import Cheaps from '../../components/base/Cheaps';
 import IconButton from '../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
 import LooksWardrobeScreen from './LooksScreen/LooksWardrobeScreen';
@@ -76,16 +75,6 @@ export default function WardrobeScreen() {
         <ViewBottomMenu modalRef={bottomSheetModalRef}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerContainer}>
-                    {/* <IconButton
-                        style={styles.buttonPlus}
-                        icon={
-                            <AntDesign
-                                name="search1"
-                                size={24}
-                                color={Colors.base.black}
-                            />
-                        }
-                    /> */}
                     <CheapButtons
                         cheaps={menuItems}
                         currentScreen={(component) => {

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 export default function StartScreen() {
     return (
         <View style={styles.container}>
-            <Text style={styles.headerTitle}>Pose</Text>
+            <Text style={styles.headerTitle}>Kiroo</Text>
             <Text style={styles.caption}>Твой стиль</Text>
         </View>
     );

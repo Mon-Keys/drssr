@@ -24,8 +24,9 @@ export interface PostCardProps {
 }
 
 const styles = StyleSheet.create({
-    scrollContainer: {
-        marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    container: {
+        // paddingTop: 30,//Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         paddingHorizontal: Layout.margins.small
     },
     postDescription: {
@@ -176,125 +177,124 @@ export const PostCard = (props: PostCardProps) => {
     });
 
     return (
-        <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={styles.scrollContainer}
-        >
-            <Header
-                style={{ marginVertical: 14 }}
-                title={'Просмотр публикации'}
-                back={() => navigation.goBack()}
-            />
-            <View
-                style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                }}
-            >
-                <Carousel
-                    layout={'stack'}
-                    ref={(ref) => (carouselRef = ref)}
-                    data={data}
-                    sliderWidth={250} // TODO пиздец
-                    itemWidth={Dimensions.get('window').width-14} // TODO пиздец
-                    renderItem={_renderItem}
-                    onSnapToItem={(index) => setActiveIndex(index)}
+        <SafeAreaView style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Header
+                    style={{ marginVertical: 14 }}
+                    title={'Просмотр публикации'}
+                    back={() => navigation.goBack()}
                 />
                 <View
                     style={{
-                        position: 'absolute',
-                        zIndex: 1,
+                        flex: 1,
                         flexDirection: 'row',
-                        top: -14
+                        justifyContent: 'center'
                     }}
                 >
-                    <Pagination
-                        tappableDots={true}
-                        carouselRef={carouselRef}
-                        dotsLength={data.length}
-                        activeDotIndex={activeIndex}
-                        dotStyle={{
-                            width: 10,
-                            height: 10,
-                            borderRadius: 5,
-                            backgroundColor: Colors.base.black
+                    <Carousel
+                        layout={'stack'}
+                        ref={(ref) => (carouselRef = ref)}
+                        data={data}
+                        sliderWidth={250} // TODO пиздец
+                        itemWidth={Dimensions.get('window').width-14} // TODO пиздец
+                        renderItem={_renderItem}
+                        onSnapToItem={(index) => setActiveIndex(index)}
+                    />
+                    <View
+                        style={{
+                            position: 'absolute',
+                            zIndex: 1,
+                            flexDirection: 'row',
+                            top: -14
                         }}
-                        inactiveDotStyle={{
-                            width: 8,
-                            height: 8,
-                            borderRadius: 5,
-                            backgroundColor: Colors.base.darkgray
-                        }}
-                        inactiveDotOpacity={0.4}
-                        inactiveDotScale={0.6}
+                    >
+                        <Pagination
+                            tappableDots={true}
+                            carouselRef={carouselRef}
+                            dotsLength={data.length}
+                            activeDotIndex={activeIndex}
+                            dotStyle={{
+                                width: 10,
+                                height: 10,
+                                borderRadius: 5,
+                                backgroundColor: Colors.base.black
+                            }}
+                            inactiveDotStyle={{
+                                width: 8,
+                                height: 8,
+                                borderRadius: 5,
+                                backgroundColor: Colors.base.darkgray
+                            }}
+                            inactiveDotOpacity={0.4}
+                            inactiveDotScale={0.6}
+                        />
+                    </View>
+                </View>
+                <View style={styles.postDescription}>
+                    <View style={styles.postDescriptionUpperContainer}>
+                        <View style={styles.postDescriptionAuthorContainer}>
+                            <Image
+                                style={styles.postDescriptionAvatar}
+                                source={{
+                                    uri: 'https://www.africanoverlandtours.com/wp-content/uploads/2014/04/animal_facts-e1396431549968.jpg'
+                                }}
+                            />
+                            <Text style={styles.postDescriptionAuthor}>
+                                {JSON.stringify(props.post)}
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={styles.postDescriptionBottomContainer}>
+                        <View style={styles.postDescriptionContainer}>
+                            <Text style={styles.postDescriptionName}>
+                                {props.post.name}
+                            </Text>
+                            <Text style={styles.postDescriptionPrice}>
+                                Общая стоимость: 10 500 руб
+                            </Text>
+
+                            <Text style={styles.postDescriptionDescription}>
+                                {props.post.description}
+                            </Text>
+                            <IconButton
+                                onPress={() => {
+                                    props.likeCardCallback();
+                                }}
+                                icon={
+                                    <View
+                                        style={{
+                                            backgroundColor: Colors.base.white,
+                                            borderRadius: 50,
+                                            height: 30,
+                                            width: 30,
+                                            justifyContent: 'center',
+                                            alignItems: 'center'
+                                        }}
+                                    >
+                                        <AntDesign
+                                            name="hearto"
+                                            size={15}
+                                            color="black"
+                                        />
+                                    </View>
+                                }
+                            />
+                        </View>
+                    </View>
+                </View>
+                <View style={styles.itemsContainer}>
+                    <Text style={styles.itemsHeader}>Вещи в этом луке</Text>
+                    <Carousel
+                        layout={'default'}
+                        ref={(ref) => (itemsRef = ref)}
+                        data={clothesData}
+                        sliderWidth={354}
+                        itemWidth={170}
+                        renderItem={_renderClothesItem}
+                        onSnapToItem={(index) => setActiveIndexItems(index)}
                     />
                 </View>
-            </View>
-            <View style={styles.postDescription}>
-                <View style={styles.postDescriptionUpperContainer}>
-                    <View style={styles.postDescriptionAuthorContainer}>
-                        <Image
-                            style={styles.postDescriptionAvatar}
-                            source={{
-                                uri: 'https://www.africanoverlandtours.com/wp-content/uploads/2014/04/animal_facts-e1396431549968.jpg'
-                            }}
-                        />
-                        <Text style={styles.postDescriptionAuthor}>
-                            {JSON.stringify(props.post)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.postDescriptionBottomContainer}>
-                    <View style={styles.postDescriptionContainer}>
-                        <Text style={styles.postDescriptionName}>
-                            {props.post.name}
-                        </Text>
-                        <Text style={styles.postDescriptionPrice}>
-                            Общая стоимость: 10 500 руб
-                        </Text>
-
-                        <Text style={styles.postDescriptionDescription}>
-                            {props.post.description}
-                        </Text>
-                        <IconButton
-                            onPress={() => {
-                                props.likeCardCallback();
-                            }}
-                            icon={
-                                <View
-                                    style={{
-                                        backgroundColor: Colors.base.white,
-                                        borderRadius: 50,
-                                        height: 30,
-                                        width: 30,
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}
-                                >
-                                    <AntDesign
-                                        name="hearto"
-                                        size={15}
-                                        color="black"
-                                    />
-                                </View>
-                            }
-                        />
-                    </View>
-                </View>
-            </View>
-            <View style={styles.itemsContainer}>
-                <Text style={styles.itemsHeader}>Вещи в этом луке</Text>
-                <Carousel
-                    layout={'default'}
-                    ref={(ref) => (itemsRef = ref)}
-                    data={clothesData}
-                    sliderWidth={354}
-                    itemWidth={170}
-                    renderItem={_renderClothesItem}
-                    onSnapToItem={(index) => setActiveIndexItems(index)}
-                />
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
     );
 };

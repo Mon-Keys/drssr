@@ -1,15 +1,15 @@
 import { View } from '../base/Themed';
-import { Image, Pressable, StyleSheet, Text } from 'react-native';
+import { Image, Pressable, StyleSheet } from 'react-native';
 import React from 'react';
 import { LikeFeedCardButton } from './LikeFeedCardButton';
 import { IPost } from '../../reducers/posts/post';
 import { getUri } from '../../network/const';
-import {Layout} from "../../styles";
+import { Layout } from "../../styles";
 
 const styles = StyleSheet.create({
     cardContainer: {
         flex: 1,
-        minHeight: 240,
+        minHeight: Layout.window.height / 2.7,
         borderRadius: Layout.cornerRadius
     },
     image: {
