@@ -45,6 +45,7 @@ export type RootStackParamList = {
         post: IPost;
     };
     Settings: undefined;
+    EditProfile: undefined;
     ItemsByCategory: {
         category: string;
     };
@@ -96,7 +97,7 @@ export type ClothingByCategoryScreenRouteProp = RouteProp<
 >;
 
 export type PostRouteProp = RouteProp<RootStackParamList, 'Post'>;
-
+export type EditProfileProp = RouteProp<RootStackParamList, 'EditProfile'>;
 export type ThingScreenRouteProp = RouteProp<RootStackParamList, 'Item'>;
 export type LookRouteProp = RouteProp<RootStackParamList, 'Look'>;
 export type CreatePostRouteProp = RouteProp<RootStackParamList, 'CreatePost'>;

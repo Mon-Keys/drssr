@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import ProfileScreen from '../../screens/ProfileScreen/ProfileScreen';
 import SettingsModalScreen from '../../screens/Modals/SettingsModal';
+import EditProfileModalScreen from '../../screens/Modals/EditProfileModal';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export function ProfileNavigation(): any {
                     headerShown: true
                 }}
             />
+            <Stack.Screen name="EditProfile" component={EditProfileModalScreen} />
         </Stack.Navigator>
     );
 }
