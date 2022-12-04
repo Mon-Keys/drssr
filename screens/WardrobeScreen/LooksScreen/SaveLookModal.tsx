@@ -118,7 +118,6 @@ export default function SaveLookModal({
             description: description
         };
 
-        console.log(lookSelector.look.clothes);
         // @ts-ignore
         const newLook1: ILook = {
             img: lookSelector.look.img,

@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
     },
     itemCardImage: {
         width: 133,
-        height: 133
+        height: 133,
+        resizeMode: 'center'
     },
     itemCardSign: {
         fontSize: 14,

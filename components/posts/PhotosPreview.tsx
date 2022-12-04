@@ -38,7 +38,7 @@ export default function PhotosPreview(props: PhotosPreviewProps) {
     const dispatch = useAppDispatch();
 
     const getPhotos = () => {
-        const photos: Array<IPhoto> = [{ img: 'button' }];
+        const photos: Array<IPhoto> = [];
         newPost.previews_paths.forEach((item) => {
             photos.push({
                 img: '',
@@ -46,6 +46,7 @@ export default function PhotosPreview(props: PhotosPreviewProps) {
             });
         });
         photos.push({ img: props.photo.img });
+        photos.push({ img: 'button' });
         return photos;
     };
     const addPhoto = async () => {
@@ -59,7 +60,7 @@ export default function PhotosPreview(props: PhotosPreviewProps) {
         }
     };
     const deletePhoto = (index: number) => {
-        dispatch(deletePhotoForNewPost(index - 1)); // вычитаем 1 из-за карточки AddPhotoButton
+        dispatch(deletePhotoForNewPost(index));
     };
 
     return (
@@ -87,6 +88,7 @@ export default function PhotosPreview(props: PhotosPreviewProps) {
                         />
                     )
                 }
+                keyExtractor={(item, index) => `${index}`}
             />
         </View>
     );

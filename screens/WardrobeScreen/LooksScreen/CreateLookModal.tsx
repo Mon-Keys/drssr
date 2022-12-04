@@ -134,7 +134,6 @@ export default function CreateLookModal({
                     image: getUri(item.image)
                 };
             });
-            console.log(tempItems);
             dispatch(addLookData(tempItems));
             navigation.navigate('SaveLook');
         });

@@ -76,8 +76,6 @@ export default function SaveEditLookModal({
     const route = useRoute();
     const { data } = route.params;
 
-    console.log(route.params);
-
     const fields: Array<InputFieldData> = [
         {
             key: 'name',
@@ -120,7 +118,6 @@ export default function SaveEditLookModal({
             description: description
         };
 
-        console.log(lookSelector.look.clothes);
         // @ts-ignore
         const newLook1: ILook = {
             img: lookSelector.look.img,
@@ -128,7 +125,6 @@ export default function SaveEditLookModal({
             name: name,
             description: description
         };
-        console.log(lookSelector.look.clothes);
 
         // @ts-ignore
         dispatch(updateLook({ look: newLook1, id: route.params.id })).then(

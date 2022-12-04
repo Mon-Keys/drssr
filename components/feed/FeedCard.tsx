@@ -11,9 +11,6 @@ const styles = StyleSheet.create({
     image: { width: 170, height: 240, resizeMode: 'cover', borderRadius: 14 },
     cardContainer: {
         borderRadius: 14,
-        margin: 7,
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end'
     }
 });
 
