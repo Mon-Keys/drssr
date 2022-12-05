@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import {ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet} from 'react-native';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { IItemData } from '../../../network';
@@ -140,43 +140,38 @@ export default function AddItemModal() {
     }
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "padding"}
-            enabled={Platform.OS === "ios"}
-            style={{ flex: 1 }}
+        <KeyboardAwareScrollView
+            enableOnAndroid={false}
+            style={styles.container}
+            showsVerticalScrollIndicator={false}
         >
-            <ScrollView
-                style={styles.container}
-                showsVerticalScrollIndicator={false}
-            >
-                <BigImage
-                    img={img}
-                    style={styles.imageContainer}
-                    loading={prepareItem.status === 'pending'}
-                />
+            <BigImage
+                img={img}
+                style={styles.imageContainer}
+                loading={prepareItem.status === 'pending'}
+            />
 
-                {prepareItem.status === 'pending' ? (
-                    <>
-                        <ActivityIndicator
-                            size="large"
-                            color={Colors.base.black}
-                            style={styles.indicator}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <InputContainer
-                            inputFields={fields}
-                            style={styles.bodyContainer}
-                        />
-                        <BaseButton
-                            title={'Сохранить'}
-                            onPress={add}
-                            style={styles.submitContainer}
-                        />
-                    </>
-                )}
-            </ScrollView>
-        </KeyboardAvoidingView>
+            {prepareItem.status === 'pending' ? (
+                <>
+                    <ActivityIndicator
+                        size="large"
+                        color={Colors.base.black}
+                        style={styles.indicator}
+                    />
+                </>
+            ) : (
+                <>
+                    <InputContainer
+                        inputFields={fields}
+                        style={styles.bodyContainer}
+                    />
+                    <BaseButton
+                        title={'Сохранить'}
+                        onPress={add}
+                        style={styles.submitContainer}
+                    />
+                </>
+            )}
+        </KeyboardAwareScrollView>
     );
 }
