@@ -32,19 +32,19 @@ import { GenerateRandomName, ICreateLook } from '../../../network/api/common';
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
-        alignItems: 'center'
     },
     lookContainer: {
-        width: 354,
-        height: 442,
-        marginVertical: Layout.margins.default,
+        flex: 1,
+        minHeight: 400,
+        marginTop: Layout.margins.default,
         borderRadius: 14,
         resizeMode: 'center'
     },
     lookContainerInactive: {
-        width: 354,
-        height: 442,
-        marginVertical: Layout.margins.default,
+        flex: 1,
+        minHeight: 400,
+        marginTop: Layout.margins.default,
+        marginHorizontal: Layout.margins.small,
         opacity: 0.5,
         borderRadius: 14,
         resizeMode: 'center'
@@ -138,7 +138,11 @@ export default function SaveLookModal({
     };
 
     return (
-        <ScrollView nestedScrollEnabled={true} horizontal={false}>
+        <ScrollView
+            nestedScrollEnabled={true}
+            horizontal={false}
+            style={{ paddingHorizontal: Layout.margins.small }}
+        >
             <View style={styles.container}>
                 <View style={styles.lookContainer}>
                     <Image

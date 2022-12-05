@@ -20,6 +20,7 @@ import IconButton from '../../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
 import { selectLook } from '../../../reducers/looks/lookReducer';
 import { Look } from '../../../components/Look/Look';
+import Back from "../../../components/icons/back";
 
 const styles = StyleSheet.create({
     container: {
@@ -65,10 +66,9 @@ export default function LookScreen() {
                 <IconButton
                     style={{ flex: 0 }}
                     icon={
-                        <AntDesign
-                            name="back"
-                            size={24}
+                        <Back
                             color={Colors.base.black}
+                            width={24}
                         />
                     }
                     onPress={() => navigation.goBack()}
