@@ -25,6 +25,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { fetchUsersClothes } from '../../../reducers/items/fetchClothes';
 import ViewBottomMenu from '../../../components/items/ViewBottomMenu';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import Back from "../../../components/icons/back";
 
 const styles = StyleSheet.create({
     container: {
@@ -92,10 +93,9 @@ export default function ItemsByCategoryScreen() {
                     <IconButton
                         style={styles.flexZero}
                         icon={
-                            <AntDesign
-                                name="back"
-                                size={24}
+                            <Back
                                 color={Colors.base.black}
+                                width={24}
                             />
                         }
                         onPress={() => navigation.goBack()}
