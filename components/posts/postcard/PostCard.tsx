@@ -157,7 +157,7 @@ export const PostCard = (props: PostCardProps) => {
     const [activeIndex, setActiveIndex] = React.useState(0);
     const [activeIndexItems, setActiveIndexItems] = React.useState(0);
 
-
+    // костыли, из-за которых можно ловить угарные баги
     const [is_liked, setLike] = React.useState(props.post.is_liked);
     const [likes, setLikes] = React.useState(props.post.likes);
 
