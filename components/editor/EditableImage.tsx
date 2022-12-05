@@ -5,13 +5,6 @@ import React from 'react';
 import Gestures from 'react-native-easy-gestures';
 
 const styles = StyleSheet.create({
-    image: {
-        width: 100,
-        height: 100,
-        resizeMode: 'cover',
-        backgroundColor: 'transparent',
-        position: 'absolute'
-    },
     imageContainer: {
         backgroundColor: 'transparent'
     }
