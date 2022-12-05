@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: Colors.base.white,
         borderRadius: Layout.cornerRadius,
-        width: Abstracts.profile.defaultWidth,
-        height: 250,
-        top: 10,
+        width: '100%',
+        height: 300,
+        marginTop: Layout.margins.default,
         alignItems: 'center',
         justifyContent: 'center',
     },

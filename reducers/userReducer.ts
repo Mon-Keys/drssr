@@ -224,11 +224,12 @@ export const userSlice = createSlice({
             })
             .addCase(requestStylist.pending, (state) => {
                 state.status = 'pending';
+                state.isRequest = true;
                 state.error = '';
             })
             .addCase(requestStylist.fulfilled, (state, action) => {
                 state.status = 'resolved';
-                state.userData = action.payload as unknown as User;
+                // state.userData = action.payload as unknown as User;
             })
             .addCase(requestStylist.rejected, (state) => {
                 state.status = 'rejected';

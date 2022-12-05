@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         borderRadius: Abstracts.profile.avatarSize,
         position: 'absolute',
         top: -Abstracts.profile.avatarSize * 0.5,
-        backgroundColor: 'green',
         borderStyle: 'solid',
         borderWidth: 4,
         borderColor: Colors.base.white
@@ -47,8 +46,6 @@ const styles = StyleSheet.create({
     },
     descriptionContainer: {
         marginBottom: Layout.margins.default,
-        minHeight: 30,
-        maxHeight: 60,
         maxWidth: 300,
         justifyContent: 'center'
     },
@@ -135,7 +132,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
                     </Pressable>
                 </View>
                 <View style={styles.descriptionContainer}>
-                    <Text numberOfLines={3} style={styles.descriptionText}>
+                    <Text style={styles.descriptionText}>
                         {props.description}
                     </Text>
                 </View>
