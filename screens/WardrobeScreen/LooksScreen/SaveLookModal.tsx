@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
     },
     lookContainer: {
         flex: 1,
-        minHeight: 400,
+        minHeight: Layout.window.height * 0.6,
         marginTop: Layout.margins.default,
         borderRadius: 14,
         resizeMode: 'center'
     },
     lookContainerInactive: {
         flex: 1,
-        minHeight: 400,
+        minHeight: Layout.window.height * 0.6,
         marginTop: Layout.margins.default,
         marginHorizontal: Layout.margins.small,
         opacity: 0.5,
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
         resizeMode: 'center'
     },
     infoContainer: {
-        width: 354,
         marginVertical: Layout.margins.default
     },
     buttonSave: {

@@ -176,4 +176,8 @@ export default class Common {
     getClothesById(id: number) {
         return http.get<Clothes>(`/public/clothes?id=${id}`);
     }
+
+    getUserData(id: number) {
+        return http.get(`/public/users?id=${id}`);
+    }
 }
