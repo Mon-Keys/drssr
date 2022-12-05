@@ -84,8 +84,8 @@ export default function SignupScreenModal(/*{
             password: password.trim(),
             email: email.trim(),
             birth_date: new Date(),
-            name: 'test',
-            description: 'test user'
+            name: nickname.trim(),
+            description: ''
         };
 
         setNicknameValid(nameRegExp.test(nickname));

@@ -18,7 +18,7 @@ import { ProfileCard } from '../../components/base/ProfileCard';
 import { useNavigation } from '@react-navigation/native';
 import { getPosts } from '../../reducers/posts/createPost';
 import { Layout } from '../../styles';
-import { selectPosts } from '../../reducers/posts/postReducer';
+import {selectPosts, selectPosts2} from '../../reducers/posts/postReducer';
 import { BecomeStylistCard } from '../../components/base/BecomeStylistCard';
 import { PostPreview } from '../../components/posts/PostPreview';
 import NewPostBottomMenu from '../../components/profile/NewPostBottomMenu';
@@ -29,6 +29,7 @@ import { selectUserItems } from '../../reducers/items/clothesReducer';
 import BaseButton from '../../components/base/BaseButton';
 import { FeedCommon } from '../../components/feed/FeedCommon';
 import { RequestStylist } from '../../components/base/RequestStylist';
+import {Feed} from "../../reducers/feedReducer";
 
 const styles = StyleSheet.create({
     container: {
@@ -70,6 +71,11 @@ export default function ProfileScreen() {
     const user = useAppSelector(selectUser);
     const userData = user.userData
     const posts = useAppSelector(selectPosts);
+
+    const postsProfile: Feed = {
+        data: posts,
+        status: ''
+    }
 
     const clothes = useAppSelector(selectUserItems);
     const hasClothes = (): boolean => {
@@ -123,6 +129,7 @@ export default function ProfileScreen() {
                             onRefresh={refresh}
                         />
                     }
+                    style={{ paddingHorizontal: Layout.margins.small }}
                 >
                     <ProfileCard
                         avatarSrc={ userData.avatar }
@@ -144,23 +151,13 @@ export default function ProfileScreen() {
                                 title={'Опубликовать'}
                                 onPress={openMenu}
                                 style={{
-                                    marginHorizontal: Layout.margins.default,
-                                    marginTop: Layout.margins.default
+                                    marginVertical: Layout.margins.default
                                 }}
                             />
-                            <View
-                                style={{
-                                    width: '100%',
-                                    alignItems: 'center'
-                                }}
-                            >
-                                <FeedCommon
-                                    data={null}
-                                    renderItem={() => (<View></View>)}
-                                    navigation={navigation}
-                                    feed={{ data: posts, status: 'ready' }}
-                                />
-                            </View>
+                            <FeedCommon
+                                navigation={navigation}
+                                feed={postsProfile}
+                            />
                         </>
                     )}
                     {!userData.stylist && !user.isRequest && (
