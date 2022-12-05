@@ -227,7 +227,7 @@ export const PostCard = (props: PostCardProps) => {
                         }}
                     >
                         <Pagination
-                            tappableDots={true}
+                            tappableDots={false}
                             // carouselRef={carouselRef}
                             dotsLength={data.length}
                             activeDotIndex={activeIndex}
@@ -265,15 +265,15 @@ export const PostCard = (props: PostCardProps) => {
                         </View>
                     </View>
                     <View style={styles.postDescriptionBottomContainer}>
-                        {look.name || look.description ? (
-                            <>
-                                <Text numberOfLines={1} style={styles.postDescriptionName}>
-                                    {look.name}
-                                </Text>
-                                <Text style={styles.postDescriptionDescription}>
-                                    {look.description}
-                                </Text>
-                            </>
+                        {look.name ? (
+                            <Text numberOfLines={1} style={styles.postDescriptionName}>
+                                {props.post.name}
+                            </Text>
+                        ) : null}
+                        {look.description ? (
+                            <Text style={styles.postDescriptionDescription}>
+                                {props.post.description}
+                            </Text>
                         ) : null}
                         <Text style={styles.postDescriptionLikes}>
                             {'Нравится: ' + likes}
