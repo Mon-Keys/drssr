@@ -75,6 +75,7 @@ export const { addPhotoForNewPost, deletePhotoForNewPost, clearNewPost } =
     postsSlice.actions;
 
 export const selectPosts = (state: RootState) => state.posts.posts;
+export const selectPosts2 = (state: RootState) => state.posts;
 export const selectNewPosts = (state: RootState) => state.posts.prepareNewPost;
 
 export default postsSlice.reducer;

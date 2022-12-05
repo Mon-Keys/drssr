@@ -1,5 +1,5 @@
 import { View } from './Themed';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import {Pressable, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import ProfileVerified from '../icons/profileVerified';
 import Colors from '../../styles/Colors';
@@ -9,15 +9,13 @@ const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: Colors.base.white,
         borderRadius: Layout.cornerRadius,
-        width: Abstracts.profile.defaultWidth,
+        width: '100%',
         height: 300,
-        top: 10,
-        alignItems: 'center'
+        marginTop: Layout.margins.default,
     },
     button: {
-        width: 332,
         height: 40,
-        top: 200 - 178,
+        margin: Layout.margins.default,
         backgroundColor: Colors.base.lightgray,
         borderRadius: Layout.cornerRadius,
         display: 'flex',
@@ -26,13 +24,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonText: {
-        fontSize: 24,
+        marginLeft: Layout.margins.small,
+        fontSize: Layout.fontSize.big,
         fontFamily: 'proxima-nova'
     },
     desc: {
-        width: 250,
-        height: 100,
-        top: 60,
+        marginTop: 40,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -56,19 +53,21 @@ export interface BecomeStylistCardProps {
 
 export const BecomeStylistCard = (props: BecomeStylistCardProps) => (
     <View style={styles.mainContainer}>
-        <Pressable onPress={props.becomeStylist}>
+        <TouchableOpacity onPress={props.becomeStylist} activeOpacity={0.4}>
             <View style={styles.button}>
                 <ProfileVerified color="white" />
-                <Text style={styles.buttonText}> Стать стилистом </Text>
+                <Text style={styles.buttonText}>Стать стилистом</Text>
             </View>
-        </Pressable>
+        </TouchableOpacity>
         <View style={styles.desc}>
-            <Text style={styles.descText}> Станьте стилистом </Text>
-            <Text style={styles.subDescText}>
-                {' '}
-                Для того, чтобы получить возможность создавать публикации,
-                подайте заявку{' '}
-            </Text>
+            <View style={{ maxWidth: 250 }}>
+                <Text style={styles.descText}> Станьте стилистом </Text>
+                <Text style={styles.subDescText}>
+                    {' '}
+                    Для того, чтобы получить возможность создавать публикации,
+                    подайте заявку{' '}
+                </Text>
+            </View>
         </View>
     </View>
 );

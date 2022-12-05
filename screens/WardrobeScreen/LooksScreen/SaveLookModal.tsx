@@ -35,22 +35,21 @@ const styles = StyleSheet.create({
     },
     lookContainer: {
         flex: 1,
-        minHeight: 400,
+        minHeight: Layout.window.height * 0.6,
         marginTop: Layout.margins.default,
         borderRadius: 14,
-        resizeMode: 'center'
+        resizeMode: 'contain'
     },
     lookContainerInactive: {
         flex: 1,
-        minHeight: 400,
+        minHeight: Layout.window.height * 0.6,
         marginTop: Layout.margins.default,
         marginHorizontal: Layout.margins.small,
         opacity: 0.5,
         borderRadius: 14,
-        resizeMode: 'center'
+        resizeMode: 'contain'
     },
     infoContainer: {
-        width: 354,
         marginVertical: Layout.margins.default
     },
     buttonSave: {
@@ -141,7 +140,7 @@ export default function SaveLookModal({
         <ScrollView
             nestedScrollEnabled={true}
             horizontal={false}
-            style={{ paddingHorizontal: Layout.margins.small }}
+            style={{ flex: 1, paddingHorizontal: Layout.margins.small }}
         >
             <View style={styles.container}>
                 <View style={styles.lookContainer}>
@@ -164,9 +163,9 @@ export default function SaveLookModal({
                         />
                     ) : null}
                 </View>
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                >
+                {/*<KeyboardAvoidingView*/}
+                {/*    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}*/}
+                {/*>*/}
                     <InputContainer
                         inputFields={fields}
                         style={styles.infoContainer}
@@ -176,7 +175,7 @@ export default function SaveLookModal({
                         onPress={addLook}
                         style={styles.buttonSave}
                     />
-                </KeyboardAvoidingView>
+                {/*</KeyboardAvoidingView>*/}
             </View>
         </ScrollView>
     );

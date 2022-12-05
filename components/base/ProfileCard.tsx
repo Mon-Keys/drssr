@@ -11,47 +11,43 @@ import { getUri } from '../../network/const';
 const styles = StyleSheet.create({
     cardContainer: {
         backgroundColor: Colors.base.transparent,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        borderRadius: Layout.cornerRadius
+        alignItems: 'center'
     },
     mountContainer: {
+        marginTop: 60,
         backgroundColor: Colors.base.white,
         borderRadius: Layout.cornerRadius,
-        width: Abstracts.profile.defaultWidth,
+        // width: Abstracts.profile.defaultWidth,
+        width: '100%',
         alignItems: 'center',
     },
     image: {
         width: Abstracts.profile.avatarSize,
         height: Abstracts.profile.avatarSize,
-        borderRadius: 50,
+        borderRadius: Abstracts.profile.avatarSize,
         position: 'absolute',
+        top: -Abstracts.profile.avatarSize * 0.5,
         borderStyle: 'solid',
         borderWidth: 4,
         borderColor: Colors.base.white
-    },
-    headerContainer: {
-        height: 40
     },
     name: {
         fontSize: 24,
         fontFamily: 'proxima-nova'
     },
     nameContainer: {
-        height: 40,
+        marginTop: 50,
+        marginBottom: Layout.margins.default,
         flexDirection: 'row',
         alignItems: 'center'
     },
     statsContainer: {
-        height: 50,
+        marginVertical: Layout.margins.small,
     },
     descriptionContainer: {
-        minHeight: 30,
-        maxHeight: 60,
-        width: 320,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center',
+        marginBottom: Layout.margins.default,
+        maxWidth: 300,
+        justifyContent: 'center'
     },
     descriptionText: {
         color: Colors.base.black,
@@ -109,74 +105,38 @@ export interface ProfileCardProps {
 }
 
 export const ProfileCard = (props: ProfileCardProps) => {
-    // const stats = [
-    //     {
-    //         value: '3,8К',
-    //         desc: 'Подписчики'
-    //     },
-    //     {
-    //         value: '5,4К',
-    //         desc: 'Лайки'
-    //     },
-    //     {
-    //         value: '7',
-    //         desc: 'Публикации'
-    //     }
-    // ];
-
     return (
         <View style={styles.cardContainer}>
-            <View style={{ height: 50 }} />
             <View style={styles.mountContainer}>
-                <View style={styles.headerContainer} />
+                <Image
+                    style={styles.image}
+                    source={{
+                        uri: props.avatarSrc !== './media/defaults/avatar.webp' ? getUri(props.avatarSrc) : 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                    }}
+                />
                 <Pressable
                     style={styles.leftButton}
                     onPress={props.settingsAction}
                 >
-                    <Settings color={Colors.base.darkgray} />
+                    <Settings color={Colors.base.black} />
                 </Pressable>
-                {/* <Share
-                    style={styles.rightButton}
-                    color={Colors.base.darkgray}
-                /> */}
                 <View style={styles.nameContainer}>
-                    <Text style={styles.name}> {props.name} </Text>
+                    <Text style={styles.name}>{props.name}</Text>
                     {props.isVerified &&
-                        <ProfileVerified color="white" />
+                        <ProfileVerified style={{ marginLeft: 7 }} color="white" />
                     }
                 </View>
-                {/* <View style={styles.statsContainer}>
-                    <FlatList
-                        scrollEnabled={false}
-                        showsHorizontalScrollIndicator={false}
-                        ItemSeparatorComponent={() => (
-                            <View style={styles.separator} />
-                        )}
-                        horizontal={true}
-                        data={stats}
-                        renderItem={({ item }) => {
-                            return <Stat value={item.value} desc={item.desc} />;
-                        }}
-                    />
-                </View> */}
                 <View style={styles.statsContainer}>
                     <Pressable style={styles.edit} onPress={props.editAction}>
-                        <Text style={styles.editText}> Редактировать </Text>
+                        <Text style={styles.editText}>Редактировать</Text>
                     </Pressable>
                 </View>
                 <View style={styles.descriptionContainer}>
-                    <Text numberOfLines={3} style={styles.descriptionText}>
+                    <Text style={styles.descriptionText}>
                         {props.description}
                     </Text>
                 </View>
-                <View style={styles.bottomContainer} />
             </View>
-            <Image
-                style={styles.image}
-                source={{
-                    uri: props.avatarSrc !== './media/defaults/avatar.webp' ? getUri(props.avatarSrc) : 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
-                }}
-            />
         </View>
     );
 };

@@ -81,7 +81,7 @@ export default function CreatePostModal() {
             placeholder: 'Расскажите подробнее о вашем образе',
             value: defaultDescription
         },
-        { key: 'price', title: 'Цена', placeholder: 'Укажите цену образа' }
+        // { key: 'price', title: 'Цена', placeholder: 'Укажите цену образа' }
     ];
 
     const publish = () => {

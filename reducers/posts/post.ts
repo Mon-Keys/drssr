@@ -11,6 +11,8 @@ export interface IPost {
     previews_paths: Array<string>;
     likes: number;
     is_liked: boolean;
+    name: string;
+    description: string;
 }
 
 export interface INewPost {

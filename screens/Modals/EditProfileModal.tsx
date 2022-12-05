@@ -129,7 +129,7 @@ export default function EditProfileModalScreen() {
                     }}
                 />
                 <Pressable style={styles.uploadPhoto} onPress={ pickImage }>
-                        <Text style={styles.clickableText}> Загрузить новое фото </Text>
+                        <Text style={styles.clickableText}>Загрузить новое фото</Text>
                 </Pressable>
                 <InputFieldForEdit
                     placeholderTextColor={Colors.base.darkgray}
@@ -137,14 +137,14 @@ export default function EditProfileModalScreen() {
                     value={name}
                     onChangeText={setName}
                 />
-                <Text style={styles.text}> Введите ваше имя и загрузите фото. </Text>
+                <Text style={styles.text}> Введите ваше имя</Text>
                 <InputFieldForEdit
                     placeholderTextColor={Colors.base.darkgray}
                     placeholder={'Описание'}
                     value={desc}
                     onChangeText={setDesc}
                 />
-                <Text style={styles.text}> Расскажите о себе. Почему клиенты выбирают вас? </Text>
+                <Text style={styles.text}>Расскажите о себе. Почему клиенты выбирают вас?</Text>
             </View>
         </View>
     );

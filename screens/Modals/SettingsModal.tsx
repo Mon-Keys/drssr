@@ -32,7 +32,7 @@ export default function SettingsModalScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.tempContainer}>
-                <StyledButton title={'logout'} onPress={logout} />
+                <StyledButton title={'Выйти из аккаунта'} onPress={logout} />
             </View>
         </View>
     );

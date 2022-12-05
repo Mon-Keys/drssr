@@ -15,6 +15,8 @@ import {Colors, Layout} from '../../../styles';
 import { useNavigation } from '@react-navigation/native';
 import Header from "../../header/header";
 import { LikeButton } from "./LikeButton";
+import network from "../../../network";
+import {getUri} from "../../../network/const";
 
 export interface PostCardProps {
     goBackCallback: () => void;
@@ -163,6 +165,16 @@ export const PostCard = (props: PostCardProps) => {
 
     const look = props.post.look;
 
+    const [authorName, setAuthorName] = React.useState<string>('');
+    const [authorAvatar, setAuthorAvatar] = React.useState<string>('');
+    React.useEffect(() => {
+        if (props.post.look.creator_id) {
+            network.Common.getUserData(props.post.look.creator_id).then((data) => {
+                setAuthorName(data.data.name);
+                setAuthorAvatar(getUri(data.data.avatar));
+            });
+        }
+    });
 
     let carouselRef = useRef<Carousel<any>>();
     let itemsRef = useRef<Carousel<any>>();
@@ -215,7 +227,7 @@ export const PostCard = (props: PostCardProps) => {
                         }}
                     >
                         <Pagination
-                            tappableDots={true}
+                            tappableDots={false}
                             // carouselRef={carouselRef}
                             dotsLength={data.length}
                             activeDotIndex={activeIndex}
@@ -242,24 +254,26 @@ export const PostCard = (props: PostCardProps) => {
                             <Image
                                 style={styles.postDescriptionAvatar}
                                 source={{
-                                    uri: 'https://www.africanoverlandtours.com/wp-content/uploads/2014/04/animal_facts-e1396431549968.jpg'
+                                    uri: authorAvatar == ''
+                                        ? 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
+                                        : authorAvatar
                                 }}
                             />
                             <Text numberOfLines={1} style={styles.postDescriptionAuthor}>
-                                {JSON.stringify(props.post)}
+                                {authorName}
                             </Text>
                         </View>
                     </View>
                     <View style={styles.postDescriptionBottomContainer}>
-                        {look.name || look.description ? (
-                            <>
-                                <Text numberOfLines={1} style={styles.postDescriptionName}>
-                                    {look.name}
-                                </Text>
-                                <Text style={styles.postDescriptionDescription}>
-                                    {look.description}
-                                </Text>
-                            </>
+                        {look.name ? (
+                            <Text numberOfLines={1} style={styles.postDescriptionName}>
+                                {props.post.name}
+                            </Text>
+                        ) : null}
+                        {look.description ? (
+                            <Text style={styles.postDescriptionDescription}>
+                                {props.post.description}
+                            </Text>
                         ) : null}
                         <Text style={styles.postDescriptionLikes}>
                             {'Нравится: ' + likes}
