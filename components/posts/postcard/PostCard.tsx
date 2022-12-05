@@ -12,10 +12,9 @@ import { IPost } from '../../../reducers/posts/post';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { ScrollView } from 'react-native-gesture-handler';
 import {Colors, Layout} from '../../../styles';
-import IconButton from '../../base/IconButton';
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Header from "../../header/header";
+import { LikeButton } from "./LikeButton";
 
 export interface PostCardProps {
     goBackCallback: () => void;
@@ -24,32 +23,11 @@ export interface PostCardProps {
 }
 
 const styles = StyleSheet.create({
-    scrollContainer: {
-        marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    container: {
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         paddingHorizontal: Layout.margins.small
     },
-    postDescription: {
-        backgroundColor: Colors.base.white,
-        borderRadius: Layout.cornerRadius,
-        width: '100%',
-        marginVertical: 7
-    },
-    itemsContainer: {
-        backgroundColor: Colors.base.white,
-        borderRadius: Layout.cornerRadius,
-        width: '100%',
-        alignItems: 'center',
-        padding: 16,
-        marginBottom: 14
-    },
-    postDescriptionUpperContainer: {
-        height: 35,
-        width: '100%',
-    },
-    postDescriptionBottomContainer: {
-        height: 244,
-        width: '100%',
-    },
+
     imageContainer: {
         backgroundColor: Colors.base.lightgray,
         borderRadius: Layout.cornerRadius,
@@ -62,19 +40,20 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: 'contain'
     },
-    itemCard: {
-        height: 193,
-        width: '100%',
+
+    postDescription: {
         backgroundColor: Colors.base.white,
         borderRadius: Layout.cornerRadius,
-        justifyContent: 'center',
-        alignItems: 'center'
+        marginVertical: 7
     },
-    itemsHeader: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        lineHeight: 19,
-        paddingBottom: 16
+    postDescriptionUpperContainer: {
+        height: 36,
+        margin: Layout.margins.default,
+        flexDirection: 'row',
+    },
+    postDescriptionAuthorContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     postDescriptionAvatar: {
         borderRadius: 50,
@@ -82,39 +61,60 @@ const styles = StyleSheet.create({
         width: 36
     },
     postDescriptionAuthor: {
-        fontSize: 14,
+        width: 200,
+        fontSize: Layout.fontSize.default,
         fontWeight: 'bold',
-        lineHeight: 17,
-        paddingLeft: 6
+        marginLeft: Layout.margins.small
     },
-    postDescriptionAuthorContainer: {
-        height: 36,
-        margin: 14,
-        marginBottom: 24,
-        width: 153,
-        flexDirection: 'row',
-        alignItems: 'center'
+    postDescriptionBottomContainer: {
+        marginHorizontal: Layout.margins.default,
+        marginBottom: Layout.margins.default
     },
     postDescriptionName: {
-        fontSize: 20,
-        lineHeight: 24,
+        maxWidth: 300,
+        marginTop: Layout.margins.default,
+        marginBottom: Layout.margins.small,
+        fontSize: Layout.fontSize.header,
         fontWeight: 'bold'
     },
-    postDescriptionContainer: {
-        margin: 14,
-        marginTop: 24
-    },
-    postDescriptionPrice: {
-        fontSize: 16,
-        lineHeight: 19,
-        marginVertical: 14
-    },
     postDescriptionDescription: {
+        marginVertical: Layout.margins.small,
+        fontSize: Layout.fontSize.default,
+    },
+    postDescriptionLikes: {
+        marginVertical: Layout.margins.small,
+        fontSize: Layout.fontSize.default,
+        fontWeight: 'bold'
+    },
+    postDescriptionLike: {
+        alignItems: 'flex-start',
+        marginVertical: Layout.margins.small,
+    },
+
+    itemsContainer: {
+        backgroundColor: Colors.base.white,
+        borderRadius: Layout.cornerRadius,
+        width: '100%',
+        alignItems: 'center',
+        padding: 16,
+        marginBottom: 14
+    },
+    itemsHeader: {
         fontSize: 16,
-        lineHeight: 19
+        fontWeight: 'bold',
+        lineHeight: 19,
+        paddingBottom: 16
+    },
+    itemCard: {
+        height: 193,
+        width: '100%',
+        backgroundColor: Colors.base.lightgray,
+        borderRadius: Layout.cornerRadius,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     itemCardImage: {
-        // width: 133,
+        width: 133,
         height: 133,
         resizeMode: 'center'
     },
@@ -152,20 +152,27 @@ function _renderClothesItem(props) {
 }
 
 export const PostCard = (props: PostCardProps) => {
+    const navigation = useNavigation();
+
     const [activeIndex, setActiveIndex] = React.useState(0);
     const [activeIndexItems, setActiveIndexItems] = React.useState(0);
 
+    // костыли, из-за которых можно ловить угарные баги
+    const [is_liked, setLike] = React.useState(props.post.is_liked);
+    const [likes, setLikes] = React.useState(props.post.likes);
+
+    const look = props.post.look;
+
+
     let carouselRef = useRef<Carousel<any>>();
     let itemsRef = useRef<Carousel<any>>();
-    var data;
-    if (props.post.previews_paths) {
-        data = [...props.post.previews_paths, props.post.look.img_path];
-    } else {
-        data = [props.post.look.img_path];
-    }
-    const navigation = useNavigation();
 
-    let clothesData = props.post.look.clothes.map((item) => {
+    let data: Array<string> = [look.img_path];
+    if (props.post.previews_paths) {
+        data.unshift(...props.post.previews_paths);
+    }
+
+    let clothesData = look.clothes.map((item) => {
         const onPress = () => {
             navigation.navigate('Item', { id: item.id });
         };
@@ -176,125 +183,112 @@ export const PostCard = (props: PostCardProps) => {
     });
 
     return (
-        <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={styles.scrollContainer}
-        >
-            <Header
-                style={{ marginVertical: 14 }}
-                title={'Просмотр публикации'}
-                back={() => navigation.goBack()}
-            />
-            <View
-                style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                }}
-            >
-                <Carousel
-                    layout={'stack'}
-                    ref={(ref) => (carouselRef = ref)}
-                    data={data}
-                    sliderWidth={250} // TODO пиздец
-                    itemWidth={Dimensions.get('window').width-14} // TODO пиздец
-                    renderItem={_renderItem}
-                    onSnapToItem={(index) => setActiveIndex(index)}
+        <SafeAreaView style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Header
+                    style={{ marginVertical: 14 }}
+                    title={'Просмотр публикации'}
+                    back={() => navigation.goBack()}
                 />
                 <View
                     style={{
-                        position: 'absolute',
-                        zIndex: 1,
+                        flex: 1,
                         flexDirection: 'row',
-                        top: -14
+                        justifyContent: 'center'
                     }}
                 >
-                    <Pagination
-                        tappableDots={true}
-                        carouselRef={carouselRef}
-                        dotsLength={data.length}
-                        activeDotIndex={activeIndex}
-                        dotStyle={{
-                            width: 10,
-                            height: 10,
-                            borderRadius: 5,
-                            backgroundColor: Colors.base.black
+                    <Carousel
+                        layout={'stack'}
+                        ref={(ref) => (carouselRef = ref)}
+                        data={data}
+                        sliderWidth={250} // TODO пиздец
+                        itemWidth={Dimensions.get('window').width-14} // TODO пиздец
+                        renderItem={_renderItem}
+                        onSnapToItem={(index) => setActiveIndex(index)}
+                    />
+                    <View
+                        style={{
+                            position: 'absolute',
+                            zIndex: 1,
+                            flexDirection: 'row',
+                            top: -14
                         }}
-                        inactiveDotStyle={{
-                            width: 8,
-                            height: 8,
-                            borderRadius: 5,
-                            backgroundColor: Colors.base.darkgray
-                        }}
-                        inactiveDotOpacity={0.4}
-                        inactiveDotScale={0.6}
+                    >
+                        <Pagination
+                            tappableDots={true}
+                            // carouselRef={carouselRef}
+                            dotsLength={data.length}
+                            activeDotIndex={activeIndex}
+                            dotStyle={{
+                                width: 10,
+                                height: 10,
+                                borderRadius: 5,
+                                backgroundColor: Colors.base.black
+                            }}
+                            inactiveDotStyle={{
+                                width: 8,
+                                height: 8,
+                                borderRadius: 5,
+                                backgroundColor: Colors.base.darkgray
+                            }}
+                            inactiveDotOpacity={0.4}
+                            inactiveDotScale={0.6}
+                        />
+                    </View>
+                </View>
+                <View style={styles.postDescription}>
+                    <View style={styles.postDescriptionUpperContainer}>
+                        <View style={styles.postDescriptionAuthorContainer}>
+                            <Image
+                                style={styles.postDescriptionAvatar}
+                                source={{
+                                    uri: 'https://www.africanoverlandtours.com/wp-content/uploads/2014/04/animal_facts-e1396431549968.jpg'
+                                }}
+                            />
+                            <Text numberOfLines={1} style={styles.postDescriptionAuthor}>
+                                {JSON.stringify(props.post)}
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={styles.postDescriptionBottomContainer}>
+                        {look.name || look.description ? (
+                            <>
+                                <Text numberOfLines={1} style={styles.postDescriptionName}>
+                                    {look.name}
+                                </Text>
+                                <Text style={styles.postDescriptionDescription}>
+                                    {look.description}
+                                </Text>
+                            </>
+                        ) : null}
+                        <Text style={styles.postDescriptionLikes}>
+                            {'Нравится: ' + likes}
+                        </Text>
+                        <LikeButton
+                            id={props.post.id}
+                            currentLikes={props.post.likes}
+                            is_liked={is_liked}
+                            style={styles.postDescriptionLike}
+                            callback={() => {
+                                setLikes(likes + (!is_liked ? 1 : -1))
+                                setLike(!is_liked);
+                            }}
+                        />
+                    </View>
+                </View>
+                <View style={styles.itemsContainer}>
+                    <Text style={styles.itemsHeader}>Вещи в этом луке</Text>
+                    <Carousel
+                        layout={'default'}
+                        ref={(ref) => (itemsRef = ref)}
+                        data={clothesData}
+                        sliderWidth={354}
+                        itemWidth={170}
+                        renderItem={_renderClothesItem}
+                        onSnapToItem={(index) => setActiveIndexItems(index)}
                     />
                 </View>
-            </View>
-            <View style={styles.postDescription}>
-                <View style={styles.postDescriptionUpperContainer}>
-                    <View style={styles.postDescriptionAuthorContainer}>
-                        <Image
-                            style={styles.postDescriptionAvatar}
-                            source={{
-                                uri: 'https://www.africanoverlandtours.com/wp-content/uploads/2014/04/animal_facts-e1396431549968.jpg'
-                            }}
-                        />
-                        <Text style={styles.postDescriptionAuthor}>
-                            {JSON.stringify(props.post)}
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.postDescriptionBottomContainer}>
-                    <View style={styles.postDescriptionContainer}>
-                        <Text style={styles.postDescriptionName}>
-                            {props.post.name}
-                        </Text>
-                        <Text style={styles.postDescriptionPrice}>
-                            Общая стоимость: 10 500 руб
-                        </Text>
-
-                        <Text style={styles.postDescriptionDescription}>
-                            {props.post.description}
-                        </Text>
-                        <IconButton
-                            onPress={() => {
-                                props.likeCardCallback();
-                            }}
-                            icon={
-                                <View
-                                    style={{
-                                        backgroundColor: Colors.base.white,
-                                        borderRadius: 50,
-                                        height: 30,
-                                        width: 30,
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}
-                                >
-                                    <AntDesign
-                                        name="hearto"
-                                        size={15}
-                                        color="black"
-                                    />
-                                </View>
-                            }
-                        />
-                    </View>
-                </View>
-            </View>
-            <View style={styles.itemsContainer}>
-                <Text style={styles.itemsHeader}>Вещи в этом луке</Text>
-                <Carousel
-                    layout={'default'}
-                    ref={(ref) => (itemsRef = ref)}
-                    data={clothesData}
-                    sliderWidth={354}
-                    itemWidth={170}
-                    renderItem={_renderClothesItem}
-                    onSnapToItem={(index) => setActiveIndexItems(index)}
-                />
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
     );
 };

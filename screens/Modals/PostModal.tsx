@@ -25,7 +25,7 @@ export default function PostModalScreen({
     return (
         <View style={styles.container}>
             <PostCard
-                post={route.params}
+                post={post}
                 goBackCallback={() => {
                     navigation.goBack();
                 }}

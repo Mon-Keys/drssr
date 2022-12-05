@@ -1,11 +1,9 @@
 import { View } from '../base/Themed';
 import { FlatList, FlatListProps, StyleSheet } from 'react-native';
 import React from 'react';
-import { FeedCard, FeedCardProps } from './FeedCard';
+import { FeedCard } from './FeedCard';
 import { Feed } from '../../reducers/feedReducer';
 import { IPost } from '../../reducers/posts/post';
-import {Clothes} from "../../reducers/items/clothesReducer";
-import {ILook} from "../../reducers/looks/looks";
 
 const styles = StyleSheet.create({
     container: {
@@ -27,18 +25,21 @@ export interface FeedCommonProps extends FlatListProps<IPost> {
 // поэтому ловите нахуй костыль
 // если вам непонятен этот код, то удалите его нахуй, а еще FlatList заодно с планеты земля
 export const FeedCommon = (props: FeedCommonProps) => {
-    let data1: Array<IPost> = [];
-    data1.push(...props.feed.data);
-    if (data1.length % 2) {
-        let xyi: IPost = {
-            id: -1,
-            creator_id: 0,
-            type: '',
-            look: data1[0].look,
-            previews_paths: [],
-            likes: 0,
-        };
-        data1.push(xyi);
+    let posts: Array<IPost> = [];
+    if (props.feed && props.feed.data && props.feed.data.length) {
+        posts.push(...props.feed.data);
+        if (posts.length % 2) {
+            let xyi: IPost = {
+                id: -1,
+                creator_id: 0,
+                type: '',
+                look: posts[0].look,
+                previews_paths: [],
+                likes: 0,
+                is_liked: false
+            };
+            posts.push(xyi);
+        }
     }
 
     return (
@@ -46,8 +47,7 @@ export const FeedCommon = (props: FeedCommonProps) => {
             <FlatList
                 {...props}
                 showsVerticalScrollIndicator={false}
-                data={data1}
-                // data={props.feed.data}
+                data={posts}
                 numColumns={2}
                 keyExtractor={(item) => `${item.id}`}
                 style={styles.container}
@@ -61,7 +61,7 @@ export const FeedCommon = (props: FeedCommonProps) => {
                                 <FeedCard
                                     hasLikeButton={true}
                                     post={item}
-                                    onPress={() => props.navigation.navigate('Post', item)}
+                                    onPress={() => props.navigation.navigate('Post', { post: item })}
                                     id={item.id}
                                 />
                             </View>
