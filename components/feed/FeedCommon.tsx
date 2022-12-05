@@ -61,7 +61,7 @@ export const FeedCommon = (props: FeedCommonProps) => {
                                 <FeedCard
                                     hasLikeButton={true}
                                     post={item}
-                                    onPress={() => props.navigation.navigate('Post', item)}
+                                    onPress={() => props.navigation.navigate('Post', { post: item })}
                                     id={item.id}
                                 />
                             </View>
