@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
-        resizeMode: 'center',
+        resizeMode: 'contain',
         borderRadius: Layout.cornerRadius
     }
 });

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         minHeight: Layout.window.height * 0.6,
         marginTop: Layout.margins.default,
         borderRadius: 14,
-        resizeMode: 'center'
+        resizeMode: 'contain'
     },
     lookContainerInactive: {
         flex: 1,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         marginHorizontal: Layout.margins.small,
         opacity: 0.5,
         borderRadius: 14,
-        resizeMode: 'center'
+        resizeMode: 'contain'
     },
     infoContainer: {
         marginVertical: Layout.margins.default
