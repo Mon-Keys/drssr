@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
+import {ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet} from 'react-native';
 
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
@@ -140,37 +140,43 @@ export default function AddItemModal() {
     }
 
     return (
-        <ScrollView
-            style={styles.container}
-            showsVerticalScrollIndicator={false}
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "padding"}
+            enabled={Platform.OS === "ios"}
+            style={{ flex: 1 }}
         >
-            <BigImage
-                img={img}
-                style={styles.imageContainer}
-                loading={prepareItem.status === 'pending'}
-            />
+            <ScrollView
+                style={styles.container}
+                showsVerticalScrollIndicator={false}
+            >
+                <BigImage
+                    img={img}
+                    style={styles.imageContainer}
+                    loading={prepareItem.status === 'pending'}
+                />
 
-            {prepareItem.status === 'pending' ? (
-                <>
-                    <ActivityIndicator
-                        size="large"
-                        color={Colors.base.black}
-                        style={styles.indicator}
-                    />
-                </>
-            ) : (
-                <>
-                    <InputContainer
-                        inputFields={fields}
-                        style={styles.bodyContainer}
-                    />
-                    <BaseButton
-                        title={'Сохранить'}
-                        onPress={add}
-                        style={styles.submitContainer}
-                    />
-                </>
-            )}
-        </ScrollView>
+                {prepareItem.status === 'pending' ? (
+                    <>
+                        <ActivityIndicator
+                            size="large"
+                            color={Colors.base.black}
+                            style={styles.indicator}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <InputContainer
+                            inputFields={fields}
+                            style={styles.bodyContainer}
+                        />
+                        <BaseButton
+                            title={'Сохранить'}
+                            onPress={add}
+                            style={styles.submitContainer}
+                        />
+                    </>
+                )}
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
