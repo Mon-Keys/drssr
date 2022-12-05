@@ -96,6 +96,7 @@ export type ClothingByCategoryScreenRouteProp = RouteProp<
     'ItemsByCategory'
 >;
 
+export type SearchRouteProp = RouteProp<RootTabParamList, 'Search'>;
 export type PostRouteProp = RouteProp<RootStackParamList, 'Post'>;
 export type EditProfileProp = RouteProp<RootStackParamList, 'EditProfile'>;
 export type ThingScreenRouteProp = RouteProp<RootStackParamList, 'Item'>;

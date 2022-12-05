@@ -1,10 +1,12 @@
 import { View } from '../base/Themed';
-import { Image, Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import React from 'react';
 import { Colors } from '../../styles';
 import { AntDesign } from '@expo/vector-icons';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {fetchFavoritePosts, likePost} from '../../reducers/feedReducer';
+import {dislikePost, fetchFavoritePosts, likePost} from '../../reducers/feedReducer';
+import {useNavigation, useRoute} from "@react-navigation/native";
+import { SearchRouteProp, RootNavigation } from "../../types";
 
 const styles = StyleSheet.create({
     likeButton: {
@@ -28,13 +30,17 @@ export interface LikeFeedCardButtonProps {
 
 export const LikeFeedCardButton = (props: LikeFeedCardButtonProps) => {
     const dispatch = useAppDispatch();
-    const [liked, setLiked] = React.useState(props.is_liked);
 
     const like = () => {
-        setLiked(!liked);
-        dispatch(
-            likePost({ id: props.id, likesAmount: props.currentLikes })
-        ).then(() => dispatch(fetchFavoritePosts()));
+        if (!props.is_liked) {
+            dispatch(
+                likePost({ id: props.id, likesAmount: props.currentLikes })
+            );
+        } else {
+            dispatch(
+                dislikePost({ id: props.id })
+            );
+        }
     }
 
     return (
@@ -42,7 +48,7 @@ export const LikeFeedCardButton = (props: LikeFeedCardButtonProps) => {
             onPress={like}
         >
             <View style={styles.likeButton}>
-                {liked ? (
+                {props.is_liked ? (
                     <AntDesign
                         name="heart"
                         size={10}

@@ -16,6 +16,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchFavoritePosts, selectFavoriteFeeds } from '../../reducers/feedReducer';
 import {Layout} from "../../styles";
 import EmptyView from "../../components/base/EmptyView";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
 
 const styles = StyleSheet.create({
     container: {
@@ -43,13 +44,14 @@ const styles = StyleSheet.create({
 export default function DiscoverScreen({
     navigation
 }: RootTabScreenProps<'Search'>) {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const favoriteFeed = useAppSelector(selectFavoriteFeeds);
     const [, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        dispatch(fetchFavoritePosts());
+        dispatch(fetchFavoritePosts()).then(() => console.log(favoriteFeed.data.filter((item) => item.is_liked)));
+
     }, [dispatch]);
 
     React.useEffect(() => {

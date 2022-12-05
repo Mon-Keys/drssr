@@ -36,6 +36,7 @@ export const FeedCommon = (props: FeedCommonProps) => {
                 look: posts[0].look,
                 previews_paths: [],
                 likes: 0,
+                is_liked: false
             };
             posts.push(xyi);
         }

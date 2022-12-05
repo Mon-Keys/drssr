@@ -169,7 +169,7 @@ export default class Common {
         });
     }
 
-    dislike(id: number, likes: number) {
+    dislike(id: number) {
         return http.delete(`/private/posts/likes?id=${id}`);
     }
 
