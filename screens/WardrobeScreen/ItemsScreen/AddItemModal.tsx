@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
-import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
-
+import {ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { IItemData } from '../../../network';
@@ -140,7 +140,8 @@ export default function AddItemModal() {
     }
 
     return (
-        <ScrollView
+        <KeyboardAwareScrollView
+            enableOnAndroid={false}
             style={styles.container}
             showsVerticalScrollIndicator={false}
         >
@@ -171,6 +172,6 @@ export default function AddItemModal() {
                     />
                 </>
             )}
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 }

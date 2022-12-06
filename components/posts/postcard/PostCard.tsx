@@ -168,7 +168,7 @@ export const PostCard = (props: PostCardProps) => {
     const [authorName, setAuthorName] = React.useState<string>('');
     const [authorAvatar, setAuthorAvatar] = React.useState<string>('');
     React.useEffect(() => {
-        if (props.post.look.creator_id) {
+        if (props.post.look.creator_id && authorName == '') {
             network.Common.getUserData(props.post.look.creator_id).then((data) => {
                 setAuthorName(data.data.name);
                 setAuthorAvatar(getUri(data.data.avatar));
