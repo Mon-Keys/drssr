@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     likeButton: {
         borderRadius: 50,
         backgroundColor: Colors.base.lightgray,
-        width: 24,
-        height: 24,
+        width: 22,
+        height: 22,
         justifyContent: 'center',
         alignItems: 'center'
     }
