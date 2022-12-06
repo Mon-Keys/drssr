@@ -3,6 +3,12 @@
         "version": ">= 2.3.0"
     },
     "build": {
+
+        "preview_a": {
+            "android": {
+                "buildType": "apk"
+            }
+        },
         "development": {
             "developmentClient": true,
             "distribution": "internal"
