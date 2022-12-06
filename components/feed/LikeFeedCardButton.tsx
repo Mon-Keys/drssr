@@ -1,20 +1,23 @@
 import { View } from '../base/Themed';
 import { Pressable, StyleSheet } from 'react-native';
 import React from 'react';
-import { Colors } from '../../styles';
+import {Colors, Layout} from '../../styles';
 import { AntDesign } from '@expo/vector-icons';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import {dislikePost, likePost} from '../../reducers/feedReducer';
 
 const styles = StyleSheet.create({
+    container: {
+        position: 'absolute',
+        right: 0,
+        bottom: 0,
+        padding: Layout.margins.small
+    },
     likeButton: {
         borderRadius: 50,
         backgroundColor: Colors.base.lightgray,
-        width: 21,
-        height: 21,
-        position: 'absolute',
-        right: 7,
-        bottom: 7,
+        width: 22,
+        height: 22,
         justifyContent: 'center',
         alignItems: 'center'
     }
@@ -44,18 +47,19 @@ export const LikeFeedCardButton = (props: LikeFeedCardButtonProps) => {
     return (
         <Pressable
             onPress={like}
+            style={styles.container}
         >
             <View style={styles.likeButton}>
                 {props.is_liked ? (
                     <AntDesign
                         name="heart"
-                        size={10}
+                        size={12}
                         color={Colors.base.black}
                     />
                 ) : (
                     <AntDesign
                         name="hearto"
-                        size={10}
+                        size={12}
                         color={Colors.base.black}
                     />
                 )}
