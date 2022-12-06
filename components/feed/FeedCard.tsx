@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
-        resizeMode: 'contain',
+        // resizeMode: 'contain', по дефолту будет cover, это плохо потому что он обрезает картинку. contain плохо выглядит на ios, поэтому пока так
         borderRadius: Layout.cornerRadius
     },
 });

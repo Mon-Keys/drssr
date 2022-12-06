@@ -50,8 +50,7 @@ export default function DiscoverScreen({
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        dispatch(fetchFavoritePosts()).then(() => console.log(favoriteFeed.data.filter((item) => item.is_liked)));
-
+        dispatch(fetchFavoritePosts());
     }, [dispatch]);
 
     React.useEffect(() => {

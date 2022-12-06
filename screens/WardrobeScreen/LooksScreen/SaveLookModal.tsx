@@ -27,6 +27,7 @@ import InputContainer, {
 } from '../../../components/item/InputContainer';
 import BaseButton from '../../../components/base/BaseButton';
 import { GenerateRandomName, ICreateLook } from '../../../network/api/common';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 // @ts-ignore
 
 const styles = StyleSheet.create({
@@ -137,9 +138,9 @@ export default function SaveLookModal({
     };
 
     return (
-        <ScrollView
-            nestedScrollEnabled={true}
-            horizontal={false}
+        <KeyboardAwareScrollView
+            enableOnAndroid={false}
+            showsVerticalScrollIndicator={false}
             style={{ flex: 1, paddingHorizontal: Layout.margins.small }}
         >
             <View style={styles.container}>
@@ -163,9 +164,6 @@ export default function SaveLookModal({
                         />
                     ) : null}
                 </View>
-                {/*<KeyboardAvoidingView*/}
-                {/*    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}*/}
-                {/*>*/}
                     <InputContainer
                         inputFields={fields}
                         style={styles.infoContainer}
@@ -175,8 +173,7 @@ export default function SaveLookModal({
                         onPress={addLook}
                         style={styles.buttonSave}
                     />
-                {/*</KeyboardAvoidingView>*/}
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 }
