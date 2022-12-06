@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.base.lightgray,
         borderRadius: Layout.cornerRadius,
         flex: 1,
-        resizeMode: 'contain'
+        // resizeMode: 'contain'
     },
 
     postDescription: {
