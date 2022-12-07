@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
-import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
-
+import {ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { IItemData } from '../../../network';
@@ -23,6 +23,7 @@ import BaseButton from '../../../components/base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from '../../../types';
 import { linkItemRegExp, typeItemRegExp } from '../../../constants/validation';
+import {selectUser} from "../../../reducers/userReducer";
 
 const styles = StyleSheet.create({
     container: {
@@ -47,53 +48,55 @@ const styles = StyleSheet.create({
 export default function AddItemModal() {
     const navigation = useNavigation<RootNavigation>();
 
+    const user = useAppSelector(selectUser);
     const prepareItem = useAppSelector(selectPrepareClothes);
     const dispatch = useAppDispatch();
 
-    const fields: Array<InputFieldData> = [
-        {
-            key: 'type',
-            title: 'Тип вещи',
-            placeholder: 'Например джинсы',
-            validationFunc: (text) => {
-                if (text === '') {
-                    return 'Заполните поле';
-                }
-                if (!typeItemRegExp.test(text)) {
-                    return 'Используйте только буквы';
-                }
-                return '';
+    const fieldType: InputFieldData = {
+        key: 'type',
+        title: 'Тип вещи',
+        placeholder: 'Например джинсы',
+        validationFunc: (text) => {
+            if (text === '') {
+                return 'Заполните поле';
             }
-        },
-        {
-            key: 'link',
-            title: 'Ссылка',
-            placeholder: 'Ссылка на вещь в магазине',
-            validationFunc: (text) => {
-                if (text === '') {
-                    return '';
-                }
-                if (!linkItemRegExp.test(text)) {
-                    return 'Неверный формат ссылки';
-                }
-                return '';
+            if (!typeItemRegExp.test(text)) {
+                return 'Используйте только буквы';
             }
-        },
-        {
-            key: 'brand',
-            title: 'Бренд',
-            placeholder: 'Укажите бренд',
-            validationFunc: (text) => {
-                if (text === '') {
-                    return '';
-                }
-                if (text.length > 30) {
-                    return 'Слишко длинное название бренда';
-                }
-                return '';
-            }
+            return '';
         }
-    ];
+    };
+    const fieldLink: InputFieldData = {
+        key: 'link',
+        title: 'Ссылка',
+        placeholder: 'Ссылка на вещь в магазине',
+        validationFunc: (text) => {
+            if (text === '') {
+                return '';
+            }
+            if (!linkItemRegExp.test(text)) {
+                return 'Неверный формат ссылки';
+            }
+            return '';
+        }
+    };
+    const fieldBrand: InputFieldData = {
+        key: 'brand',
+        title: 'Бренд',
+        placeholder: 'Укажите бренд',
+        validationFunc: (text) => {
+            if (text === '') {
+                return '';
+            }
+            if (text.length > 30) {
+                return 'Слишко длинное название бренда';
+            }
+            return '';
+        }
+    };
+    const fields: Array<InputFieldData> = user.userData.stylist
+        ? [fieldType, fieldLink, fieldBrand]
+        : [fieldType, fieldBrand];
 
     useEffect(() => {
         if (prepareItem.currentItem != null) {
@@ -137,7 +140,8 @@ export default function AddItemModal() {
     }
 
     return (
-        <ScrollView
+        <KeyboardAwareScrollView
+            enableOnAndroid={false}
             style={styles.container}
             showsVerticalScrollIndicator={false}
         >
@@ -168,6 +172,6 @@ export default function AddItemModal() {
                     />
                 </>
             )}
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 }

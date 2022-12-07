@@ -31,7 +31,7 @@ export const LookList = (props: LooksListProps) => {
             <FlatList
                 data={props.looks}
                 numColumns={2}
-                keyExtractor={(item) => `${item.description}`}
+                keyExtractor={(item) => `${item.id}`}
                 columnWrapperStyle={styles.columnWrapper}
                 horizontal={false}
                 showsVerticalScrollIndicator={false}

@@ -5,13 +5,6 @@ import React from 'react';
 import Gestures from 'react-native-easy-gestures';
 
 const styles = StyleSheet.create({
-    image: {
-        width: 100,
-        height: 100,
-        resizeMode: 'cover',
-        backgroundColor: 'transparent',
-        position: 'absolute'
-    },
     imageContainer: {
         backgroundColor: 'transparent'
     }
@@ -36,18 +29,10 @@ export const EditableImage = (props: EditableImageProps) => {
                     max: 3
                 }}
                 onChange={(event, styles) => {
-                    console.log(styles.transform[0].scale);
-                    console.log(styles.transform[1].rotate);
-                    console.log(event.nativeEvent.pageX);
-                    console.log(event.nativeEvent.pageY);
                     setZIndex(props.maxZIndex + 1);
                     props.setMaxZIndex();
                 }}
                 onEnd={(event, styles) => {
-                    console.log(styles.transform[0].scale);
-                    console.log(styles.transform[1].rotate);
-                    console.log(event.nativeEvent.pageX);
-                    console.log(event.nativeEvent.pageY);
                     setZIndex(props.maxZIndex + 1);
                     props.setMaxZIndex();
                     props.setParams(

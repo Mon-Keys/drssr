@@ -27,30 +27,30 @@ import InputContainer, {
 } from '../../../components/item/InputContainer';
 import BaseButton from '../../../components/base/BaseButton';
 import { GenerateRandomName, ICreateLook } from '../../../network/api/common';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 // @ts-ignore
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
-        alignItems: 'center'
     },
     lookContainer: {
-        width: 354,
-        height: 442,
-        marginVertical: Layout.margins.default,
+        flex: 1,
+        minHeight: Layout.window.height * 0.6,
+        marginTop: Layout.margins.default,
         borderRadius: 14,
-        resizeMode: 'center'
+        resizeMode: 'contain'
     },
     lookContainerInactive: {
-        width: 354,
-        height: 442,
-        marginVertical: Layout.margins.default,
+        flex: 1,
+        minHeight: Layout.window.height * 0.6,
+        marginTop: Layout.margins.default,
+        marginHorizontal: Layout.margins.small,
         opacity: 0.5,
         borderRadius: 14,
-        resizeMode: 'center'
+        resizeMode: 'contain'
     },
     infoContainer: {
-        width: 354,
         marginVertical: Layout.margins.default
     },
     buttonSave: {
@@ -118,7 +118,6 @@ export default function SaveLookModal({
             description: description
         };
 
-        console.log(lookSelector.look.clothes);
         // @ts-ignore
         const newLook1: ILook = {
             img: lookSelector.look.img,
@@ -139,7 +138,11 @@ export default function SaveLookModal({
     };
 
     return (
-        <ScrollView nestedScrollEnabled={true} horizontal={false}>
+        <KeyboardAwareScrollView
+            enableOnAndroid={false}
+            showsVerticalScrollIndicator={false}
+            style={{ flex: 1, paddingHorizontal: Layout.margins.small }}
+        >
             <View style={styles.container}>
                 <View style={styles.lookContainer}>
                     <Image
@@ -161,9 +164,6 @@ export default function SaveLookModal({
                         />
                     ) : null}
                 </View>
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                >
                     <InputContainer
                         inputFields={fields}
                         style={styles.infoContainer}
@@ -173,8 +173,7 @@ export default function SaveLookModal({
                         onPress={addLook}
                         style={styles.buttonSave}
                     />
-                </KeyboardAvoidingView>
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 }

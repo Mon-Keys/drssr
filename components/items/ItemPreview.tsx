@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
     preview: {
         flex: 1,
-        resizeMode: 'center',
+        resizeMode: 'contain',
         borderRadius: Layout.cornerRadius
     },
     caption: {

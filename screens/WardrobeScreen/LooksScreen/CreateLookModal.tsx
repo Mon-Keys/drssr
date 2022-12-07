@@ -23,7 +23,6 @@ import {
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import EmptyView from '../../../components/base/EmptyView';
 import { getUri } from '../../../network/const';
-import * as Console from 'console';
 import { LookItem } from '../../Modals/EditLookModal';
 
 const styles = StyleSheet.create({
@@ -39,8 +38,10 @@ const styles = StyleSheet.create({
         right: 20
     },
     lookArea: {
-        height: 700,
-        width: 500
+        flex: 1,
+        padding: 10,
+        alignItems: 'flex-start',
+        flexWrap: 'wrap'
     },
     bottomSheet: {
         backgroundColor: Colors.base.white
@@ -52,16 +53,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
 
-    resizedImage: {
-        height: 250,
-        borderWidth: 1,
-        borderColor: 'black',
-        alignSelf: 'stretch',
-        marginBottom: 10
-    },
     defaultImage: {
-        width: 100,
-        height: 100,
+        width: 160,
+        height: 160,
         backgroundColor: 'transparent',
         resizeMode: 'center'
     },
@@ -134,7 +128,6 @@ export default function CreateLookModal({
                     image: getUri(item.image)
                 };
             });
-            console.log(tempItems);
             dispatch(addLookData(tempItems));
             navigation.navigate('SaveLook');
         });
@@ -186,6 +179,7 @@ export default function CreateLookModal({
                                 format: 'jpg',
                                 quality: 0.8
                             }}
+                            style={{ flex: 1, backgroundColor: 'transparent' }}
                         >
                             <View style={styles.lookArea}>
                                 {boardItems.map((item, index) => (

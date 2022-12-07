@@ -32,7 +32,7 @@ export interface IupdateLook {
 }
 
 export const newLook = createAsyncThunk<ILook, ICreateLook>(
-    'user/signUpUser',
+    'createLook/newLook',
     async (lookData, { rejectWithValue }) => {
         try {
             const response = await Api.Common.createNewLook(lookData);
@@ -48,10 +48,9 @@ export const newLook = createAsyncThunk<ILook, ICreateLook>(
 );
 
 export const updateLook = createAsyncThunk<ILook, IupdateLook>(
-    'createLook/update',
+    'createLook/updateLook',
     async (lookData, { rejectWithValue }) => {
         try {
-            console.log(lookData.look.clothes);
             const response = await Api.Common.updateLook(
                 lookData.look,
                 lookData.id
@@ -68,7 +67,7 @@ export const updateLook = createAsyncThunk<ILook, IupdateLook>(
 );
 
 export const createLookSlice = createSlice({
-    name: 'clothes',
+    name: 'createLook',
     initialState,
     reducers: {
         addLookPhoto: (state, action: PayloadAction<string>) => {
@@ -76,7 +75,6 @@ export const createLookSlice = createSlice({
         },
         addLookData: (state, action) => {
             state.look.clothes = action.payload;
-            console.log(state.look.clothes);
         }
     },
     extraReducers: (builder) => {

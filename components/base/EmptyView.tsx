@@ -23,7 +23,9 @@ const styles = StyleSheet.create({
         marginVertical: Layout.margins.default
     },
     text: {
-        color: Colors.base.darkgray
+        color: Colors.base.darkgray,
+        maxWidth: 300,
+        textAlign: 'center'
     }
 });
 

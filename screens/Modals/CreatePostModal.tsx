@@ -17,6 +17,7 @@ import InputContainer, {
 } from '../../components/item/InputContainer';
 import PhotosPreview from '../../components/posts/PhotosPreview';
 import { clearNewPost, selectNewPosts } from '../../reducers/posts/postReducer';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 const styles = StyleSheet.create({
     container: {
@@ -81,7 +82,7 @@ export default function CreatePostModal() {
             placeholder: 'Расскажите подробнее о вашем образе',
             value: defaultDescription
         },
-        { key: 'price', title: 'Цена', placeholder: 'Укажите цену образа' }
+        // { key: 'price', title: 'Цена', placeholder: 'Укажите цену образа' }
     ];
 
     const publish = () => {
@@ -102,22 +103,25 @@ export default function CreatePostModal() {
     };
 
     return (
-        <View style={styles.container}>
-            <ScrollView style={{ flex: 1 }} scrollEnabled={true}>
-                <PhotosPreview
-                    photo={{ img: defaultPreview }}
-                    style={styles.photosContainer}
-                />
-                <InputContainer
-                    inputFields={fields}
-                    style={styles.inputContainer}
-                />
-                <BaseButton
-                    title={'Опубликовать'}
-                    style={styles.button}
-                    onPress={publish}
-                />
-            </ScrollView>
-        </View>
+        <KeyboardAwareScrollView
+            enableOnAndroid={false}
+            showsVerticalScrollIndicator={false}
+            style={styles.container}
+            scrollEnabled={true}
+        >
+            <PhotosPreview
+                photo={{ img: defaultPreview }}
+                style={styles.photosContainer}
+            />
+            <InputContainer
+                inputFields={fields}
+                style={styles.inputContainer}
+            />
+            <BaseButton
+                title={'Опубликовать'}
+                style={styles.button}
+                onPress={publish}
+            />
+        </KeyboardAwareScrollView>
     );
 }

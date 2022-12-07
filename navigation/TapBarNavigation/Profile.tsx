@@ -19,6 +19,7 @@ export function ProfileNavigation(): any {
                 name="Settings"
                 component={SettingsModalScreen}
                 options={{
+                    title: 'Настройки аккаунта',
                     headerShown: true
                 }}
             />

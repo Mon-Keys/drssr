@@ -13,74 +13,40 @@ import { RootTabScreenProps } from '../../types';
 import { AppDispatch } from '../../store';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import {
-    fetchFavoritePosts,
-    fetchSubscribtionPosts,
-    selectFeeds
-} from '../../reducers/feedReducer';
-import { SearchBar } from '../../components/base/SearchBar';
-import IconButton from '../../components/base/IconButton';
-import { AntDesign } from '@expo/vector-icons';
-import { Colors } from '../../styles';
+import { fetchFavoritePosts, selectFavoriteFeeds } from '../../reducers/feedReducer';
+import {Layout} from "../../styles";
+import EmptyView from "../../components/base/EmptyView";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        paddingTop: 30,// Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         backgroundColor: 'transparent'
-    },
-    mainContainer: {
-        flex: 10,
-        alignItems: 'center',
-        backgroundColor: 'transparent'
-    },
-    cheapInnerContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: 'transparent',
-        alignItems: 'center',
-        justifyContent: 'center',
-        maxWidth: 354,
-        height: 35
-    },
-    cheapOuterContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: 'transparent',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: 64
-    },
-    searchIcon: {
-        left: 0,
-        position: 'absolute'
     },
     headerContainer: {
+        height: 53, // такой хардкод епта не просто так, чтобы EmptyView на разных экранах одинаково выглядили
         justifyContent: 'center',
         alignItems: 'center',
-        width: 354
     },
     headerText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        lineHeight: 19
+        fontSize: Layout.fontSize.big,
+        fontWeight: 'bold'
+    },
+    mainContainer: {
+        flex: 1,
+        marginHorizontal: Layout.margins.small
     }
 });
 
 export default function DiscoverScreen({
     navigation
 }: RootTabScreenProps<'Search'>) {
-    const dispatch = useDispatch<AppDispatch>();
-    const subscribtionFeedData = useAppSelector(selectFeeds);
+    const dispatch = useAppDispatch();
+    const favoriteFeed = useAppSelector(selectFavoriteFeeds);
     const [, setRefreshing] = React.useState(false);
-
-    const searchbar = <SearchBar />;
-    const searchBarRef = React.useRef(searchbar);
-
-    const [menuOpen, setMenuOpen] = React.useState<boolean>(true);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -91,48 +57,36 @@ export default function DiscoverScreen({
         dispatch(fetchFavoritePosts());
     }, [dispatch]);
 
+    const hasFavoriteFeed = (): boolean => {
+        return favoriteFeed.data && favoriteFeed.data.length != 0
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            {menuOpen ? (
-                <View style={styles.cheapOuterContainer}>
-                    <View style={styles.cheapInnerContainer}>
-                        {/* <IconButton
-                            icon={
-                                <AntDesign
-                                    name="search1"
-                                    size={24}
-                                    color={Colors.base.black}
-                                />
-                            }
-                            style={styles.searchIcon}
-                            //@ts-ignore
-                            title={'search'}
-                            onPress={() => {
-                                setMenuOpen(!menuOpen);
-                            }}
-                        /> */}
-                        <View style={styles.headerContainer}>
-                            <Text style={styles.headerText}>Избранное</Text>
-                        </View>
-                    </View>
-                </View>
-            ) : (
-                searchBarRef.current
-            )}
+            <View style={styles.headerContainer}>
+                <Text style={styles.headerText}>Избранное</Text>
+            </View>
             <View style={styles.mainContainer}>
-                <FeedCommon
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={
-                                subscribtionFeedData.FavoriteFeed.status ==
-                                'pending'
-                            }
-                            onRefresh={onRefresh}
-                        />
-                    }
-                    navigation={navigation}
-                    feed={subscribtionFeedData.FavoriteFeed}
-                />
+                {hasFavoriteFeed() ? (
+                    <FeedCommon
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={
+                                    favoriteFeed.status ==
+                                    'pending'
+                                }
+                                onRefresh={onRefresh}
+                            />
+                        }
+                        navigation={navigation}
+                        feed={favoriteFeed}
+                    />
+                ) : (
+                    <EmptyView
+                        textHeader={'Здесь пока пусто'}
+                        text={'Лайкайте посты в ленте и они попадут сюда'}
+                    />
+                )}
             </View>
         </SafeAreaView>
     );

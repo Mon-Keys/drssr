@@ -16,17 +16,17 @@ import { selectUserItems } from '../../reducers/items/clothesReducer';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // width: '100%',
         backgroundColor: 'transparent'
     },
     previewContainer: {
-        height: 450,
+        flex: 1,
+        minHeight: Layout.window.height * 0.6,
         margin: Layout.margins.default,
         borderRadius: Layout.cornerRadius
     },
     lookImage: {
         flex: 1,
-        resizeMode: 'center',
+        resizeMode: 'contain',
         borderRadius: Layout.cornerRadius
     },
     descriptionContainer: {

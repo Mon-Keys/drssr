@@ -21,108 +21,15 @@ export interface Feeds {
 
 const initialState = {
     SubscribtionFeed: {
-        data: [
-            {
-                id: 1,
-                creator_id: 1,
-                type: 'look',
-                look: {
-                    id: 1,
-                    // clothes: [
-                    //     {
-                    //         id: 1,
-                    //         brand: 'dss',
-                    //         color: 'dsds',
-                    //         currency: 'RUB',
-                    //         link: 'link',
-                    //         type: 'Boots',
-                    //         img_path: 'clothesImg',
-                    //         mask_path: 'clothesMaskImg',
-                    //         owner_id: 1,
-                    //         price: 10000,
-                    //         sex: 'male',
-                    //         description: 'clothes description'
-                    //     }
-                    // ],
-                    img_path: 'img',
-                    description: 'desc'
-                },
-                previews_paths: [
-                    'https://media-cdn.tripadvisor.com/media/photo-s/0c/bb/a3/97/predator-ride-in-the.jpg',
-                    'img2'
-                ],
-                likes: 123213
-            }
-        ],
+        data: [],
         status: 'ready'
     },
     DiscoverFeed: {
-        data: [
-            {
-                id: 1,
-                creator_id: 1,
-                type: 'look',
-                look: {
-                    id: 1,
-                    // clothes: [
-                    //     {
-                    //         id: 1,
-                    //         brand: 'dss',
-                    //         color: 'dsds',
-                    //         currency: 'RUB',
-                    //         link: 'link',
-                    //         type: 'Boots',
-                    //         img_path: 'clothesImg',
-                    //         mask_path: 'clothesMaskImg',
-                    //         owner_id: 1,
-                    //         price: 10000,
-                    //         sex: 'male',
-                    //         description: 'clothes description'
-                    //     }
-                    // ],
-                    img_path: 'img',
-                    description: 'desc'
-                },
-                previews_paths: [
-                    'https://media-cdn.tripadvisor.com/media/photo-s/0c/bb/a3/97/predator-ride-in-the.jpg',
-                    'img2'
-                ],
-                likes: 123213
-            }
-        ],
+        data: [],
         status: 'ready'
     },
     FavoriteFeed: {
-        data: [
-            {
-                id: 1,
-                creator_id: 1,
-                type: 'look',
-                look: {
-                    id: 1,
-                    // clothes: [
-                    //     {
-                    //         id: 1,
-                    //         brand: 'dss',
-                    //         color: 'dsds',
-                    //         currency: 'RUB',
-                    //         link: 'link',
-                    //         type: 'Boots',
-                    //         img_path: 'clothesImg',
-                    //         mask_path: 'clothesMaskImg',
-                    //         owner_id: 1,
-                    //         price: 10000,
-                    //         sex: 'male',
-                    //         description: 'clothes description'
-                    //     }
-                    // ],
-                    img_path: 'img',
-                    description: 'desc'
-                },
-                previews_paths: ['img1', 'img2'],
-                likes: 123213
-            }
-        ],
+        data: [],
         status: 'ready'
     },
     cacheClothes: []
@@ -132,7 +39,7 @@ export const fetchFavoritePosts = createAsyncThunk<Array<IPost>>(
     'Feeds/fetchFavoritePosts',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await Api.Common.getFavoritePosts(10, 0);
+            const response = await Api.Common.getFavoritePosts(100, 0);
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
@@ -149,7 +56,7 @@ export const fetchSubscribtionPosts = createAsyncThunk<Array<IPost>>(
     'Feeds/fetchSubscribtionPosts',
     async (_, { rejectWithValue }) => {
         try {
-            const response = await Api.Common.getSubscribtionPosts(10, 0);
+            const response = await Api.Common.getSubscribtionPosts(100, 0);
 
             if (response.status !== 200) {
                 throw new Error(`Error, status ${response.status}`);
@@ -197,7 +104,7 @@ export const fetchClothesById = createAsyncThunk<Clothes, number>(
 export const likePost = createAsyncThunk<
     { id: number; likesAmount: number },
     { id: number; likesAmount: number }
->('feeds/likePost', async (data, { rejectWithValue }) => {
+>('Feeds/likePost', async (data, { rejectWithValue }) => {
     try {
         const response = await Api.Common.like(data.id, data.likesAmount);
         if (response.status !== 200) {
@@ -212,10 +119,10 @@ export const likePost = createAsyncThunk<
 
 export const dislikePost = createAsyncThunk<
     { id: number; likesAmount: number },
-    { id: number; likesAmount: number }
->('feeds/likePost', async (data, { rejectWithValue }) => {
+    { id: number; }
+>('Feeds/dislikePost', async (data, { rejectWithValue }) => {
     try {
-        const response = await Api.Common.dislike(data.id, data.likesAmount);
+        const response = await Api.Common.dislike(data.id);
         if (response.status !== 200) {
             throw new Error(`Error, status ${response.status}`);
         }
@@ -267,6 +174,22 @@ export const feedSlice = createSlice({
             .addCase(fetchClothesById.fulfilled, (state, action) => {
                 const clothes = action.payload as Clothes;
                 state.cacheClothes.push(clothes);
+            })
+            .addCase(likePost.pending, (state, action) => {
+                state.SubscribtionFeed.data.forEach((item) => {
+                    if (item.id == action.meta.arg.id) {
+                        item.is_liked = true;
+                        state.FavoriteFeed.data.unshift(item);
+                    }
+                })
+            })
+            .addCase(dislikePost.pending, (state, action) => {
+                state.FavoriteFeed.data = state.FavoriteFeed.data.filter((item) => item.id !== action.meta.arg.id);
+                state.SubscribtionFeed.data.forEach((item) => {
+                    if (item.id == action.meta.arg.id) {
+                        item.is_liked = false;
+                    }
+                });
             });
     }
 });
@@ -274,6 +197,8 @@ export const feedSlice = createSlice({
 export const { loadData } = feedSlice.actions;
 
 export const selectFeeds = (state: RootState) => state.feeds;
+export const selectSubscribtionFeed = (state: RootState) => state.feeds.SubscribtionFeed;
+export const selectFavoriteFeeds = (state: RootState) => state.feeds.FavoriteFeed;
 export const selectFeedClothes = (state: RootState) => state.feeds.cacheClothes;
 
 export default feedSlice.reducer;
