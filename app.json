@@ -30,9 +30,6 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "android.permission.CAMERA"
-      ],
       "package": "com.leonidperlin.drssr"
     },
     "web": {
@@ -43,14 +40,6 @@
         "projectId": "23649fc7-4ed0-47d7-baaa-55bb20046c67"
       }
     },
-    "plugins": [
-      [
-        "react-native-vision-camera",
-        {
-          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera."
-        }
-      ]
-    ],
     "owner": "lnkn13"
   }
 }
