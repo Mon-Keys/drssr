@@ -285,7 +285,7 @@ export default function EditLookModal({
                             data={clothes}
                             renderItem={({ item }) => (
                                 <Item
-                                    imgURI={`http://leonidperl.in/${item.mask_path}`}
+                                    imgURI={getUri(item.mask_path)}
                                     callbackfn={() => {
                                         addItem(item.id, item.mask_path);
                                         closeModal();

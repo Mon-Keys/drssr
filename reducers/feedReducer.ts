@@ -119,7 +119,7 @@ export const likePost = createAsyncThunk<
 
 export const dislikePost = createAsyncThunk<
     { id: number; likesAmount: number },
-    { id: number; }
+    { id: number }
 >('Feeds/dislikePost', async (data, { rejectWithValue }) => {
     try {
         const response = await Api.Common.dislike(data.id);
@@ -181,10 +181,12 @@ export const feedSlice = createSlice({
                         item.is_liked = true;
                         state.FavoriteFeed.data.unshift(item);
                     }
-                })
+                });
             })
             .addCase(dislikePost.pending, (state, action) => {
-                state.FavoriteFeed.data = state.FavoriteFeed.data.filter((item) => item.id !== action.meta.arg.id);
+                state.FavoriteFeed.data = state.FavoriteFeed.data.filter(
+                    (item) => item.id !== action.meta.arg.id
+                );
                 state.SubscribtionFeed.data.forEach((item) => {
                     if (item.id == action.meta.arg.id) {
                         item.is_liked = false;
@@ -197,8 +199,10 @@ export const feedSlice = createSlice({
 export const { loadData } = feedSlice.actions;
 
 export const selectFeeds = (state: RootState) => state.feeds;
-export const selectSubscribtionFeed = (state: RootState) => state.feeds.SubscribtionFeed;
-export const selectFavoriteFeeds = (state: RootState) => state.feeds.FavoriteFeed;
+export const selectSubscribtionFeed = (state: RootState) =>
+    state.feeds.SubscribtionFeed;
+export const selectFavoriteFeeds = (state: RootState) =>
+    state.feeds.FavoriteFeed;
 export const selectFeedClothes = (state: RootState) => state.feeds.cacheClothes;
 
 export default feedSlice.reducer;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, View, Image, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { FileHost } from '../../network/const';
 // import ImageUploading, { ImageListType } from "react-images-uploading";
 
 export type Props = {};
@@ -54,7 +55,7 @@ const CustomImagePicker: React.FC<Props> = ({}) => {
 
     const handleUploadPhoto = () => {
         if (image !== undefined) {
-            fetch('http://leonidperl.in:5001/upload', {
+            fetch(`${FileHost}upload'`, {
                 method: 'POST',
                 body: createFormData(image)
             });

@@ -43,7 +43,7 @@ export const FeedCard = (props: FeedCardProps) => {
                             };
                         } else {
                             return {
-                                uri: `http://leonidperl.in/${props.post.look?.img_path}`
+                                uri: getUri(props.post.look?.img_path)
                             };
                         }
                     })()}
