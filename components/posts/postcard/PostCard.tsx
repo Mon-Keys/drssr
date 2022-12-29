@@ -131,7 +131,7 @@ function _renderItem(props) {
         <View style={styles.imageContainer}>
             <Image
                 style={styles.image}
-                source={{ uri: `http://leonidperl.in/${props.item}` }}
+                source={{ uri: getUri(props.item) }}
             />
         </View>
     );
@@ -144,7 +144,7 @@ function _renderClothesItem(props) {
                 <Image
                     style={styles.itemCardImage}
                     source={{
-                        uri: `http://leonidperl.in/${props.item.mask_path}`
+                        uri: getUri(props.item.mask_path)
                     }}
                 />
                 <Text style={styles.itemCardSign}>{props.item.brand}</Text>

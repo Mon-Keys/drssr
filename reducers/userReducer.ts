@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import Api, { ILoginData, IUserData, ISignupData, IUpdateUserData } from '../network/';
+import Api, {
+    ILoginData,
+    IUserData,
+    ISignupData,
+    IUpdateUserData
+} from '../network/';
 import { IAvatarData, ICheckStylist } from '../network/api/user';
 
 export interface User {
@@ -142,28 +147,30 @@ export const updateUserData = createAsyncThunk<IUserData, IUpdateUserData>(
 );
 
 export const addAvatar = createAsyncThunk<IUserData, IAvatarData>(
-    'user/addAvatar', 
+    'user/addAvatar',
     async (data, { rejectWithValue }) => {
-    try {
-        const response = await Api.User.addAvatar(data);
+        try {
+            const response = await Api.User.addAvatar(data);
 
-        return response.data;
-    } catch (error: any) {
-        return rejectWithValue(error.message);
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
     }
-});
+);
 
 export const deleteAvatar = createAsyncThunk<IUserData>(
-    'user/deleteAvatar', 
+    'user/deleteAvatar',
     async (data, { rejectWithValue }) => {
-    try {
-        const response = await Api.User.deleteAvatar();
+        try {
+            const response = await Api.User.deleteAvatar();
 
-        return response.data;
-    } catch (error: any) {
-        return rejectWithValue(error.message);
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
     }
-});
+);
 
 export const userSlice = createSlice({
     name: 'user',
