@@ -1,5 +1,5 @@
-// const host = 'leonidperl.in'
-const host = '185.130.114.65'
+const host = 'leonidperl.in'
+// const host = '185.130.114.65'
 
 export const FileHost = `http://${host}:5001/`;
 

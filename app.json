@@ -44,14 +44,6 @@
         "projectId": "855a16af-9293-435f-a61b-4d8220a37e9d"
       }
     },
-    "plugins": [
-      [
-        "react-native-vision-camera",
-        {
-          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera."
-        }
-      ]
-    ],
     "runtimeVersion": "1.0.0"
   }
 }
