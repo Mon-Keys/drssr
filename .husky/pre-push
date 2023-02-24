@@ -5,4 +5,5 @@ StartSTR=$'-> PRE-PUSH HOOK STARTING...\n'
 FinishSTR=$'-> PRE-PUSH HOOK CHECKS FINISHED...\n'
 
 echo "$StartSTR"
+
 echo "$FinishSTR"
