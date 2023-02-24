@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 StartSTR='\n->  PRE-COMMIT HOOK STARTING...\n'
-FinishSTR='->  PRE-COMMIT HOOK CHECKS FINISHED...\n'
+FinishSTR='->  PRE-COMMIT HOOK CHECKS FINISHED\n'
 
 echo "$StartSTR"
 npx --no -- commitlint --edit
