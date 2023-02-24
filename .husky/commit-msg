@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-StartSTR='\n->  PRE-COMMIT HOOK STARTING...\n'
+StartSTR='->  PRE-COMMIT HOOK STARTING...\n'
 FinishSTR='->  PRE-COMMIT HOOK CHECKS FINISHED\n'
 
 echo "$StartSTR"
