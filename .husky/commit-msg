@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-StartSTR='->  PRE-COMMIT HOOK STARTING...\n'
-FinishSTR='->  PRE-COMMIT HOOK CHECKS FINISHED\n'
+StartString='->  PRE-COMMIT HOOK STARTING...\n'
+FinishString='->  PRE-COMMIT HOOK CHECKS FINISHED\n'
 
-echo "$StartSTR"
+echo "$StartString"
 npx --no -- commitlint --edit
-echo "$FinishSTR"
+echo "$FinishString"

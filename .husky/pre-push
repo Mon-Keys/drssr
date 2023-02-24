@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-StartSTR='->  PRE-PUSH HOOK STARTING...\n'
-FinishSTR='->  PRE-PUSH HOOK CHECKS FINISHED\n'
+StartString='->  PRE-PUSH HOOK STARTING...\n'
+FinishString='->  PRE-PUSH HOOK CHECKS FINISHED\n'
 
-echo "$StartSTR"
+echo "$StartString"
 
-echo "$FinishSTR"
+echo "$FinishString"
