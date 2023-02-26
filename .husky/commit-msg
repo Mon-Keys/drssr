@@ -6,4 +6,5 @@ FinishString='\n->  PRE-COMMIT HOOK CHECKS FINISHED\n'
 
 echo "$StartString"
 npx --no -- commitlint --edit
+npm run prettier:write
 echo "$FinishString"
