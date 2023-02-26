@@ -5,18 +5,20 @@ import {
     Text,
     SafeAreaView,
     Dimensions,
-    Pressable, Platform, StatusBar
+    Pressable,
+    Platform,
+    StatusBar
 } from 'react-native';
 import React, { useRef } from 'react';
 import { IPost } from '../../../reducers/posts/post';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { ScrollView } from 'react-native-gesture-handler';
-import {Colors, Layout} from '../../../styles';
+import { Colors, Layout } from '../../../styles';
 import { useNavigation } from '@react-navigation/native';
-import Header from "../../header/header";
-import { LikeButton } from "./LikeButton";
-import network from "../../../network";
-import {getUri} from "../../../network/const";
+import Header from '../../header/header';
+import { LikeButton } from './LikeButton';
+import network from '../../../network';
+import { getUri } from '../../../network/const';
 
 export interface PostCardProps {
     goBackCallback: () => void;
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     image: {
         backgroundColor: Colors.base.lightgray,
         borderRadius: Layout.cornerRadius,
-        flex: 1,
+        flex: 1
         // resizeMode: 'contain'
     },
 
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     postDescriptionUpperContainer: {
         height: 36,
         margin: Layout.margins.default,
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
     postDescriptionAuthorContainer: {
         flexDirection: 'row',
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     },
     postDescriptionDescription: {
         marginVertical: Layout.margins.small,
-        fontSize: Layout.fontSize.default,
+        fontSize: Layout.fontSize.default
     },
     postDescriptionLikes: {
         marginVertical: Layout.margins.small,
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
     },
     postDescriptionLike: {
         alignItems: 'flex-start',
-        marginVertical: Layout.margins.small,
+        marginVertical: Layout.margins.small
     },
 
     itemsContainer: {
@@ -129,10 +131,7 @@ const styles = StyleSheet.create({
 function _renderItem(props) {
     return (
         <View style={styles.imageContainer}>
-            <Image
-                style={styles.image}
-                source={{ uri: getUri(props.item) }}
-            />
+            <Image style={styles.image} source={{ uri: getUri(props.item) }} />
         </View>
     );
 }
@@ -169,10 +168,12 @@ export const PostCard = (props: PostCardProps) => {
     const [authorAvatar, setAuthorAvatar] = React.useState<string>('');
     React.useEffect(() => {
         if (props.post.look.creator_id && authorName == '') {
-            network.Common.getUserData(props.post.look.creator_id).then((data) => {
-                setAuthorName(data.data.name);
-                setAuthorAvatar(getUri(data.data.avatar));
-            });
+            network.Common.getUserData(props.post.look.creator_id).then(
+                (data) => {
+                    setAuthorName(data.data.name);
+                    setAuthorAvatar(getUri(data.data.avatar));
+                }
+            );
         }
     });
 
@@ -214,7 +215,7 @@ export const PostCard = (props: PostCardProps) => {
                         ref={(ref) => (carouselRef = ref)}
                         data={data}
                         sliderWidth={250} // TODO пиздец
-                        itemWidth={Dimensions.get('window').width-14} // TODO пиздец
+                        itemWidth={Dimensions.get('window').width - 14} // TODO пиздец
                         renderItem={_renderItem}
                         onSnapToItem={(index) => setActiveIndex(index)}
                     />
@@ -254,19 +255,26 @@ export const PostCard = (props: PostCardProps) => {
                             <Image
                                 style={styles.postDescriptionAvatar}
                                 source={{
-                                    uri: authorAvatar == ''
-                                        ? 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
-                                        : authorAvatar
+                                    uri:
+                                        authorAvatar == ''
+                                            ? 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
+                                            : authorAvatar
                                 }}
                             />
-                            <Text numberOfLines={1} style={styles.postDescriptionAuthor}>
+                            <Text
+                                numberOfLines={1}
+                                style={styles.postDescriptionAuthor}
+                            >
                                 {authorName}
                             </Text>
                         </View>
                     </View>
                     <View style={styles.postDescriptionBottomContainer}>
                         {look.name ? (
-                            <Text numberOfLines={1} style={styles.postDescriptionName}>
+                            <Text
+                                numberOfLines={1}
+                                style={styles.postDescriptionName}
+                            >
                                 {props.post.name}
                             </Text>
                         ) : null}
@@ -284,7 +292,7 @@ export const PostCard = (props: PostCardProps) => {
                             is_liked={is_liked}
                             style={styles.postDescriptionLike}
                             callback={() => {
-                                setLikes(likes + (!is_liked ? 1 : -1))
+                                setLikes(likes + (!is_liked ? 1 : -1));
                                 setLike(!is_liked);
                             }}
                         />

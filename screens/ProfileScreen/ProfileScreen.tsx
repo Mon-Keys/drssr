@@ -11,14 +11,19 @@ import {
 
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { checkStylist, fetchUserData, requestStylist, selectUser } from '../../reducers/userReducer';
+import {
+    checkStylist,
+    fetchUserData,
+    requestStylist,
+    selectUser
+} from '../../reducers/userReducer';
 import { RootNavigation, RootTabScreenProps } from '../../types';
 import Colors from '../../styles/Colors';
 import { ProfileCard } from '../../components/base/ProfileCard';
 import { useNavigation } from '@react-navigation/native';
 import { getPosts } from '../../reducers/posts/createPost';
 import { Layout } from '../../styles';
-import {selectPosts, selectPosts2} from '../../reducers/posts/postReducer';
+import { selectPosts, selectPosts2 } from '../../reducers/posts/postReducer';
 import { BecomeStylistCard } from '../../components/base/BecomeStylistCard';
 import { PostPreview } from '../../components/posts/PostPreview';
 import NewPostBottomMenu from '../../components/profile/NewPostBottomMenu';
@@ -29,7 +34,7 @@ import { selectUserItems } from '../../reducers/items/clothesReducer';
 import BaseButton from '../../components/base/BaseButton';
 import { FeedCommon } from '../../components/feed/FeedCommon';
 import { RequestStylist } from '../../components/base/RequestStylist';
-import {Feed} from "../../reducers/feedReducer";
+import { Feed } from '../../reducers/feedReducer';
 
 const styles = StyleSheet.create({
     container: {
@@ -69,13 +74,13 @@ export default function ProfileScreen() {
     const navigation = useNavigation<RootNavigation>();
 
     const user = useAppSelector(selectUser);
-    const userData = user.userData
+    const userData = user.userData;
     const posts = useAppSelector(selectPosts);
 
     const postsProfile: Feed = {
         data: posts,
         status: ''
-    }
+    };
 
     const clothes = useAppSelector(selectUserItems);
     const hasClothes = (): boolean => {
@@ -90,7 +95,7 @@ export default function ProfileScreen() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(checkStylist())
+        dispatch(checkStylist());
         dispatch(fetchUserData());
         dispatch(getPosts());
         dispatch(fetchUsersClothes());
@@ -98,7 +103,7 @@ export default function ProfileScreen() {
     }, [dispatch]);
 
     const refresh = () => {
-        dispatch(checkStylist())
+        dispatch(checkStylist());
         dispatch(fetchUserData());
         dispatch(getPosts());
     };
@@ -132,7 +137,7 @@ export default function ProfileScreen() {
                     style={{ paddingHorizontal: Layout.margins.small }}
                 >
                     <ProfileCard
-                        avatarSrc={ userData.avatar }
+                        avatarSrc={userData.avatar}
                         name={userData.name}
                         isVerified={userData.stylist || false}
                         subscribersAmount={3500}
@@ -143,7 +148,9 @@ export default function ProfileScreen() {
                         editAction={() => {
                             navigation.navigate('EditProfile');
                         }}
-                        description={ userData.description ? userData.description : ''}
+                        description={
+                            userData.description ? userData.description : ''
+                        }
                     />
                     {userData.stylist && (
                         <>
@@ -163,9 +170,7 @@ export default function ProfileScreen() {
                     {!userData.stylist && !user.isRequest && (
                         <BecomeStylistCard becomeStylist={becomeStyist} />
                     )}
-                    {!userData.stylist && user.isRequest && (
-                        <RequestStylist />
-                    )}
+                    {!userData.stylist && user.isRequest && <RequestStylist />}
                 </ScrollView>
             </SafeAreaView>
         </NewPostBottomMenu>

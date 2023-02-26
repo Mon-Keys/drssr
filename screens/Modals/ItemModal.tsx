@@ -4,10 +4,13 @@ import { Clothes, selectUserItems } from '../../reducers/items/clothesReducer';
 import { ThingScreenRouteProp } from '../../types';
 import { useRoute } from '@react-navigation/native';
 import Item from '../../components/items/Item';
-import { fetchClothesById, selectFeedClothes } from "../../reducers/feedReducer";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { ActivityIndicator } from "react-native";
-import { Colors } from "../../styles";
+import {
+    fetchClothesById,
+    selectFeedClothes
+} from '../../reducers/feedReducer';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { ActivityIndicator } from 'react-native';
+import { Colors } from '../../styles';
 
 export default function ItemModal() {
     const dispatch = useAppDispatch();
@@ -35,16 +38,18 @@ export default function ItemModal() {
         dispatch(fetchClothesById(id));
 
         return null;
-    }
+    };
 
     const item = smartGetItem();
     if (!item) {
         return (
-            <ActivityIndicator color={Colors.base.black} size={42} style={{ flex: 1, justifyContent: 'center' }} />
+            <ActivityIndicator
+                color={Colors.base.black}
+                size={42}
+                style={{ flex: 1, justifyContent: 'center' }}
+            />
         );
     }
 
-    return (
-        <Item item={item} />
-    );
+    return <Item item={item} />;
 }

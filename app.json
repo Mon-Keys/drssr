@@ -1,49 +1,45 @@
 {
-  "expo": {
-    "name": "drssr",
-    "slug": "kiru",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/855a16af-9293-435f-a61b-4d8220a37e9d"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.leonidperlin.drssr",
-      "infoPlist": {
-        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera."
-      }
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "permissions": [
-        "android.permission.CAMERA"
-      ],
-      "package": "com.leonidperlin.drssr"
-    },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "855a16af-9293-435f-a61b-4d8220a37e9d"
-      }
-    },
-    "runtimeVersion": "1.0.0"
-  }
+    "expo": {
+        "name": "drssr",
+        "slug": "kiru",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/images/icon.png",
+        "scheme": "myapp",
+        "userInterfaceStyle": "automatic",
+        "splash": {
+            "image": "./assets/images/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0,
+            "url": "https://u.expo.dev/855a16af-9293-435f-a61b-4d8220a37e9d"
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.leonidperlin.drssr",
+            "infoPlist": {
+                "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera."
+            }
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "permissions": ["android.permission.CAMERA"],
+            "package": "com.leonidperlin.drssr"
+        },
+        "web": {
+            "favicon": "./assets/images/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "855a16af-9293-435f-a61b-4d8220a37e9d"
+            }
+        },
+        "runtimeVersion": "1.0.0"
+    }
 }

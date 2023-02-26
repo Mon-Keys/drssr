@@ -1,23 +1,19 @@
-import React, {ReactElement} from 'react';
-import {
-    StyleSheet,
-    Text,
-    View, ViewStyle
-} from 'react-native';
+import React, { ReactElement } from 'react';
+import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 
 import { Colors, Layout } from '../../styles';
 import IconButton from '../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
-import Back from "../icons/back";
+import Back from '../icons/back';
 
 const styles = StyleSheet.create({
     container: {
-        height: '100%',
+        height: '100%'
     },
     headerContainer: {
         display: 'flex',
         flexDirection: 'row',
-        margin: Layout.margins.small,
+        margin: Layout.margins.small
     },
     flexZero: {
         flex: 0,
@@ -48,21 +44,16 @@ export default function Header(props: HeaderProps) {
             <View style={styles.headerContainer}>
                 <IconButton
                     style={styles.flexZero}
-                    icon={
-                        <Back color={Colors.base.black} />
-                    }
+                    icon={<Back color={Colors.base.black} />}
                     onPress={props.back}
                 />
                 <View style={styles.headerTitleContainer}>
                     <Text style={styles.headerTitleText}>{props.title}</Text>
                 </View>
                 {props.icon ? (
-                    <IconButton
-                        style={styles.flexZero}
-                        icon={props.icon}
-                    />
+                    <IconButton style={styles.flexZero} icon={props.icon} />
                 ) : (
-                    <View style={styles.flexZero}/>
+                    <View style={styles.flexZero} />
                 )}
             </View>
         </View>

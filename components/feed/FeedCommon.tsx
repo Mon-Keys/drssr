@@ -52,16 +52,31 @@ export const FeedCommon = (props: FeedCommonProps) => {
                 keyExtractor={(item) => `${item.id}`}
                 style={styles.container}
                 columnWrapperStyle={styles.columnWrapper}
-                renderItem={({item, index}) => (
+                renderItem={({ item, index }) => (
                     <>
-                        {(item.id == -1) ? (
-                            <View style={{ flex: 1, backgroundColor: 'transparent' }}/>
+                        {item.id == -1 ? (
+                            <View
+                                style={{
+                                    flex: 1,
+                                    backgroundColor: 'transparent'
+                                }}
+                            />
                         ) : (
-                            <View style={{ flex: 1, backgroundColor: 'transparent', marginRight: index % 2 ? 0 : 7 }}>
+                            <View
+                                style={{
+                                    flex: 1,
+                                    backgroundColor: 'transparent',
+                                    marginRight: index % 2 ? 0 : 7
+                                }}
+                            >
                                 <FeedCard
                                     hasLikeButton={true}
                                     post={item}
-                                    onPress={() => props.navigation.navigate('Post', { post: item })}
+                                    onPress={() =>
+                                        props.navigation.navigate('Post', {
+                                            post: item
+                                        })
+                                    }
                                     id={item.id}
                                 />
                             </View>
@@ -71,4 +86,4 @@ export const FeedCommon = (props: FeedCommonProps) => {
             />
         </View>
     );
-}
+};

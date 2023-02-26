@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 
-import {ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, StyleSheet} from 'react-native';
+import {
+    ActivityIndicator,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet
+} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
@@ -23,7 +29,7 @@ import BaseButton from '../../../components/base/BaseButton';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigation } from '../../../types';
 import { linkItemRegExp, typeItemRegExp } from '../../../constants/validation';
-import {selectUser} from "../../../reducers/userReducer";
+import { selectUser } from '../../../reducers/userReducer';
 
 const styles = StyleSheet.create({
     container: {
