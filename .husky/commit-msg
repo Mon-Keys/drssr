@@ -19,6 +19,8 @@ configParse() {
 
 keys=$(configParse)
 
+echo 'keys: $keys'
+
 echo "$startString"
 
 echo "\nКоммит должен соответствовать шаблону:\n$keys:␣<описание коммита>\n"
