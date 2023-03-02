@@ -25,7 +25,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { fetchUsersClothes } from '../../../reducers/items/fetchClothes';
 import ViewBottomMenu from '../../../components/items/ViewBottomMenu';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import Back from "../../../components/icons/back";
+import Back from '../../../components/icons/back';
 
 const styles = StyleSheet.create({
     container: {
@@ -92,12 +92,7 @@ export default function ItemsByCategoryScreen() {
                 <View style={styles.headerContainer}>
                     <IconButton
                         style={styles.flexZero}
-                        icon={
-                            <Back
-                                color={Colors.base.black}
-                                width={24}
-                            />
-                        }
+                        icon={<Back color={Colors.base.black} width={24} />}
                         onPress={() => navigation.goBack()}
                     />
                     <View style={styles.headerTitleContainer}>

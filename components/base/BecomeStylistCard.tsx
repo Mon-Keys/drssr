@@ -1,5 +1,5 @@
 import { View } from './Themed';
-import {Pressable, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import { Pressable, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import ProfileVerified from '../icons/profileVerified';
 import Colors from '../../styles/Colors';
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         borderRadius: Layout.cornerRadius,
         width: '100%',
         height: 300,
-        marginTop: Layout.margins.default,
+        marginTop: Layout.margins.default
     },
     button: {
         height: 40,

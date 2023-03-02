@@ -23,7 +23,10 @@ export function ProfileNavigation(): any {
                     headerShown: true
                 }}
             />
-            <Stack.Screen name="EditProfile" component={EditProfileModalScreen} />
+            <Stack.Screen
+                name="EditProfile"
+                component={EditProfileModalScreen}
+            />
         </Stack.Navigator>
     );
 }

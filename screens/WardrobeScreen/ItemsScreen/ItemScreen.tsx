@@ -16,7 +16,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import IconButton from '../../../components/base/IconButton';
 import { AntDesign } from '@expo/vector-icons';
 import Item from '../../../components/items/Item';
-import Back from "../../../components/icons/back";
+import Back from '../../../components/icons/back';
 
 const styles = StyleSheet.create({
     container: {
@@ -66,12 +66,7 @@ export default function ItemScreen() {
             <View style={styles.headerContainer}>
                 <IconButton
                     style={{ flex: 0 }}
-                    icon={
-                        <Back
-                            color={Colors.base.black}
-                            width={24}
-                        />
-                    }
+                    icon={<Back color={Colors.base.black} width={24} />}
                     onPress={() => navigation.goBack()}
                 />
                 <View style={styles.headerTitleContainer}>

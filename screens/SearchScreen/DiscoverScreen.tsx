@@ -13,23 +13,26 @@ import { RootTabScreenProps } from '../../types';
 import { AppDispatch } from '../../store';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { fetchFavoritePosts, selectFavoriteFeeds } from '../../reducers/feedReducer';
-import {Layout} from "../../styles";
-import EmptyView from "../../components/base/EmptyView";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {
+    fetchFavoritePosts,
+    selectFavoriteFeeds
+} from '../../reducers/feedReducer';
+import { Layout } from '../../styles';
+import EmptyView from '../../components/base/EmptyView';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: 'center',
         justifyContent: 'center',
-        paddingTop: 30,// Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+        paddingTop: 30, // Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         backgroundColor: 'transparent'
     },
     headerContainer: {
         height: 53, // такой хардкод епта не просто так, чтобы EmptyView на разных экранах одинаково выглядили
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     headerText: {
         fontSize: Layout.fontSize.big,
@@ -58,8 +61,8 @@ export default function DiscoverScreen({
     }, [dispatch]);
 
     const hasFavoriteFeed = (): boolean => {
-        return favoriteFeed.data && favoriteFeed.data.length != 0
-    }
+        return favoriteFeed.data && favoriteFeed.data.length != 0;
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -71,10 +74,7 @@ export default function DiscoverScreen({
                     <FeedCommon
                         refreshControl={
                             <RefreshControl
-                                refreshing={
-                                    favoriteFeed.status ==
-                                    'pending'
-                                }
+                                refreshing={favoriteFeed.status == 'pending'}
                                 onRefresh={onRefresh}
                             />
                         }

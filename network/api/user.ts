@@ -27,7 +27,6 @@ export interface ICheckStylist {
     exists: boolean;
 }
 
-
 export default class User {
     /**
      * Returns axios request handle
@@ -100,7 +99,7 @@ export default class User {
      *
      * @beta
      */
-     requestStylist() {
+    requestStylist() {
         return http.post<any>('/private/users/stylist', {
             withCredentials: true
         });
@@ -114,7 +113,7 @@ export default class User {
      *
      * @beta
      */
-     checkStylist() {
+    checkStylist() {
         return http.get<ICheckStylist>('/private/users/stylist', {
             withCredentials: true
         });

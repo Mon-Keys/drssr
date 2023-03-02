@@ -17,7 +17,7 @@ import InputContainer, {
 } from '../../components/item/InputContainer';
 import PhotosPreview from '../../components/posts/PhotosPreview';
 import { clearNewPost, selectNewPosts } from '../../reducers/posts/postReducer';
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const styles = StyleSheet.create({
     container: {
@@ -81,7 +81,7 @@ export default function CreatePostModal() {
             title: 'Описание',
             placeholder: 'Расскажите подробнее о вашем образе',
             value: defaultDescription
-        },
+        }
         // { key: 'price', title: 'Цена', placeholder: 'Укажите цену образа' }
     ];
 

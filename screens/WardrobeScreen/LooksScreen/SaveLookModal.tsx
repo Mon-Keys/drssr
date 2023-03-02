@@ -27,12 +27,12 @@ import InputContainer, {
 } from '../../../components/item/InputContainer';
 import BaseButton from '../../../components/base/BaseButton';
 import { GenerateRandomName, ICreateLook } from '../../../network/api/common';
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // @ts-ignore
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'transparent',
+        backgroundColor: 'transparent'
     },
     lookContainer: {
         flex: 1,
@@ -164,15 +164,15 @@ export default function SaveLookModal({
                         />
                     ) : null}
                 </View>
-                    <InputContainer
-                        inputFields={fields}
-                        style={styles.infoContainer}
-                    />
-                    <BaseButton
-                        title="Сохранить"
-                        onPress={addLook}
-                        style={styles.buttonSave}
-                    />
+                <InputContainer
+                    inputFields={fields}
+                    style={styles.infoContainer}
+                />
+                <BaseButton
+                    title="Сохранить"
+                    onPress={addLook}
+                    style={styles.buttonSave}
+                />
             </View>
         </KeyboardAwareScrollView>
     );

@@ -1,10 +1,10 @@
 import { View } from '../base/Themed';
 import { Pressable, StyleSheet } from 'react-native';
 import React from 'react';
-import {Colors, Layout} from '../../styles';
+import { Colors, Layout } from '../../styles';
 import { AntDesign } from '@expo/vector-icons';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import {dislikePost, likePost} from '../../reducers/feedReducer';
+import { dislikePost, likePost } from '../../reducers/feedReducer';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,17 +38,12 @@ export const LikeFeedCardButton = (props: LikeFeedCardButtonProps) => {
                 likePost({ id: props.id, likesAmount: props.currentLikes })
             );
         } else {
-            dispatch(
-                dislikePost({ id: props.id })
-            );
+            dispatch(dislikePost({ id: props.id }));
         }
-    }
+    };
 
     return (
-        <Pressable
-            onPress={like}
-            style={styles.container}
-        >
+        <Pressable onPress={like} style={styles.container}>
             <View style={styles.likeButton}>
                 {props.is_liked ? (
                     <AntDesign

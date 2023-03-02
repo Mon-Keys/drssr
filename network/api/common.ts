@@ -2,7 +2,7 @@ import http from '../instace';
 import * as ImagePicker from 'expo-image-picker';
 import { IPost } from '../../reducers/posts/post';
 import { ILook } from '../../reducers/looks/looks';
-import {Clothes} from "../../reducers/items/clothesReducer";
+import { Clothes } from '../../reducers/items/clothesReducer';
 
 export interface IItemData {
     id?: number;

@@ -4,7 +4,7 @@ import React from 'react';
 import { LikeFeedCardButton } from './LikeFeedCardButton';
 import { IPost } from '../../reducers/posts/post';
 import { getUri } from '../../network/const';
-import { Layout } from "../../styles";
+import { Layout } from '../../styles';
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // resizeMode: 'contain', по дефолту будет cover, это плохо потому что он обрезает картинку. contain плохо выглядит на ios, поэтому пока так
         borderRadius: Layout.cornerRadius
-    },
+    }
 });
 
 export interface FeedCardProps {
@@ -29,7 +29,7 @@ export interface FeedCardProps {
 export const FeedCard = (props: FeedCardProps) => {
     return (
         <View style={styles.cardContainer}>
-            <Pressable style={{flex: 1}} onPress={props.onPress}>
+            <Pressable style={{ flex: 1 }} onPress={props.onPress}>
                 <Image
                     style={styles.image}
                     source={(() => {
@@ -56,4 +56,4 @@ export const FeedCard = (props: FeedCardProps) => {
             </Pressable>
         </View>
     );
-}
+};

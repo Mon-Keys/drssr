@@ -1,5 +1,5 @@
 import { View } from './Themed';
-import {  StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import React from 'react';
 import Exclamation from '../icons/exclamation';
 import Colors from '../../styles/Colors';
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         height: 300,
         marginTop: Layout.margins.default,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     exclamation: {
         width: 60,
@@ -45,18 +45,17 @@ const styles = StyleSheet.create({
     }
 });
 
-
 export const RequestStylist = () => (
     <View style={styles.mainContainer}>
         <View style={styles.exclamation}>
-            < Exclamation />
+            <Exclamation />
         </View>
         <View style={styles.desc}>
             <Text style={styles.descText}> Заявка рассматривается </Text>
             <Text style={styles.subDescText}>
                 {' '}
-                Ваша заявка на статус стилиста рассматривается модерацией. Процесс
-может занять от 1 до 24 часов.{' '}
+                Ваша заявка на статус стилиста рассматривается модерацией.
+                Процесс может занять от 1 до 24 часов.{' '}
             </Text>
         </View>
     </View>

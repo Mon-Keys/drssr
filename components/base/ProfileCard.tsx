@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         borderRadius: Layout.cornerRadius,
         // width: Abstracts.profile.defaultWidth,
         width: '100%',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     image: {
         width: Abstracts.profile.avatarSize,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     statsContainer: {
-        marginVertical: Layout.margins.small,
+        marginVertical: Layout.margins.small
     },
     descriptionContainer: {
         marginBottom: Layout.margins.default,
@@ -111,7 +111,10 @@ export const ProfileCard = (props: ProfileCardProps) => {
                 <Image
                     style={styles.image}
                     source={{
-                        uri: props.avatarSrc !== './media/defaults/avatar.webp' ? getUri(props.avatarSrc) : 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                        uri:
+                            props.avatarSrc !== './media/defaults/avatar.webp'
+                                ? getUri(props.avatarSrc)
+                                : 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
                     }}
                 />
                 <Pressable
@@ -122,9 +125,12 @@ export const ProfileCard = (props: ProfileCardProps) => {
                 </Pressable>
                 <View style={styles.nameContainer}>
                     <Text style={styles.name}>{props.name}</Text>
-                    {props.isVerified &&
-                        <ProfileVerified style={{ marginLeft: 7 }} color="white" />
-                    }
+                    {props.isVerified && (
+                        <ProfileVerified
+                            style={{ marginLeft: 7 }}
+                            color="white"
+                        />
+                    )}
                 </View>
                 <View style={styles.statsContainer}>
                     <Pressable style={styles.edit} onPress={props.editAction}>

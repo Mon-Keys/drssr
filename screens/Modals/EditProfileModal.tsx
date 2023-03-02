@@ -1,12 +1,24 @@
 import React from 'react';
-import { StyleSheet, Image, Text, Pressable, Platform, StatusBar, } from 'react-native';
+import {
+    StyleSheet,
+    Image,
+    Text,
+    Pressable,
+    Platform,
+    StatusBar
+} from 'react-native';
 import { View } from '../../components/base/Themed';
 import { Colors } from '../../styles';
 import { Abstracts } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { addAvatar, deleteAvatar, selectUser, updateUserData } from '../../reducers/userReducer';
+import {
+    addAvatar,
+    deleteAvatar,
+    selectUser,
+    updateUserData
+} from '../../reducers/userReducer';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import InputFieldForEdit from '../../components/base/InputFieldForEdit';
 import * as ImagePicker from 'expo-image-picker';
@@ -44,7 +56,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position: 'absolute',
         top: 10,
-        left: 10,
+        left: 10
     },
     submit: {
         height: 45,
@@ -53,52 +65,58 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position: 'absolute',
         top: 10,
-        right: 10,
+        right: 10
     },
     uploadPhoto: {
         height: 45,
         backgroundColor: Colors.base.transparent,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     text: {
         top: 5,
         height: 50,
         fontSize: 12,
         fontFamily: 'proxima-nova'
-    },
+    }
 });
 
 export default function EditProfileModalScreen() {
     const user = useAppSelector(selectUser);
-    const userData = user.userData
+    const userData = user.userData;
 
     const [name, setName] = React.useState<string>(userData.name);
-    const [desc, setDesc] = React.useState<string>(userData.description ? userData.description : '');
+    const [desc, setDesc] = React.useState<string>(
+        userData.description ? userData.description : ''
+    );
 
     const navigation = useNavigation<RootStackParamList>();
 
     const dispatch = useAppDispatch();
 
     const updateProfile = () => {
-        console.log(user.status)
-        dispatch(updateUserData({
-            nickname: userData.nickname,
-            email: userData.email,
-            name: name,
-            birth_date: userData.birthDate ? userData.birthDate : '2001-06-29',
-            description: desc,
-        })).then(() => {
+        console.log(user.status);
+        dispatch(
+            updateUserData({
+                nickname: userData.nickname,
+                email: userData.email,
+                name: name,
+                birth_date: userData.birthDate
+                    ? userData.birthDate
+                    : '2001-06-29',
+                description: desc
+            })
+        ).then(() => {
             if (user.status === 'resolved') {
-                navigation.goBack()
+                navigation.goBack();
             }
         });
     };
 
     const cancel = () => {
         // dispatch(deleteAvatar())
-        navigation.goBack()
-    }
+        navigation.goBack();
+    };
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -106,9 +124,11 @@ export default function EditProfileModalScreen() {
             quality: 1
         });
         if (!result.cancelled) {
-            dispatch(addAvatar({
-                file: result,
-            }))
+            dispatch(
+                addAvatar({
+                    file: result
+                })
+            );
             // .then( () => {console.log(user.userData)});
         }
     };
@@ -116,20 +136,25 @@ export default function EditProfileModalScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.tempContainer}>
-                <Pressable style={styles.cancel} onPress={ cancel }>
-                        <Text style={styles.clickableText}> Отмена </Text>
+                <Pressable style={styles.cancel} onPress={cancel}>
+                    <Text style={styles.clickableText}> Отмена </Text>
                 </Pressable>
-                <Pressable style={styles.submit} onPress={ updateProfile }>
-                        <Text style={styles.clickableText}> Готово </Text>
+                <Pressable style={styles.submit} onPress={updateProfile}>
+                    <Text style={styles.clickableText}> Готово </Text>
                 </Pressable>
                 <Image
                     style={styles.image}
                     source={{
-                        uri: userData.avatar !== './media/defaults/avatar.webp' ? getUri(userData.avatar) : 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
+                        uri:
+                            userData.avatar !== './media/defaults/avatar.webp'
+                                ? getUri(userData.avatar)
+                                : 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
                     }}
                 />
-                <Pressable style={styles.uploadPhoto} onPress={ pickImage }>
-                        <Text style={styles.clickableText}>Загрузить новое фото</Text>
+                <Pressable style={styles.uploadPhoto} onPress={pickImage}>
+                    <Text style={styles.clickableText}>
+                        Загрузить новое фото
+                    </Text>
                 </Pressable>
                 <InputFieldForEdit
                     placeholderTextColor={Colors.base.darkgray}
@@ -144,7 +169,9 @@ export default function EditProfileModalScreen() {
                     value={desc}
                     onChangeText={setDesc}
                 />
-                <Text style={styles.text}>Расскажите о себе. Почему клиенты выбирают вас?</Text>
+                <Text style={styles.text}>
+                    Расскажите о себе. Почему клиенты выбирают вас?
+                </Text>
             </View>
         </View>
     );

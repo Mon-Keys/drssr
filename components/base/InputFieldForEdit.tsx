@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import Colors from '../../styles/Colors';
 
-interface InputFieldForEditProps extends Omit<TextInputProps, 'secureTextEntry'> {}
+interface InputFieldForEditProps
+    extends Omit<TextInputProps, 'secureTextEntry'> {}
 
 const styles = StyleSheet.create({
     inputContainer: {
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 9,
-        width: 300,
+        width: 300
     },
     input: {
         color: Colors.base.black,
@@ -27,13 +28,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         width: 280,
         paddingLeft: 10
-    },
+    }
 });
 
 const InputFieldForEdit = (props: InputFieldForEditProps) => {
     return (
         <SafeAreaView>
-            <View style={styles.inputContainer} >
+            <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
                     selectionColor={Colors.base.black}
