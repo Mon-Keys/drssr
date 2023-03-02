@@ -1,10 +1,34 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-StartString='->  PRE-COMMIT HOOK STARTING...'
-FinishString='\n->  PRE-COMMIT HOOK CHECKS FINISHED\n'
+startString='->  PRE-COMMIT HOOK STARTING...'
+statusSuccessString='Status: success'
+finishString='->  PRE-COMMIT HOOK CHECKS SUCCESSFULLY FINISHED\n'
 
-echo "$StartString"
+configParse() {
+    pathToConfig="./commitlint.config.js"
+
+    allLineCountInFile=$(wc -l < "$pathToConfig")
+    blockWithKeysFromEnd=$((allLineCountInFile - 6))
+    blockWithKeysPartWithoutTrash=$((blockWithKeysFromEnd - 3))
+
+    formattedKeysArray=$(cat "$pathToConfig" | tail -n "$blockWithKeysFromEnd" | head -n "$blockWithKeysPartWithoutTrash" | sed 's/^[ \t]*//' | tr -d '\r\n')
+
+    echo "$formattedKeysArray"
+}
+
+keys=$(configParse)
+
+echo "$startString"
+
+echo "\nКоммит должен соответствовать шаблону:\n$keys:␣<описание коммита>\n"
+
+echo "Проверка именования коммита..."
 npx --no -- commitlint --edit
+echo "$statusSuccessString"
+
+echo "Запуск prettier..."
 npm run prettier:write
-echo "$FinishString"
+echo "$statusSuccessString"
+
+echo "$finishString"

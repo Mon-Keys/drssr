@@ -5,16 +5,12 @@ module.exports = {
             2,
             'always',
             [
-                'build',
                 'ci',
                 'docs',
                 'fix',
-                'perf',
-                'refactor',
+                'refact',
                 'revert',
-                'style',
-                'test',
-                'feature'
+                'code'
             ]
         ]
     }
